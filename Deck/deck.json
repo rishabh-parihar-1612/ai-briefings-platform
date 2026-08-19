@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-19 16:32 UTC",
+ "generated": "2026-08-19 16:36 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -897,6 +897,56 @@
    "cite": "issue 004, §9"
   },
   {
+   "id": "c-ed-cache-aware-routing",
+   "front": "What is cache-aware routing?",
+   "back": "Routing a request to the replica that already holds its prefix in cache rather than round-robin. Round-robin throws away the hit you already paid for.",
+   "hook": "Round-robin discards your cache",
+   "kind": "pat",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "doc: ai-architect-edge-playbook §2"
+  },
+  {
+   "id": "c-ed-kv-cache-growth",
+   "front": "Why do long conversations get both slower and more expensive?",
+   "back": "The KV cache grows with context, so each new token attends over more state — memory and time per token rise with conversation length, not just total tokens billed.",
+   "hook": "Cost and latency both scale with length",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "context-compression",
+   "cite": "doc: ai-architect-edge-playbook §1"
+  },
+  {
+   "id": "c-ed-prefill-vs-decode",
+   "front": "Prefill versus decode — why does the distinction matter?",
+   "back": "Prefill processes input in parallel; decode generates one token at a time. It is the model everything hangs off — big prompts hurt TTFT, big outputs hurt throughput.",
+   "hook": "One parallel phase, one sequential",
+   "kind": "def",
+   "theme": "cost-performance",
+   "topic": "token-economics",
+   "cite": "doc: ai-architect-edge-playbook §1"
+  },
+  {
+   "id": "c-ed-prompt-cache-own-goal",
+   "front": "The classic prompt-caching own-goal.",
+   "back": "Editing the stable prefix, which invalidates the cache for every consumer at once. A one-word system-prompt tweak can multiply the bill.",
+   "hook": "One word, whole cache gone",
+   "kind": "fail",
+   "theme": "cost-performance",
+   "topic": "prompt-caching",
+   "cite": "doc: ai-architect-edge-playbook §2"
+  },
+  {
+   "id": "c-ed-prompt-ordering-rule",
+   "front": "What must the prompt layout obey to earn caching?",
+   "back": "Stable prefix first — system prompt and tool definitions — variable content last. The provider caches a prefix, so ordering is a cost decision.",
+   "hook": "Prefix order is a cost decision",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "prompt-caching",
+   "cite": "doc: ai-architect-edge-playbook §2"
+  },
+  {
    "id": "c-five-token-reduction-techniques",
    "front": "The five token-reduction techniques, in priority order.",
    "back": "System-prompt compaction by hoisting tool defs to MCP, 15-25%. Conversation summarization past turn 6, 10-20%. Tool-result truncation with a citation link, 10-15%. Few-shot curation to three, 5-10%. JSON schema output, 5-10%.",
@@ -1069,6 +1119,76 @@
    "theme": "evaluation",
    "topic": "ai-testing-and-evals",
    "cite": "doc: agentic-ai-evaluation-definitive-reference §19"
+  },
+  {
+   "id": "c-ed-bootstrap-intervals",
+   "front": "How do you report an eval result honestly?",
+   "back": "Bootstrap the interval — resample results 10,000 times — and report \"84% ± 5\", never the bare point estimate. Ten lines of code that permanently change how the team talks about results.",
+   "hook": "\"84%\" alone is not honest",
+   "kind": "rule",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
+  },
+  {
+   "id": "c-ed-eval-noise-floor",
+   "front": "Eval set of 100, baseline 82%, new prompt 85%. Did it improve?",
+   "back": "You have learned essentially nothing. The 95% CI on a proportion at n=100, p≈0.83 is roughly ±7.4 points — the intervals overlap enormously.",
+   "hook": "±7.4 points swallows a 3-point win",
+   "kind": "number",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
+  },
+  {
+   "id": "c-ed-eval-power-analysis",
+   "front": "Before promising to detect a 2-point improvement, what must you know?",
+   "back": "Your required eval-set size. Detecting 2 points reliably needs substantially more than 100 cases — power-analyze first rather than promising sensitivity you do not have.",
+   "hook": "Promise only what n supports",
+   "kind": "check",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
+  },
+  {
+   "id": "c-ed-eval-run-variance",
+   "front": "Why run the same eval several times at nonzero temperature?",
+   "back": "Self-consistency across runs is itself a quality metric. A system whose score swings 6 points between identical runs has a stability problem worth knowing about.",
+   "hook": "Swing between identical runs",
+   "kind": "metric",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
+  },
+  {
+   "id": "c-ed-paired-comparison",
+   "front": "The single change that most increases eval statistical power.",
+   "back": "Paired comparison: run both variants on the same cases and analyze differences. It removes case-difficulty variance, so 100 paired cases can detect a real 3-point shift an unpaired test cannot.",
+   "hook": "Test \"did case X improve\", not 85>82",
+   "kind": "rule",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
+  },
+  {
+   "id": "c-ed-random-walk-line",
+   "front": "The line that lands hardest on eval discipline.",
+   "back": "\"Most teams are making ship decisions on differences well inside their noise floor — a random walk they call iteration.\"",
+   "hook": "A random walk called iteration",
+   "kind": "rule",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
+  },
+  {
+   "id": "c-ed-temperature-zero-not-deterministic",
+   "front": "\"I set temperature to 0 so it's reproducible.\" What is wrong?",
+   "back": "Batching effects, floating-point non-associativity across GPU kernel scheduling, and MoE expert routing all add run-to-run variance at temperature 0. Reproducibility comes from pinning the model version and accepting a variance band.",
+   "hook": "Temperature 0 is not determinism",
+   "kind": "fail",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-edge-playbook §8"
   },
   {
    "id": "c-eval-dataset-five-classes",
@@ -2434,6 +2554,107 @@
    "cite": "issue 009, §20"
   },
   {
+   "id": "c-ed-cache-key-scope",
+   "front": "Where do gateways leak data?",
+   "back": "The cache key. It must include model, every output-affecting parameter, and the full permission/tenant scope. A prompt-hash key serves Tenant A's answer to Tenant B — and prompts collide more than you would think.",
+   "hook": "\"Summarize this ticket\" collides",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-gateway-build-vs-buy",
+   "front": "The gateway build-vs-buy landscape, named.",
+   "back": "LiteLLM for a fast self-hosted start with virtual keys and budgets; Portkey/Helicone/Cloudflare AI Gateway for managed with a data-boundary question; Kong/Apigee if you already run one; Bedrock/Vertex if committed to a cloud.",
+   "hook": "LiteLLM is the common default",
+   "kind": "def",
+   "theme": "reliability-operations",
+   "topic": "build-buy-partner",
+   "cite": "doc: ai-architect-edge-playbook §12"
+  },
+  {
+   "id": "c-ed-gateway-client-disconnect",
+   "front": "What does a mid-stream client disconnect leave behind?",
+   "back": "Untracked spend and a dangling upstream request you are still paying for. Handling disconnect separates having built a gateway from having described one.",
+   "hook": "You still pay for the abandoned stream",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "cost-visibility-chargeback",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-gateway-latency-tax",
+   "front": "The hidden cost of a gateway everyone forgets.",
+   "back": "Its own added latency. Eighty milliseconds on every call is a tax on the whole organization, and it compounds through every step of a multi-step agent run.",
+   "hook": "80ms × every call × every team",
+   "kind": "number",
+   "theme": "reliability-operations",
+   "topic": "abstraction-seams",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-gateway-spof",
+   "front": "The gateway is now a single point of failure. What does that require?",
+   "back": "Stateless and horizontally scalable, health-checked, deployed with more care than the apps behind it — and a documented client-side bypass path so a gateway outage does not take down every AI feature.",
+   "hook": "Document the bypass before you need it",
+   "kind": "check",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-gateway-streaming-accounting",
+   "front": "The hardest part of a gateway: streaming with accounting.",
+   "back": "Stream to the client with minimal added latency while counting tokens, applying output guards and writing a trace — accumulate in parallel, finalize the trace on stream close.",
+   "hook": "Cannot buffer, cannot skip accounting",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-provider-feature-drift",
+   "front": "A gateway abstracts providers. What is the trap on both sides?",
+   "back": "Abstracting to a lowest common denominator makes your best model worse; passing everything through is not an abstraction. Normalize the common 90%, expose a provider-specific escape hatch, version the gateway API.",
+   "hook": "Normalize 90%, escape-hatch the rest",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "abstraction-seams",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-retry-with-streaming",
+   "front": "Upstream fails after 300 tokens already streamed. Now what?",
+   "back": "You cannot transparently retry. Either retry only pre-first-token (clean, limited) or support client-side resumption (complex). Pick one and document it, or clients treat a truncated response as complete.",
+   "hook": "Truncated reads as complete",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-semantic-cache-correctness-hazard",
+   "front": "Why is semantic caching a correctness hazard, not a cost feature?",
+   "back": "A false hit is a wrong answer served with full confidence, silently. If you do it: tight threshold, tenant-scoped, exclude temporal or personalized content, log every hit with its score, sample-audit.",
+   "hook": "Mature teams narrow it to FAQ shapes",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "semantic-cache",
+   "cite": "doc: ai-architect-edge-playbook §11"
+  },
+  {
+   "id": "c-ed-shared-rate-limits-self-dos",
+   "front": "How do teams DoS themselves through a provider?",
+   "back": "Provider rate limits are per-organization. Team A's batch backfill exhausts the quota and Team B's customer-facing product throws 429s. Solve it at the gateway: per-consumer fair-share quotas, priority classes, a queue for low-priority work.",
+   "hook": "Your batch job is their outage",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "rate-limiting-and-quotas-for-ai",
+   "cite": "doc: ai-architect-edge-playbook §11",
+   "aryaka": "An overnight re-triage backfill can 429 the live portal copilot unless interactive traffic outranks it."
+  },
+  {
    "id": "c-iq-autoregressive-floor",
    "front": "Why does training parallelize while inference cannot?",
    "back": "Inference is autoregressive: token 20 cannot exist before token 1. In training the full sequence is known, so all positions process in one batch.",
@@ -2663,6 +2884,127 @@
    "theme": "reliability-operations",
    "topic": "llm-observability",
    "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ed-fail-open-vs-fail-closed",
+   "front": "The guardrail service itself is down. What happens?",
+   "back": "Read-only advisory paths fail open, logged loudly. Any write, external communication or customer-visible output fails closed to human handoff. Decide and approve this before the incident.",
+   "hook": "Under pressure someone decides wrongly",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "kill-switch-framework",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-false-positive-log-weekly",
+   "front": "The fastest source of guardrail improvement, that nobody uses.",
+   "back": "The false-positive log, reviewed weekly. And never hard-block silently: a blocked request needs a clear message, a path forward, and a log entry.",
+   "hook": "Nobody reads the block log",
+   "kind": "check",
+   "theme": "security-data",
+   "topic": "llm-observability",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-guardrail-cost-ladder",
+   "front": "The guardrail implementation ladder, cheapest first.",
+   "back": "Regex/deny-list (~0ms), classical fine-tuned classifier (5-30ms, underrated), small guard LLM like Llama Guard or ShieldGemma (100-400ms), managed service (100-500ms), full LLM judge (500-2000ms).",
+   "hook": "Classifiers are very good and very cheap",
+   "kind": "pat",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-guardrail-false-positive-math",
+   "front": "A guardrail at 2% false-positive rate, 1M requests a month. What is the cost?",
+   "back": "20,000 legitimate requests blocked — in support, 20,000 frustrated customers. False-positive rate is a product metric with an owner, not a security afterthought.",
+   "hook": "2% is twenty thousand people",
+   "kind": "number",
+   "theme": "security-data",
+   "topic": "ai-product-metrics",
+   "cite": "doc: ai-architect-edge-playbook §5",
+   "aryaka": "At our ticket volume a 2% false block is a daily stream of customers told no for nothing."
+  },
+  {
+   "id": "c-ed-guardrail-operating-point-per-class",
+   "front": "How do experienced teams tune guardrail thresholds?",
+   "back": "Per action class. High recall — accept false positives — for DESTRUCTIVE actions; high precision — accept misses — for advisory read-only paths. One global threshold is wrong at both ends.",
+   "hook": "One threshold is wrong twice",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-guardrail-serial-latency",
+   "front": "Guards naively add 400-1,000ms. Four ways to claw it back.",
+   "back": "Run independent guards in parallel with each other; run input guards in parallel with retrieval and cancel the model call if one trips; cheap tiers first, escalate only ambiguous cases; async log-and-alert for low-risk categories.",
+   "hook": "Parallel with retrieval, not before it",
+   "kind": "pat",
+   "theme": "security-data",
+   "topic": "resilience-patterns",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-guardrail-three-placements",
+   "front": "Guardrails sit in three places. Name them and what each catches.",
+   "back": "Input (jailbreaks, injection, off-topic, PII in), output (ungroundedness, PII leakage, policy statements, format), action (unauthorized action, out-of-policy parameters, blast radius).",
+   "hook": "Three placements, three different jobs",
+   "kind": "def",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-model-armor-landscape",
+   "front": "Name the managed guardrail platforms, and why naming them matters.",
+   "back": "Google Cloud Model Armor, Bedrock Guardrails, Azure Content Safety. Naming products correctly is a low-cost, high-value credibility signal — use them when you want the compliance story without owning the models.",
+   "hook": "Cheap credibility, correctly named",
+   "kind": "def",
+   "theme": "security-data",
+   "topic": "build-buy-partner",
+   "cite": "doc: ai-architect-edge-playbook §6"
+  },
+  {
+   "id": "c-ed-only-action-guardrails-load-bearing",
+   "front": "Which guardrail class is actually load-bearing for safety?",
+   "back": "Action guardrails. Input and output guards are probabilistic quality controls that reduce probability; action guardrails are deterministic authorization that reduces possibility.",
+   "hook": "Probability versus possibility",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-separate-guardrails-from-authorization",
+   "front": "The line that separates guardrails from authorization.",
+   "back": "\"Content guardrails are probabilistic and I expect them to fail some percentage of the time. Anything where failure is unacceptable goes in the deterministic policy layer in front of the tool.\"",
+   "hook": "Say it in one breath",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-streaming-guard-decision-framing",
+   "front": "How does an architect resolve the streaming-guardrail trade-off?",
+   "back": "By consequence class, and by surfacing it rather than deciding alone: stream optimistically for an internal assistant, buffer for anything customer-facing, and tell product the TTFT cost is the price of the guarantee.",
+   "hook": "Surface the trade-off, don't resolve it silently",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "hitl-design",
+   "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-ed-streaming-vs-output-guards",
+   "front": "Streaming and output guardrails conflict. Name all three strategies.",
+   "back": "Buffer-and-check (safe, destroys TTFT), chunked windowed checking (good middle, can miss violations spanning boundaries, needs overlap), optimistic stream with retraction (best latency, user may briefly see bad content).",
+   "hook": "You cannot un-send a token",
+   "kind": "pat",
+   "theme": "security-data",
+   "topic": "hitl-design",
+   "cite": "doc: ai-architect-edge-playbook §5"
   },
   {
    "id": "c-iq-conflicting-documents",
