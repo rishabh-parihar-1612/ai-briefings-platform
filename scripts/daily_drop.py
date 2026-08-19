@@ -88,6 +88,22 @@ def days_between(a: str, b: date) -> int:
 # ------------------------------------------------------------- selection
 
 
+def interleave(items, key_of):
+    """Round-robin a stable order across keys, so a window of CARDS_PER_DROP consecutive
+    items spans that many distinct themes and THEME_CAP never silently skips one — a
+    skipped card would otherwise resurface a day or two later."""
+    buckets: dict = {}
+    for it in items:
+        buckets.setdefault(key_of(it), []).append(it)
+    keys = sorted(buckets, key=lambda k: seed("deck", k))
+    out = []
+    while any(buckets[k] for k in keys):
+        for k in keys:
+            if buckets[k]:
+                out.append(buckets[k].pop(0))
+    return out
+
+
 def pick_cards(deck, state, day: date):
     """Deterministic: same (deck, state, day) always yields the same 8 cards.
 
@@ -107,8 +123,10 @@ def pick_cards(deck, state, day: date):
                  key=lambda cid: (-overdue(cid), seed(ds, cid)))
     # Unseen cards walk a fixed global order in a window that advances 8 per day, so an
     # ungraded day still cannot replay a card until the whole unseen pool has cycled.
-    fresh = sorted((cid for cid in cards if cid not in cstate or not cstate[cid].get("last")),
-                   key=lambda cid: seed("deck", cid))
+    fresh = interleave(sorted((cid for cid in cards
+                               if cid not in cstate or not cstate[cid].get("last")),
+                              key=lambda cid: seed("deck", cid)),
+                       lambda cid: cards[cid].get("theme"))
     if fresh:
         off = ((day - EPOCH).days * CARDS_PER_DROP) % len(fresh)
         new = fresh[off:] + fresh[:off]
@@ -143,12 +161,20 @@ def pick_cards(deck, state, day: date):
     for kind in ("contrast", "buzzword"):
         if any(cards[cid].get("kind") == kind for cid in chosen):
             continue
-        pool = sorted((cid for cid in cards if cards[cid].get("kind") == kind),
-                      key=lambda cid: (cid in cstate, seed(ds, cid)))
-        if pool and len(chosen) >= CARDS_PER_DROP:
-            chosen[-1] = pool[0]
-        elif pool:
-            chosen.append(pool[0])
+        # same rotating window as the main pool: a date-seeded pick would happily
+        # repeat yesterday's card, which is exactly what the guarantee must not do
+        pool = sorted((cid for cid in cards if cards[cid].get("kind") == kind
+                       and cid not in used),
+                      key=lambda cid: (cid in cstate and bool(cstate[cid].get("last")),
+                                       seed("deck", cid)))
+        if not pool:
+            continue
+        pick = pool[(day - EPOCH).days % len(pool)]
+        if len(chosen) >= CARDS_PER_DROP:
+            chosen[-1] = pick
+        else:
+            chosen.append(pick)
+        used.add(pick)
 
     return [cards[cid] for cid in chosen[:CARDS_PER_DROP]]
 
