@@ -16,9 +16,12 @@ Usage:
   python3 scripts/daily_drop.py --md               # also write Daily/YYYY-MM-DD.md
   python3 scripts/daily_drop.py --html             # also write Deck/daily.html (mirror)
   python3 scripts/daily_drop.py --telegram         # push (needs TELEGRAM_BOT_TOKEN/CHAT_ID)
-  python3 scripts/daily_drop.py --grade "1g 2a 3e 4g 5g 6f 7g 8e d:partial"
+  python3 scripts/daily_drop.py --grade "1g 2a 3e 4g 5g 6f 7x 8e d:partial"
+  python3 scripts/daily_drop.py --bury c-bw-grpo:"not my lever"   # retire a card
+  python3 scripts/daily_drop.py --buried                          # what is retired, and why
 
 Grades: a=again (reset to box 1) · g=good (box+1) · e=easy (box+2) · f=again, alias.
+        x=reject — retires the card permanently (same as --bury).
 Drill grades: d:nailed | d:partial | d:blank
 """
 
@@ -127,7 +130,8 @@ def pick_cards(deck, state, day: date):
     Raise REVIEW_CAP if you want the deck to consolidate instead of expand.
     """
     ds = day.isoformat()
-    cards = {c["id"]: c for c in deck["cards"]}
+    buried = set(state.get("buried", {}))
+    cards = {c["id"]: c for c in deck["cards"] if c["id"] not in buried}
     cstate = state.get("cards", {})
 
     def overdue(cid):
@@ -199,7 +203,9 @@ def pick_drill(deck, state, day: date):
     ds = day.isoformat()
     tier = TIER_CYCLE[(day - EPOCH).days % len(TIER_CYCLE)]
     dstate = state.get("drills", {})
-    pool = [d for d in deck["drills"] if d.get("tier") == tier] or deck["drills"]
+    buried = set(state.get("buried", {}))
+    live = [d for d in deck["drills"] if d["id"] not in buried]
+    pool = [d for d in live if d.get("tier") == tier] or live
     if not pool:
         return None
     return sorted(pool, key=lambda d: (dstate.get(d["id"], {}).get("last", ""),
@@ -425,6 +431,21 @@ def send_telegram(msgs):
 
 
 GRADE_MAP = {"a": "again", "f": "again", "g": "good", "e": "easy"}
+# 'x' is not a grade — it retires the card. A card you cannot kill is a card you learn to
+# skim past, which quietly poisons every box interval it appears in.
+BURY_LETTER = "x"
+
+
+def bury(state, card_id: str, ds: str, reason: str = ""):
+    """Retire a card from every future drop.
+
+    Kept in schedule.json rather than deleted from Deck/cards/ on purpose: the card stays
+    in the corpus with its citation intact, and `build_deck.py` reports the buried set —
+    so a rejected card reads as a bug report about the card, not as content quietly
+    vanishing. Un-bury with --unbury.
+    """
+    state.setdefault("buried", {})[card_id] = {"date": ds, "reason": reason}
+    state.get("cards", {}).pop(card_id, None)      # drop its box state; it is out of rotation
 
 
 def apply_grades(deck, state, day: date, spec: str):
@@ -438,12 +459,16 @@ def apply_grades(deck, state, day: date, spec: str):
             dgrade = token[2:]
             continue
         idx, _, letter = token[:-1], None, token[-1].lower()
-        if not idx.isdigit() or letter not in GRADE_MAP:
-            sys.exit(f"cannot parse grade token '{token}' — want e.g. 3g, 5a, d:partial")
+        if not idx.isdigit() or letter not in (set(GRADE_MAP) | {BURY_LETTER}):
+            sys.exit(f"cannot parse grade token '{token}' — want e.g. 3g, 5a, 2x, d:partial")
         i = int(idx) - 1
         if not 0 <= i < len(cards):
             sys.exit(f"grade token '{token}' is outside 1-{len(cards)}")
         card = cards[i]
+        if letter == BURY_LETTER:
+            bury(state, card["id"], ds, "rejected during grading")
+            logged.append((card["id"], "buried", None))
+            continue
         entry = state["cards"].setdefault(card["id"], {"box": 0, "seen": 0, "again": 0})
         grade = GRADE_MAP[letter]
         if grade == "again":
@@ -485,7 +510,13 @@ def main():
     p.add_argument("--md", action="store_true", help="write Daily/<date>.md")
     p.add_argument("--html", action="store_true", help="write Deck/daily.html")
     p.add_argument("--telegram", action="store_true", help="push to Telegram")
-    p.add_argument("--grade", metavar='"1g 2a …"', help="grade today's drop and advance boxes")
+    p.add_argument("--grade", metavar='"1g 2a …"',
+                   help="grade today's drop and advance boxes; 'x' retires a card (e.g. 2x)")
+    p.add_argument("--bury", metavar="ID[:reason]", action="append", default=[],
+                   help="retire a card or drill by id so it never appears again")
+    p.add_argument("--unbury", metavar="ID", action="append", default=[],
+                   help="bring a retired card back into rotation")
+    p.add_argument("--buried", action="store_true", help="list what is retired, and why")
     p.add_argument("--stats", action="store_true", help="print scheduler state only")
     args = p.parse_args()
 
@@ -497,9 +528,38 @@ def main():
         print(stats(deck, state))
         return
 
+    if args.bury or args.unbury or args.buried:
+        ds = day.isoformat()
+        ids = {c["id"] for c in deck["cards"]} | {d["id"] for d in deck["drills"]}
+        for spec in args.bury:
+            cid, _, reason = spec.partition(":")
+            if cid not in ids:
+                sys.exit(f"no card or drill with id '{cid}'")
+            bury(state, cid, ds, reason or "rejected")
+            print(f"  buried {cid}" + (f" — {reason}" if reason else ""))
+        for cid in args.unbury:
+            if state.get("buried", {}).pop(cid, None):
+                print(f"  unburied {cid} — back in rotation as new material")
+            else:
+                print(f"  {cid} was not buried")
+        if args.bury or args.unbury:
+            save_schedule(state)
+        b = state.get("buried", {})
+        if args.buried or b:
+            print(f"\n{len(b)} retired:")
+            for cid, meta in sorted(b.items()):
+                print(f"  {cid:<44} {meta.get('date','')}  {meta.get('reason','')}")
+            if b:
+                print("\nA retired card is a bug report — fix or delete it in Deck/cards/, "
+                      "and build_deck.py lists these so they do not just vanish quietly.")
+        return
+
     if args.grade:
         logged, (drill, dgrade) = apply_grades(deck, state, day, args.grade)
         for cid, grade, box in logged:
+            if grade == "buried":
+                print(f"  {cid}: retired — will not appear again (--unbury to undo)")
+                continue
             nxt = BOX_DAYS[box]
             print(f"  {cid}: {grade} → box {box} (next in {nxt}d)")
         if dgrade and drill:

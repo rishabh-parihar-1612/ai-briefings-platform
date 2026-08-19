@@ -49,6 +49,13 @@ jobs:
       - name: Commit if anything new
         id: commit
         run: |
+          # a digest file only exists when something crossed the bar; the ledger and
+          # seen-list update every run, and must NOT trigger a notification
+          if [ -f "radar-inbox/$(date -u '+%Y-%m-%d').md" ]; then
+            echo "digest=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "digest=false" >> "$GITHUB_OUTPUT"
+          fi
           git config user.name  "radar-collect"
           git config user.email "actions@github.com"
           git add radar-inbox
@@ -63,7 +70,7 @@ jobs:
 
       - name: Nudge Telegram
         # only when there is something to read, and never fail the job over a nudge
-        if: steps.commit.outputs.changed == 'true' && env.TELEGRAM_BOT_TOKEN != ''
+        if: steps.commit.outputs.digest == 'true' && env.TELEGRAM_BOT_TOKEN != ''
         continue-on-error: true
         env:
           SUMMARY: ${{ steps.collect.outputs.summary }}
@@ -72,8 +79,8 @@ jobs:
           export URL="https://github.com/${REPO}/blob/main/radar-inbox/$(date -u '+%Y-%m-%d').md"
           python - <<'PY'
           import json, os, urllib.parse, urllib.request
-          text = (f"\U0001F4E1 <b>Radar</b> — {os.environ.get('SUMMARY','new items')}\n"
-                  f"Undecoded collection. Run <code>/radar --deck</code> to turn it into cards.\n"
+          text = (f"\U0001F4E1 <b>Radar</b> — {os.environ.get('SUMMARY','something crossed the bar')}\n"
+                  f"Undecoded. Run <code>/radar --deck</code> to fill the lineage slots and mine cards.\n"
                   f"{os.environ['URL']}")
           data = urllib.parse.urlencode({"chat_id": os.environ["TELEGRAM_CHAT_ID"],
                                          "text": text, "parse_mode": "HTML",

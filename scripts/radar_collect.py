@@ -33,6 +33,9 @@ from datetime import datetime, timedelta, timezone
 from html import unescape
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import radar_terms as rt                                     # noqa: E402
+
 BASE = Path(__file__).resolve().parent.parent
 UA = "ai-briefings-radar/1.0 (+personal learning system)"
 TIMEOUT = 25
@@ -91,7 +94,9 @@ def fetch(url: str) -> bytes:
 
 
 def strip_html(s: str) -> str:
-    return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", s or ""))).strip()
+    txt = re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", s or ""))).strip()
+    # arXiv titles carry LaTeX; "D$^2$ACCI" should read as "D2ACCI"
+    return re.sub(r"\$+\^?\{?([^${}]*)\}?\$+", r"\1", txt)
 
 
 def parse_date(s: str):
@@ -232,7 +237,12 @@ def score(item, vocab):
     terms = [t for t in vocab.get("terms", []) if len(t) > 4 and t in text]
     item["topics"] = sorted(set(hits))
     item["terms"] = sorted(set(terms))[:8]
-    item["incident"] = bool(INCIDENT_WORDS.search(text))
+    # Incident classification is for write-ups, not papers: an arXiv abstract saying
+    # "root cause" or "failure" is describing a research problem, not a production
+    # post-mortem, and letting those through is what fills the section with noise.
+    is_paper = item["source"].startswith("arXiv")
+    item["incident"] = bool(INCIDENT_WORDS.search(text)) and not is_paper
+    item["paper"] = is_paper
     item["inflection"] = bool(INFLECTION_WORDS.search(text))
     item["covered"] = {t: vocab.get("deck_topics", {}).get(t, 0) for t in item["topics"]}
     item["score"] = (3 * len(item["topics"]) + len(item["terms"])
@@ -241,55 +251,95 @@ def score(item, vocab):
     return item
 
 
-def render(items, errors, day, vocab):
-    inc = [i for i in items if i["incident"]]
-    inf = [i for i in items if i["inflection"] and not i["incident"]]
-    rest = [i for i in items if not i["incident"] and not i["inflection"]]
-    known = sorted({t for i in items for t in i["topics"]})
-    new_terms = sorted({t for i in items for t in i["terms"]
-                        if t not in {x.replace("-", " ") for x in vocab.get("topics", [])}})[:15]
-    L = [f"---", f"date: {day}", "collector: radar_collect.py", "decoded: false",
-         f"items: {len(items)}", "status: pending-approval", "---", "",
-         f"# Radar inbox — {day}", "",
-         "Collected deterministically (no model). Scored against the wiki slugs, glossary "
-         "terms and existing deck coverage — so the cross-references below are matches, "
-         "not judgements. **Nothing here is decoded yet**: run `/radar --deck` over this "
-         "file to turn it into prose, buzzword four-beats and candidate cards.", ""]
+def render(day, trend, incidents, movers, papers, errors, vocab):
+    """The digest, rewritten around terms rather than articles.
+
+    The old version was a list of links, which is noise. This one leads with the
+    vocabulary that gained ground, places it on a documented succession chain, and names
+    the five slots a decode has to fill. It is a worksheet, not a newsletter — and it is
+    only written when something crossed the bar.
+    """
+    L = ["---", f"date: {day}", "collector: radar_collect.py", "decoded: false",
+         f"rising_terms: {len(trend)}", f"incidents: {len(incidents)}",
+         "status: pending-approval", "---", "",
+         f"# Radar — {day}", "",
+         "Terms that gained ground, not a list of articles. Detection is deterministic "
+         "(mention counts, distinct sources, first-seen dates, and which succession chain "
+         "the term extends); the prose is not written yet. Run `/radar --deck` to fill the "
+         "slots and mine cards.", ""]
     if errors:
-        L += ["> **Sources that failed this run** (reported, not hidden — a quiet collector "
-              "looks the same as a quiet week):", ""]
-        L += [f"> - {e}" for e in errors] + [""]
-    L += [f"**Topics touched:** {', '.join(known) or '(none matched)'}", ""]
-    if new_terms:
-        L += [f"**Vocabulary seen that is not a topic page yet:** {', '.join(new_terms)}", ""]
+        L += ["> Sources that failed this run (reported, never hidden — a silent collector "
+              "looks the same as a quiet week):", ""] + [f"> - {e}" for e in errors] + [""]
 
-    def block(title, group, why):
-        if not group:
-            return []
-        out = [f"## {title}", "", f"*{why}*", ""]
-        for i in sorted(group, key=lambda x: -x["score"]):
-            cov = ", ".join(f"{t} ({n} cards)" for t, n in i["covered"].items()) or "no topic match"
-            out += [f"### {i['title']}",
-                    f"**Source:** {i['source']} · {i['date']} · {i['url']}"]
-            if i.get("discussion"):
-                out += [f"**Discussion:** {i['discussion']}"]
-            if i.get("summary"):
-                out += ["", i["summary"]]
-            out += ["", f"**Touches:** {cov}", f"**Relevance score:** {i['score']}", ""]
-        return out
+    if trend:
+        L += ["## Terms gaining ground", ""]
+        for t in trend:
+            L += [f"### {t['term']}", "",
+                  f"**Momentum:** {t['mentions']} mentions across {t['sources']} distinct "
+                  f"sources in the last 14 days · first seen {t['first_seen']}",
+                  f"**Already in my vocabulary:** {'yes — this is momentum, not news' if t['already_known'] else 'NO — new to the corpus'}"]
+            ch, step = t.get("chain"), t.get("step")
+            if ch:
+                L += ["", f"**Extends a documented succession:** *{ch['question']}*", ""]
+                for st in ch["steps"]:
+                    mark = " ← **this one**" if step and st["term"] == step["term"] else ""
+                    L += [f"- `{st['era']}` **{st['term']}** — {st['what_changed']} "
+                          f"({st['cite']}){mark}"]
+                if not step:
+                    L += [f"- `2026` **{t['term']}** — ??? *(the decode must fill this in, "
+                          f"and say whether it is a real shift or a rename)*"]
+            else:
+                L += ["", "**No known chain** — either it starts one, or it is a product name."]
+            L += ["", "**Evidence:**"]
+            for m in t["recent"][:3]:
+                L += [f"- {m['source']} · {m['date']} · [{m['title']}]({m['url']})"]
+            L += ["", "**Slots the decode must fill:**",
+                  "1. What was the previous approach, concretely, and what did it fail at?",
+                  "2. What changed mechanically — not in framing, in mechanism?",
+                  "3. Which decision in our stack does it change, if any? (\"none\" is a valid answer "
+                  "and a useful one.)",
+                  "4. Real shift, or rebranding? Say which, with the reasoning.",
+                  "5. Does it invalidate an existing card? Name the id. This matters more than "
+                  "adding one — nothing else in the system retires stale cards.", ""]
 
-    L += block("Candidate contrast cards — incident language",
-               inc, "Matched incident vocabulary. These are what feed ❌/✅ cards, so read these first.")
-    L += block("Candidate inflection movers",
-               inf, "Matched pricing, deprecation, GA, standards or regulation language — the "
-                    "things that move a strategic watch rather than a design detail.")
-    L += block("Everything else that matched", rest, "Lower signal. Skim or skip.")
-    L += ["## What a decode pass must add", "",
-          "1. Four-beat decode for every new term above (Sold as / Actually / Changes / Say).",
-          "2. Which inflection watch each mover advances, and what decision it changes.",
-          "3. **Which existing card this invalidates** — news that retires a stale card is worth "
-          "more than news that adds one, and nothing else in the system checks for that.",
-          "4. Candidate cards as JSON, which `build_deck.py` then validates before merge.", ""]
+    if incidents:
+        L += ["## Incidents — candidate contrast cards", "",
+              "*Matched incident vocabulary. The ❌/✅ card writes itself if the post names "
+              "what they did and what fixed it.*", ""]
+        for i in incidents:
+            cov = ", ".join(f"{k} ({v} cards)" for k, v in i["covered"].items()) or "no topic match"
+            L += [f"- **{i['title']}** — {i['source']} · {i['date']}",
+                  f"  {i['url']}", f"  touches: {cov}"]
+        L += [""]
+
+    if movers:
+        L += ["## Moves a strategic watch", "",
+              "*Pricing, deprecation, GA, standards or regulation language against a topic "
+              "we already track.*", ""]
+        for i in movers:
+            cov = ", ".join(i["topics"]) or "—"
+            L += [f"- **{i['title']}** — {i['source']} · {i['date']}",
+                  f"  {i['url']}", f"  touches: {cov}"]
+        L += [""]
+
+    if papers:
+        L += ["## Research touching two or more of my topics", "",
+              "*arXiv, filtered to papers that hit at least two tracked topics. Skim the "
+              "abstract; these are for direction, not for cards.*", ""]
+        for i in papers:
+            L += [f"- **{i['title']}** — {i['date']} · {i['url']}",
+                  f"  touches: {', '.join(i['topics'])}"]
+        L += [""]
+
+    L += ["## Bar for this digest existing at all", "",
+          f"- a term with ≥{3} mentions from ≥{2} distinct sources in 14 days, not already "
+          "decoded in the deck; or",
+          "- an item matching incident vocabulary; or",
+          "- a pricing/deprecation/GA/standards item touching a topic we track; or",
+          "- a paper touching two or more tracked topics.", "",
+          "Nothing else is written. A quiet week produces no file, no commit and no "
+          "notification — that is deliberate, because a daily list of links trains you to "
+          "ignore the channel.", ""]
     return "\n".join(L)
 
 
@@ -311,6 +361,8 @@ def main():
     ap.add_argument("--seen", default=None, help="path to seen.json (default: <out>/seen.json)")
     ap.add_argument("--vocab", default=None, help="pre-built vocab.json (for the mirror repo)")
     ap.add_argument("--min-score", type=int, default=1, help="drop items below this score")
+    ap.add_argument("--ledger", default=None, help="term ledger json (default: <out>/terms.json)")
+    ap.add_argument("--lineage", default=None, help="succession chains json (default: Radar/lineage.json)")
     ap.add_argument("--decode", default=None, help="model provider for the decode pass (unavailable)")
     ap.add_argument("--emit-vocab", metavar="PATH",
                     help="write vocab.json from the local corpus and exit (the mirror repo "
@@ -353,26 +405,58 @@ def main():
         urls.add(u); i["url"] = u; uniq.append(i)
 
     scored = [score(i, vocab) for i in uniq]
-    kept = [i for i in scored if i["score"] >= args.min_score]
-    if args.decode:
-        kept, derr = decode_stub(kept); errors += derr
-
     day = datetime.now(timezone.utc).date().isoformat()
-    body = render(kept, errors, day, vocab)
+
+    # --- term momentum: the ledger is the memory that makes "gaining ground" meaningful
+    ledger_path = Path(args.ledger) if args.ledger else out_dir / "terms.json"
+    lineage_path = Path(args.lineage) if args.lineage else BASE / "Radar" / "lineage.json"
+    ledger = rt.load_ledger(ledger_path)
+    lineage = rt.load_lineage(lineage_path)
+    ledger = rt.update(ledger, scored, day)
+    known = rt.known_terms(vocab, BASE / "Deck" / "deck.json")
+    decoded = rt.decoded_terms(BASE / "Deck" / "deck.json")
+    trend = rt.rising(ledger, day, known, decoded)
+    for t in trend:
+        ch, step = rt.chain_for(t["term"], lineage)
+        t["chain"], t["step"] = ch, step
+
+    incidents = [i for i in scored if i["incident"]]
+    movers = [i for i in scored if i["inflection"] and not i["incident"]
+              and i["topics"] and not i.get("paper")]
+    papers = [i for i in scored if i.get("paper") and len(i["topics"]) >= 2]
+
+    if args.decode:
+        scored, derr = decode_stub(scored); errors += derr
+
+    # --- the bar. Nothing crossed it means nothing is written.
+    if not (trend or incidents or movers or papers):
+        print(f"nothing crossed the bar ({len(scored)} new items seen, "
+              f"{len(ledger['terms'])} terms tracked"
+              + (f", {len(errors)} source errors" if errors else "") + ")")
+        if not args.dry_run:
+            ledger_path.parent.mkdir(parents=True, exist_ok=True)
+            ledger_path.write_text(json.dumps(ledger, indent=1))
+            seen_path.write_text(json.dumps(sorted(seen | urls), indent=0))
+        return
+
+    body = render(day, trend, incidents, movers, papers, errors, vocab)
     if args.dry_run:
-        print(body[:4000])
-        print(f"\n--- {len(kept)} kept of {len(scored)} new ({len(items)} fetched), "
-              f"{len(errors)} source errors")
+        print(body)
         return
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"{day}.md").write_text(body)
+    ledger_path.write_text(json.dumps(ledger, indent=1))
     seen_path.write_text(json.dumps(sorted(seen | urls), indent=0))
-    # one line for the Telegram nudge / workflow summary
-    topics = sorted({t for i in kept for t in i["topics"]})
-    print(f"{len(kept)} new items"
-          + (f" touching {', '.join(topics[:6])}" if topics else "")
-          + (f"; {sum(1 for i in kept if i['incident'])} look like incidents" if kept else "")
-          + (f"; {len(errors)} source errors" if errors else ""))
+    bits = []
+    if trend:
+        bits.append(f"{len(trend)} term(s) gaining ground: " + ", ".join(t["term"] for t in trend[:3]))
+    if incidents:
+        bits.append(f"{len(incidents)} incident(s)")
+    if papers:
+        bits.append(f"{len(papers)} paper(s)")
+    if movers:
+        bits.append(f"{len(movers)} watch mover(s)")
+    print("; ".join(bits) + (f"; {len(errors)} source errors" if errors else ""))
 
 
 if __name__ == "__main__":
