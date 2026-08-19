@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-19 14:45 UTC",
+ "generated": "2026-08-19 16:32 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -333,6 +333,56 @@
    "theme": "agents-orchestration",
    "topic": "workflow-engines-for-ai",
    "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-iq-agentic-rag-trigger",
+   "front": "When does agentic RAG earn its cost over standard RAG?",
+   "back": "When the task is multi-step, needs decomposition, spans multiple systems, or depends on intermediate findings. \"When can I get a replacement\" needs order, product and delivery systems.",
+   "hook": "Four triggers, not \"it's complex\"",
+   "kind": "check",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-interviewer-tests-category",
+   "front": "In a design round, what is the first move on any question?",
+   "back": "Name the category the question belongs to — platform architecture, security, retrieval trade-off. The surface question is rarely what is being tested.",
+   "hook": "Reframe before you answer",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §1"
+  },
+  {
+   "id": "c-iq-state-the-tradeoff",
+   "front": "What separates a senior design answer from a correct one?",
+   "back": "Explicitly naming the trade-off you accepted. Structure, example, then the cost you knowingly took. Candidates skip the fourth move.",
+   "hook": "The fourth move is the signal",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §1"
+  },
+  {
+   "id": "c-iq-tool-defect-not-model",
+   "front": "The agent keeps calling the wrong tool. What kind of defect is that?",
+   "back": "A tool-design defect. Vague descriptions, overlapping responsibilities, weak parameter schemas, missing usage examples. Fix boundaries, schemas, enums and validation — not the model.",
+   "hook": "\"We cannot just train the model\"",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-trajectory-walk",
+   "front": "Walk the trajectory — what six things do you inspect, in order?",
+   "back": "User input, planning step, tool selected, generated arguments, tool response, final answer. Debugging anywhere else is guessing.",
+   "hook": "Six stops, in order",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
   },
   {
    "id": "c-bw-a2a",
@@ -855,6 +905,67 @@
    "theme": "cost-performance",
    "topic": "token-economics",
    "cite": "issue 005, §9"
+  },
+  {
+   "id": "c-iq-10k-to-100m",
+   "front": "RAG works at 10K docs and fails at 100M. What actually changed?",
+   "back": "It became a distributed systems problem: sharding, cross-shard merge and global rerank, coordination overhead and tail latency, incremental indexing instead of full reindexing.",
+   "hook": "A single index stops being practical",
+   "kind": "scale",
+   "theme": "cost-performance",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §5"
+  },
+  {
+   "id": "c-iq-allocate-intelligence",
+   "front": "\"Why do more models make a system stronger?\" What is being tested?",
+   "back": "Allocation of intelligence, not model strength. Small models take intent detection, routing, classification, extraction, validation, guardrails; large models take complex reasoning, planning, final synthesis.",
+   "hook": "Allocate intelligence intelligently",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "model-cascade-and-batch",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-iq-gateway-single-entry",
+   "front": "Multiple teams want LLM access. What is the answer, and its cost?",
+   "back": "One central gateway: auth, per-team quotas, rate limits, routing, prompt templates, logging, cost attribution, retries, fallbacks, policy checks. Cost is platform complexity; gain is governance and one stable API.",
+   "hook": "Integrate once, swap behind it",
+   "kind": "pat",
+   "theme": "cost-performance",
+   "topic": "abstraction-seams",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-iq-hybrid-exact-match",
+   "front": "Why is embedding search alone insufficient in production RAG?",
+   "back": "Error codes, API names, function names, config keys and product IDs are exact-match problems. BM25 over an inverted index catches what embeddings blur; merge then rerank.",
+   "hook": "\"error 429\" is not a semantic query",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4",
+   "aryaka": "Device models, error codes and CLI strings in our runbooks are exactly this class."
+  },
+  {
+   "id": "c-iq-recall-then-rerank",
+   "front": "Recall or precision in RAG — which do you optimize?",
+   "back": "High recall first, then reranking for precision before context reaches the model. Missing the document is catastrophic; flooding the window with noise costs answers, latency and money.",
+   "hook": "Recall first, precision by rerank",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "kg-rag",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-iq-two-second-budget",
+   "front": "Four moves that hold a 10M-doc RAG under two seconds.",
+   "back": "Metadata filters before retrieval, ANN instead of exact nearest-neighbour, reranking bounded to a small candidate set, and caching for repeated queries and hot embeddings.",
+   "hook": "Filter before you search",
+   "kind": "pat",
+   "theme": "cost-performance",
+   "topic": "semantic-cache",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §3"
   },
   {
    "id": "c-quality-adjusted-cost",
@@ -1451,6 +1562,56 @@
    "theme": "fails-vs-works",
    "topic": "ai-testing-and-evals",
    "cite": "doc: agentic-ai-system-design-deep-dive §17"
+  },
+  {
+   "id": "c-fw-iq-direct-provider-integration",
+   "front": "Every team integrating the model provider directly.",
+   "back": "❌ No quotas, no cost attribution, no failover, N integrations to change. ✅ One gateway; teams integrate once and the platform swaps providers behind it.",
+   "hook": "N integrations, N migrations",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "abstraction-seams",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-fw-iq-hallucination-label",
+   "front": "Blaming a wrong answer on hallucination.",
+   "back": "❌ \"The model hallucinated\" — no stage, no owner, no fix. ✅ Check top-K for the source passage: absent is retrieval, present is generation.",
+   "hook": "Structure beats a label",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-fw-iq-one-big-model",
+   "front": "Sending every request to the strongest model.",
+   "back": "❌ A simple FAQ answered by the biggest model — wasteful by default. ✅ Small models classify and route; escalate only when complexity demands it.",
+   "hook": "Expensive intelligence, trivial task",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "model-cascade-and-batch",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-fw-iq-prompt-only-security",
+   "front": "Defending injection with prompt separation alone.",
+   "back": "❌ Security that depends on the model behaving correctly. ✅ Retrieved content triggers no actions; every tool call validated server-side; least privilege; approval on sensitive actions.",
+   "hook": "Real security lives outside the prompt",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-fw-iq-restart-workflow",
+   "front": "Restarting a workflow that failed at step 8.",
+   "back": "❌ Replays seven successful steps, including their side effects. ✅ Persist state and checkpoints; resume from the last successful step.",
+   "hook": "Resumability, not repetition",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "langgraph-state-and-checkpointing",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
   },
   {
    "id": "c-fw-logs-without-traces",
@@ -2121,6 +2282,36 @@
    "cite": "doc: agent-harness-loop-llmops-deep-dive §6"
   },
   {
+   "id": "c-iq-eval-from-production",
+   "front": "How should the eval set evolve?",
+   "back": "Cluster real failed production sessions — slow responses, repeated misunderstandings, rephrasing, drop-offs — and feed those patterns back in. Offline eval must track production reality.",
+   "hook": "Production failures are the eval backlog",
+   "kind": "rule",
+   "theme": "product-metrics",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-eval-score-vs-complaints",
+   "front": "Eval score is high, users still complain. What is wrong?",
+   "back": "Metric mismatch — the eval set does not reflect production usage. Clean questions in eval, vague and messy ones in reality; correctness measured, speed and task completion cared about.",
+   "hook": "A good model score is not a good system",
+   "kind": "fail",
+   "theme": "product-metrics",
+   "topic": "ai-product-metrics",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-product-metrics-four",
+   "front": "Beyond model metrics, which four product metrics matter?",
+   "back": "Task completion rate, escalation rate, user correction rate, repeat question rate. They answer whether users are succeeding, which model scores cannot.",
+   "hook": "Are users actually succeeding?",
+   "kind": "metric",
+   "theme": "product-metrics",
+   "topic": "ai-product-metrics",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
    "id": "c-last-touch-undercredits-ai",
    "front": "Why does default attribution systematically under-credit AI?",
    "back": "Last-touch attribution credits whatever happened last, but AI's contribution sits early in the workflow — triage, drafting, retrieval. Traditional ROI assumes linear attribution; AI ROI is multi-causal.",
@@ -2241,6 +2432,66 @@
    "theme": "product-metrics",
    "topic": "ai-product-metrics",
    "cite": "issue 009, §20"
+  },
+  {
+   "id": "c-iq-autoregressive-floor",
+   "front": "Why does training parallelize while inference cannot?",
+   "back": "Inference is autoregressive: token 20 cannot exist before token 1. In training the full sequence is known, so all positions process in one batch.",
+   "hook": "No GPU removes the generation loop",
+   "kind": "def",
+   "theme": "reliability-operations",
+   "topic": "token-economics",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-isolate-stage-first",
+   "front": "A RAG answer is fluent but wrong. What is the first check?",
+   "back": "Is the correct source passage in the top-K retrieved results at all? Absent means a retrieval problem; present means a generation problem. One check halves the search space.",
+   "hook": "Top-K presence splits the space",
+   "kind": "check",
+   "theme": "reliability-operations",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-scaling-four-levers",
+   "front": "Traffic grows 100x. Name the levers in order, and the catch.",
+   "back": "Caching, batching, replicas, queuing — after locating the bottleneck. They interact: bigger batches raise throughput but latency, replicas raise cost, queuing adds wait.",
+   "hook": "Not \"add more GPUs\"",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "queue-architecture-for-ai",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §5"
+  },
+  {
+   "id": "c-iq-temporary-vs-permanent",
+   "front": "Classify the failure before choosing a recovery. Why?",
+   "back": "Temporary (API timeout) gets bounded retries with backoff. Permanent (invalid input) makes retries pure waste — the workflow must take a different path.",
+   "hook": "Retrying invalid input forever",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-iq-ttft-psychology",
+   "front": "Why does TTFT matter more than total completion in chat?",
+   "back": "The system feels fast if streaming starts quickly, even when the full answer is slow. Perception tracks first token, not last.",
+   "hook": "Perceived speed is the first token",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "ai-product-metrics",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-ttft-vs-tps",
+   "front": "Latency for a chat product is which two numbers?",
+   "back": "TTFT — time to first token, driven by prefill and prompt size. TPS — tokens per second once streaming starts, driven by model size and GPU load. Different bottlenecks, different fixes.",
+   "hook": "\"Measure latency\" is a weak answer",
+   "kind": "metric",
+   "theme": "reliability-operations",
+   "topic": "edge-inference",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
   },
   {
    "id": "c-ro-decomposition-counterintuitive",
@@ -2412,6 +2663,47 @@
    "theme": "reliability-operations",
    "topic": "llm-observability",
    "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-iq-conflicting-documents",
+   "front": "Two policy docs disagree — three remote days versus two. What does the agent do?",
+   "back": "Never pick randomly. Resolve by version, timestamp and authority metadata; if still unresolved, state the disagreement explicitly rather than choosing a side.",
+   "hook": "An arbitrary pick is unauditable",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "corpus-provenance",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-detection-is-secondary",
+   "front": "Where does injection detection rank among defenses?",
+   "back": "Additional, never primary. Attackers rewrite around simple detectors. The controls that hold are server-side validation of every tool call and least privilege.",
+   "hook": "A detector is a filter, not a boundary",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-memory-not-truth",
+   "front": "Memory is a source of what, exactly?",
+   "back": "Context, not truth. Preferences change and facts expire, so memory needs last-updated metadata, validation before use, and forgetting — expire old, low-confidence and contradictory entries.",
+   "hook": "Stored once is not still correct",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "memory-systems",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-iq-tool-isolation-boundary",
+   "front": "Multi-tenant isolation has five boundaries. Which is new in agentic systems?",
+   "back": "Tool isolation. Data, access, compute and cache isolation are familiar; one tenant's agent reaching another's APIs, files or actions is the agentic addition.",
+   "hook": "Five boundaries, one of them new",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §2",
+   "aryaka": "A per-tenant agent must not reach another customer's MyAryaka endpoints — a fifth boundary beyond data and cache."
   },
   {
    "id": "c-sd-confused-deputy",
@@ -3498,6 +3790,100 @@
    ]
   },
   {
+   "id": "d-t2-inference-scaling-100x",
+   "tier": 2,
+   "level": "staff",
+   "theme": "cost-performance",
+   "title": "Copilot traffic is about to grow 100x. Scale inference without a blank cheque.",
+   "problem": "Assumption: the support copilot serves ~800 requests a day today across 80 engineers, on hosted frontier models through the gateway. The plan is to expose it to all 500 customers' portals — call it 80,000 requests a day within two quarters, with the same p95 latency target and a cost ceiling that grows 10x, not 100x. You have provider rate limits, one self-hosted GPU tier for regulated tenants, and a queue you have not needed yet. Sequence the work and say what each lever costs you.",
+   "assesses": [
+    "Locating the bottleneck before spending",
+    "Knowing the four levers and the order that wastes least money",
+    "That the levers interact rather than compose cleanly",
+    "Provider rate limits as the real ceiling, not GPUs",
+    "Choosing degradation over failure at the limit"
+   ],
+   "skeleton": [
+    "First locate it: model, GPUs, request rate, or the latency requirement. Scaling the wrong one buys nothing.",
+    "At 100x on hosted models the first wall is provider rate limits, not compute — so this is a queue-and-quota problem before it is a capacity problem.",
+    "Lever one, caching: prompt-prefix, retrieval results and repeated queries. Cheapest, and the query distribution is skewed enough to matter.",
+    "Lever two, batching: group requests arriving in the same window into one inference pass, which lifts GPU utilisation on the self-hosted tier.",
+    "Lever three, replicas behind a load balancer for parallel capacity — the lever that costs money linearly.",
+    "Lever four, queuing: buffer rather than drop when traffic exceeds capacity, with Retry-After and a job id.",
+    "Now say the interactions out loud: bigger batches raise throughput and latency; replicas raise capacity and cost; queuing protects the system and adds wait.",
+    "Protect the interactive path with bulkheads so portal traffic cannot starve engineer traffic.",
+    "Then the cheaper structural lever: cascade the easy 60% to a small model, which cuts the volume the expensive tier ever sees.",
+    "Instrument cost per successful task and the escalation rate, so the 10x ceiling is a measured constraint rather than a hope."
+   ],
+   "numbers": [
+    "800/day to 80,000/day is 100x volume against a 10x cost ceiling — a 10x improvement in cost per request is the actual requirement",
+    "Caching plus cascade is where that comes from; replicas alone scale cost linearly and fail the ceiling",
+    "Batching helps only the self-hosted tier; hosted endpoints already batch server-side, so do not claim it twice"
+   ],
+   "traps": [
+    "Reaching for GPUs first. On hosted models the ceiling is the rate limit, and retry storms against it make things worse.",
+    "Claiming caching and batching and replicas each cut cost 50% and multiplying them. They interact, and one of them raises latency.",
+    "Dropping requests at the limit instead of queuing with a job id and Retry-After.",
+    "Forgetting the cascade. It is the only lever that changes cost per request by an order of magnitude."
+   ],
+   "termdrops": [
+    "bottleneck identification",
+    "prompt-prefix cache",
+    "continuous batching",
+    "replica fleet",
+    "backpressure",
+    "bulkhead",
+    "model cascade",
+    "cost per successful task"
+   ],
+   "followups": [
+    {
+     "q": "Why not just raise the rate limit with the provider?",
+     "a": "That is worth doing and it is not a design. It moves the ceiling without changing cost per request, so the 10x budget still fails at 100x volume. The cascade and cache are what change the unit economics."
+    },
+    {
+     "q": "Batching raises latency. How do you keep p95?",
+     "a": "Batch only the latency-tolerant paths — portal self-service and overnight work — and keep the engineer-facing path unbatched behind its own bulkhead. The window is a per-path setting, not a global one."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Caching and cascade before replicas",
+     "over": "Adding replicas and GPU capacity first",
+     "because": "Volume grows 100x against a 10x budget, so cost per request has to fall 10x. Replicas scale cost linearly and cannot deliver that."
+    },
+    {
+     "choice": "Queue with backpressure",
+     "over": "Rejecting requests above capacity",
+     "because": "A dropped request is an outage for that customer; a queued one with a job id and Retry-After is a slower success."
+    },
+    {
+     "choice": "Batching only on latency-tolerant paths",
+     "over": "One global batching window",
+     "because": "Batching trades latency for throughput, and the engineer-facing path is exactly where that trade is unacceptable."
+    },
+    {
+     "choice": "Bulkheaded pools for portal versus engineer traffic",
+     "over": "One shared pool sized for peak",
+     "because": "500 customers' portal traffic will saturate a shared pool and starve the internal users who already depend on it."
+    }
+   ],
+   "topics": [
+    "model-cascade-and-batch",
+    "queue-architecture-for-ai",
+    "rate-limiting-and-quotas-for-ai",
+    "caching-layers",
+    "token-economics"
+   ],
+   "cite": [
+    "doc: agentic-system-design-interview-answer-patterns §5",
+    "doc: agentic-system-design-interview-answer-patterns §4",
+    "issue 008, §5",
+    "issue 004, §9",
+    "doc: agentic-ai-system-design-deep-dive §10"
+   ]
+  },
+  {
    "id": "d-t2-mandatory-model-gateway",
    "tier": 2,
    "level": "principal",
@@ -4155,6 +4541,100 @@
      "over": "Tuning the retriever to compensate",
      "because": "Dedupe, supersession and metadata tagging usually beat retriever tuning — you cannot rerank your way out of a contradictory corpus."
     }
+   ]
+  },
+  {
+   "id": "d-t2-rag-10k-to-100m",
+   "tier": 2,
+   "level": "staff",
+   "theme": "cost-performance",
+   "title": "The runbook RAG works at 10,000 pages. Make it work at 100 million chunks.",
+   "problem": "Assumption: today's corpus is ~40,000 runbook and KB pages on a single vector index, and retrieval is fine. The mandate is to add every customer's config history, every closed ticket and every device log summary — call it 100M chunks across 500 tenants, with tenant isolation mandatory and p95 retrieval under 300ms inside a 2-second answer budget. Full reindexing currently takes a weekend. Tell me what breaks first, what the architecture becomes, and what you give up.",
+   "assesses": [
+    "Recognising the point where retrieval becomes a distributed systems problem",
+    "Sharding and cross-shard merge with global reranking",
+    "Pre-filter versus post-filter under tenant isolation, and its cost to ANN recall",
+    "Incremental indexing and freshness instead of full rebuilds",
+    "Naming the recall/latency/cost trade-off without being asked"
+   ],
+   "skeleton": [
+    "Name the transition: a single index on one machine stops being practical — this is now a distributed systems problem.",
+    "Shard the index; a query may hit several shards, so partial results merge and then rerank globally.",
+    "That merge is where tail latency lives: p95 is set by the slowest shard, not the average.",
+    "Tenant isolation forces filtering early — post-filtering at this scale wastes most of the retrieval.",
+    "But pre-filtering degrades ANN recall, because the graph was built over the unfiltered set; say so rather than hiding it.",
+    "Resolve it by partitioning on tenant so the filter becomes routing, not filtering, for large tenants.",
+    "Kill full reindexing: incremental indexing on change events, with corpus versioning and a freshness SLA.",
+    "Cache the hot path — repeated queries and hot embeddings — because at this scale the query distribution is heavily skewed.",
+    "Hybrid stays mandatory: error codes and device models are exact-match, so BM25 plus dense, merged then reranked.",
+    "State the trade-off: better recall costs latency, infrastructure and complexity. Pick the recall floor deliberately."
+   ],
+   "numbers": [
+    "100M chunks at ~1KB of vector plus metadata is a multi-hundred-GB index — past single-node RAM, which is the forcing function",
+    "p95 across N shards is the max of N latencies, not the mean: more shards raises tail latency even as it lowers per-shard work",
+    "Skewed query distribution means a small cache can absorb a large share of traffic — measure before sizing"
+   ],
+   "traps": [
+    "Answering 'add more replicas'. Replicas scale throughput, not index size — the wall here is memory and merge, not QPS.",
+    "Claiming pre-filtering is free. It is the right call and it costs ANN recall; not knowing that reads as never having run one.",
+    "Leaving full reindexing in place with a comment about running it overnight. At 100M it does not finish.",
+    "Forgetting exact-match retrieval, then wondering why 'error 429' returns forty plausible documents."
+   ],
+   "termdrops": [
+    "sharded retrieval",
+    "global rerank",
+    "tail latency",
+    "pre-filter versus post-filter",
+    "ANN recall degradation",
+    "incremental indexing",
+    "corpus version",
+    "hybrid retrieval"
+   ],
+   "followups": [
+    {
+     "q": "You said pre-filter. Doesn't that break the ANN index?",
+     "a": "It degrades recall, because the proximity graph was built over the unfiltered set and filtering strands neighbours. For large tenants I partition instead, so the filter becomes routing. For small tenants I accept the recall hit and compensate with a wider candidate set before reranking."
+    },
+    {
+     "q": "Where does your 300ms actually go?",
+     "a": "Roughly: metadata routing and filter resolution, parallel shard search, merge, then a bounded rerank of the top candidates. The rerank is the tunable — candidate-set size is the dial between precision and the budget."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Tenant partitioning for large tenants",
+     "over": "One shared index with a tenant filter for everyone",
+     "because": "At 500 tenants and 100M chunks the filter itself becomes the cost, and pre-filtering degrades ANN recall. Partitioning turns filtering into routing."
+    },
+    {
+     "choice": "Incremental indexing on change events",
+     "over": "Scheduled full reindexing",
+     "because": "A weekend rebuild at 40K pages does not survive 100M chunks; freshness has to come from deltas plus a corpus version stamped into traces."
+    },
+    {
+     "choice": "Hybrid retrieval kept at scale",
+     "over": "Dense-only to reduce moving parts",
+     "because": "Error codes, device models and CLI strings are exact-match problems that embeddings blur, and they are most of what an engineer actually types."
+    },
+    {
+     "choice": "Bounded rerank over a small candidate set",
+     "over": "Reranking everything retrieved",
+     "because": "Reranking is the precision lever and the latency risk; bounding the candidate set is what keeps the 2-second budget intact."
+    }
+   ],
+   "topics": [
+    "embeddings-and-vector-databases",
+    "kg-rag",
+    "multi-tenant-ai-security",
+    "semantic-cache",
+    "caching-layers"
+   ],
+   "cite": [
+    "doc: agentic-system-design-interview-answer-patterns §5",
+    "doc: agentic-system-design-interview-answer-patterns §3",
+    "doc: rag01 §3",
+    "doc: agentic-ai-system-design-deep-dive §11",
+    "issue 008, §2"
    ]
   },
   {

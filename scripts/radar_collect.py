@@ -276,7 +276,8 @@ def render(day, trend, incidents, movers, papers, errors, vocab):
         for t in trend:
             L += [f"### {t['term']}", "",
                   f"**Momentum:** {t['mentions']} mentions across {t['sources']} distinct "
-                  f"sources in the last 14 days · first seen {t['first_seen']}",
+                  f"sources in the last 14 days · first seen {t['first_seen']} · "
+                  f"detected as *{t.get('kind','ngram')}*",
                   f"**Already in my vocabulary:** {'yes — this is momentum, not news' if t['already_known'] else 'NO — new to the corpus'}"]
             ch, step = t.get("chain"), t.get("step")
             if ch:
@@ -332,8 +333,10 @@ def render(day, trend, incidents, movers, papers, errors, vocab):
         L += [""]
 
     L += ["## Bar for this digest existing at all", "",
-          f"- a term with ≥{3} mentions from ≥{2} distinct sources in 14 days, not already "
-          "decoded in the deck; or",
+          "- a named pattern, acronym or product term with ≥3 mentions from ≥2 distinct "
+          "sources in 14 days, not already decoded in the deck; or",
+          "- a general phrase (the noisier layer, so a stricter bar) with ≥4 mentions from "
+          "≥3 distinct sources; or",
           "- an item matching incident vocabulary; or",
           "- a pricing/deprecation/GA/standards item touching a topic we track; or",
           "- a paper touching two or more tracked topics.", "",
@@ -413,6 +416,7 @@ def main():
     ledger = rt.load_ledger(ledger_path)
     lineage = rt.load_lineage(lineage_path)
     ledger = rt.update(ledger, scored, day)
+    pruned = rt.prune(ledger, day)
     known = rt.known_terms(vocab, BASE / "Deck" / "deck.json")
     decoded = rt.decoded_terms(BASE / "Deck" / "deck.json")
     trend = rt.rising(ledger, day, known, decoded)
@@ -432,6 +436,7 @@ def main():
     if not (trend or incidents or movers or papers):
         print(f"nothing crossed the bar ({len(scored)} new items seen, "
               f"{len(ledger['terms'])} terms tracked"
+              + (f", {pruned} stale pruned" if pruned else "")
               + (f", {len(errors)} source errors" if errors else "") + ")")
         if not args.dry_run:
             ledger_path.parent.mkdir(parents=True, exist_ok=True)
