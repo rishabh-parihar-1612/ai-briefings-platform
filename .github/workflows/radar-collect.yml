@@ -1,0 +1,92 @@
+# Copied into the public mirror repo by scripts/publish_platform.sh.
+#
+# Free by construction and by necessity: this job runs NO model. GitHub Models was
+# retired on 2026-07-30 (its inference API now returns HTTP 410), Copilot coding agent
+# consumes premium requests, and a Claude OAuth token here would draw down the same
+# subscription budget used interactively. So collection is deterministic — fetch, dedupe,
+# and score against the corpus vocabulary — and the decode pass happens later, in a
+# session, via `/radar --deck`. When a free model becomes available, implement
+# decode_stub() in radar_collect.py; nothing else here has to change.
+name: radar-collect
+
+on:
+  schedule:
+    - cron: "0 2 * * *"       # 02:00 UTC, half an hour ahead of the daily drop
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "lookback window in days"
+        default: "2"
+
+permissions:
+  contents: write             # commits the digest and seen.json
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect
+        id: collect
+        run: |
+          set -o pipefail
+          python scripts/radar_collect.py \
+            --out radar-inbox \
+            --vocab Deck/mirror/vocab.json \
+            --days "${{ github.event.inputs.days || 2 }}" \
+            | tee /tmp/summary.txt
+          echo "summary=$(cat /tmp/summary.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit if anything new
+        id: commit
+        run: |
+          git config user.name  "radar-collect"
+          git config user.email "actions@github.com"
+          git add radar-inbox
+          if git diff --cached --quiet; then
+            echo "nothing new"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -q -m "radar: $(date -u '+%Y-%m-%d') — ${{ steps.collect.outputs.summary }}"
+            git push -q
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Nudge Telegram
+        # only when there is something to read, and never fail the job over a nudge
+        # secrets are available to `if`; step-level env is not evaluated yet at this point
+        if: steps.commit.outputs.changed == 'true' && secrets.TELEGRAM_BOT_TOKEN != ''
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SUMMARY: ${{ steps.collect.outputs.summary }}
+          REPO: ${{ github.repository }}
+        run: |
+          export URL="https://github.com/${REPO}/blob/main/radar-inbox/$(date -u '+%Y-%m-%d').md"
+          python - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          text = (f"\U0001F4E1 <b>Radar</b> — {os.environ.get('SUMMARY','new items')}\n"
+                  f"Undecoded collection. Run <code>/radar --deck</code> to turn it into cards.\n"
+                  f"{os.environ['URL']}")
+          data = urllib.parse.urlencode({"chat_id": os.environ["TELEGRAM_CHAT_ID"],
+                                         "text": text, "parse_mode": "HTML",
+                                         "disable_web_page_preview": "true"}).encode()
+          req = urllib.request.Request(
+              f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}/sendMessage", data)
+          print(urllib.request.urlopen(req, timeout=20).status)
+          PY
+        shell: bash
+
+      - name: Job summary
+        if: always()
+        run: |
+          echo "### radar-collect" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '${{ steps.collect.outputs.summary }}' >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Source errors are recorded inside the digest itself, not hidden here." >> "$GITHUB_STEP_SUMMARY"
