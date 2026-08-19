@@ -24,6 +24,11 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    # job-level env, because the `env` context IS available in a step's `if` while
+    # `secrets` is NOT — referencing secrets there fails the whole workflow at parse time
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -58,12 +63,9 @@ jobs:
 
       - name: Nudge Telegram
         # only when there is something to read, and never fail the job over a nudge
-        # secrets are available to `if`; step-level env is not evaluated yet at this point
-        if: steps.commit.outputs.changed == 'true' && secrets.TELEGRAM_BOT_TOKEN != ''
+        if: steps.commit.outputs.changed == 'true' && env.TELEGRAM_BOT_TOKEN != ''
         continue-on-error: true
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SUMMARY: ${{ steps.collect.outputs.summary }}
           REPO: ${{ github.repository }}
         run: |
