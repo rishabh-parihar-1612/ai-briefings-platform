@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-19 08:52 UTC",
+ "generated": "2026-08-19 09:57 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -34,13 +34,314 @@
  },
  "cards": [
   {
+   "id": "c-ao-agentic-definition",
+   "front": "Define an agentic AI system in one sentence.",
+   "back": "A distributed system with a nondeterministic component in the control path. Distributed means timeouts, retries, tracing; nondeterministic means evals; in the control path means injection is privilege escalation.",
+   "hook": "Every requirement falls out of that one line",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-anthropic-15x",
+   "front": "The published number on multi-agent token cost.",
+   "back": "Anthropic's multi-agent research system consumed roughly 15x the tokens of a single chat interaction. Worth it for open-ended parallelizable research; explicitly not for tightly-coupled shared-context tasks.",
+   "hook": "15x, and they said when not to",
+   "kind": "number",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2"
+  },
+  {
+   "id": "c-ao-anthropic-composable-patterns",
+   "front": "Anthropic's published ordering for agent patterns.",
+   "back": "Start simplest: prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer. Add autonomy only when the task genuinely needs open-ended decisions.",
+   "hook": "Simplest possible, then increase",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-autonomy-spectrum-five",
+   "front": "Name the five points on the autonomy spectrum, in order.",
+   "back": "Prompt, chain, workflow, agent, multi-agent. Left to right you trade determinism for delegated control: debuggable and cheap becomes hard and expensive with compounding risk.",
+   "hook": "Every notch up costs determinism",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-control-path-is-the-difference",
+   "front": "Why does the model being in the control path change the security model?",
+   "back": "A model producing content badly makes bad content. A model deciding what happens next, when manipulated, executes an attacker's plan using your credentials.",
+   "hook": "Content bug versus privilege escalation",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-crosscutting-not-boxes",
+   "front": "Why are state, observability, evals and security drawn as cross-cutting?",
+   "back": "Because anything drawn as a box in the flow gets built later, and later never comes. Cross-cutting means every layer carries it from the start.",
+   "hook": "A box means \"we'll add it before GA\"",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": null,
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-distributed-monolith",
+   "front": "What do you get from multi-agent adopted for org-chart reasons?",
+   "back": "A distributed monolith with a language model as the message bus — all the coordination cost, none of the parallelism.",
+   "hook": "The org chart is not the architecture",
+   "kind": "fail",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2"
+  },
+  {
+   "id": "c-ao-dpd-chevrolet",
+   "front": "DPD and the Chevrolet dealership: the same two missing gates.",
+   "back": "Scope enforcement on input and policy validation on output. One chatbot swore and disparaged its own company; the other agreed to sell a Tahoe for $1 as 'legally binding'.",
+   "hook": "No concept of authorized statements",
+   "kind": "fail",
+   "theme": "agents-orchestration",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-five-gaps",
+   "front": "The five gaps between a demo and production.",
+   "back": "Input distribution, failure surface, scale economics, consequence, and time. When someone says it worked in the demo, ask which gap the demo did not cross.",
+   "hook": "\"It worked in the demo\" names the gap",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "pre-pilot-checklist",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-gap-scale-economics",
+   "front": "At 200K runs a month, what does per-run cost mean?",
+   "back": "A 3-cent design is $6K a month; a 30-cent design is $60K. In a demo of 20 runs the difference is invisible, which is why demos never surface it.",
+   "hook": "Ten cents of design, $54K of bill",
+   "kind": "number",
+   "theme": "agents-orchestration",
+   "topic": "token-economics",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-gap-time",
+   "front": "What does the 'time' gap mean for a system that works today?",
+   "back": "It runs for 18 months while the model, the prompt, the docs and the APIs all drift underneath it. Nothing you validated stays validated.",
+   "hook": "Eighteen months of drift under a fixed prompt",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-handoff-contract-five",
+   "front": "What must a multi-agent handoff specify?",
+   "back": "Which agent owns the next step, the typed payload, the expected output schema, the timeout, and the conflict-resolution rule. Undefined handoffs are where multi-agent systems die.",
+   "hook": "Five fields, or it dies at the seam",
+   "kind": "check",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-leftmost-that-works",
+   "front": "State the spectrum design rule and its real justification.",
+   "back": "Choose the leftmost point that solves the problem — not out of caution, but to conserve your debugging budget for the parts that genuinely need nondeterminism.",
+   "hook": "Spend nondeterminism where it pays",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-most-agents-are-workflows",
+   "front": "What shape are most production 'agents' actually?",
+   "back": "Workflows with two or three agentic decision points. That is the correct shape for the overwhelming majority of enterprise use cases.",
+   "hook": "Structure is not the opposite of autonomy",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-multi-agent-cost-mechanism",
+   "front": "Why is multi-agent structurally more expensive, mechanically?",
+   "back": "Each agent re-reads context, so context is paid for repeatedly. Add handoff overhead and often-serialized waits, and cost plus latency grow faster than the work does.",
+   "hook": "Context billed once per agent",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2"
+  },
+  {
+   "id": "c-ao-multi-agent-two-of-four",
+   "front": "When does multi-agent earn its keep?",
+   "back": "When at least two hold: genuine parallelism, genuine specialization with different tools or permissions, adversarial review, or different lifecycles.",
+   "hook": "Two of four, or collapse it",
+   "kind": "check",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2"
+  },
+  {
+   "id": "c-ao-over-decomposition-numbers",
+   "front": "The six-agent change assistant: what did collapsing it recover?",
+   "back": "p95 fell from 90 seconds, latency dropped about 70% and cost about 80%, and the trace became one linear thing a human can read.",
+   "hook": "Six workflow IDs, nobody accountable",
+   "kind": "number",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2"
+  },
+  {
+   "id": "c-ao-permissions-as-architectural-reason",
+   "front": "Which multi-agent justification is architectural rather than stylistic?",
+   "back": "Different credentials. A read-only investigator and a change-approved remediator genuinely differ in permissions — that is a boundary, not a preference.",
+   "hook": "Different credentials is a real boundary",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2",
+   "aryaka": "Diagnosis agents read MyAryaka; only a separately-credentialed remediator may push config."
+  },
+  {
+   "id": "c-ao-pipeline-means-functions",
+   "front": "When steps are known and fixed, what is the implementation?",
+   "back": "Plain functions. Genuinely plain functions — no graph runtime, no framework, no orchestration layer to debug.",
+   "hook": "Plain functions, genuinely",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "workflow-engines-for-ai",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-policy-engine-placement",
+   "front": "Where does the policy engine sit, and why does the position matter?",
+   "back": "Between the model and the tools — never inside the model's reasoning. The model proposes, deterministic code disposes. That one structural choice prevents a whole category of incidents.",
+   "hook": "Between model and tools, not inside",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-proposes-validates-approves-executes",
+   "front": "The four-stage action chain, in order.",
+   "back": "Model proposes, code validates, human approves, tool executes. Skipping the validate stage is what turns a wrong proposal into a wrong action.",
+   "hook": "Four stages; the model owns one",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "plan-before-execute",
+   "cite": "doc: agentic-ai-system-design-deep-dive §8"
+  },
+  {
+   "id": "c-ao-rate-limits-become-bottleneck",
+   "front": "At high concurrency, what becomes the system's bottleneck?",
+   "back": "Model provider rate limits. You need a queue and a degradation policy, not just retries — retry storms against a rate limit make it worse.",
+   "hook": "Retries against a limit deepen it",
+   "kind": "scale",
+   "theme": "agents-orchestration",
+   "topic": "rate-limiting-and-quotas-for-ai",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-reference-architecture-order",
+   "front": "Name the layers of the reference architecture in order.",
+   "back": "Ingress and scope gate, orchestration, then model / context-RAG / approval-policy in parallel, then tools, then systems of record.",
+   "hook": "Scope gate first, systems of record last",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": null,
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-ao-resumability-third-benefit",
+   "front": "Resumability gives crash recovery and day-long approval waits. What is the third win?",
+   "back": "Replaying a production failure locally against a fixed state — the closest thing to a stack trace an agent gets.",
+   "hook": "Replay production locally",
+   "kind": "win",
+   "theme": "agents-orchestration",
+   "topic": "langgraph-state-and-checkpointing",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-shared-orchestration-platform",
+   "front": "Many teams, many workflows — what changes?",
+   "back": "A shared orchestration platform with common middleware: auth, tracing, cost accounting, eval hooks, policy engine. Otherwise every team reimplements all of it, differently and worse.",
+   "hook": "Reimplemented differently and worse",
+   "kind": "scale",
+   "theme": "agents-orchestration",
+   "topic": "abstraction-seams",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-straight-line-heuristic",
+   "front": "The one-line test for a fake multi-agent system.",
+   "back": "If you can draw it as a straight line, it is not multi-agent — it is a pipeline you made expensive.",
+   "hook": "Straight line means pipeline",
+   "kind": "check",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-deep-dive §2"
+  },
+  {
+   "id": "c-ao-three-caps",
+   "front": "The three caps every loop needs, and the fourth thing.",
+   "back": "Max steps, max cost, max wall-clock — and log which cap fired. A loop with no cap is an outage waiting for an unusual input, and unusual inputs arrive daily at scale.",
+   "hook": "Cap three things, log which fired",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-weakest-primitive",
+   "front": "State the orchestration selection rule.",
+   "back": "Pick the weakest orchestration primitive that works: pipeline, then state machine, then graph, then durable workflow engine, then autonomous loop.",
+   "hook": "Weakest primitive that works",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "workflow-engines-for-ai",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-when-durable-engine",
+   "front": "What forces a durable workflow engine specifically?",
+   "back": "Long-running work that must survive crashes and deploys, needs exactly-once semantics, or waits days on a human. Temporal or Step Functions, not a graph runtime.",
+   "hook": "Days-long waits need durability",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "workflow-engines-for-ai",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-whiteboard-test",
+   "front": "The test for whether your control flow is explicit enough.",
+   "back": "A production agent's flow should be drawable on a whiteboard. If it can't be drawn, it can't be reviewed, and nobody knows what it does under an unusual input.",
+   "hook": "Undrawable means unreviewable",
+   "kind": "check",
+   "theme": "agents-orchestration",
+   "topic": "workflow-engines-for-ai",
+   "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
    "id": "c-bw-a2a",
    "front": "A2A — what problem does it solve that MCP doesn't?",
    "back": "Sold as: agents talking to agents | Actually: Google's cross-vendor protocol where an agent card advertises skills, auth and endpoints so agents can delegate tasks; MCP is agent-to-tool, A2A is agent-to-agent | Changes: cross-vendor delegation with long-running task callbacks becomes possible | Say: \"MCP plus A2A is the complete interop story — tools and peers.\"",
    "hook": "Agent cards, not tool schemas",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "mcp",
    "cite": "issue 002, §1"
   },
   {
@@ -50,7 +351,7 @@
    "hook": "Nine boxes around one rented model",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31",
    "aryaka": "Our ticket copilot's harness outlives whichever frontier model we're on this quarter."
   },
@@ -61,7 +362,7 @@
    "hook": "Unknown control flow is the only reason",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "single-vs-multi-agent-decision",
    "cite": "doc: agentic-ai-system-design-deep-dive §6"
   },
   {
@@ -71,7 +372,7 @@
    "hook": "Trace tools without evals strand you",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "llm-observability",
    "cite": "doc: 2026-08-19-buzzword-terms §2",
    "aryaka": "Braintrust, LangSmith, Phoenix, Datadog LLM, AgentOps — the eval flywheel is the differentiator."
   },
@@ -82,7 +383,7 @@
    "hook": "One seam, every model behind it",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "abstraction-seams",
    "cite": "issue 001, §3"
   },
   {
@@ -92,7 +393,7 @@
    "hook": "Leftmost that works, defended",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "single-vs-multi-agent-decision",
    "cite": "doc: agentic-ai-system-design-deep-dive §19",
    "aryaka": "Tier-1 triage sits at plan-then-approve; only diagnosis is agentic, remediation isn't."
   },
@@ -103,7 +404,7 @@
    "hook": "A prompt cannot enforce a ceiling",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31",
    "aryaka": "Per-tenant budget objects stop one noisy customer eating the support-agent's day."
   },
@@ -114,7 +415,7 @@
    "hook": "A summarizer that lies is durable",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "context-compression",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §12"
   },
   {
@@ -124,7 +425,7 @@
    "hook": "Sleep, not thinking",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -134,7 +435,7 @@
    "hook": "Assembly is subtraction, not addition",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "context-engineering",
    "cite": "issue 004, §14"
   },
   {
@@ -144,7 +445,7 @@
    "hook": "The silent quality killer",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "context-compression",
    "cite": "issue 004, §16",
    "aryaka": "A 30-tool single agent for NOC triage rots; four scoped workers don't."
   },
@@ -155,7 +456,7 @@
    "hook": "Mock the model, keep the loop honest",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "ai-testing-and-evals",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -165,7 +466,7 @@
    "hook": "Below 500/day the math never closes",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "model-cascade-and-batch",
    "cite": "issue 006, §9"
   },
   {
@@ -175,7 +476,7 @@
    "hook": "Verify the artifact, not the sentence",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -185,7 +486,7 @@
    "hook": "The 2024 cost objection is dead",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "kg-rag",
    "cite": "doc: 2026-08-19-buzzword-terms §3",
    "aryaka": "'Which customers share the device model behind last month's flaps' is a traversal, not a similarity search."
   },
@@ -196,7 +497,7 @@
    "hook": "Supported by context, or invented",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "ai-testing-and-evals",
    "cite": "doc: agentic-ai-evaluation-definitive-reference §9"
   },
   {
@@ -216,7 +517,7 @@
    "hook": "An OS, not a fence",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §2"
   },
   {
@@ -226,7 +527,7 @@
    "hook": "Prompts are text. Harnesses are systems.",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §1"
   },
   {
@@ -236,7 +537,7 @@
    "hook": "No TTL means orphaned workflows",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "hitl-design",
    "cite": "doc: harness-loop-llmops-interview-playbook §3"
   },
   {
@@ -246,7 +547,7 @@
    "hook": "A judge you never audit is a rumor",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "ai-testing-and-evals",
    "cite": "doc: agentic-ai-evaluation-definitive-reference §4"
   },
   {
@@ -256,7 +557,7 @@
    "hook": "Failure clusters are the roadmap",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "ai-testing-and-evals",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -266,7 +567,7 @@
    "hook": "AutoGPT had the model, not the loop",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §24"
   },
   {
@@ -276,7 +577,7 @@
    "hook": "Standard interface, your security model",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "mcp",
    "cite": "doc: agentic-ai-system-design-deep-dive §21"
   },
   {
@@ -286,7 +587,7 @@
    "hook": "Retrieval is a decision, not a reflex",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -296,7 +597,7 @@
    "hook": "Injection with a shelf life",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "prompt-injection-defense",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31",
    "aryaka": "A wrong 'ACME uses IPsec not SSL' fact would mis-route tickets for months."
   },
@@ -307,7 +608,7 @@
    "hook": "Three stores, three write policies",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -317,7 +618,7 @@
    "hook": "Savings live in the escalation rate",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "model-cascade-and-batch",
    "cite": "issue 003, §2"
   },
   {
@@ -327,7 +628,7 @@
    "hook": "Same call three times is not thinking",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -337,7 +638,7 @@
    "hook": "Index always, chapters on request",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "tool-calling-anatomy",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -347,7 +648,7 @@
    "hook": "Stable prefix first, or no discount",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "prompt-caching",
    "cite": "doc: agentic-ai-system-design-deep-dive §10"
   },
   {
@@ -357,7 +658,7 @@
    "hook": "The credential is the vulnerability",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "prompt-injection-defense",
    "cite": "issue 008, §6",
    "aryaka": "A customer-pasted log line is untrusted input to any config-write tool."
   },
@@ -368,7 +669,7 @@
    "hook": "Policy in git, enforcement in the sandbox",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "multi-tenant-ai-security",
    "cite": "issue 003, §1"
   },
   {
@@ -378,7 +679,7 @@
    "hook": "Near-match plus stale fact equals outage",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "semantic-cache",
    "cite": "issue 003, §5",
    "aryaka": "A cached MTU threshold two days stale is a black-holed site, not a saved dollar."
   },
@@ -389,7 +690,7 @@
    "hook": "Approve the intent, regenerate the diff",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "plan-before-execute",
    "cite": "doc: 2026-08-19-buzzword-terms §5"
   },
   {
@@ -399,7 +700,7 @@
    "hook": "Free latency, no quality trade",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "edge-inference",
    "cite": "issue 001, §1"
   },
   {
@@ -409,7 +710,7 @@
    "hook": "Isolation of context, not a hierarchy",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "multi-agent-patterns",
    "cite": "doc: agentic-ai-system-design-deep-dive §6",
    "aryaka": "One investigation sub-agent per alert, capped; the outer NOC flow stays deterministic."
   },
@@ -420,7 +721,7 @@
    "hook": "Append the correction, keep the history",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -430,7 +731,7 @@
    "hook": "Weeks of warning before a ticket",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "agent-loop-guardrails",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §10"
   },
   {
@@ -440,7 +741,7 @@
    "hook": "Overthinking is a measured failure mode",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "token-economics",
    "cite": "doc: 2026-08-19-buzzword-terms §1",
    "aryaka": "Interactive ticket replies stay shallow; overnight RCA drafting can afford depth."
   },
@@ -451,7 +752,7 @@
    "hook": "Seconds, minutes, weeks — three owners",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "ai-testing-and-evals",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -461,7 +762,7 @@
    "hook": "Tools are API contracts, not helpers",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "tool-calling-anatomy",
    "cite": "doc: agentic-ai-system-design-deep-dive §4",
    "aryaka": "MyAryaka read tools versus change-execution tools need different side-effect classes."
   },
@@ -472,7 +773,7 @@
    "hook": "Right answer, wrong route",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "ai-testing-and-evals",
    "cite": "doc: agentic-ai-evaluation-definitive-reference §5"
   },
   {
@@ -482,7 +783,7 @@
    "hook": "The credential, not the vibe",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "plan-before-execute",
    "cite": "doc: agentic-ai-system-design-deep-dive §4"
   },
   {
@@ -492,7 +793,7 @@
    "hook": "A build artifact, not a store",
    "kind": "buzzword",
    "theme": "buzzword-decoder",
-   "topic": null,
+   "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §31"
   },
   {
@@ -1942,6 +2243,359 @@
    "cite": "issue 009, §20"
   },
   {
+   "id": "c-ro-decomposition-counterintuitive",
+   "front": "What is the counterintuitive result of decomposition?",
+   "back": "More steps with smaller models is often faster, cheaper and more accurate than one step with a big model — and each step is testable and localizable.",
+   "hook": "More steps, smaller models, better",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-everything-degraded",
+   "front": "What is the last rung of the degradation ladder?",
+   "back": "Graceful handoff to a human with full context attached. Not an error page — the context is what makes the handoff worth anything.",
+   "hook": "Hand off with the context, not a 500",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "hitl-design",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-fallback-ladder",
+   "front": "Name the fallback for each failure class.",
+   "back": "Primary model down: secondary family, same contract. Invalid structured output: deterministic extraction or ask. Retrieval down: known-good cache or say you can't. Tool down: queue, alternative, or human.",
+   "hook": "Every critical path has a degraded mode",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-freeform-between-steps",
+   "front": "Why is free-form text between LLM steps dangerous?",
+   "back": "It is the most common source of silent breakage: it works until the model phrases something differently, then produces plausible garbage instead of an exception.",
+   "hook": "It fails without failing",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-mcdonalds-drivethru",
+   "front": "McDonald's and IBM drive-thru voice ordering, June 2024.",
+   "back": "Ended after multi-year testing across roughly 100 locations, with widely-circulated videos of misinterpreted orders. Both framed it as a learning phase.",
+   "hook": "100 locations, then discontinued",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "pre-pilot-checklist",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-model-call-is-a-network-call",
+   "front": "The mistake behind most model-reliability incidents.",
+   "back": "Treating the model call as a function call rather than a network call to a system with variable latency, occasional outages and silent quality changes.",
+   "hook": "It is a network call, not a function",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-observability-vendor-boundary",
+   "front": "What does an observability vendor imply about your data boundary?",
+   "back": "They are inside it, whether or not you thought about it. Redaction is part of the trace design, not a later privacy review.",
+   "hook": "Inside the boundary either way",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-otel-genai",
+   "front": "What is the standards-based path for agent tracing?",
+   "back": "OpenTelemetry with GenAI semantic conventions, or a dedicated LLM observability platform. Structured JSON with a trace id is enough only at prototype scale.",
+   "hook": "Conventions beat a bespoke schema",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-regulated-observability",
+   "front": "What changes about tracing under regulation?",
+   "back": "Immutable audit trail, defined retention, access logging on the traces themselves, and documented redaction. The traces become regulated data.",
+   "hook": "Log who read the logs",
+   "kind": "scale",
+   "theme": "reliability-operations",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-reliability-definition",
+   "front": "Define reliability for an agentic system.",
+   "back": "The system behaving predictably even when the model does not. Predictability is a property of the code around the model, never of the model.",
+   "hook": "Predictable despite an unpredictable part",
+   "kind": "def",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-sample-but-keep-failures",
+   "front": "What is the sampling rule at production volume?",
+   "back": "Sample traces for cost, but always retain 100% of failures and escalations. Sampled-away failures are the ones you needed.",
+   "hook": "Sample the wins, keep every loss",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-schema-valid-not-real",
+   "front": "Schema-valid is not real — give the three examples.",
+   "back": "A date syntactically perfect and in the past. A device ID well-formed and nonexistent. A user ID valid and belonging to someone else. Semantic validation is a separate pass.",
+   "hook": "Well-formed, wrong, and accepted",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9",
+   "aryaka": "A well-formed device ID that isn't on the customer's tenant is exactly this class."
+  },
+  {
+   "id": "c-ro-six-mechanisms",
+   "front": "Name the six reliability mechanisms.",
+   "back": "Decomposition, contracts, validation, disciplined retries, fallbacks, and treating every model call as an unreliable upstream dependency.",
+   "hook": "Six mechanisms, none of them the model",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-ai-system-design-deep-dive §9"
+  },
+  {
+   "id": "c-ro-three-untracked-deploys",
+   "front": "Which three components change in production without anyone calling it a deploy?",
+   "back": "Prompt version, model version and corpus snapshot. All three move quietly, and all three change behaviour.",
+   "hook": "Silent deploys, loud regressions",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-trace-one-question",
+   "front": "What single question must a trace schema answer?",
+   "back": "Where did this fail? Design the schema backwards from that question, not from what is convenient to log.",
+   "hook": "One question, designed backwards",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-trace-to-eval-pipeline",
+   "front": "The highest-leverage observability investment at maturity.",
+   "back": "A trace-to-eval-to-regression pipeline: a failed production trace becomes a test case with one click. That closes the loop between incident and prevention.",
+   "hook": "One click from incident to test",
+   "kind": "win",
+   "theme": "reliability-operations",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-ro-versioning-block",
+   "front": "Which trace block do teams skip, and what does it cost them?",
+   "back": "The versioning block. When quality drops on a Tuesday the first question is what changed — answerable only if every trace records prompt version, model version and corpus snapshot.",
+   "hook": "Three things move without a deploy",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-deep-dive §12"
+  },
+  {
+   "id": "c-sd-confused-deputy",
+   "front": "Define the confused deputy in agent terms.",
+   "back": "The agent acts with its own high privilege on behalf of a low-privilege user — it runs as a broad service account and the permission check on the end user was never done.",
+   "hook": "Your service account, their request",
+   "kind": "def",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-delimiting-necessary-not-sufficient",
+   "front": "Where does delimiting untrusted content sit among the defenses?",
+   "back": "First and weakest: necessary, not sufficient. It reduces accidental instruction-following; it does not stop a deliberate attacker.",
+   "hook": "Necessary, never sufficient",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-derive-authority-from-identity",
+   "front": "How should an agent's permissions be defined?",
+   "back": "Derive them from the identity system you already audit — the Salesforce and Microsoft pattern. New parallel permission models are where privilege escalation lives.",
+   "hook": "Never invent a second permission system",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-dual-channel-rule",
+   "front": "State the dual-channel rule for high-risk agents.",
+   "back": "Reading untrusted content, holding private data, and being able to communicate externally is a complete exfiltration path. Break at least one leg.",
+   "hook": "Three legs make an exfiltration path",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13",
+   "aryaka": "The portal copilot reads untrusted uploads and sees tenant data — so it gets no send capability at all."
+  },
+  {
+   "id": "c-sd-eight-vectors",
+   "front": "Name the attack surface.",
+   "back": "Direct injection, indirect injection, tool poisoning, unsafe output execution, excessive agency, data exfiltration, supply chain, confused deputy.",
+   "hook": "Eight vectors, one of them dominant",
+   "kind": "def",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-excessive-agency",
+   "front": "Define excessive agency, with the canonical example.",
+   "back": "The agent can do more than the task requires — an agent that only needs to read tickets holding write access. Replit's production deletion was blast radius, not intent.",
+   "hook": "Blast radius is set by the credential",
+   "kind": "def",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-fully-compromised-question",
+   "front": "The one question to ask of every agent design.",
+   "back": "If this were fully compromised right now, what is the worst it could do? If the answer is unacceptable, no prompt will fix it — reduce the permissions.",
+   "hook": "Unacceptable answer means fewer permissions",
+   "kind": "check",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-indirect-is-the-one",
+   "front": "Why is indirect injection the one to worry about most?",
+   "back": "It needs no contact with your system. The attacker just puts text where your agent will eventually read — a ticket, a shared doc, an inbound email, a scraped page, a log line.",
+   "hook": "They never have to talk to you",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13",
+   "aryaka": "Every inbound ticket, attached config and customer email is a delivery channel."
+  },
+  {
+   "id": "c-sd-least-privilege-is-the-control",
+   "front": "Which defense is the actual control, and why?",
+   "back": "Least privilege. The credential the agent holds is the security boundary and the only one that cannot be talked out of. Per-tool credentials, per-tenant scoping, short-lived tokens, read-only by default.",
+   "hook": "Permissions are guarantees; prompts are suggestions",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-never-execute-raw-output",
+   "front": "What must never happen to model output?",
+   "back": "No eval, no shell interpolation, no raw SQL. Parameterized queries, allow-listed commands, sandboxes. Generated code runs isolated: no network, no credentials, resource cap.",
+   "hook": "Parameterize, allow-list, sandbox",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-output-filtering",
+   "front": "What does output filtering catch that nothing else does?",
+   "back": "Leaked secrets, PII, unsafe links and policy violations on the way out. Cheap, and it is the only layer positioned after the model has already been wrong.",
+   "hook": "The last cheap layer",
+   "kind": "check",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-owasp-four-that-matter",
+   "front": "Which OWASP LLM Top 10 entries account for most enterprise incidents?",
+   "back": "Prompt injection, insecure output handling, excessive agency, and sensitive information disclosure. Run the design against the list formally, not from memory.",
+   "hook": "Four of ten carry the incidents",
+   "kind": "check",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-redteam-continuously",
+   "front": "Why is a one-time pentest insufficient for injection?",
+   "back": "It is a snapshot of a moving target. Injection tests belong in the eval suite as permanent regression cases, and every published technique becomes a new case.",
+   "hook": "Every new technique is a test case",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-samsung-data-boundary",
+   "front": "The Samsung leak, 2023 — what was missing?",
+   "back": "A policy on what may cross into a third-party model provider. The failure was a data-boundary decision nobody had made, not a model behaviour.",
+   "hook": "No policy is a policy",
+   "kind": "fail",
+   "theme": "security-data",
+   "topic": "corpus-provenance",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-tay-structural-error",
+   "front": "Microsoft Tay, 2016 — the enduring lesson.",
+   "back": "Untrusted input became system behavior because there was no boundary between content the system consumes and content that shapes it. Every indirect injection today is the same error, more sophisticated.",
+   "hook": "Racist output inside 24 hours",
+   "kind": "fail",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-threat-model-one-line",
+   "front": "State the agentic threat model in one line.",
+   "back": "Every input that reaches the model is attacker-controlled until proven otherwise; every output from the model is untrusted until validated.",
+   "hook": "Both directions untrusted by default",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-tool-poisoning",
+   "front": "What is tool poisoning?",
+   "back": "A tool returning attacker-influenced data — an API response carrying injected instructions, or a third-party MCP server's tool descriptions.",
+   "hook": "The tool's output is input too",
+   "kind": "def",
+   "theme": "security-data",
+   "topic": "mcp",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
+   "id": "c-sd-validation-makes-injection-ineffective",
+   "front": "What turns injection from harder into ineffective?",
+   "back": "Deterministic validation before every consequential action. An injected instruction to refund $50,000 fails at the policy check regardless of how cleverly it was phrased.",
+   "hook": "Phrasing cannot pass a policy check",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-ai-system-design-deep-dive §13"
+  },
+  {
    "id": "c-abstract-early-five-exceptions",
    "front": "Which abstractions are worth building on day one anyway?",
    "back": "Idempotency keys, observability, tenant isolation, cost tracking, eval set. Proven patterns whose retrofit costs 10x abstract early; speculative patterns wait for the Rule of Three.",
@@ -2188,6 +2842,90 @@
   }
  ],
  "drills": [
+  {
+   "id": "d-t1-when-not-to-build-an-agent",
+   "tier": 1,
+   "level": "senior",
+   "theme": "agents-orchestration",
+   "title": "Tier-1 wants an agent to route tickets. Is routing an agent problem?",
+   "problem": "Assumption: ~8,000 tier-1 tickets a month arrive by email, portal and API. Today a rota decides which queue each goes to; misroutes cost roughly a day of latency. Leadership has asked for 'an AI agent that routes tickets intelligently'. You have last year's tickets with their final queue, and about 20 destination queues. The stated success metric is misroute rate. Someone has already built a proof of concept with a frontier model, a 900-token prompt describing all 20 queues, and a tool that writes the queue field. It works, costs about $0.04 a ticket, and takes 6 seconds. Tell me what you would actually ship.",
+   "assesses": [
+    "Placing a problem on the autonomy spectrum instead of accepting the label",
+    "Recognising a classification problem wearing agent clothing",
+    "Cost and latency reasoning at 8,000/month",
+    "Knowing what an agent buys and when that is nothing",
+    "Handling the political dimension of saying 'not an agent'"
+   ],
+   "skeleton": [
+    "Name the shape: the control flow is known — read ticket, choose one of 20 labels, write a field.",
+    "Known control flow means workflow, not agent. Nothing here depends on what a previous step discovered.",
+    "So the leftmost point on the autonomy spectrum that works is a classifier, with an LLM step at most.",
+    "Baseline first: a fine-tuned or few-shot small model on a year of labelled data, measured against the rota.",
+    "Route by confidence: high-confidence auto-routes, low-confidence goes to a human with the top two suggestions.",
+    "Reserve the frontier tier for the residual — the ambiguous and multi-intent tickets, which are the expensive ones.",
+    "Keep the tool write behind idempotency and an audit record; a misroute must be traceable and reversible.",
+    "Say the yes: an agent earns its place later, when the task becomes investigate-then-decide rather than label.",
+    "Frame it to leadership as sequencing, not refusal — same metric, cheaper, and it becomes the agent's router later."
+   ],
+   "numbers": [
+    "$0.04 × 8,000 = ~$320/month for the frontier PoC; a small-model classifier lands closer to $10-30",
+    "6s per ticket is invisible here — this is a queue write, not an interactive answer, so latency is not the lever",
+    "Cost is not the argument on its own at this volume; the argument is accuracy per dollar and testability"
+   ],
+   "traps": [
+    "Building the agent because the ask said agent. That is how you inherit cost and debugging pain for no benefit.",
+    "Refusing flatly. 'Not an agent' without an alternative that hits the same metric reads as obstruction.",
+    "Leading with the $320. It is small enough to be dismissed, and it is not the real problem — testability is.",
+    "Forgetting the confidence path. A classifier with no human route is a misroute machine at the tail."
+   ],
+   "termdrops": [
+    "autonomy spectrum",
+    "known control flow",
+    "confidence routing",
+    "model cascade",
+    "leftmost that works"
+   ],
+   "followups": [
+    {
+     "q": "So we're not doing AI here?",
+     "a": "We are — a trained classifier is AI. What we are not doing is paying agent overhead for a labelling task. The agent conversation starts when routing needs investigation, like checking topology before deciding the queue."
+    },
+    {
+     "q": "What would change your answer?",
+     "a": "If correct routing required gathering evidence first — pulling device state or change history to tell a network fault from a billing question — the control flow stops being known and an agent starts earning its cost."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "A classifier with confidence routing",
+     "over": "An agent with a queue-write tool",
+     "because": "The control flow is known in advance, so nothing depends on discovery. Agent overhead buys cost and debugging pain with no accuracy gain."
+    },
+    {
+     "choice": "Small model, fine-tuned on a year of labels",
+     "over": "A frontier model with a 900-token prompt listing 20 queues",
+     "because": "The labels already exist and the task is narrow and high-volume — exactly where a small model wins on cost and repeatability."
+    },
+    {
+     "choice": "Frontier tier for the low-confidence residual only",
+     "over": "One tier for all tickets",
+     "because": "The ambiguous tail is where misroutes actually come from; spending the expensive tier there and nowhere else is the whole cascade argument."
+    }
+   ],
+   "topics": [
+    "single-vs-multi-agent-decision",
+    "model-cascade-and-batch",
+    "agent-routing",
+    "token-economics"
+   ],
+   "cite": [
+    "doc: agentic-ai-system-design-deep-dive §6",
+    "doc: agentic-ai-system-design-deep-dive §19",
+    "issue 004, §21",
+    "issue 006, §9",
+    "issue 002, §2"
+   ]
+  },
   {
    "id": "d-t2-approval-surface-400-changes",
    "tier": 2,
@@ -2473,6 +3211,98 @@
      "over": "A blanket 'complex tickets get the frontier model' rule",
      "because": "Without a named benefit per intent, the expensive tier expands by default and the cascade quietly stops saving anything."
     }
+   ]
+  },
+  {
+   "id": "d-t2-change-window-collision-guard",
+   "tier": 2,
+   "level": "staff",
+   "theme": "reliability-operations",
+   "title": "The agent proposes a config push. Prove it cannot land inside someone else's change window.",
+   "problem": "Assumption: the config-change agent proposes roughly 400 changes a day across 500 tenants, and a human approves each. Last quarter two approved changes landed during a customer's frozen window and one collided with a concurrent tier-3 maintenance, taking down a site for 20 minutes. The approvers cannot hold 500 change calendars in their heads. Change windows live in the change-management system, some tenants keep theirs in email, and tier-3's maintenance schedule is a separate calendar. Design the guard. Assume you cannot make the tenants change how they record windows this quarter.",
+   "assesses": [
+    "Turning a human-judgement failure into a deterministic pre-condition",
+    "Designing around authoritative-source gaps you cannot fix",
+    "Fail-closed versus fail-open reasoning on a safety check",
+    "Making the check visible in the approval artifact",
+    "Handling the race between approval and execution"
+   ],
+   "skeleton": [
+    "Reframe: this is not an approval-quality problem, it is a missing deterministic pre-condition.",
+    "The guard runs before the change is ever shown to a human — an ineligible change never reaches the queue.",
+    "Build one window resolver over three sources: change-management records, tier-3 calendar, tenant-specific overrides.",
+    "Where a tenant's window only exists in email, the resolver returns unknown — and unknown fails closed, not open.",
+    "Fail-closed on unknown is the whole design: an unverifiable window blocks and routes to a human to confirm.",
+    "Re-check at execution, not only at proposal — approval and execution are separated by minutes to hours.",
+    "Bind the approval to the resolved window plus the proposal hash, so a changed window invalidates the approval.",
+    "Surface it in the artifact: the approver sees the window, its source, and its freshness, not just the diff.",
+    "Instrument the gap: count unknown-window proposals per tenant and publish it — that report is what fixes the data.",
+    "Pair with commit-confirm so a change that lands wrong reverts without a human in the loop."
+   ],
+   "numbers": [
+    "400 proposals a day against 500 calendars is why this cannot be a human check — it is a lookup",
+    "Two breaches and one collision in a quarter is roughly a 1-in-6,000 event rate; fail-closed trades throughput for that tail",
+    "The unknown-window count per tenant is the metric that drives the data cleanup, so publish it monthly"
+   ],
+   "traps": [
+    "Adding the change calendar to the prompt and asking the model to check. That is prompt-as-policy on a safety control.",
+    "Failing open when the window is unknown, because blocking is inconvenient. Unknown is exactly the case that caused the incident.",
+    "Checking only at proposal time, leaving the approval-to-execution gap the collision actually happened in.",
+    "Reporting a single collision count. Without the unknown-window-by-tenant breakdown, nobody fixes the source data."
+   ],
+   "termdrops": [
+    "deterministic pre-condition",
+    "fail-closed",
+    "window resolver",
+    "proposal hash binding",
+    "commit-confirm",
+    "re-check at execution"
+   ],
+   "followups": [
+    {
+     "q": "Fail-closed will block changes every day. Operations will hate it.",
+     "a": "It blocks only proposals whose window cannot be resolved, and the per-tenant count tells you where. That report is the lever that gets windows into the system — the friction is pointed at the cause."
+    },
+    {
+     "q": "Why re-check at execution if the approver just looked?",
+     "a": "Because the window can change in the gap, and the approval was for a state that no longer holds. Binding approval to the resolved window plus proposal hash makes a stale approval fail instead of executing."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "A deterministic window resolver as a pre-condition",
+     "over": "Adding calendars to the prompt for the model to check",
+     "because": "A safety control that can be argued with is not a control. This is a lookup with a boolean answer."
+    },
+    {
+     "choice": "Fail closed on an unresolvable window",
+     "over": "Proceeding when the window is unknown",
+     "because": "Unknown is precisely the state that produced the incident; blocking converts a customer outage into an internal delay."
+    },
+    {
+     "choice": "Re-check at execution and bind approval to the window",
+     "over": "Checking once at proposal time",
+     "because": "Approval and execution are separated by minutes to hours, which is the gap the collision happened in."
+    },
+    {
+     "choice": "Publish unknown-window counts per tenant",
+     "over": "Reporting only blocked-change totals",
+     "because": "The totals justify the guard; the per-tenant breakdown is what actually gets the source data fixed."
+    }
+   ],
+   "topics": [
+    "agent-loop-guardrails",
+    "hitl-design",
+    "idempotency-for-ai-operations",
+    "resilience-patterns",
+    "plan-before-execute"
+   ],
+   "cite": [
+    "issue 003, §4",
+    "issue 005, §5",
+    "doc: agentic-ai-system-design-deep-dive §9",
+    "doc: agentic-ai-system-design-deep-dive §20",
+    "issue 004, §18"
    ]
   },
   {
@@ -2857,6 +3687,193 @@
    ]
   },
   {
+   "id": "d-t2-network-or-app-with-abstention",
+   "tier": 2,
+   "level": "staff",
+   "theme": "evaluation",
+   "title": "Design the answer path for \"is it your network or my application?\"",
+   "problem": "The single most contested ticket class a SASE provider handles. The customer says the app is slow; the provider's view says the underlay is healthy. Evidence lives in four places: path metrics (loss, latency, jitter per hop), tunnel and link state, the customer's own application telemetry which you may not have, and the change history on both sides. Assumption: this class is ~15% of tier-1 volume and has the worst MTTR and the highest escalation rate. A wrong answer in either direction is expensive — 'it's your app' when it was the network burns trust; 'it's our network' when it wasn't burns two days of engineering. Design the retrieval, the synthesis and the confidence policy.",
+   "assesses": [
+    "Designing for a question where the honest answer is often 'insufficient evidence'",
+    "Separating deterministic measurement from model judgement",
+    "Claim-level grounding rather than a fluent narrative",
+    "Handling asymmetric cost of the two wrong answers",
+    "Making abstention operationally acceptable rather than a dodge"
+   ],
+   "skeleton": [
+    "Start from the asymmetry: both wrong answers are expensive, so the design optimises for defensibility, not confidence.",
+    "Thresholds are deterministic code: loss, latency and jitter against the SLA are compared in Python, never judged by a model.",
+    "The model's job is assembly and explanation over measured evidence — it never decides whether a number breached.",
+    "Retrieve evidence in parallel per hop and per segment, and stamp each with its measurement window.",
+    "Require claim-level citation: every sentence in the answer maps to a metric, a change record or a runbook line.",
+    "Confidence policy: below the retrieval-confidence floor, or when sources conflict, the agent abstains and escalates.",
+    "Abstention is a product feature with its own SLA, not a failure — it returns the evidence bundle a human would have built.",
+    "Never assert about the customer's application without their telemetry; state the boundary of what you observed.",
+    "Log the two error classes separately — false network-clear and false network-blame have different owners and different fixes."
+   ],
+   "numbers": [
+    "Retrieval confidence floor at 0.7, or conflicting sources, forces abstention rather than a guess",
+    "15% of volume at the worst MTTR is where the minutes are, even if the class is a fifth of triage",
+    "Evidence bundle assembly is the reusable win — it shortens the human path even on abstained tickets"
+   ],
+   "traps": [
+    "Letting the model decide whether 2% loss breaches the SLA. That is arithmetic against a contract, not judgement.",
+    "Producing a fluent verdict with no per-claim source. Fluent and ungrounded is the dangerous quadrant.",
+    "Treating abstention as a failed run in the metrics, which trains the team to suppress it.",
+    "Asserting about the application layer from network telemetry alone — you cannot see what you did not measure."
+   ],
+   "termdrops": [
+    "claim-level grounding",
+    "abstention policy",
+    "retrieval confidence",
+    "deterministic evaluator",
+    "measurement window",
+    "error class asymmetry"
+   ],
+   "followups": [
+    {
+     "q": "Your abstention rate comes back at 40%. Is the feature failing?",
+     "a": "Not necessarily — it may be telling you the evidence is genuinely thin, usually missing customer-side telemetry. The fix is instrumentation or a data-sharing agreement, not lowering the confidence floor."
+    },
+    {
+     "q": "Why not let the model weigh the metrics? It sees more context than a threshold.",
+     "a": "Because the answer is contractual. An SLA breach is a deterministic comparison, and a model that can be argued into a different verdict cannot be quoted to a customer."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Deterministic threshold checks with the model only assembling",
+     "over": "A model judging whether metrics breach the SLA",
+     "because": "The verdict is contractual arithmetic. A model verdict is unquotable to a customer and drifts with the model."
+    },
+    {
+     "choice": "Abstain-and-escalate with the evidence bundle",
+     "over": "Returning the most likely answer with a confidence score",
+     "because": "Both wrong answers are expensive and a score is not a control. The bundle still saves the human most of the work."
+    },
+    {
+     "choice": "Claim-level citations",
+     "over": "A cited answer with sources listed at the end",
+     "because": "End-of-answer sources let one unsupported sentence ride along with four supported ones — which is exactly what gets quoted back at you."
+    }
+   ],
+   "topics": [
+    "ai-testing-and-evals",
+    "corpus-provenance",
+    "hitl-design",
+    "llm-observability"
+   ],
+   "cite": [
+    "issue 005, §6",
+    "issue 004, §19",
+    "doc: rag01 §13",
+    "doc: agentic-ai-system-design-deep-dive §12"
+   ]
+  },
+  {
+   "id": "d-t2-noc-alert-triage-under-three-minutes",
+   "tier": 2,
+   "level": "staff",
+   "theme": "agents-orchestration",
+   "title": "Cut tier-1 alert triage from 13 minutes to under 3, at 90% classification accuracy",
+   "problem": "Assumption (replace with real figures): the NOC takes ~1,200 alerts a day across 500 SASE tenants. A tier-1 engineer opens the alert, queries the monitoring stack, checks whether a change went out recently, looks for similar past alerts, decides real outage / false positive / maintenance window, and writes a tier-2 handoff — 10-15 minutes each. Eight engineers across follow-the-sun. Roughly 60% turn out to be false positives or maintenance. The ask: under 3 minutes per alert at 90%+ classification accuracy, and tier-2 must never receive a ticket a human did not see. You may not touch the customer's network in this phase.",
+   "assesses": [
+    "Choosing an orchestration pattern for a real latency budget and defending it",
+    "Sequencing parallel evidence gathering against a 3-minute wall clock",
+    "Placing the HITL gate where it protects trust without eating the saving",
+    "Cost per alert against the human cost it displaces",
+    "Knowing which 10% must escalate and designing for it rather than hiding it"
+   ],
+   "skeleton": [
+    "Scope first: this phase classifies and drafts. Remediation stays human — diagnosis is the reversible half.",
+    "Supervisor decomposes the alert, then fans out to four workers in parallel — that is where the 13 minutes goes.",
+    "History worker: RAG over 90 days of this tenant's alerts. Topology worker: live link, tunnel and device state.",
+    "Change worker: change-management records in the last 24h. Prior worker: known-issue and runbook retrieval.",
+    "Synthesis agent aggregates, classifies, and cites which evidence drove the call — no citation, no classification.",
+    "Abstain rather than guess: conflicting evidence or thin history routes to a human as 'undetermined', which is a valid outcome.",
+    "HITL gate before any tier-2 ticket exists — engineer approves the classification and the draft, roughly 30 seconds.",
+    "Budget object per alert: step cap, cost cap, 120-second wall clock so a slow worker degrades to partial evidence.",
+    "Idempotency key from alert id plus step so a retry cannot create two tier-2 tickets.",
+    "Measure classification accuracy per class, not aggregate — false-positive recall is the number that earns trust."
+   ],
+   "numbers": [
+    "~5 model calls, ~50K tokens per alert ≈ $0.10-0.30 → $120-360/day at 1,200 alerts",
+    "Wall clock: 4 workers in parallel ≈ 30-60s, plus ~30s human approval — inside the 3-minute SLO",
+    "13 min → ~1 min of human attention is ~92% of the triage minutes back, not 100% — the approval is real work",
+    "Against ~8 engineers, the saving is capacity for the 40% that are real, not headcount removal"
+   ],
+   "traps": [
+    "Promising 100% automation. The 10% novel alerts are exactly the ones that matter, and claiming them loses the room.",
+    "Auto-creating tier-2 tickets to hit the 3-minute number. One false escalation and tier-2 stops trusting the queue.",
+    "Quoting aggregate accuracy. 90% overall with 60% false-positive recall means the agent is confidently clearing real outages.",
+    "Skipping the wall-clock cap because the workers are 'usually fast'. Usually is not an SLO."
+   ],
+   "termdrops": [
+    "supervisor-worker",
+    "parallel fan-out",
+    "plan-before-execute",
+    "abstention",
+    "budget object",
+    "idempotency key",
+    "classification recall per class"
+   ],
+   "followups": [
+    {
+     "q": "Why not one agent with all the tools? It would be simpler.",
+     "a": "Sequential tool calls blow the 3-minute budget, and a 30-tool context rots — accuracy drops as the window grows. The four workers exist for parallelism and context isolation, not specialization."
+    },
+    {
+     "q": "Your accuracy target is 90%. What happens to the other 10%?",
+     "a": "They must land as 'undetermined' with the evidence attached, not as a wrong confident answer. Abstention keeps the error budget in the escalation path rather than in the customer's network."
+    },
+    {
+     "q": "How do you prove 90% before you ship it?",
+     "a": "Backtest against 90 days of already-classified alerts, stratified by class and tenant size, with tier-1 engineers authoring the adversarial set — not the automation team, whose blind spots match the build."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Supervisor with four parallel workers",
+     "over": "A single agent holding all thirty tools",
+     "because": "Sequential calls cannot fit a 3-minute SLO, and a 30-tool context rots — the split buys parallelism and context isolation, not specialization."
+    },
+    {
+     "choice": "Supervisor pattern",
+     "over": "A debate or network pattern between peer agents",
+     "because": "Debate roughly triples cost for marginal gain on routine triage; 60% of these alerts are false positives with an unambiguous answer."
+    },
+    {
+     "choice": "HITL approval before the tier-2 ticket exists",
+     "over": "Auto-creating the ticket and letting tier-2 reject it",
+     "because": "A false escalation costs trust that takes months to rebuild; 30 seconds of approval is cheaper than the credibility."
+    },
+    {
+     "choice": "Classify and draft only, remediation excluded",
+     "over": "Closing the loop with automatic remediation",
+     "because": "Diagnosis is reversible and remediation is not. Earning the write path needs an eval suite this phase does not have yet."
+    },
+    {
+     "choice": "Abstain as a first-class outcome",
+     "over": "Always returning a best-guess classification",
+     "because": "A confident wrong classification on a real outage is the failure that kills the programme; 'undetermined' with evidence is still 12 minutes saved."
+    }
+   ],
+   "topics": [
+    "multi-agent-patterns",
+    "supervisor-worker-pattern",
+    "hitl-design",
+    "agent-loop-guardrails",
+    "ai-testing-and-evals"
+   ],
+   "cite": [
+    "issue 004, §12",
+    "issue 004, §19",
+    "issue 003, §2",
+    "issue 005, §6",
+    "doc: agentic-ai-system-design-deep-dive §6"
+   ]
+  },
+  {
    "id": "d-t2-noisy-neighbor-capacity-fairness",
    "tier": 2,
    "level": "principal",
@@ -3141,6 +4158,183 @@
    ]
   },
   {
+   "id": "d-t2-residency-constrained-tenant-inference",
+   "tier": 2,
+   "level": "staff",
+   "theme": "cost-performance",
+   "title": "A regulated EU tenant's traffic data may not reach a hosted model. Serve them anyway.",
+   "problem": "Assumption: three of 500 tenants — one EU bank, two government — have contracts stating that traffic metadata and configuration data must not leave their region or reach a third-party processor. They generate about 6% of ticket volume but a disproportionate share of revenue. The copilot today calls a hosted frontier model from one region. Options on the table: exclude these tenants, run an open-weight model in-region, or redact before sending. Decide, size it, and say what quality difference the customer should expect — the contract review will quote your answer back to you.",
+   "assesses": [
+    "Reasoning about residency as an architecture constraint rather than a legal footnote",
+    "Self-hosting economics against real volume, not enthusiasm",
+    "Quality honesty when the model tier differs per tenant",
+    "Keeping one code path across two serving backends",
+    "Knowing when redaction is and is not sufficient"
+   ],
+   "skeleton": [
+    "Separate the three options by what they actually promise: exclusion, in-region weights, or de-identification.",
+    "Redaction alone fails here — the contract names configuration data, and a redactor that misses once has already breached.",
+    "So the answer is in-region open-weight serving for those tenants, behind the same gateway contract.",
+    "Size it honestly: 6% of 8,000 tickets is ~480/month, which is below the self-hosting crossover on cost alone.",
+    "The justification is contractual access to revenue, not unit economics — say that plainly rather than inventing savings.",
+    "Quantization brings the crossover down; distillation only pays if the task is narrow and volume grows.",
+    "One request path: the gateway resolves tenant → serving backend, so no call site knows which model answered.",
+    "Run the same eval suite against both backends and publish the per-tenant quality delta rather than hiding it.",
+    "Degrade explicitly: if the in-region backend is down, those tenants queue or go human — never silently fail over out of region."
+   ],
+   "numbers": [
+    "~480 tickets/month is well under the ~1K/day self-hosting crossover; quantization moves that to ~1K/day, distillation to ~500/day",
+    "Distillation training costs $200-500 and never amortizes below ~500 requests/day — not this volume",
+    "So the GPU line item is a cost of sale for three contracts, and should be presented that way"
+   ],
+   "traps": [
+    "Claiming self-hosting saves money at 6% of volume. The finance team will check, and you lose the argument you needed.",
+    "Silently failing over to the hosted region during an outage. That is the breach the contract was written to prevent.",
+    "Promising identical quality across backends without running the evals to prove it.",
+    "Treating redaction as equivalent to residency. One missed entity is a reportable event, not a bug."
+   ],
+   "termdrops": [
+    "data residency",
+    "open-weight serving",
+    "quantization",
+    "cost crossover",
+    "gateway backend resolution",
+    "per-tenant eval delta",
+    "explicit degradation"
+   ],
+   "followups": [
+    {
+     "q": "Why not just redact and keep one backend? Much cheaper.",
+     "a": "Redaction is probabilistic and the contract is absolute — configuration data must not reach a third-party processor. One miss is a reportable breach, and the redactor cannot be evaluated to zero."
+    },
+    {
+     "q": "What quality drop should the customer expect?",
+     "a": "Whatever the eval suite measures on their traffic mix, published per dimension. If grounding holds and only phrasing degrades, say that. Guessing here is how a contract review turns into a credibility problem."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "In-region open-weight serving",
+     "over": "Excluding the three tenants from the copilot",
+     "because": "They are a disproportionate share of revenue and the exclusion is permanent — the GPU line is a cost of sale, not overhead."
+    },
+    {
+     "choice": "In-region weights",
+     "over": "Redaction before sending to a hosted model",
+     "because": "The contract names configuration data and redaction is probabilistic. One missed entity is a reportable breach, not a defect."
+    },
+    {
+     "choice": "Quantized open-weight model",
+     "over": "A distilled task-specific model",
+     "because": "Distillation costs $200-500 to train and needs ~500 requests/day to amortize; this is ~480 a month."
+    },
+    {
+     "choice": "Backend resolved at the gateway",
+     "over": "A separate code path for regulated tenants",
+     "because": "Two code paths drift, and the one with three customers is the one nobody tests."
+    }
+   ],
+   "topics": [
+    "edge-inference",
+    "multi-tenant-ai-security",
+    "token-economics",
+    "abstraction-seams",
+    "model-cascade-and-batch"
+   ],
+   "cite": [
+    "issue 004, §11",
+    "issue 002, §10",
+    "issue 006, §9",
+    "doc: ai-architect-edge-playbook §4",
+    "issue 001, §10"
+   ]
+  },
+  {
+   "id": "d-t2-tool-retriever-at-two-hundred-tools",
+   "tier": 2,
+   "level": "staff",
+   "theme": "agents-orchestration",
+   "title": "The support agent now has 200 tools across four systems. Fix the tool layer.",
+   "problem": "Assumption: MyAryaka, the monitoring stack, ticketing and the config service expose about 200 callable operations between them, and every one has been registered as a tool because each was easy to add. Tool-selection accuracy has fallen as the registry grew, the system prompt is now dominated by tool definitions, and last month the agent called a plan-change operation when it meant a ticket-field update — 47 times over three weeks before anyone noticed. You cannot remove the underlying APIs. Redesign the tool layer, and say how you would prove the accuracy recovered.",
+   "assesses": [
+    "Recognising too-many-tools as a design failure rather than a model limitation",
+    "Task-oriented versus CRUD tool granularity",
+    "Retrieval over tool metadata instead of stuffing the context",
+    "Naming and side-effect classing as a safety control",
+    "Proving a selection-accuracy recovery with numbers"
+   ],
+   "skeleton": [
+    "Diagnose it as two separate problems: too many tools in context, and tools that are indistinguishable to a model.",
+    "Collapse CRUD operations into task-oriented tools that match how an engineer describes the work.",
+    "Every tool declares a side-effect class — READ, WRITE_LOW, WRITE_HIGH, DESTRUCTIVE — which drives its gate.",
+    "Rename for discriminability: no two tools may differ by one token. update_ticket_fields, not update vs upgrade.",
+    "Index tool metadata in a vector store; retrieve top-K candidates per step instead of listing all 200.",
+    "Keep a small always-loaded core set, load the rest on demand — progressive disclosure for tools.",
+    "Wrap the write tools with per-tool caps and confirmation gates so a mis-selection cannot execute silently.",
+    "Prove it: tool-selection accuracy above 98% and tool-argument accuracy above 99%, measured on a stratified set.",
+    "Add the 47-call failure as a permanent regression case — the fix is not shipped until that case is caught."
+   ],
+   "numbers": [
+    "200 tool definitions dominate the prompt; top-K retrieval takes it to single digits per step",
+    "Gates: tool-selection accuracy >98%, tool-argument accuracy >99% — the argument gate is what stops wrong-account damage",
+    "47 wrong calls over 21 days is roughly 2 a day passing unnoticed — the detection lag is the real finding"
+   ],
+   "traps": [
+    "Blaming the model and upgrading the tier. Tool-selection accuracy falls with registry size regardless of tier.",
+    "Fixing the prompt to say 'be careful with upgrade_ticket'. Prompt-as-policy: a suggestion, not a guarantee.",
+    "Retrieving tools but leaving the names ambiguous — retrieval hands the model two near-identical candidates.",
+    "Measuring only tool selection. Right tool with the wrong account_id is what actually ships damage."
+   ],
+   "termdrops": [
+    "tool retriever",
+    "task-oriented tools",
+    "progressive disclosure",
+    "side-effect class",
+    "tool-argument accuracy",
+    "confirmation gate"
+   ],
+   "followups": [
+    {
+     "q": "Why not just put all 200 in the context? Windows are large now.",
+     "a": "Cost and accuracy both degrade: definitions consume the window every call, and selection accuracy falls as candidates grow. Large windows make it affordable to be wrong, not correct."
+    },
+    {
+     "q": "How would you have caught the 47 calls on day one?",
+     "a": "An alert on unexpected side-effect classes per intent — a ticket-update intent producing a plan-upgrade write is a class mismatch, detectable without knowing the specific bug."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Task-oriented tools",
+     "over": "Fine-grained CRUD operations mirroring the APIs",
+     "because": "A model reasoning over CRUD primitives has to invent the workflow every call; task-shaped tools encode it once."
+    },
+    {
+     "choice": "Top-K retrieval over tool metadata",
+     "over": "All tool definitions in the system prompt",
+     "because": "Definitions consume the window on every call and selection accuracy falls as the candidate set grows."
+    },
+    {
+     "choice": "Renaming for discriminability plus side-effect classes",
+     "over": "A prompt instruction warning about the risky tool",
+     "because": "Prompts are suggestions. The 47-call incident happened with a correct instruction already in place."
+    }
+   ],
+   "topics": [
+    "tool-calling-anatomy",
+    "agent-routing",
+    "mcp",
+    "agent-loop-guardrails"
+   ],
+   "cite": [
+    "issue 002, §2",
+    "issue 001, §2",
+    "issue 006, §6",
+    "doc: agentic-ai-system-design-deep-dive §4",
+    "doc: agentic-ai-system-design-deep-dive §17"
+   ]
+  },
+  {
    "id": "d-t3-budget-object-placement-multitenant",
    "tier": 3,
    "level": "principal",
@@ -3409,6 +4603,99 @@
      "over": "Treating compaction as data reduction",
      "because": "Compaction is a context operation, never deletion; without the raw trace the post-incident review has nothing to read."
     }
+   ]
+  },
+  {
+   "id": "d-t3-customer-facing-portal-copilot",
+   "tier": 3,
+   "level": "principal",
+   "theme": "security-data",
+   "title": "Put the copilot in the customer portal, where the input is untrusted and the tenant is not you",
+   "problem": "Leadership wants the support copilot exposed in MyAryaka so customers self-serve. Assumption: 500 tenants, customers upload network diagrams, configs and email exports as ticket attachments, and the internal copilot already has tools that read topology, search runbooks, update tickets and email summaries to the account team. The internal version has run for two quarters without incident. Two things change at the boundary: every input is now untrusted, and a wrong answer is visible to the customer rather than to an engineer who knows better. Design the customer-facing variant and name what you refuse to expose.",
+   "assesses": [
+    "Treating retrieved and uploaded content as untrusted input rather than as data",
+    "Reasoning about blast radius per tool instead of per agent",
+    "Tenant isolation extended to caches, traces and eval sets",
+    "Knowing which capabilities must not cross the boundary at all",
+    "Staging exposure so the first incident is small"
+   ],
+   "skeleton": [
+    "Restate the threat model: the customer-facing agent's inputs are attacker-controlled by default.",
+    "The egress tool goes first — an agent reachable by untrusted input must not be able to email anyone.",
+    "Reduce the tool surface to read-only for this variant; ticket creation goes through a validated form, not a tool call.",
+    "Strip invisible content at ingestion — white-on-white text, font-size-1, metadata — before anything is embedded.",
+    "Treat retrieved chunks as data, never as instructions: structural separation in the prompt, plus an injection classifier.",
+    "Re-derive tenant identity server-side from the session; never from anything the model produced.",
+    "Extend tenant_id into cache keys, trace records and eval fixtures — a cross-tenant cache hit is the same incident.",
+    "Deterministic output checks before display: no other tenant's identifiers, no internal hostnames, no unresolved PII.",
+    "Stage it: internal dogfood, then 5 design-partner tenants, then a public beta with a kill switch at each stage.",
+    "Own the refusals explicitly — no config writes, no billing actions, no cross-tenant comparison, no egress."
+   ],
+   "numbers": [
+    "500 tenants means one leak is a 500-tenant disclosure question, not a single-customer conversation",
+    "Cross-tenant leakage cases belong in the CI eval suite as hard zero-tolerance gates, not as review checklist items",
+    "Staged exposure: 1 internal → 5 partners → beta, with a kill switch that degrades to the ticket form"
+   ],
+   "traps": [
+    "Reusing the internal agent's tool set because it has been safe for two quarters. Safety came from trusted inputs.",
+    "Relying on a system-prompt instruction to ignore injected instructions. Issue 008's PDF defeated exactly that.",
+    "Filtering output for PII but leaving the egress tool attached — the exfiltration path is the tool, not the text.",
+    "Accepting the model's tenant_id for the retrieval filter. That is authorization bypass with extra steps."
+   ],
+   "termdrops": [
+    "indirect prompt injection",
+    "untrusted retrieval",
+    "least-privilege tools",
+    "blast radius",
+    "tenant context from session",
+    "zero-tolerance eval gate",
+    "kill switch"
+   ],
+   "followups": [
+    {
+     "q": "The customer wants the agent to open tickets for them. That is the whole point.",
+     "a": "They get a validated form the agent pre-fills, which the customer submits. The write happens under the customer's own authorization, not the agent's, so injected instructions cannot forge it."
+    },
+    {
+     "q": "Isn't an injection classifier just another model you can fool?",
+     "a": "Yes, which is why it is one layer and not the control. The control is that the reachable tool set cannot cause harm — no egress, no writes. The classifier reduces noise; least privilege bounds damage."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Read-only tool surface for the customer-facing variant",
+     "over": "Reusing the internal agent's tool set with tighter prompts",
+     "because": "Prompts do not bound blast radius. Removing the write and egress tools makes the worst case a wrong answer instead of an exfiltration."
+    },
+    {
+     "choice": "Pre-filled validated form for ticket creation",
+     "over": "A create_ticket tool the agent may call",
+     "because": "The write then executes under the customer's authorization, so an injected instruction cannot forge it."
+    },
+    {
+     "choice": "Ingestion-time stripping of invisible content",
+     "over": "Detecting injection at retrieval time only",
+     "because": "Once poisoned text is embedded, every future retrieval is a fresh attempt. Cleaning at the boundary is one pass instead of forever."
+    },
+    {
+     "choice": "Tenant identity from the session, server-side",
+     "over": "Passing tenant_id through the model's context",
+     "because": "Anything the model can restate, it can be persuaded to restate differently — that is authorization bypass."
+    }
+   ],
+   "topics": [
+    "prompt-injection-defense",
+    "multi-tenant-ai-security",
+    "hitl-design",
+    "kill-switch-framework"
+   ],
+   "cite": [
+    "issue 008, §6",
+    "issue 002, §6",
+    "issue 008, §2",
+    "doc: agentic-ai-system-design-deep-dive §11",
+    "doc: ai-architect-edge-playbook §7",
+    "issue 005, §21"
    ]
   },
   {
@@ -3767,6 +5054,98 @@
      "over": "A single judge pass",
      "because": "Self-disagreement is the judge telling you it cannot grade that example — a free triage signal you otherwise discard."
     }
+   ]
+  },
+  {
+   "id": "d-t3-memory-across-twelve-months-of-tickets",
+   "tier": 3,
+   "level": "staff",
+   "theme": "harness-loop-memory",
+   "title": "The copilot should remember a customer across twelve months of tickets. Design the tiers.",
+   "problem": "Assumption: 500 tenants, ~8,000 tickets a month, twelve months retained — call it 96,000 tickets and several hundred thousand messages. Engineers want the copilot to know that ACME runs IPsec not SSL, that their change window is Saturday 02:00-04:00 IST, that they escalated twice last quarter over the same flapping tunnel, and that their preferred contact refuses phone calls. Retrieval must stay under 50ms p95 in the ticket view, storage under a few thousand dollars a month, and a customer's deletion request must actually delete. Design the tiers, the write path, and how you would know memory is helping rather than just existing.",
+   "assesses": [
+    "Separating the memory tiers by access pattern rather than storing everything one way",
+    "Write-path discipline — the asymmetry between a missing fact and a wrong one",
+    "Supersession and provenance instead of overwrite",
+    "Deletion propagating to derived artifacts",
+    "Measuring memory usefulness rather than memory size"
+   ],
+   "skeleton": [
+    "Split by access pattern first: structured facts, episodic history, semantic knowledge, preferences, procedures.",
+    "Structured facts — topology, tunnel type, change window, contract tier — live relationally. They are exact lookups, never embeddings.",
+    "Episodic history is append-only per tenant: what happened, when, which engineer, what resolved it.",
+    "Semantic memory holds distilled durable facts, written by batch consolidation over episodes — never inline per turn.",
+    "Procedural memory — the runbook steps the agent may follow — is version-controlled and reviewed like code.",
+    "Gate the writes: a fact enters semantic memory only via confirmed extraction into an enumerated schema.",
+    "Records are (fact, value, confidence, source_episode, observed_at, superseded_by) — supersede, never overwrite.",
+    "A memory-need gate decides whether a turn needs retrieval at all; most ticket-view loads want facts, not history.",
+    "Deletion propagates: a tenant deletion walks facts, episodes, embeddings, caches and eval fixtures, and is testable.",
+    "Measure usefulness — retrieval hit rate on turns where a human later supplied the same fact, not bytes stored."
+   ],
+   "numbers": [
+    "Under 50ms p95 rules the exact-fact path out of vector search — a relational lookup on tenant_id is single-digit ms",
+    "96,000 tickets embedded is a modest index; the cost driver is re-embedding on every corpus change, not storage",
+    "Consolidation runs batch nightly: the same distillation inline per turn would multiply cost by turns per day"
+   ],
+   "traps": [
+    "Putting the change window in a vector store. That is a probabilistic answer to a deterministic question.",
+    "Letting the model decide what is worth remembering. Salience judgement is how a wrong fact becomes permanent.",
+    "Overwriting a fact when new evidence arrives, which destroys the trail you need after an incident.",
+    "Declaring victory on memory size. Facts nobody retrieves are cost and liability, not capability."
+   ],
+   "termdrops": [
+    "memory tiers",
+    "consolidation",
+    "supersession",
+    "provenance",
+    "memory-need gate",
+    "confirmed extraction",
+    "deletion propagation"
+   ],
+   "followups": [
+    {
+     "q": "Two tickets disagree about the change window. What does the agent do?",
+     "a": "It does not pick. The write gate rejects a contradicting fact into review, the agent surfaces both with their observed_at dates, and asks. A confidently wrong change window is a customer outage."
+    },
+    {
+     "q": "Why not one vector store for all of it? Simpler to operate.",
+     "a": "Because exact facts, temporal history and durable knowledge have different latency, write and deletion semantics. One store means every question gets probabilistic answers and the 50ms budget is gone."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Storage chosen per access pattern",
+     "over": "One vector store for all memory",
+     "because": "Exact facts need relational lookups under 50ms; blurring them into embeddings gives probabilistic answers to deterministic questions."
+    },
+    {
+     "choice": "Batch consolidation into semantic memory",
+     "over": "Writing distilled facts inline during the turn",
+     "because": "Inline distillation multiplies cost by turns and puts an unreviewed write on the critical path."
+    },
+    {
+     "choice": "Supersession with provenance",
+     "over": "Overwriting on newer evidence",
+     "because": "Post-incident you have to answer why the agent believed the old value; overwrite destroys that."
+    },
+    {
+     "choice": "Confirmed extraction into an enumerated schema",
+     "over": "LLM salience deciding what to remember",
+     "because": "A missing memory degrades one answer; a wrong memory is confidently wrong forever and survives every retrieval."
+    }
+   ],
+   "topics": [
+    "memory-systems",
+    "context-engineering",
+    "corpus-provenance",
+    "embeddings-and-vector-databases"
+   ],
+   "cite": [
+    "issue 006, §2",
+    "issue 006, §12",
+    "doc: agent-harness-loop-llmops-deep-dive §4",
+    "doc: agent-harness-loop-llmops-deep-dive §31",
+    "issue 011, §6"
    ]
   },
   {
