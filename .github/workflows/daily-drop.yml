@@ -1,0 +1,25 @@
+# Copied into the public mirror repo by scripts/publish_platform.sh.
+# Free by construction: GitHub Actions minutes are unlimited on public repos and the
+# Telegram Bot API costs nothing. This job is a READ-ONLY renderer — it never writes
+# Deck/schedule.json, so it can never fight with grading done on the laptop.
+name: daily-drop
+
+on:
+  schedule:
+    - cron: "30 2 * * *"      # 02:30 UTC = 08:00 IST (GitHub cron can lag 5-15 min)
+  workflow_dispatch:           # manual test send
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Push today's drop to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DECK_MIRROR_URL: https://rishabh-parihar-1612.github.io/ai-briefings-platform/
+        run: python scripts/daily_drop.py --telegram
