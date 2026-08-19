@@ -46,6 +46,7 @@ THEME_CAP = 3           # no more than this many cards from one theme in a drop
 BOX_DAYS = {0: 0, 1: 1, 2: 3, 3: 7, 4: 21, 5: 60}
 MAX_BOX = 5
 TIER_CYCLE = [1, 2, 3, 4]
+FLAVOUR_THEMES = ("fails-vs-works", "buzzword-decoder")   # lead every interleave round
 EPOCH = date(2026, 8, 18)   # day 1 of the habit
 MIRROR = os.environ.get("DECK_MIRROR_URL",
                         "https://rishabh-parihar-1612.github.io/ai-briefings-platform/")
@@ -88,20 +89,35 @@ def days_between(a: str, b: date) -> int:
 # ------------------------------------------------------------- selection
 
 
-def interleave(items, key_of):
-    """Round-robin a stable order across keys, so a window of CARDS_PER_DROP consecutive
-    items spans that many distinct themes and THEME_CAP never silently skips one — a
-    skipped card would otherwise resurface a day or two later."""
+def interleave(items, key_of, first=FLAVOUR_THEMES, block=CARDS_PER_DROP):
+    """Lay the unseen cards out in blocks of `block`, each block reserving one slot per
+    `first` theme and round-robining the rest across the remaining themes.
+
+    Two properties fall out, and the daily drop depends on both. Any window of `block`
+    consecutive cards contains one card from each flavour theme — so a contrast card and a
+    buzzword card are in every drop structurally, not by a post-hoc swap. And the window
+    the drop takes advances exactly `block` per day, so it stays aligned to these blocks
+    and no card is served twice before the whole deck has cycled. The flavour guarantee in
+    pick_cards is a safety net that should never fire; when it did fire it rotated on its
+    own cycle, which is what used to serve one card twice in a single pass."""
     buckets: dict = {}
     for it in items:
         buckets.setdefault(key_of(it), []).append(it)
-    keys = sorted(buckets, key=lambda k: seed("deck", k))
-    out = []
-    while any(buckets[k] for k in keys):
-        for k in keys:
-            if buckets[k]:
-                out.append(buckets[k].pop(0))
-    return out
+    lead = [k for k in first if buckets.get(k)]
+    rest = sorted((k for k in buckets if k not in lead), key=lambda k: seed("deck", k))
+    order, spin = [], 0
+    while any(buckets.values()):
+        for k in lead:                        # reserved slots, one per flavour theme
+            if buckets.get(k):
+                order.append(buckets[k].pop(0))
+        for _ in range(max(0, block - len(lead))):
+            live = [k for k in rest if buckets.get(k)] or [k for k in lead if buckets.get(k)]
+            if not live:
+                break
+            k = live[spin % len(live)]
+            spin += 1
+            order.append(buckets[k].pop(0))
+    return order
 
 
 def pick_cards(deck, state, day: date):
