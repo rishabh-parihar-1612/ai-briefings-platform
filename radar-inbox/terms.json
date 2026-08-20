@@ -1,0 +1,6358 @@
+{
+ "terms": {
+  "frontier models": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "OpenAI",
+     "title": "Offering Zero Data Retention for frontier models",
+     "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models openai": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "OpenAI",
+     "title": "Offering Zero Data Retention for frontier models",
+     "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "frontier models openai": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "OpenAI",
+     "title": "Offering Zero Data Retention for frontier models",
+     "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models openai reaffirms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "OpenAI",
+     "title": "Offering Zero Data Retention for frontier models",
+     "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "token costs": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "OpenAI",
+     "title": "Replit expands access to software creation with GPT-5.6 Luna",
+     "url": "https://openai.com/index/replit"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "juggling multiple copilot": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "GitHub",
+     "title": "GitHub Copilot app for Beginners: Managing your work",
+     "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-managing-your-work"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "github copilot app": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "GitHub",
+     "title": "GitHub Copilot app for Beginners: Managing your work",
+     "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-managing-your-work"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multiple copilot sessions": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "GitHub",
+     "title": "GitHub Copilot app for Beginners: Managing your work",
+     "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-managing-your-work"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "copilot app": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "GitHub",
+     "title": "GitHub Copilot app for Beginners: Managing your work",
+     "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-managing-your-work"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "copilot sessions": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "GitHub",
+     "title": "GitHub Copilot app for Beginners: Managing your work",
+     "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-managing-your-work"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multiple copilot": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "GitHub",
+     "title": "GitHub Copilot app for Beginners: Managing your work",
+     "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-managing-your-work"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "smolvm as a sandbox": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "paces as a fast": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "RAM": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "JavaScript": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "secure sandbox explore": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandbox explore": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "fast secure sandbox": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "secure sandbox": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "smolmachines / smolvm as a sandbox for untrusted Python & JavaScript",
+     "url": "https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "app as a solid": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "having llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "web llms radically": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandboxing llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms tags": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms radically": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "modern sandbox": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "modern sandbox primitives": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandbox primitives": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "having llms fill": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "tags sandboxing llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms fill": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandbox primitives lower": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms radically lower": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms tags sandboxing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Quoting Jeremy Morrell",
+     "url": "https://simonwillison.net/2026/Aug/19/jeremy-morrell"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "transcript prompt": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Conceptual integrity and counting lines of code",
+     "url": "https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "coding agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Conceptual integrity and counting lines of code",
+     "url": "https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "edited transcript prompt": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Simon Willison",
+     "title": "Conceptual integrity and counting lines of code",
+     "url": "https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "LFM2": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Hugging Face",
+     "title": "LFM2.5 Q4\\_0 Checkpoints from Quantization-Aware Distillation",
+     "url": "https://huggingface.co/blog/LiquidAI/qad"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "Q4": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Hugging Face",
+     "title": "LFM2.5 Q4\\_0 Checkpoints from Quantization-Aware Distillation",
+     "url": "https://huggingface.co/blog/LiquidAI/qad"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "quantization-aware distillation": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "Hugging Face",
+     "title": "LFM2.5 Q4\\_0 Checkpoints from Quantization-Aware Distillation",
+     "url": "https://huggingface.co/blog/LiquidAI/qad"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "AgentCore": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Domain and publish date filters for Web Search on AgentCore",
+     "url": "https://aws.amazon.com/blogs/machine-learning/domain-and-publish-date-filters-for-web-search-on-agentcore"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "agents consult": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Domain and publish date filters for Web Search on AgentCore",
+     "url": "https://aws.amazon.com/blogs/machine-learning/domain-and-publish-date-filters-for-web-search-on-agentcore"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "IDP": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Automate Document Processing with Quick Automate and the IDP Accelerator",
+     "url": "https://aws.amazon.com/blogs/machine-learning/automate-document-processing-with-quick-automate-and-the-idp-accelerator"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "GAIIC": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Automate Document Processing with Quick Automate and the IDP Accelerator",
+     "url": "https://aws.amazon.com/blogs/machine-learning/automate-document-processing-with-quick-automate-and-the-idp-accelerator"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "document intake pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Automate Document Processing with Quick Automate and the IDP Accelerator",
+     "url": "https://aws.amazon.com/blogs/machine-learning/automate-document-processing-with-quick-automate-and-the-idp-accelerator"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "intake pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Automate Document Processing with Quick Automate and the IDP Accelerator",
+     "url": "https://aws.amazon.com/blogs/machine-learning/automate-document-processing-with-quick-automate-and-the-idp-accelerator"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent processes requests": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "functions pipelines": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent processes": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "pipelines eliminating": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentcore agents asynchronously": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "idle compute": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "compute costs while": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "bedrock agentcore agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents asynchronously": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "eliminating idle compute": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "step functions pipelines": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentcore agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "compute costs": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "functions pipelines eliminating": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "idle compute costs": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "pipelines eliminating idle": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "serverless pipelines": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "Asynchronous patterns for calling Amazon Bedrock AgentCore agents in serverless pipelines",
+     "url": "https://aws.amazon.com/blogs/machine-learning/asynchronous-patterns-for-calling-amazon-bedrock-agentcore-agents-in-serverless-pipelines"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "closed loop": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "KnowledgeForge: mining gold from the ITSM ticket graveyard",
+     "url": "https://aws.amazon.com/blogs/machine-learning/knowledgeforge-mining-gold-from-the-itsm-ticket-graveyard"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "ITSM": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "KnowledgeForge: mining gold from the ITSM ticket graveyard",
+     "url": "https://aws.amazon.com/blogs/machine-learning/knowledgeforge-mining-gold-from-the-itsm-ticket-graveyard"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "S3": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "KnowledgeForge: mining gold from the ITSM ticket graveyard",
+     "url": "https://aws.amazon.com/blogs/machine-learning/knowledgeforge-mining-gold-from-the-itsm-ticket-graveyard"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "KnowledgeForge": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "KnowledgeForge: mining gold from the ITSM ticket graveyard",
+     "url": "https://aws.amazon.com/blogs/machine-learning/knowledgeforge-mining-gold-from-the-itsm-ticket-graveyard"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "closed-loop pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "KnowledgeForge: mining gold from the ITSM ticket graveyard",
+     "url": "https://aws.amazon.com/blogs/machine-learning/knowledgeforge-mining-gold-from-the-itsm-ticket-graveyard"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multi-tenant closed-loop pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "AWS ML",
+     "title": "KnowledgeForge: mining gold from the ITSM ticket graveyard",
+     "url": "https://aws.amazon.com/blogs/machine-learning/knowledgeforge-mining-gold-from-the-itsm-ticket-graveyard"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent harness": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "the loop": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "HN": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "YC": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "S26": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "OneCLI": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "oss sandboxed agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "personal agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "loop approval": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandboxed agent harness": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent harness built": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "harness built": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandboxed agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sandboxed personal agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (72 pts)",
+     "title": "Launch HN: OneCLI (YC S26) \u2013 OSS sandboxed agent harness for teams",
+     "url": "https://github.com/onecli/onecli"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "AGENTS": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (194 pts)",
+     "title": "Feature Request: Support AGENTS.md",
+     "url": "https://github.com/anthropics/claude-code/issues/6235"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "support agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (194 pts)",
+     "title": "Feature Request: Support AGENTS.md",
+     "url": "https://github.com/anthropics/claude-code/issues/6235"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "request support agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "HN (194 pts)",
+     "title": "Feature Request: Support AGENTS.md",
+     "url": "https://github.com/anthropics/claude-code/issues/6235"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "SPADE": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "RL": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "existing training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training environment pools": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "long-horizon training environments": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language agents existing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents existing training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "existing training environment": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "complete long-horizon training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "single llm plays": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm plays": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training environment": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents existing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training environments": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "single llm": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "long-horizon training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+     "url": "https://arxiv.org/abs/2608.19197v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "VLA": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "latent alignments vla": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "communication language-model agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "continuous hidden states": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "verifiable latent alignments": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "alignments vla": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "hidden states": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "latent alignments": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language-model agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication",
+     "url": "https://arxiv.org/abs/2608.19161v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "safe agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Robust Risk Under Evolving Uncertainty: A Wasserstein Counterpart of the Entropic Value-at-Risk",
+     "url": "https://arxiv.org/abs/2608.19073v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent still learning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Robust Risk Under Evolving Uncertainty: A Wasserstein Counterpart of the Entropic Value-at-Risk",
+     "url": "https://arxiv.org/abs/2608.19073v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent still": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Robust Risk Under Evolving Uncertainty: A Wasserstein Counterpart of the Entropic Value-at-Risk",
+     "url": "https://arxiv.org/abs/2608.19073v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model llm": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training strategy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "large corpus": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "evaluate checkpoints": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "large language model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training evaluate checkpoints": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "selected training strategy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model llm agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language model llm": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm end-to-end": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "selected training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training evaluate": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+     "url": "https://arxiv.org/abs/2608.19072v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent orchestration": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "specialized state memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "planning architecture": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "receding-horizon planning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "receding-horizon planning architecture": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "regret planning invalidation": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "operators tools": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "state memory operators": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "specialized state": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memory operators tools": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "regret planning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "operators tools verifiers": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "planning invalidation amortization": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "state memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "meta-agent orchestration": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "task-conditioned meta-agent orchestration": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memory operators": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "tools verifiers": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "planning invalidation": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "planning architecture promotion": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Eureka: Task-Conditioned Meta-Agent Orchestration for Scientific Discovery",
+     "url": "https://arxiv.org/abs/2608.19047v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic system": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "AMR": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "improve subsequent reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reflection amr agentic": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning complexity assessment": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "static retrieval often": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "retrieval often lack": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "subsequent reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "static retrieval": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "amr agentic system": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning existing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning existing medical": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "adaptability persistent memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "specialized agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "retrieval often": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "nuanced reasoning existing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "amr agentic": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "nuanced reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning complexity": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "adaptive memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "dedicated memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "persistent memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "subsequent reasoning complexity": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Adaptive Memory and Reflection Multi-Agent System for Medical Question Answering",
+     "url": "https://arxiv.org/abs/2608.19029v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "context and": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "four escalating workflows": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms perform": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "interpreting scientific context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models accurately": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "expert curated prompt": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "own prompts": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "expert-written prompts": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "instructions llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models accurately extracting": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "escalating workflows": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "frontier llms perform": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "workflows given": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language models": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "scientific context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language models llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "frontier llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "simple instructions llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms perform well": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "curated prompt": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "expert-written prompts autonomou": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "escalating workflows given": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "prompts autonomou": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "large language models": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    },
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language models accurately": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models",
+     "url": "https://arxiv.org/abs/2608.19025v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "formulate harness": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "HCL": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "modern agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "experience modern agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "formulate harness continual": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "prompts memories tools": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model while retaining": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model parameters continual": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memories tools skills": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "adaptation beyond model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model parameters": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "beyond model parameters": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memories tools": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "prompts memories": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent continually": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "routing rules because": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "beyond model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "harness continual learning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent continually improve": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "harness update": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model while": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "treating model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "routing rules": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "treating model parameters": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "state outside": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model-centric treating model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "harness continual": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "tools skills": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Harness Continual Learning: Continual Adaptation Beyond Model Parameters",
+     "url": "https://arxiv.org/abs/2608.19013v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "emerged as a useful": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "other agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "judges often llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "external judges": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "often llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents engage": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "example llm-empowered agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "external judges often": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm-empowered agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "judges often": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Theory of Post-hoc Debate Judgement",
+     "url": "https://arxiv.org/abs/2608.19002v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language model reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "editable experience memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning however": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning explicitly": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "experience memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation",
+     "url": "https://arxiv.org/abs/2608.18952v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "test time exploration": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "SkillForge": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "model llm based": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "skillforge self-distilling agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm based": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "self-distilling agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "based agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm based agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillForge: Self-Distilling Agents for Project-Specific Issue Resolution",
+     "url": "https://arxiv.org/abs/2608.18933v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "compute budget": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "inference time self": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "inference time protocol": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "GRPO": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "EvoResearcher": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "frozen llm backbone": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "single frozen llm": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "strict compute budget": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reinforcement-learning training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "compute budget four": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "full training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "frozen llm": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "full training pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "protocol iterates": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training-free inference-time protocol": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "inference-time protocol": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models reinforcement-learning training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "budget four": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models reinforcement-learning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "strict compute": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm backbone": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "budget four self-reflective": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "protocol iterates generate": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language models reinforcement-learning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Training-Free Inference-Time Self-Reflection and Cost-Bounded Early Stopping for Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18884v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "DentAgent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "dental reasoning oral": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multimodal dental": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "orchestrator coordinate five": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "recent vision-language models": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning oral diseases": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reasoning oral": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "vision-language models": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "orchestrator coordinate": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models support": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "vision-language models support": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models support flexible": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multimodal dental reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "dental reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "DentAgent: Evidence-Centric Multi-Agent Coordination for Multimodal Dental Reasoning",
+     "url": "https://arxiv.org/abs/2608.18878v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "SkillGate": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "training in-policy skill": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "structural reason": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents agent frameworks": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "policy itself": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "long-horizon agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "skillgate training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "skillgate training in-policy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training in-policy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent frameworks increasingly": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent frameworks": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "few tokens": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent reads": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "long-horizon agents agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+     "url": "https://arxiv.org/abs/2608.18852v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic last": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "predictors however llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model spatiotemporal": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms remain sensitive": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reason explicitly": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "current delivery state": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "allows llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "learning-based methods model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "however llms remain": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "methods model": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model spatiotemporal dependencies": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic last-mile delivery": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language allows llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "methods model spatiotemporal": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "however llms": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llms remain": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "delivery state": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic last-mile": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "ORBITER: Conflict-Aware Decision-Making for Agentic Last-Mile Delivery",
+     "url": "https://arxiv.org/abs/2608.18846v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm auditor": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "physics-grounded executor agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "independent supervisor": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "supervisor agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "executor agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "large-language-model llm auditor": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "large-language-model llm": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "executor agent falsifies": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent falsifies hypotheses": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "independent supervisor agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent falsifies": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "llm auditor checks": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Verifiable abstention makes AI leak diagnosis accountable in water distribution networks",
+     "url": "https://arxiv.org/abs/2608.18836v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "EvalCE": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Metrics That Write Themselves: Evolving an Evaluator from Its Own Blind Spots",
+     "url": "https://arxiv.org/abs/2608.18744v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "spots agents improve": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Metrics That Write Themselves: Evolving an Evaluator from Its Own Blind Spots",
+     "url": "https://arxiv.org/abs/2608.18744v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents improve": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Metrics That Write Themselves: Evolving an Evaluator from Its Own Blind Spots",
+     "url": "https://arxiv.org/abs/2608.18744v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "spots agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Metrics That Write Themselves: Evolving an Evaluator from Its Own Blind Spots",
+     "url": "https://arxiv.org/abs/2608.18744v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "blind spots agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Metrics That Write Themselves: Evolving an Evaluator from Its Own Blind Spots",
+     "url": "https://arxiv.org/abs/2608.18744v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents improve quickly": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Metrics That Write Themselves: Evolving an Evaluator from Its Own Blind Spots",
+     "url": "https://arxiv.org/abs/2608.18744v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "context protocol": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "MCP": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "CrewAI": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "agents operate": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "evaluation across end-to-end": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "protocol mcp": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "context protocol mcp": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "components evaluation": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sequential pipeline": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model context protocol": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "dashboard components evaluation": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "evaluation across": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "components evaluation across": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "A Multi-Agent Platform for Automated Enterprise Analytics and Insight Generation",
+     "url": "https://arxiv.org/abs/2608.18740v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "judge as a latent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "reference-free judge gates": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reference-free judge": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "frozen agent": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "judge gates": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "loop whether": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "verifiable rewards confining": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rewards confining": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "verifiable rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Competence, Not Accuracy: A Diagnostic for Reference-Free Judge Gates in Skill Optimization",
+     "url": "https://arxiv.org/abs/2608.18719v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "MemFuse": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "MemFuseBench": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "product",
+   "last_seen": "2026-08-20"
+  },
+  "benchmarks predominantly": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memfuse multi-source memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memory fusion memfusebench": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "requiring agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "existing memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "existing memory systems": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "yet existing memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multi-source memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "source provenance": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "long-term memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "benchmarks predominantly focus": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "time requiring agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memory fusion": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multi-source memory fusion": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "observations long-term memory": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "memory systems": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "MemFuse: Multi-Source Memory Fusion from Fragmented Observations",
+     "url": "https://arxiv.org/abs/2608.18704v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic workflows": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "context mismatch": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "RTPO": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "training training multi-turn": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multi-turn agentic": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "instability rollout-training context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rollout-training context mismatch": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training remains highly": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training multi-turn": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "policy drift": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "multi-turn agentic workflows": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "asynchronous policy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "perform complex reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rollout-training context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "policy optimization": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "stabilizing agentic": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "asynchronous policy drift": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training remains": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "sparse terminal rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reverse-turn policy optimization": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training multi-turn agentic": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "terminal rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rtpo reverse-turn policy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "complex reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "context mismatch weak": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "training training": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reverse-turn policy": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "external tools": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+     "url": "https://arxiv.org/abs/2608.18682v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "user prompts evidence": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Sanyu Studio: A Multi-Agent System for Art-Historical Narrative Construction",
+     "url": "https://arxiv.org/abs/2608.18677v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models sanyu": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Sanyu Studio: A Multi-Agent System for Art-Historical Narrative Construction",
+     "url": "https://arxiv.org/abs/2608.18677v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "prompts evidence organization": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Sanyu Studio: A Multi-Agent System for Art-Historical Narrative Construction",
+     "url": "https://arxiv.org/abs/2608.18677v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "user prompts": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Sanyu Studio: A Multi-Agent System for Art-Historical Narrative Construction",
+     "url": "https://arxiv.org/abs/2608.18677v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models sanyu oil": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Sanyu Studio: A Multi-Agent System for Art-Historical Narrative Construction",
+     "url": "https://arxiv.org/abs/2608.18677v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "prompts evidence": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Sanyu Studio: A Multi-Agent System for Art-Historical Narrative Construction",
+     "url": "https://arxiv.org/abs/2608.18677v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "OP": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "UTVR": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "reward changes": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "informed routing decisions": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "routing decisions despite": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "formulations assume rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "uncertain time-varying rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "stochastic reward changes": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rewards op-utvr": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents op-utvr relaxes": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rewards framework": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "forecast future rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "reward dynamics": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "despite stochastic reward": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "assume rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "delivery agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "estimate reward": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "informed routing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "stochastic reward": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "time-varying rewards op-utvr": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "routing decisions": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "time-varying rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "allowing agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agents op-utvr": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "time-varying rewards framework": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "estimate reward dynamics": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "delivery agents op-utvr": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "enables informed routing": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "future rewards": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Orienteering Problem with Uncertain Time-Varying Rewards: Framework and Benchmark for Everyday Service Robotics",
+     "url": "https://arxiv.org/abs/2608.18672v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "models evolve": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "unlike standard benchmarks": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "benchmarks real-world": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "language models evolve": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "decision-making agents": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "standard benchmarks": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "real-world preference reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "preference reasoning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "alignment coordination": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "standard benchmarks real-world": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "benchmarks real-world preference": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "Preference Reasoning under Indeterminacy in Large Language Models",
+     "url": "https://arxiv.org/abs/2608.18631v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic cti": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "the harness": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "context management": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "pattern",
+   "last_seen": "2026-08-20"
+  },
+  "CTI": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "acronym",
+   "last_seen": "2026-08-20"
+  },
+  "planning loops": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "corpus scaffold": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "model capability": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "tool protocols": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agentic cti investigation": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "matured rapidly planning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "embedding index": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "tool protocols context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "protocols context": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rapidly planning": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent-native corpus": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "harness side": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "planning loops tool": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "rapidly planning loops": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "loops tool": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "corpus side": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "protocols context management": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "agent-native corpus scaffold": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  },
+  "loops tool protocols": {
+   "first_seen": "2026-08-20",
+   "mentions": [
+    {
+     "date": "2026-08-19",
+     "source": "arXiv",
+     "title": "CTIFoundry: An Agent-Native Corpus Scaffold for Cyber Threat Intelligence",
+     "url": "https://arxiv.org/abs/2608.18613v1"
+    }
+   ],
+   "kind": "ngram",
+   "last_seen": "2026-08-20"
+  }
+ }
+}
