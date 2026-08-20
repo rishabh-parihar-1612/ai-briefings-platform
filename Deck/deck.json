@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-20 06:11 UTC",
+ "generated": "2026-08-20 06:24 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -1347,6 +1347,226 @@
    "theme": "aryaka-ops",
    "topic": "supervisor-worker-pattern",
    "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §12"
+  },
+  {
+   "id": "c-ary-wf-fragmentation",
+   "front": "100+ network workflows across 5 tools. What actually goes wrong when AI arrives?",
+   "back": "One team bolts an LLM into a script, another builds a custom agent, a third uses a vendor feature. No consistency, no cross-workflow observability, no audit trail, no reuse.",
+   "hook": "Three teams, three AI patterns, one mess",
+   "kind": "fail",
+   "theme": "aryaka-ops",
+   "topic": "workflow-engines-for-ai",
+   "cite": "issue 011, §19"
+  },
+  {
+   "id": "c-ary-wf-blend-steps",
+   "front": "The requirement that makes one engine worth building.",
+   "back": "A single workflow blends API calls, script execution, LLM calls and HITL gates as step types. Deterministic and AI steps in one DAG, defined as code, versioned in git, reviewed in PRs.",
+   "hook": "AI is a step type, not a separate system",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "workflow-engines-for-ai",
+   "cite": "issue 011, §19"
+  },
+  {
+   "id": "c-ary-wf-scoped-killswitch",
+   "front": "Kill-switch requirement for the workflow engine, stated precisely.",
+   "back": "Disable a specific workflow in under 60 seconds. Scoped, not global — stop the runaway one without stopping the other ninety-nine that network operations depends on.",
+   "hook": "Per-workflow, or nobody will pull it",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "kill-switch-framework",
+   "cite": "issue 011, §19"
+  },
+  {
+   "id": "c-ary-wf-saga-compensation",
+   "front": "A HITL gate rejects a step halfway through a config workflow.",
+   "back": "Roll back via saga compensating actions, defined per step. Retry policies handle transient failure; compensation handles a human saying no after three steps already ran.",
+   "hook": "Retry is not rollback",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "idempotency-for-ai-operations",
+   "cite": "issue 011, §19"
+  },
+  {
+   "id": "c-ary-wf-audit-7-years",
+   "front": "What the workflow audit trail stores, and for how long.",
+   "back": "Every step's input, output, duration, cost and model version, retained 7 years — 500GB to 2TB a year. Model version is the field that makes a past decision explainable.",
+   "hook": "Seven years means storage is a design input",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "corpus-provenance",
+   "cite": "issue 011, §19"
+  },
+  {
+   "id": "c-ary-wf-episodic-patterns",
+   "front": "Why the workflow engine keeps a vector store at all.",
+   "back": "Workflow pattern embeddings in Qdrant, so a new execution can surface similar past workflows. Episodic memory over your own run history, not over documentation.",
+   "hook": "Retrieve past runs, not just docs",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "memory-systems",
+   "cite": "issue 011, §19"
+  },
+  {
+   "id": "c-ary-aim-compress-coordination",
+   "front": "What an agentic incident manager is allowed to compress.",
+   "back": "The coordination cost, not the human decision-making. P1 MTTM runs 45-90 minutes and about 60% is coordination and information gathering — that is the part to automate.",
+   "hook": "Automate the tab-switching, not the judgment",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "hitl-design",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-aim-90-seconds",
+   "front": "Trigger-to-declare targets for the incident manager.",
+   "back": "P0 under 90 seconds, P1 under 5 minutes, with the initial stakeholder update inside the same window. The first five minutes decide whether it is a 30-minute event or a four-hour one.",
+   "hook": "The first five minutes set the length",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "ai-slis-slos",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-aim-approval-under-10s",
+   "front": "Why the Slack approval button has a 10-second budget.",
+   "back": "If approving takes longer than typing the command, humans bypass the system. A HITL gate slower than the manual path is a gate that gets designed around.",
+   "hook": "Slow gates get bypassed, not obeyed",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "hitl-design",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-aim-step-slower-than-manual",
+   "front": "Runbook step latency target, and the reason behind it.",
+   "back": "p95 under 30 seconds per step. Incident commanders lose trust fast if the agent is slower than running the step by hand — and trust lost during a P1 does not come back.",
+   "hook": "Slower than manual means never used again",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "ai-slis-slos",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-aim-never-autonomous",
+   "front": "Which incident actions the agent may take on its own?",
+   "back": "None that change state. Rollback, scale-up, failover, tenant block, credential revoke — every one needs IC approval. Diagnostics are autonomous; remediation is not.",
+   "hook": "Diagnose freely, remediate never",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "agent-loop-guardrails",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-aim-page-by-class",
+   "front": "How the incident manager decides who else to page.",
+   "back": "By classification: network engineer for connectivity, database engineer for data-layer alerts, security engineer for suspicious-traffic patterns. Then track acks and escalate on ack-SLA breach.",
+   "hook": "Classification chooses the pager",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "agent-routing",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-aim-highest-blast-radius",
+   "front": "Why the incident manager is the riskiest of the three support systems.",
+   "back": "It touches production, makes state-changing tool calls, and runs under time pressure. Bounded autonomy, HITL at every state-changing boundary, and evals that catch silent wrong-tool calls.",
+   "hook": "Production, state changes, time pressure",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "agent-loop-guardrails",
+   "cite": "issue 009, §19"
+  },
+  {
+   "id": "c-ary-routing-misroute-cost",
+   "front": "The case-routing problem, in numbers.",
+   "back": "15-25% misroute rate adding 4-24 hours to MTTR, 30% of tickets touched by two or more teams inflating MTTR 40-60%. Modeled impact: $2-5M a year plus the CSAT damage.",
+   "hook": "A misroute costs hours, not minutes",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "agent-routing",
+   "cite": "issue 010, §19"
+  },
+  {
+   "id": "c-ary-routing-accuracy-bar",
+   "front": "Routing accuracy target, and why not lower.",
+   "back": "90%+ against a 75-85% keyword-and-human baseline. Below 90% the MTTR reduction is not measurable, so the project cannot prove it worked.",
+   "hook": "Under 90% and you cannot prove the win",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "ai-product-metrics",
+   "cite": "issue 010, §19"
+  },
+  {
+   "id": "c-ary-routing-expert-silo",
+   "front": "Why misroute rate climbs on the night shift.",
+   "back": "Senior engineers hold which team owns which edge case as tacit knowledge. Off-shift, that knowledge is absent. The routing model's real job is de-siloing expertise, not saving clicks.",
+   "hook": "The routing model encodes the senior on-call",
+   "kind": "fail",
+   "theme": "aryaka-ops",
+   "topic": "agent-routing",
+   "cite": "issue 010, §19"
+  },
+  {
+   "id": "c-ary-routing-learn-from-reroute",
+   "front": "The feedback loop that makes routing improve on its own.",
+   "back": "When a team re-routes a ticket, treat the correction as a label. Every resolved ticket becomes training data. The misroute you already pay for is the cheapest label you will ever get.",
+   "hook": "A re-route is a free label",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 010, §19"
+  },
+  {
+   "id": "c-ary-routing-no-itsm-replacement",
+   "front": "The constraint that decides whether routing ever ships.",
+   "back": "Integrate with ServiceNow, Zendesk or Jira Service Management — do not require replacing the ITSM. A design that needs an ITSM migration first will not launch.",
+   "hook": "Never make ITSM migration a prerequisite",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "abstraction-seams",
+   "cite": "issue 010, §19"
+  },
+  {
+   "id": "c-ary-routing-fallback-manual",
+   "front": "AI routing fails at 2am. What happens to the tickets?",
+   "back": "Global kill-switch inside 60 seconds, falling back to manual triage. The fallback has to be the process that already exists, because nobody builds a second one under pressure.",
+   "hook": "Fall back to what already works",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "kill-switch-framework",
+   "cite": "issue 010, §19"
+  },
+  {
+   "id": "c-ary-region-three-drivers",
+   "front": "Three things that force multi-region AI, within 12-18 months of launch.",
+   "back": "Residency (EU data processed in EU), latency (APAC cannot wait 500ms round-trip for sub-200ms p95), and sovereignty (data never leaves the jurisdiction, even in transit). Otherwise you lose the deals.",
+   "hook": "Residency, latency, sovereignty",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "edge-inference",
+   "cite": "issue 008, §19"
+  },
+  {
+   "id": "c-ary-region-control-vs-data",
+   "front": "The split that makes multi-region tractable.",
+   "back": "Global control plane owns tenant config, model and prompt registries, eval sets and billing. Regional data planes own inference, vector DB, traces, memory and tenant data.",
+   "hook": "Config is global, data is regional",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 008, §19"
+  },
+  {
+   "id": "c-ary-region-failover-consent",
+   "front": "A region fails. Can you fail its tenants over?",
+   "back": "Only with explicit customer consent, recorded per tenant. RPO under 5 minutes, RTO under 15. For a sovereignty tenant, failing over without consent is the compliance breach, not the outage.",
+   "hook": "Failover without consent is the breach",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 008, §19"
   },
   {
    "id": "c-bw-a2a",
