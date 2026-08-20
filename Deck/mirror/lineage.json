@@ -1,0 +1,76 @@
+{
+ "chains": [
+  {
+   "id": "instruction-to-runtime",
+   "question": "Where does the engineering effort live?",
+   "steps": [
+    {
+     "term": "prompt engineering",
+     "era": "2022-2023",
+     "what_changed": "How you phrased a single request",
+     "cite": "doc: 2026-08-19-buzzword-terms \u00a71"
+    },
+    {
+     "term": "context engineering",
+     "era": "2024-2025",
+     "what_changed": "Which information enters a finite window per step",
+     "cite": "issue 004, \u00a714"
+    },
+    {
+     "term": "harness engineering",
+     "era": "2026",
+     "what_changed": "The deterministic runtime around the model: memory schema, loop policy, tool contracts, budgets, trace",
+     "cite": "doc: agent-harness-loop-llmops-deep-dive \u00a71"
+    },
+    {
+     "term": "loop engineering",
+     "era": "2026",
+     "what_changed": "Iteration and termination policy specifically \u2014 which of the seven termination mechanisms ended the run",
+     "cite": "doc: agent-harness-loop-llmops-deep-dive \u00a724"
+    }
+   ]
+  },
+  {
+   "id": "eval-maturity",
+   "question": "What does 'it works' mean?",
+   "steps": [
+    {
+     "term": "vibes-driven development",
+     "era": "2023",
+     "what_changed": "It seemed better than last week",
+     "cite": "doc: agentic-ai-system-design-deep-dive \u00a717"
+    },
+    {
+     "term": "eval-driven development",
+     "era": "2024-2025",
+     "what_changed": "A regression eval set gates the deploy",
+     "cite": "issue 006, \u00a77"
+    },
+    {
+     "term": "trajectory evaluation",
+     "era": "2025-2026",
+     "what_changed": "The path is graded, not only the answer",
+     "cite": "doc: agentic-ai-evaluation-definitive-reference \u00a75"
+    }
+   ]
+  },
+  {
+   "id": "authoring-shift",
+   "question": "What artifact do humans actually review?",
+   "steps": [
+    {
+     "term": "vibe coding",
+     "era": "2025",
+     "what_changed": "Review the generated diff, or don't",
+     "cite": "doc: agentic-ai-system-design-deep-dive \u00a74"
+    },
+    {
+     "term": "spec-driven development",
+     "era": "2026",
+     "what_changed": "Review a versioned spec; the code is regenerable output",
+     "cite": "doc: 2026-08-19-buzzword-terms \u00a75"
+    }
+   ]
+  }
+ ]
+}

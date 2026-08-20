@@ -6,7 +6,9 @@ name: daily-drop
 
 on:
   schedule:
-    - cron: "30 2 * * *"      # 02:30 UTC = 08:00 IST (GitHub cron can lag 5-15 min)
+    - cron: "3 2 * * *"       # 02:03 UTC = 07:33 IST. Off-peak minute on purpose: GitHub
+                              # queues scheduled jobs and :00/:30 are the most congested
+                              # slots, which is why the 02:30 run landed at 03:25 UTC.
   workflow_dispatch:           # manual test send
 
 jobs:

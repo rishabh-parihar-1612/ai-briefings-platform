@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-20 01:32 UTC",
+ "generated": "2026-08-20 06:04 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -10,7 +10,8 @@
   "harness-loop-memory": "Harness, Loop & Memory",
   "evaluation": "Evaluation",
   "fails-vs-works": "What Fails vs What Works",
-  "buzzword-decoder": "Buzzword Decoder"
+  "buzzword-decoder": "Buzzword Decoder",
+  "aryaka-ops": "Aryaka Ops (Applied)"
  },
  "kinds": {
   "def": "concept",
@@ -686,6 +687,606 @@
    "theme": "agents-orchestration",
    "topic": "ai-system-design-interview",
    "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
+  },
+  {
+   "id": "c-ary-copilot-scale-envelope",
+   "front": "Aryaka support copilot: the scale you design against.",
+   "back": "1,000 tickets/day at launch to 10K over 18 months. 50 tenants to 500. ~50 peak concurrent users. Design for the 10x, build for the 1x.",
+   "hook": "10x in 18 months, 10x in tenants too",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-copilot-nfr-contract",
+   "front": "The five non-functionals the copilot is held to.",
+   "back": "p95 under 5s to first response; 99.9% uptime; under $0.50 per ticket; ZDR-compatible for regulated tenants; SOC2-auditable and multi-tenant isolated.",
+   "hook": "Under five seconds, under fifty cents",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "ai-slis-slos",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-ticket-lifecycle-five-stages",
+   "front": "One ticket through the copilot: name the five stages.",
+   "back": "Ingest (webhook) to triage (supervisor fans out) to HITL (plan reviewed) to execute (bounded loop) to learn (resolution plus feedback logged).",
+   "hook": "Ingest, triage, approve, execute, learn",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "supervisor-worker-pattern",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-triage-four-workers",
+   "front": "What the triage supervisor fans out to, in parallel.",
+   "back": "Four workers: KB search, topology lookup, change-history, prior-tickets. Parallel via the LangGraph Send API, then a synthesis agent classifies and drafts the plan.",
+   "hook": "KB, topology, changes, prior tickets",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "multi-agent-patterns",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-tools-layer-is-mcp",
+   "front": "Aryaka's tools layer, concretely.",
+   "back": "MCP servers for MyAryaka API, Splunk, Change Management, KB and Runbooks — each with its own circuit breaker, its own permissions, and an audit log entry.",
+   "hook": "Five MCP servers, five circuit breakers",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "mcp",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-model-layer-four-tiers",
+   "front": "Four model tiers behind one gateway.",
+   "back": "Cloudflare AI Gateway fronts GPT-5 as default, Bedrock Claude as fallback, vLLM Llama-3.3 as the cheap tier, and NIM containers as the self-hosted tier.",
+   "hook": "Default, fallback, cheap, self-hosted",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "model-cascade-and-batch",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-hitl-sits-between-plan-and-act",
+   "front": "Where the human gate sits in the copilot, and why there.",
+   "back": "Between triage and execution: tier-1 reviews the plan in 30-60 seconds. Gate the plan, not the output — after execution the tunnel is already flapping.",
+   "hook": "Review the plan, not the damage",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "hitl-design",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-plan-before-execute-five-bullets",
+   "front": "The shape of the plan tier-1 actually approves.",
+   "back": "Five bullets, surfaced by the copilot, approved before any tool runs. Rated as eliminating the worst failure modes for two sprints of work.",
+   "hook": "Five bullets before any tool fires",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "plan-before-execute",
+   "cite": "issue 004, §13"
+  },
+  {
+   "id": "c-ary-hard-caps-10-1-90",
+   "front": "The three numbers that bound every agent run.",
+   "back": "10 iterations, $1, 90 seconds. Rated Critical impact, Low complexity, one week of work — the cheapest insurance in the whole ranked plan.",
+   "hook": "Ten iterations, one dollar, ninety seconds",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "agent-loop-guardrails",
+   "cite": "issue 003, §13"
+  },
+  {
+   "id": "c-ary-five-guardrails-before-prod",
+   "front": "Five guardrails mandatory before any copilot reaches prod.",
+   "back": "Iteration cap, circuit breaker, context cap, cost cap, alerting. One sprint. Mandatory means the launch gate fails without all five, not that they are recommended.",
+   "hook": "All five, or it does not ship",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "agent-loop-guardrails",
+   "cite": "issue 004, §13"
+  },
+  {
+   "id": "c-ary-loop-explosion-three-mitigations",
+   "front": "Agent loop explosion in the copilot: the three mitigations.",
+   "back": "Hard cap at 10 iterations, context cap at 80% of window, per-tenant cost ceiling. Three independent limits because any one of them can be the binding one.",
+   "hook": "Iterations, context, money — cap all three",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "agent-loop-guardrails",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-tool-5xx-circuit-breaker",
+   "front": "A Splunk query times out mid-diagnosis. What the copilot does.",
+   "back": "Per-tool circuit breaker trips, then reroute or escalate. Per-tool, not per-provider: one dead runbook API must not take the topology lookup with it.",
+   "hook": "Per-tool breakers, not one global one",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "resilience-patterns",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-replan-budget-two",
+   "front": "The 3-day fix for the most common agent-loop pathology.",
+   "back": "Replan budget of 2, plus routing that separates transient failure from a wrong premise. Retrying a wrong premise burns the budget and still fails.",
+   "hook": "Two replans, and know which failure it is",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "agent-loop-guardrails",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-context-summarize-at-80",
+   "front": "Copilot context window management, as a rule.",
+   "back": "Track tokens per turn and summarize at 80% of capacity. 5 days of work. Waiting for the hard limit means truncation decides what gets forgotten.",
+   "hook": "Summarize at 80%, before truncation chooses",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "context-compression",
+   "cite": "issue 010, §13"
+  },
+  {
+   "id": "c-ary-idempotency-week-one",
+   "front": "Week 1 of the sprint, on every state-changing support tool.",
+   "back": "Idempotency keys on Jira, ServiceNow, CRM and email. Target: duplicate-ticket incidents drop to zero, with an idempotency-key audit on every PR.",
+   "hook": "A retry must not open a second ticket",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "idempotency-for-ai-operations",
+   "cite": "issue 005, §13"
+  },
+  {
+   "id": "c-ary-workflow-engine-spike-timebox",
+   "front": "How the Temporal-vs-Inngest evaluation is scoped.",
+   "back": "Seven-day timebox on one agent flow, and the deliverable is a written recommendation, not production code. Named risk: the spike becomes a permanent side-project.",
+   "hook": "Seven days, output is a document",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "workflow-engines-for-ai",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-async-refactor-shadow-first",
+   "front": "Async refactor of the copilot's main loop, safely.",
+   "back": "httpx.AsyncClient plus asyncio.Semaphore, then shadow-traffic comparison for a week before cutover, with auto-rollback if CSAT drops more than 0.3.",
+   "hook": "Shadow a week, roll back on 0.3 CSAT",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "queue-architecture-for-ai",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-event-driven-design-only",
+   "front": "Event-driven migration this cycle: how much do you build?",
+   "back": "Design only, no implementation. One sprint to produce the design, implementation deferred to Q1 2027. Naming a thing design-only is what stops it half-shipping.",
+   "hook": "Design in Q3, implement in Q1",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "queue-architecture-for-ai",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-terraform-empty-modules",
+   "front": "Why two Terraform modules are deliberately left empty.",
+   "back": "ai-gateway-config carries real LiteLLM tenant configs now; ai-inference-endpoint and vector-db-cluster stay empty until self-hosting crosses 1K requests/day.",
+   "hook": "Write the seam, leave the module empty",
+   "kind": "scale",
+   "theme": "aryaka-ops",
+   "topic": "ai-infrastructure-as-code",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-tool-schema-versioning-ci",
+   "front": "The CI gate that protects a growing tool catalog.",
+   "back": "Pin $id plus version on every tool schema and lint for naming overlap. Ship a CLI that generates them, so the gate does not tax tool authors.",
+   "hook": "Two tools named alike is a silent misroute",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "tool-calling-anatomy",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-mcp-server-ticketing-topology",
+   "front": "The first MCP server to build at Aryaka.",
+   "back": "Ticketing plus network topology, 4-6 weeks, High impact. Those two are what every diagnosis needs first, so they earn the integration cost fastest.",
+   "hook": "Ticketing and topology first",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "mcp",
+   "cite": "issue 001, §13"
+  },
+  {
+   "id": "c-ary-mcp-regardless-of-runtime",
+   "front": "A managed agent runtime saves 3-6 months. What do you still build?",
+   "back": "The tool layer, in MCP, regardless. Buying the runtime is defensible for a v1; having no way to swap it is what makes the lock-in permanent.",
+   "hook": "Rent the runtime, own the tool layer",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "build-buy-partner",
+   "cite": "issue 004, §1"
+  },
+  {
+   "id": "c-ary-langfuse-first",
+   "front": "Why Langfuse deploys before the cost work, not after.",
+   "back": "Every subsequent decision needs the data it produces. Cost caps and Langfuse are the two week-1 items because the rest is unmeasurable without them.",
+   "hook": "You cannot optimize what you cannot trace",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "llm-observability",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-otel-four-spans-five-signals",
+   "front": "The instrumentation target on the agent loop.",
+   "back": "OpenTelemetry 4-span instrumentation, Langfuse wired, five golden signals on one dashboard, alerting when p95 exceeds twice baseline.",
+   "hook": "Four spans, five signals, one dashboard",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "llm-observability",
+   "cite": "issue 005, §13"
+  },
+  {
+   "id": "c-ary-tool-call-distribution-report",
+   "front": "Two days of work that catches silent wrong-tool selection.",
+   "back": "A weekly tool-call distribution report. The agent picking the wrong tool never errors — it returns a confident answer built on the wrong data.",
+   "hook": "Wrong tool never throws; it just lies",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "llm-observability",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-cost-visibility-three-layers",
+   "front": "Cost visibility for the copilot, in three layers.",
+   "back": "Tag every LLM call with tenant and feature, aggregate at trace level, roll up per tenant on a dashboard. Two sprints. Untagged spend cannot be defended in a review.",
+   "hook": "Tag, aggregate, roll up per tenant",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "cost-visibility-chargeback",
+   "cite": "issue 004, §13"
+  },
+  {
+   "id": "c-ary-self-hosted-ops-burden-named",
+   "front": "Self-hosting Langfuse: the risk that is actually named.",
+   "back": "Operations burden. Mitigation is specific — one named owner, four hours a week budgeted, and a 30-day review of whether to stay self-hosted or move to cloud.",
+   "hook": "One owner, four hours, thirty-day review",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "llm-observability",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-observability-five-pillar-stack",
+   "front": "The five-pillar observability stack for the copilot.",
+   "back": "Langfuse for traces, DuckDB for analysis, LiteLLM for cost tracking — seven days of work. Cheap because each pillar is a component, not a platform build.",
+   "hook": "Langfuse, DuckDB, LiteLLM",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "llm-observability",
+   "cite": "issue 010, §13"
+  },
+  {
+   "id": "c-ary-sprint-gate-five-criteria",
+   "front": "What has to be true before Q4 platform expansion.",
+   "back": "Zero queries over $1.00, Langfuse tracing 100% of tier-1 and tier-2, 500+ eval examples correlating above 0.7, gateway under 30ms p95 overhead, cascade 4x cheaper at under 2% regression.",
+   "hook": "Five gates; all five, or no expansion",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "ai-slis-slos",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-latency-accuracy-audit",
+   "front": "The 3-day audit rated highest-ROI in issue 010.",
+   "back": "Map every copilot feature to its own latency threshold. Triage tolerates seconds; an interactive diagnosis does not. One global p95 hides both.",
+   "hook": "One latency budget per feature, not per system",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "ai-slis-slos",
+   "cite": "issue 010, §13"
+  },
+  {
+   "id": "c-ary-crag-multi-hop",
+   "front": "What CRAG buys the copilot, measured.",
+   "back": "10-20% on multi-hop diagnosis, one sprint. Multi-hop is the support case that matters: symptom to device to recent change to known issue.",
+   "hook": "Multi-hop is where support tickets live",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "kg-rag",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-tier3-memory-episodes",
+   "front": "Tier-3 memory for the copilot, and what it returns.",
+   "back": "mem0 plus a customer_episodes ETL, one sprint, resolution time down 15-25% on hit cases. Hit cases only — the honest framing of a memory win.",
+   "hook": "15-25% faster, on the tickets that hit",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "memory-systems",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-bounded-reflection-diagnostic",
+   "front": "Reflection on the diagnostic agent: how much, and how urgent?",
+   "back": "Bounded reflection, seven days, and the lowest ROI of the ten items in that sprint. Worth knowing it ranks last when someone pitches it as the fix.",
+   "hook": "Bounded, and ranked tenth of ten",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "plan-before-execute",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-ai-ux-citations-streaming-hitl",
+   "front": "The AI UX overhaul, and the metric it moves.",
+   "back": "Citations, streaming, and inline HITL — two sprints for CSAT up half a point and trust up. In support, a cited answer is auditable; an uncited one is a claim.",
+   "hook": "Citations make an answer checkable",
+   "kind": "win",
+   "theme": "aryaka-ops",
+   "topic": "hitl-design",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-eval-stratification-40-30-20-10",
+   "front": "The highest-ROI, cheapest item in the whole 30-day sprint.",
+   "back": "Eval set stratification at 40/30/20/10 plus weekly real-ticket sampling. Three days. Without it, every subsequent AI improvement is unverifiable.",
+   "hook": "Three days, and it unblocks everything after",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-synthetic-eval-keep-real",
+   "front": "Generating 500 eval examples from 50 real ones.",
+   "back": "Claude-generated, but keep 20% real production traces and re-validate the synthetic set monthly against new traces. Named risk: hidden bias in synthetic data.",
+   "hook": "Keep a fifth real, re-validate monthly",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-eval-on-pr-five-percent",
+   "front": "The deploy gate on the copilot.",
+   "back": "Langfuse plus LangGraph wired into CI, blocking any PR that regresses more than 5%. Five days. A gate that only warns is not a gate.",
+   "hook": "Block at 5% regression, do not warn",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 008, §13"
+  },
+  {
+   "id": "c-ary-calibration-brier",
+   "front": "Measuring whether the copilot's confidence means anything.",
+   "back": "Brier score plus a reliability diagram. Five days. Accuracy tells you if it was right; calibration tells you whether to trust it saying so.",
+   "hook": "Calibration, not accuracy, gates autonomy",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-quality-slos-day-one",
+   "front": "Five quality SLOs, instrumented from day one.",
+   "back": "Hallucination rate, resolution rate, human override rate, tool-call success, CSAT. One sprint. Override rate is the one that tells you if tier-1 actually trusts it.",
+   "hook": "Override rate is the trust metric",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "ai-product-metrics",
+   "cite": "issue 004, §13"
+  },
+  {
+   "id": "c-ary-cascade-three-tier-triage",
+   "front": "Three-tier cascade on tier-1 triage: the target.",
+   "back": "Llama 8B to Sonnet to Opus, aiming at 4x lower cost per query with under 2% quality regression. The regression bound is what makes the saving real.",
+   "hook": "4x cheaper, under 2% worse",
+   "kind": "metric",
+   "theme": "aryaka-ops",
+   "topic": "model-cascade-and-batch",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-cascade-latency-risk",
+   "front": "Cascade ships and p99 latency gets worse. What do you do?",
+   "back": "Measure p99 before and after. If it exceeds 5s, raise the tier-1 threshold, or drop tier-3 and escalate to a human instead. Escalating beats a slow third model.",
+   "hook": "Drop tier 3 before you blow the SLO",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "model-cascade-and-batch",
+   "cite": "issue 009, §13"
+  },
+  {
+   "id": "c-ary-gemini-flash-tier1-config",
+   "front": "A 2-day config change worth 40-60% of tier-1 spend.",
+   "back": "Gemini 3 Flash as tier-1 in the LiteLLM cascade. Two days because the gateway made the model a config value rather than a code dependency.",
+   "hook": "The gateway is what makes it two days",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "model-cascade-and-batch",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-batch-api-nightly-evals",
+   "front": "Halving eval cost in three days.",
+   "back": "Batch API for nightly eval runs — 50% cheaper. Evals are the ideal batch workload: no user waiting, fully schedulable, run against a fixed set.",
+   "hook": "Nobody is waiting on a nightly eval",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "model-cascade-and-batch",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-litellm-per-tenant-budgets",
+   "front": "Why LiteLLM is a foundation item, not an optimization.",
+   "back": "Self-hosted proxy with per-tenant budgets: ~20% cost down, multi-provider ready, ZDR-safe. Foundational because without it you cannot measure cost at all.",
+   "hook": "No proxy, no per-tenant cost number",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "token-economics",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-slm-finetune-triage-150x",
+   "front": "Fine-tuning a small model for ticket triage.",
+   "back": "Llama 4 8B on 1,000 examples for a 150x cost reduction, ten days. Triage is the right first target: narrow, high-volume, and cheap to label from resolved tickets.",
+   "hook": "Narrow and high-volume fine-tunes first",
+   "kind": "number",
+   "theme": "aryaka-ops",
+   "topic": "model-cascade-and-batch",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-copilot-prompt-cache-stability",
+   "front": "The copilot's system prompt is large and stable. Why that matters.",
+   "back": "SASE domain knowledge, escalation policy and tool list cache as a stable prefix — around 90% off inference. Only if volatile ticket data goes strictly after it.",
+   "hook": "Volatile data last, or the cache dies",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "prompt-caching",
+   "cite": "issue 001, §1"
+  },
+  {
+   "id": "c-ary-tenant-id-every-query",
+   "front": "Cross-tenant leak in the copilot: the one-line defense.",
+   "back": "tenant_id on every cache key, every RAG query, every trace query. All three, because a leak through the cache reads exactly like a leak through retrieval.",
+   "hook": "Cache, RAG, traces — all three keyed",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-cache-ttl-never-permanent",
+   "front": "Highest-ROI item in issue 011, at three days of work.",
+   "back": "A TTL fallback so no cache entry is ever permanent. A permanent cache turns one wrong answer into a policy that outlives the incident that caused it.",
+   "hook": "No TTL means a wrong answer becomes policy",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "semantic-cache",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-multi-tenant-cache-audit",
+   "front": "The audit that follows the cache TTL fix, and why in that order.",
+   "back": "Verify tenant_id is in every cache key, five days. It runs second because adding TTL logic is exactly when a key format gets touched and quietly loses a field.",
+   "hook": "Audit the keys right after you change them",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 011, §13"
+  },
+  {
+   "id": "c-ary-sanitize-retrieved-docs",
+   "front": "Prompt injection into the copilot arrives through what door?",
+   "back": "Retrieved documents. Sanitization pipeline on the retrieval path, stripping injection patterns, five days. The KB article is untrusted input the moment anyone can edit it.",
+   "hook": "Your own KB is untrusted input",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "prompt-injection-defense",
+   "cite": "issue 008, §13"
+  },
+  {
+   "id": "c-ary-quota-hierarchy-four-limits",
+   "front": "Per-tenant quota in Redis: four limits, not one.",
+   "back": "Requests per second, tokens per minute, concurrent runs, and a daily cost ceiling. One noisy tenant can exhaust any one of the four while the others look healthy.",
+   "hook": "RPS, TPM, concurrency, daily dollars",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "rate-limiting-and-quotas-for-ai",
+   "cite": "issue 008, §13"
+  },
+  {
+   "id": "c-ary-pii-zdr-routing",
+   "front": "A regulated tenant's ticket contains PII. Where does it run?",
+   "back": "Redact before the call, and route ZDR tenants to self-hosted vLLM or NIM. Routing is the control; redaction alone still puts the payload on someone else's wire.",
+   "hook": "Redaction plus routing, not redaction alone",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-ary-claude-code-pilot-controls",
+   "front": "Piloting Claude Code with five tier-2 engineers: the four controls.",
+   "back": "Filesystem sandbox, network egress allowlist, audit logs to SIEM, per-engineer spend caps. Named risk is prompt-borne data leak, so the controls are process-level.",
+   "hook": "Sandbox, allowlist, SIEM, spend cap",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-audit-trail-soc2-path",
+   "front": "Which AI work sits on the SOC2 critical path?",
+   "back": "Audit trail v1 — a trace store plus a model and prompt version registry, ten days. Without the version registry you cannot say what produced a given answer.",
+   "hook": "No version registry, no answer provenance",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "corpus-provenance",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-stride-ai-two-hours",
+   "front": "The cheapest security artifact in the ranked plan.",
+   "back": "A two-hour STRIDE-AI threat model workshop on a whiteboard. Two hours is the point — it is cheap enough that nobody can defer it for capacity reasons.",
+   "hook": "Two hours, whiteboard, no excuse to defer",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 010, §13"
+  },
+  {
+   "id": "c-ary-foundation-before-platform",
+   "front": "The ordering rule behind every 30-day plan in the corpus.",
+   "back": "Foundation, then production hardening, then platform investment. Eval sets and schema versioning first because nothing after them is verifiable otherwise.",
+   "hook": "Verifiable before impressive",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 007, §13"
+  },
+  {
+   "id": "c-ary-what-gets-deferred",
+   "front": "Four things deliberately deferred out of the Q3 cycle.",
+   "back": "Voice agents to Q1 2027. Computer Use to a Q4 pilot on one OEM-console workflow. KG-RAG to 2027 unless flat-vector retrieval demonstrably fails. Multi-agent RAG to 2027.",
+   "hook": "Deferral with a trigger, not a maybe",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-noc-triage-pilot-shape",
+   "front": "Shape of the NOC triage multi-agent pilot.",
+   "back": "Four parallel workers, a synthesis step, and a HITL gate. Pilot means the gate stays in even when accuracy looks good enough to remove it.",
+   "hook": "Pilot keeps the gate",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "supervisor-worker-pattern",
+   "cite": "issue 004, §13"
+  },
+  {
+   "id": "c-ary-fifty-example-deploy-gate",
+   "front": "Smallest eval set that still earns a deploy-blocking gate.",
+   "back": "Fifty examples, one sprint. Fifty is enough to catch regressions and small enough that nobody argues about the cost of running it on every deploy.",
+   "hook": "Fifty examples beats a perfect set you never build",
+   "kind": "check",
+   "theme": "aryaka-ops",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 006, §13"
+  },
+  {
+   "id": "c-ary-minio-zdr-artifacts",
+   "front": "Where ZDR-sensitive artifacts live.",
+   "back": "MinIO for model weights and the trace archive. Traces are the overlooked half: they contain the ticket text, so they inherit the tenant's retention rules.",
+   "hook": "Traces inherit the tenant's retention rules",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 010, §13"
   },
   {
    "id": "c-bw-a2a",

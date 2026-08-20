@@ -49,7 +49,10 @@ THEME_CAP = 3           # no more than this many cards from one theme in a drop
 BOX_DAYS = {0: 0, 1: 1, 2: 3, 3: 7, 4: 21, 5: 60}
 MAX_BOX = 5
 TIER_CYCLE = [1, 2, 3, 4]
-FLAVOUR_THEMES = ("fails-vs-works", "buzzword-decoder")   # lead every interleave round
+# One reserved slot each per 8-card block. aryaka-ops is here because a card about the
+# SASE support copilot is the one most likely to change what gets built this week;
+# left to the round-robin it would surface once every ten days.
+FLAVOUR_THEMES = ("fails-vs-works", "buzzword-decoder", "aryaka-ops")
 EPOCH = date(2026, 8, 18)   # day 1 of the habit
 MIRROR = os.environ.get("DECK_MIRROR_URL",
                         "https://rishabh-parihar-1612.github.io/ai-briefings-platform/")
@@ -176,14 +179,16 @@ def pick_cards(deck, state, day: date):
     take(due, CARDS_PER_DROP)        # no new material left? keep reviewing
     take(resting, CARDS_PER_DROP)    # early days: pull cards forward rather than short-drop
 
-    # flavour guarantee: a drop should carry at least one "what fails vs works" card and,
-    # while the decoder is fresh, one buzzword card
-    for kind in ("contrast", "buzzword"):
-        if any(cards[cid].get("kind") == kind for cid in chosen):
+    # flavour guarantee: every drop carries one card from each reserved theme — a
+    # fails-vs-works contrast, a buzzword decode, and an applied Aryaka card.
+    # Keyed on theme rather than kind: aryaka-ops has no kind of its own, and for the
+    # other two the validator already pins kind to theme one-to-one.
+    for theme in FLAVOUR_THEMES:
+        if any(cards[cid].get("theme") == theme for cid in chosen):
             continue
         # same rotating window as the main pool: a date-seeded pick would happily
         # repeat yesterday's card, which is exactly what the guarantee must not do
-        pool = sorted((cid for cid in cards if cards[cid].get("kind") == kind
+        pool = sorted((cid for cid in cards if cards[cid].get("theme") == theme
                        and cid not in used),
                       key=lambda cid: (cid in cstate and bool(cstate[cid].get("last")),
                                        seed("deck", cid)))
@@ -191,7 +196,15 @@ def pick_cards(deck, state, day: date):
             continue
         pick = pool[(day - EPOCH).days % len(pool)]
         if len(chosen) >= CARDS_PER_DROP:
-            chosen[-1] = pick
+            # Evict from the back, but never a card already satisfying a flavour slot.
+            # With two reserved themes a plain chosen[-1] was harmless; with three, the
+            # third substitution silently overwrote the second one's pick.
+            victim = next((i for i in range(len(chosen) - 1, -1, -1)
+                           if cards[chosen[i]].get("theme") not in FLAVOUR_THEMES), None)
+            if victim is None:
+                continue
+            used.discard(chosen[victim])
+            chosen[victim] = pick
         else:
             chosen.append(pick)
         used.add(pick)
@@ -247,6 +260,8 @@ def render_text(drop) -> str:
         out.append(f"   → {c['back']}")
         if c.get("hook"):
             out.append(f"   ⚡ {c['hook']}")
+        if c.get("aryaka"):
+            out.append(f"   🏢 At Aryaka: {c['aryaka']}")
         out.append(f"   ({cite_of(c)}{gap_note(c)})")
     d = drop["drill"]
     if d:
@@ -306,25 +321,26 @@ def render_md(drop) -> str:
 
 
 def render_telegram(drop):
-    """Return a list of HTML messages, each under the Telegram size cap."""
-    e = html.escape
-    msgs, buf = [], [f"🎴 <b>Daily Drop · {drop['date']}</b> · day {drop['day']}\n"]
+    """Return a list of HTML messages, each under the Telegram size cap.
 
-    def flush():
-        nonlocal buf
-        if buf:
-            msgs.append("\n".join(buf).strip())
-            buf = []
+    ONE CARD PER MESSAGE, deliberately. Telegram clients reveal every <tg-spoiler> in a
+    message from a single tap, so batching the eight cards into one message meant the first
+    reveal dumped all eight answers and the recall test was over before it started. The
+    size cap was never the binding constraint here; the spoiler's blast radius is.
+    """
+    e = html.escape
+    n = len(drop["cards"])
+    msgs = []
 
     for i, c in enumerate(drop["cards"], 1):
         hook = f"\n⚡ {e(c['hook'])}" if c.get("hook") else ""
-        block = (f"\n<b>{i}. {e(c['front'])}</b>\n"
-                 f"<tg-spoiler>{e(c['back'])}{hook}</tg-spoiler>\n"
-                 f"<i>{e(cite_of(c))}{e(gap_note(c))}</i>")
-        if sum(len(x) for x in buf) + len(block) > TG_LIMIT:
-            flush()
-        buf.append(block)
-    flush()
+        # the applied line goes INSIDE the spoiler: it is part of the answer, and seeing
+        # "at Aryaka, the tunnel-flap runbook…" before recall gives the card away
+        ary = f"\n🏢 <b>At Aryaka:</b> {e(c['aryaka'])}" if c.get("aryaka") else ""
+        head = f"🎴 <b>Daily Drop · {drop['date']}</b> · day {drop['day']}\n\n" if i == 1 else ""
+        msgs.append(f"{head}<b>{i}/{n}. {e(c['front'])}</b>\n"
+                    f"<tg-spoiler>{e(c['back'])}{hook}{ary}</tg-spoiler>\n"
+                    f"<i>{e(cite_of(c))}{e(gap_note(c))}</i>")
 
     d = drop["drill"]
     if d:
@@ -360,6 +376,8 @@ def render_html(drop) -> str:
         f'<div class="c"><div class="f">{i}. {e(c["front"])}</div>'
         f'<div class="b" hidden>{e(c["back"])}'
         + (f'<div class="h">⚡ {e(c["hook"])}</div>' if c.get("hook") else "")
+        + (f'<div class="ary">🏢 <b>At Aryaka:</b> {e(c["aryaka"])}</div>'
+           if c.get("aryaka") else "")
         + f'<div class="s">{e(cite_of(c))}{e(gap_note(c))}</div></div>'
         f'<button>reveal</button></div>'
         for i, c in enumerate(drop["cards"], 1))
@@ -391,6 +409,7 @@ h1{{font-size:18px;margin:0 0 14px}}
 .c{{background:#161b22;border:1px solid #262d38;border-radius:10px;padding:12px;margin:10px 0}}
 .f{{font-weight:600}} .b{{margin-top:8px;color:#cfd6e0}}
 .h{{margin-top:6px;color:#7ee787}} .s{{margin-top:8px;color:#8b949e;font-size:12.5px}}
+.ary{{margin-top:8px;padding:7px 9px;border-left:3px solid #d29922;background:#1c1810;border-radius:0 4px 4px 0;color:#e3b341;font-size:13.5px}}
 button{{margin-top:10px;background:#21262d;color:#58a6ff;border:1px solid #30363d;
 border-radius:7px;padding:6px 12px;font:inherit;font-size:13px}}
 pre{{white-space:pre-wrap;font:inherit;color:#cfd6e0;margin:8px 0}}
@@ -415,9 +434,12 @@ def send_telegram(msgs):
         sys.exit("TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set in the environment.")
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     for i, text in enumerate(msgs, 1):
+        # one card per message means ~10 messages a day, so only the first is allowed to
+        # make a sound; the rest arrive silently in the same thread
         payload = urllib.parse.urlencode({
             "chat_id": chat, "text": text, "parse_mode": "HTML",
-            "disable_web_page_preview": "true"}).encode()
+            "disable_web_page_preview": "true",
+            "disable_notification": "false" if i == 1 else "true"}).encode()
         try:
             with urllib.request.urlopen(urllib.request.Request(url, data=payload)) as r:
                 ok = json.loads(r.read()).get("ok")

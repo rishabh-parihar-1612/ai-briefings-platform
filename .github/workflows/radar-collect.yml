@@ -11,7 +11,7 @@ name: radar-collect
 
 on:
   schedule:
-    - cron: "0 2 * * *"       # 02:00 UTC, half an hour ahead of the daily drop
+    - cron: "17 1 * * *"      # 01:17 UTC, ahead of the drop and off the congested top-of-hour
   workflow_dispatch:
     inputs:
       days:
@@ -42,6 +42,7 @@ jobs:
           python scripts/radar_collect.py \
             --out radar-inbox \
             --vocab Deck/mirror/vocab.json \
+            --lineage Deck/mirror/lineage.json \
             --days "${{ github.event.inputs.days || 2 }}" \
             | tee /tmp/summary.txt
           echo "summary=$(cat /tmp/summary.txt)" >> "$GITHUB_OUTPUT"
