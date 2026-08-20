@@ -9,9 +9,33 @@
 # decode_stub() in radar_collect.py; nothing else here has to change.
 name: radar-collect
 
+# SCHEDULE DISABLED 2026-08-20. Kept dispatch-only rather than deleted, so the audit
+# below stays attached to the thing it describes.
+#
+# The unattended collector cannot work, and this is a design limit rather than a tuning
+# problem. Three gates fired on string artifacts: the word "failure" in a vendor blog
+# marked it an incident; "Launch" from HN's own "Launch HN:" title prefix marked a YC
+# launch a strategic inflection; "Benchmark" fired on an ML paper. The "touches two or
+# more tracked topics" bar was cleared by the single string "Multi-Agent", which matches
+# both multi-agent-patterns and single-vs-multi-agent-decision — so papers on dental
+# reasoning and art-historical narrative outscored everything else.
+#
+# The term-momentum gate, the one designed to be the valuable part, was worse: 480 terms
+# tracked, 97% singletons, and the five that crossed the bar were "large language
+# models", "language models", "large language model", "language model" and "RL" — domain
+# stopwords, one source, three un-normalised variants of one phrase.
+#
+# Separating "harness engineering is a new discipline name" from "large language models is
+# what every paper says" needs judgment. No stopword list fixes it: the interesting terms
+# are unknown by definition, which is the whole premise of trend detection. The model path
+# is closed (GitHub Models retired 2026-07-30, Copilot spends premium requests, a Claude
+# token draws down the interactive budget), so there is no cheap fix pending.
+#
+# What replaces it already exists and is better: `/radar --topic X` in a session, with a
+# model and web search, approval-gated. Compare Radar/2026-07-27.md — primary sources,
+# mechanisms, term decodes, Aryaka angle, confidence per item — against any digest this
+# job produced.
 on:
-  schedule:
-    - cron: "17 1 * * *"      # 01:17 UTC, ahead of the drop and off the congested top-of-hour
   workflow_dispatch:
     inputs:
       days:
