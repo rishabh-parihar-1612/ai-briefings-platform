@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-20 01:00 UTC",
+ "generated": "2026-08-20 01:20 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -387,6 +387,107 @@
    "cite": "doc: interview-questions-with-explanations §11"
   },
   {
+   "id": "c-hb-autonomy-is-earned",
+   "front": "State the autonomy principle in four words.",
+   "back": "Autonomy is earned through reliability. The five levels: read-only, recommendations, human approval, low-risk automation, high-risk automation — you move up by demonstrating the level below.",
+   "hook": "Earned, never granted",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: ai-platform-system-design-interview-handbook §2"
+  },
+  {
+   "id": "c-hb-capability-router-shape",
+   "front": "Draw the shape that scales an agent platform past dozens of tools.",
+   "back": "User → planner → capability router → domain agent → small tool set → internal APIs. Each reasoning step sees a handful of tools, never the catalog.",
+   "hook": "Narrow the step, not the catalog",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: ai-platform-system-design-interview-handbook §1"
+  },
+  {
+   "id": "c-hb-eighteen-personas-not-agents",
+   "front": "A system has 18 \"agents\". What makes it not multi-agent?",
+   "back": "Each is a config row plus a prompt template. None has a tool, none can invoke another, none shares state. No planner, no delegation protocol, no message bus, zero agent-to-agent edges in the source.",
+   "hook": "Config rows, not agents",
+   "kind": "fail",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: notes §1",
+   "aryaka": "Our own audit verdict: a single-agent, multi-persona pipeline — composition happens in Python control flow and one database boolean."
+  },
+  {
+   "id": "c-hb-error-budget-by-action-class",
+   "front": "How do you set an agent's error budget?",
+   "back": "By action class, not globally. Low risk: summaries, KB search. Medium: CRM updates. High: production changes. Each class gets its own budget and its own consequence.",
+   "hook": "One budget per class of damage",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "ai-slis-slos",
+   "cite": "doc: ai-platform-system-design-interview-handbook §2"
+  },
+  {
+   "id": "c-hb-five-rules-cheatsheet",
+   "front": "The five rules, in order.",
+   "back": "Least autonomy that works. Model proposes, code disposes. Retrieve the smallest sufficient context. Least privilege is the only control that can't be talked out of. If you can't measure it, you can't change it.",
+   "hook": "Five rules, everything else follows",
+   "kind": "check",
+   "theme": "agents-orchestration",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: agentic-ai-system-design-cheatsheet §1"
+  },
+  {
+   "id": "c-hb-multi-persona-pipeline-verdict",
+   "front": "What is the honest name for 18 prompt templates composed in Python?",
+   "back": "A single-agent, multi-persona pipeline. Calling it multi-agent invites the cost and debugging profile of one without any of the benefits.",
+   "hook": "Name it accurately or inherit the costs",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: notes §1"
+  },
+  {
+   "id": "c-hb-routing-by-confidence",
+   "front": "Route by confidence — what goes where?",
+   "back": "High confidence to the specialist, medium to a verify step, low to the general agent. And never optimize only latency: optimize trust, correctness and predictability.",
+   "hook": "Three bands, three destinations",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "agent-routing",
+   "cite": "doc: ai-platform-system-design-interview-handbook §3"
+  },
+  {
+   "id": "c-hb-seven-step-answer-frame",
+   "front": "The seven-step frame for any platform design question.",
+   "back": "Clarify the real problem, identify stakeholders and competing goals, list trade-offs, think in architectures not point solutions, define success metrics, explain business impact, then recommend and justify.",
+   "hook": "Clarify first, recommend last",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-interview-handbook §0"
+  },
+  {
+   "id": "c-hb-tool-catalog-core-insight",
+   "front": "12 tools, engineering wants 30 more. What is the actual problem?",
+   "back": "Not the number of APIs — the number of tools exposed to a single reasoning step. The fix is architectural: planner, capability router, domain agents, dynamic tool retrieval.",
+   "hook": "Per reasoning step, not per platform",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "agent-routing",
+   "cite": "doc: ai-system-design-interview-questions-and-answers §1"
+  },
+  {
+   "id": "c-hb-tool-routing-metrics",
+   "front": "Which metrics prove a tool layer is healthy?",
+   "back": "Tool selection accuracy, wrong-tool rate, task completion, token cost, latency, user satisfaction. Wrong-tool rate is the one that maps to real damage.",
+   "hook": "Wrong-tool rate is the damage metric",
+   "kind": "metric",
+   "theme": "agents-orchestration",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: ai-platform-system-design-interview-handbook §1"
+  },
+  {
    "id": "c-i10-dspy-numbers",
    "front": "What do DSPy adopters report, and why is it under-adopted?",
    "back": "10-30% quality improvement over hand-crafted prompts at lower ongoing maintenance cost. Most teams have never heard of it — it reads as \"just another framework\" until you see the optimization loop.",
@@ -465,6 +566,46 @@
    "theme": "agents-orchestration",
    "topic": "llm-observability",
    "cite": "doc: agentic-system-design-interview-answer-patterns §2"
+  },
+  {
+   "id": "c-v1-four-layers",
+   "front": "The four layers of any AI application.",
+   "back": "User experience (chat, API, Slack, mobile), intelligence (planning, routing, RAG, memory, tools), AI platform (gateway, prompt registry, eval, cache), infrastructure (models, GPUs, vector DB, security, storage).",
+   "hook": "Questions target one; strong answers connect all four",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "abstraction-seams",
+   "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
+  },
+  {
+   "id": "c-v1-seven-decisions-an-ai-system-makes",
+   "front": "Name the decisions an AI system has to make at runtime.",
+   "back": "Which model answers, whether to retrieve, which documents are relevant, whether to call a tool, whether to ask a clarifying question, whether it can act autonomously, and whether a human must approve.",
+   "hook": "Seven decisions, none deterministic",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "agent-routing",
+   "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
+  },
+  {
+   "id": "c-v1-what-ai-design-really-is",
+   "front": "How does AI system design differ from designing Instagram or WhatsApp?",
+   "back": "Those move, store and retrieve data. An AI system orchestrates probabilistic reasoning — the problem shifts from building software to designing decision-making systems.",
+   "hook": "Decision systems, not data systems",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
+  },
+  {
+   "id": "c-v1-why-the-offer-is-lost",
+   "front": "Forty minutes naming LangChain, Pinecone, RAG, Redis, Kubernetes. Why no offer?",
+   "back": "The interviewer was evaluating how you think, not what you can name. Every statement was technically correct and none of it was a decision.",
+   "hook": "Correct and unhireable",
+   "kind": "fail",
+   "theme": "agents-orchestration",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
   },
   {
    "id": "c-bw-a2a",
@@ -1087,6 +1228,16 @@
    "theme": "cost-performance",
    "topic": "token-economics",
    "cite": "issue 005, §9"
+  },
+  {
+   "id": "c-hb-more-context-less-accuracy",
+   "front": "Complete the rule: more context equals…",
+   "back": "More cost, more latency, and less accuracy. The third one is the surprise, and it's why \"retrieve the smallest sufficient context\" is a rule rather than a preference.",
+   "hook": "The third term is the surprise",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "context-engineering",
+   "cite": "doc: agentic-ai-system-design-cheatsheet §1"
   },
   {
    "id": "c-i10-embedding-cost-scales-with-volume",
@@ -2151,6 +2302,46 @@
    "cite": "doc: agentic-ai-system-design-deep-dive §17"
   },
   {
+   "id": "c-hb-fw-1",
+   "front": "Exposing every internal API as an agent tool.",
+   "back": "❌ 42 tools in one reasoning step: selection accuracy drops, latency and prompt size rise, similar descriptions cause misrouting. ✅ Planner → capability router → domain agent with a small tool set; retrieve tools per step.",
+   "hook": "The catalog isn't the problem; the step is",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "agent-routing",
+   "cite": "doc: ai-system-design-interview-questions-and-answers §1"
+  },
+  {
+   "id": "c-hb-fw-2",
+   "front": "Granting an agent high-risk automation because the demo was clean.",
+   "back": "❌ Autonomy assumed rather than earned, with no error budget to lose. ✅ Climb the five levels — read-only, recommend, approve, low-risk, high-risk — each earned by the one below.",
+   "hook": "Autonomy is earned through reliability",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "hitl-design",
+   "cite": "doc: ai-platform-system-design-interview-handbook §2"
+  },
+  {
+   "id": "c-hb-fw-3",
+   "front": "Calling 18 prompt templates a multi-agent system.",
+   "back": "❌ You inherit multi-agent cost, latency and debugging pain with none of the parallelism. ✅ Name it a multi-persona pipeline; add agent machinery only when a persona needs its own tools or state.",
+   "hook": "Zero agent-to-agent edges in src/",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: notes §1"
+  },
+  {
+   "id": "c-hb-fw-4",
+   "front": "An SLA that promises availability and latency only.",
+   "back": "❌ Every number is green while answers are wrong — the SLA cannot see quality. ✅ Add routing accuracy, task success and an explicit error budget per action class.",
+   "hook": "Green dashboards, wrong answers",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "ai-slis-slos",
+   "cite": "doc: ai-platform-system-design-interview-handbook §3"
+  },
+  {
    "id": "c-approval-rate-theater",
    "front": "Your approval rate is above 95%. What is that?",
    "back": "Approval theater, not a control. The response is to shrink what needs a human with deterministic auto-approve bands, and make the remainder genuinely informative.",
@@ -2675,6 +2866,26 @@
    "cite": "doc: interview-questions-with-explanations §2"
   },
   {
+   "id": "c-hb-ai-sla-five-terms",
+   "front": "What belongs in an AI platform SLA beyond availability?",
+   "back": "P95 latency, routing accuracy, task success, and an error budget. Availability alone says nothing about whether the answers were right.",
+   "hook": "Availability is the easy half",
+   "kind": "check",
+   "theme": "product-metrics",
+   "topic": "ai-slis-slos",
+   "cite": "doc: ai-platform-system-design-interview-handbook §3"
+  },
+  {
+   "id": "c-hb-autonomy-metrics-five",
+   "front": "Which five metrics tell you whether autonomy is working?",
+   "back": "Resolution rate, override rate, escalation rate, MTTR, CSAT. Override rate is the one that reveals whether humans actually trust it.",
+   "hook": "Override rate is the trust signal",
+   "kind": "metric",
+   "theme": "product-metrics",
+   "topic": "ai-product-metrics",
+   "cite": "doc: ai-platform-system-design-interview-handbook §2"
+  },
+  {
    "id": "c-i10-latency-accuracy-central",
    "front": "What is the central PM decision in an AI product, and why?",
    "back": "Latency versus accuracy. In traditional software faster is always better; in AI, faster usually means less accurate — smaller models, cheaper models, fewer-shot prompts all trade one for the other.",
@@ -2996,6 +3207,36 @@
    "topic": "rate-limiting-and-quotas-for-ai",
    "cite": "doc: ai-architect-edge-playbook §11",
    "aryaka": "An overnight re-triage backfill can 429 the live portal copilot unless interactive traffic outranks it."
+  },
+  {
+   "id": "c-hb-error-budget-breach-sequence",
+   "front": "The error budget is exceeded. What happens, in order?",
+   "back": "Disable autonomy, route to human review, run root-cause analysis, improve retrieval and evals, then re-enable only after validation. Re-enabling without validation is how the same breach repeats.",
+   "hook": "Disable, diagnose, fix, then re-enable",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "kill-switch-framework",
+   "cite": "doc: ai-platform-system-design-interview-handbook §2"
+  },
+  {
+   "id": "c-hb-tool-error-envelope",
+   "front": "What shape should a tool return on failure?",
+   "back": "A structured envelope: ok=false, error_code, retryable flag, user_message, and a detail object. The retryable flag is what lets the loop decide without guessing from prose.",
+   "hook": "Retryable is a field, not a guess",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: notes §2"
+  },
+  {
+   "id": "c-hb-twelve-layer-crosscutting",
+   "front": "In the 12-layer architecture, which four are cross-cutting and why does it matter?",
+   "back": "State, memory, observability, evals — plus security. If they appear as a box in the flow diagram they get built \"later\", which means never.",
+   "hook": "A box in the diagram means never",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: agentic-ai-system-design-cheatsheet §1"
   },
   {
    "id": "c-i10-rule-based-alerting-ceiling",
@@ -3434,6 +3675,27 @@
    "cite": "doc: ai-architect-edge-playbook §5"
   },
   {
+   "id": "c-hb-policy-between-model-and-tools",
+   "front": "Where does the policy engine sit in the 12-layer stack?",
+   "back": "Between the model and the tools — never inside the model's reasoning. Model proposes, deterministic code disposes; that single placement prevents a whole category of incident.",
+   "hook": "Between, never inside",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-ai-system-design-cheatsheet §1"
+  },
+  {
+   "id": "c-hb-two-abstractions-for-residency",
+   "front": "Which two abstractions make regulated onboarding possible?",
+   "back": "A provider abstraction (Claude / Azure OpenAI / Llama) and a retriever abstraction (Pinecone / Qdrant / Azure AI Search). Both are needed — one alone still pins you to a region.",
+   "hook": "Two seams, not one",
+   "kind": "pat",
+   "theme": "security-data",
+   "topic": "abstraction-seams",
+   "cite": "doc: ai-platform-system-design-interview-handbook §4",
+   "aryaka": "This is the seam that lets a regulated EU or government tenant onboard without a second codebase."
+  },
+  {
    "id": "c-iq-conflicting-documents",
    "front": "Two policy docs disagree — three remote days versus two. What does the agent do?",
    "back": "Never pick randomly. Resolve by version, timestamp and authority metadata; if still unresolved, state the disagreement explicitly rather than choosing a side.",
@@ -3699,6 +3961,16 @@
    "cite": "issue 004, §17"
   },
   {
+   "id": "c-hb-residency-decision-guide",
+   "front": "Azure versus self-host for a residency requirement — decide.",
+   "back": "Azure is fastest with the lowest engineering effort. Self-hosting gives the most flexibility and the most operations. Refusing is legitimate only when the business case doesn't justify the investment.",
+   "hook": "Refusal is a valid third option",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "doc: ai-platform-system-design-interview-handbook §4"
+  },
+  {
    "id": "c-kill-switch-authority-matrix",
    "front": "Who can pull each kill-switch tier unilaterally?",
    "back": "On-call SRE pulls Tier 1. On-call PM pulls Tier 2. Only the incident commander pulls Tier 3. Lower tiers move fast; higher tiers require concurrence and deliberation.",
@@ -3882,6 +4154,26 @@
    "cite": "doc: ai-architect-interview-playbook §8"
   },
   {
+   "id": "c-v1-knows-why-they-exist",
+   "front": "The one-line difference between a good and a great system designer.",
+   "back": "\"A good system designer knows technologies. A great system designer knows why those technologies exist.\"",
+   "hook": "Knowing why beats knowing which",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
+  },
+  {
+   "id": "c-v1-technology-choices-expire",
+   "front": "Why do companies not hire on framework knowledge?",
+   "back": "Because it expires. Five years ago there was no LangChain; three years ago no MCP; tomorrow something else. They are testing reasoning, not memory.",
+   "hook": "LangGraph or CrewAI is not the question",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-handbook-vol1 §1"
+  },
+  {
    "id": "c-vendor-demo-accuracy-gap",
    "front": "The vendor demoed 95% accuracy. What will you actually get?",
    "back": "70-80%. Demos are tuned to their test data; your data is messier. Ask for the smallest 30-day pilot that validates the claim on your data — if they refuse to support one, walk away.",
@@ -3990,6 +4282,174 @@
    ]
   },
   {
+   "id": "d-t1-answer-cited-a-doc-that-doesnt-say-that",
+   "tier": 1,
+   "level": "senior",
+   "theme": "evaluation",
+   "title": "The answer carried a citation. The cited page doesn't say that. Diagnose.",
+   "problem": "Assumption: the copilot answers with citations, which the team treats as the grounding guarantee. An engineer followed a citation and found the linked runbook page says the opposite of the answer. Spot-checking finds this in roughly 1 in 15 answers. The retrieval logs show the cited page was genuinely in the top-K for that query. The team wants to add a second model to check the first. Tell me what is happening and what you would do instead.",
+   "assesses": [
+    "Separating retrieval quality from grounding",
+    "Knowing citation presence is not citation correctness",
+    "Claim-level versus answer-level grounding",
+    "Where a deterministic check beats a second model",
+    "Naming the metric that would have caught it"
+   ],
+   "skeleton": [
+    "Distinguish the two failures: retrieval found a relevant page, and synthesis made a claim that page does not support.",
+    "So this is not a retrieval problem — the logs already prove the right document was present.",
+    "It is a grounding problem, and the citation is decorative: attaching a source is not the same as being supported by it.",
+    "Measure it properly: groundedness scored per claim, not per answer, so one unsupported sentence in five is visible.",
+    "Do the deterministic part deterministically first — does every claim's cited span actually contain the entity and the value asserted?",
+    "String and entity overlap catches a large share at near-zero cost, and it cannot drift.",
+    "Only the genuinely semantic residue needs a judge, and a judge needs calibration against human labels per dimension before it gates anything.",
+    "Add abstention: below a retrieval-confidence floor or when sources conflict, say so and escalate rather than synthesising.",
+    "Then set the gate — groundedness above 95% as a release threshold, and this specific case becomes a permanent regression example."
+   ],
+   "numbers": [
+    "1 in 15 is roughly a 7% ungrounded rate — at 1,200 answers a day that is ~80 unsupported claims daily",
+    "Groundedness scored at claim level, not answer level: one unsupported claim in five reads as untrustworthy to the user",
+    "Judges must be calibrated per dimension against a hand-scored sample before they gate anything"
+   ],
+   "traps": [
+    "Adding a checker model as the first move. It adds cost and variance on top of a problem where entity overlap catches much of it deterministically.",
+    "Treating the presence of a citation as grounding. That is exactly the assumption that let this reach production.",
+    "Scoring groundedness per answer. It averages the one bad claim away.",
+    "Re-tuning retrieval. The logs already show retrieval worked; you would be optimizing the wrong stage."
+   ],
+   "termdrops": [
+    "groundedness",
+    "claim-level scoring",
+    "citation span",
+    "abstention",
+    "judge calibration",
+    "deterministic evaluator"
+   ],
+   "followups": [
+    {
+     "q": "Isn't an LLM judge the only thing that can check semantic support?",
+     "a": "For the residue, yes. But the cheap layer goes first: does the cited span contain the entity and the number being asserted? That is exact-match work, it is free, and it cannot drift with a model upgrade. Shrinking the judge's job is what makes the judge trustworthy."
+    },
+    {
+     "q": "What does the user see when the system can't ground an answer?",
+     "a": "An explicit abstention with the evidence bundle — what was retrieved, what was ambiguous, and a route to a human. Abstention is a feature; a confident unsupported answer is the failure that ends up in a regulator's inbox."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Claim-level groundedness with deterministic span checks first",
+     "over": "A second model reviewing every answer",
+     "because": "Entity and value overlap catches much of it at near-zero cost and cannot drift; the judge then only handles the semantic residue."
+    },
+    {
+     "choice": "Abstention below a confidence floor",
+     "over": "Always producing a best answer with a citation",
+     "because": "A confident unsupported claim is the Air Canada failure class, and a citation makes it more persuasive, not safer."
+    },
+    {
+     "choice": "Leave retrieval alone",
+     "over": "Re-tuning chunking and reranking",
+     "because": "The logs show the correct page was in top-K, so tuning retrieval would optimize a stage that already worked."
+    }
+   ],
+   "topics": [
+    "ai-testing-and-evals",
+    "corpus-provenance",
+    "kg-rag",
+    "hitl-design"
+   ],
+   "cite": [
+    "issue 005, §6",
+    "doc: agentic-ai-evaluation-definitive-reference §9",
+    "doc: ai-architect-edge-playbook §9",
+    "issue 001, §6"
+   ]
+  },
+  {
+   "id": "d-t1-autonomy-ladder-placement",
+   "tier": 1,
+   "level": "senior",
+   "theme": "agents-orchestration",
+   "title": "Product wants the triage agent fully autonomous at launch. Place it on the ladder instead.",
+   "problem": "Assumption: the NOC triage agent has run in shadow mode for six weeks — it classifies every alert, a human classifies the same alert, and the two are compared. Agreement is 88%. Product wants launch with full autonomy: the agent classifies, opens the tier-2 ticket, and notifies the customer, with no human in the path, because the 12% is 'mostly edge cases'. You have to answer in the same meeting, and saying no without an alternative will read as blocking. Place this on the autonomy ladder and defend the placement.",
+   "assesses": [
+    "Knowing the five autonomy levels and that they are earned, not assigned",
+    "Reasoning about the 12% rather than dismissing it",
+    "Separating the reversible action from the irreversible one in the same workflow",
+    "Setting an error budget per action class",
+    "Proposing a graduation path rather than only refusing"
+   ],
+   "skeleton": [
+    "Name the ladder: read-only, recommendations, human approval, low-risk automation, high-risk automation.",
+    "Autonomy is earned through reliability, so the question is which level 88% agreement earns.",
+    "Split the workflow before placing it — classifying is reversible, opening a tier-2 ticket is semi-reversible, notifying the customer is not.",
+    "Different actions in one workflow get different levels. That single move usually resolves the argument.",
+    "Propose: classification at low-risk automation, ticket creation at human approval, customer notification stays human-only for now.",
+    "Interrogate the 12%: is it uniformly spread, or concentrated in one alert class? Concentrated means a fixable gap, not a tail.",
+    "Set the error budget by class and the consequence of breaching it — disable autonomy, review, root-cause, fix evals, re-enable after validation.",
+    "Name the graduation criteria now, in the meeting: two weeks at agreement above X on the concentrated class promotes ticket creation to automation.",
+    "Give product the win they came for — most of the latency saving lands at level 4 anyway, without touching the customer."
+   ],
+   "numbers": [
+    "88% agreement means roughly 1 in 8 alerts classified differently from a human — at 1,200 alerts/day that is ~144 disagreements daily",
+    "Ticket creation at 88% would generate ~144 questionable tier-2 tickets a day, which is how tier-2 stops trusting the queue",
+    "Most of the time saving is in diagnosis, not in ticket creation — level 4 on classification captures it"
+   ],
+   "traps": [
+    "Calling 12% 'edge cases'. At 1,200 alerts a day that is 144 a day, every day, and the tail is where incidents live.",
+    "Assigning one autonomy level to the whole workflow, which forces the customer-facing action down to the level of the safest one or drags the safest up to the riskiest.",
+    "Refusing without a graduation path — that is how the AI programme becomes the team that says no.",
+    "Agreeing to launch and adding monitoring. Monitoring tells you afterwards; the ladder prevents it."
+   ],
+   "termdrops": [
+    "autonomy ladder",
+    "earned autonomy",
+    "error budget by action class",
+    "shadow mode",
+    "graduation criteria",
+    "reversibility"
+   ],
+   "followups": [
+    {
+     "q": "What if the 12% is uniformly spread across all alert classes?",
+     "a": "Then it is a systemic accuracy problem, not a gap, and no autonomy promotion is justified yet — the work is retrieval and evals. Uniform disagreement usually means the agent is missing a whole evidence source rather than struggling with hard cases."
+    },
+    {
+     "q": "Product says every week of delay costs money. Justify the gate.",
+     "a": "The gate costs ~30 seconds per alert. One false customer notification costs a trust conversation with an account team and, at 500 tenants, potentially a churn risk. I'll take the 30 seconds and hand them level 4 on classification, which is where the minutes actually are."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Per-action autonomy levels inside one workflow",
+     "over": "One autonomy level for the whole triage flow",
+     "because": "Classification is reversible and notification is not; a single level either over-exposes the customer or wastes the saving."
+    },
+    {
+     "choice": "Investigate whether the 12% is concentrated",
+     "over": "Treating it as an irreducible tail",
+     "because": "Concentrated disagreement is a fixable evidence gap; uniform disagreement means no promotion is justified at all."
+    },
+    {
+     "choice": "Graduation criteria stated in the meeting",
+     "over": "Revisiting autonomy 'once we have data'",
+     "because": "Unstated criteria mean the conversation reopens every sprint on opinion instead of on a threshold."
+    }
+   ],
+   "topics": [
+    "hitl-design",
+    "agent-loop-guardrails",
+    "ai-slis-slos",
+    "single-vs-multi-agent-decision"
+   ],
+   "cite": [
+    "doc: ai-platform-system-design-interview-handbook §2",
+    "doc: agentic-ai-system-design-deep-dive §8",
+    "issue 004, §18",
+    "issue 005, §21"
+   ]
+  },
+  {
    "id": "d-t1-broken-rag-repo-live-debug",
    "tier": 1,
    "level": "senior",
@@ -4069,6 +4529,89 @@
     "doc: broken-rag-repo-live-debug §3",
     "doc: broken-rag-repo-live-debug §4",
     "doc: rag01 §3"
+   ]
+  },
+  {
+   "id": "d-t1-customer-got-three-emails",
+   "tier": 1,
+   "level": "senior",
+   "theme": "reliability-operations",
+   "title": "The customer received the same update email three times. Explain how, and stop it.",
+   "problem": "Assumption: the copilot drafts and sends ticket-update emails. A customer complained about receiving an identical update three times within a minute. The logs show one agent run, one draft, and three calls to the email tool — each returning a timeout followed by a retry, and the third returning 200. The engineer's fix was to lower the retry count to one. Tell me what actually happened, why that fix is wrong, and what you would do.",
+   "assesses": [
+    "Knowing a timeout is not a failure to act",
+    "Deriving an idempotency key correctly",
+    "Recognising that reducing retries trades one bug for another",
+    "Read-back verification",
+    "Testing the guarantee rather than assuming it"
+   ],
+   "skeleton": [
+    "Name the misconception: a timeout is not a failure to send, it is an unknown outcome.",
+    "The first two calls almost certainly delivered; only the acknowledgement was lost.",
+    "So retrying without an idempotency key is not a retry, it is a second send.",
+    "Reducing retries to one does not fix it — it just makes duplicates rarer and adds silent non-delivery when the single attempt times out.",
+    "Derive the key deterministically: run id plus step index plus tool name. Never a timestamp or a fresh UUID.",
+    "Pass it where the provider supports an idempotency header; where it does not, wrap the tool in an outbox that dedupes on the key.",
+    "Verify by read-back after the write, and store the key beside the response in the trace.",
+    "Classify the retry: transient infra backs off with jitter; a malformed request repairs once; a business rejection branches.",
+    "Test it explicitly — call every state-changing tool twice with the same key and assert one resource exists."
+   ],
+   "numbers": [
+    "Three sends from one intent is a 200% over-delivery rate on that action",
+    "A deterministic key is a pure function of the logical operation, so it survives process restarts and replays",
+    "The test is one line of intent: same key twice, assert one side effect"
+   ],
+   "traps": [
+    "Lowering the retry count. It converts a visible duplicate into an invisible non-delivery.",
+    "Using a UUID or timestamp in the key — a key that changes per attempt is not a key.",
+    "Adding a 'sent already?' check in the agent's prompt. That is prompt-as-policy on an exactly-once problem.",
+    "Assuming the email provider is idempotent. Verify; the weakest tool in the chain decides the failure mode."
+   ],
+   "termdrops": [
+    "idempotency key",
+    "at-least-once delivery",
+    "outbox pattern",
+    "read-back verification",
+    "retry classification",
+    "exactly-once side effect"
+   ],
+   "followups": [
+    {
+     "q": "The email API has no idempotency support. Now what?",
+     "a": "Wrap it. Write the intent plus key to an outbox table first, have a worker send and mark it, and dedupe on the key. The guarantee lives in our code because the vendor didn't provide one."
+    },
+    {
+     "q": "Where else does this bug exist right now?",
+     "a": "Every state-changing tool the agent can call — ticket updates, CRM writes, config pushes. Email is just the one a customer noticed. That is the argument for making the key a property of the tool wrapper rather than per-integration."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Deterministic idempotency key from run id + step index + tool",
+     "over": "Reducing the retry count",
+     "because": "Fewer retries hides duplicates behind silent non-delivery; the key removes the failure mode entirely."
+    },
+    {
+     "choice": "Outbox wrapper where the provider lacks support",
+     "over": "Trusting the provider to dedupe",
+     "because": "The weakest API in the chain decides the failure mode, so the guarantee has to live in our code."
+    },
+    {
+     "choice": "Retry classes by error type",
+     "over": "One backoff policy for every failure",
+     "because": "Retrying a business rejection is waste, and retrying a malformed output forever is the $40K reflection loop."
+    }
+   ],
+   "topics": [
+    "idempotency-for-ai-operations",
+    "resilience-patterns",
+    "tool-calling-anatomy"
+   ],
+   "cite": [
+    "issue 005, §5",
+    "issue 006, §5",
+    "doc: agentic-ai-system-design-deep-dive §9",
+    "issue 003, §7"
    ]
   },
   {
@@ -4161,6 +4704,89 @@
     "issue 004, §16",
     "issue 008, §9",
     "doc: agentic-ai-system-design-deep-dive §11"
+   ]
+  },
+  {
+   "id": "d-t1-find-out-why-it-was-wrong",
+   "tier": 1,
+   "level": "senior",
+   "theme": "reliability-operations",
+   "title": "An engineer says the copilot gave a wrong answer yesterday. Find out why.",
+   "problem": "Assumption: a tier-1 engineer reports that yesterday afternoon the copilot told them a customer's tunnel was configured for IPsec when it was SSL, and they acted on it. They do not remember the ticket number. Today the copilot answers the same question correctly. You have application logs with request ids, no LLM-specific tracing, and prompts that live in the repo but are edited freely. Tell me what you can determine, what you cannot, and what you change so the next report is answerable in minutes.",
+   "assesses": [
+    "Knowing what a text log cannot reconstruct",
+    "The trace fields that make a wrong answer diagnosable",
+    "Version pinning as the precondition for root cause",
+    "That intermittent correctness points at retrieval or a version change",
+    "Turning an incident into a permanent regression case"
+   ],
+   "skeleton": [
+    "Be honest about the answer first: with text logs and unpinned prompts, this is probably not diagnosable, and saying so is the correct answer.",
+    "Enumerate what you would need: the run's trace, the retrieved chunks with their corpus version, the prompt version, the model version and snapshot.",
+    "'Correct today, wrong yesterday' narrows it to three candidates: retrieval returned different chunks, the corpus changed, or a version moved underneath you.",
+    "None of those are distinguishable without the versioning block in the trace — which is the field teams skip and the one that saves you.",
+    "So the fix is structural: structured tracing with a step hierarchy and one correlation id per run.",
+    "Every trace records prompt version, model version and corpus snapshot — the three things that change without anyone calling it a deploy.",
+    "Retain 100% of failures and escalations even when sampling the rest; the sampled-away runs are the ones you need.",
+    "Add the user-facing hook: a 'this was wrong' button that captures the run id, so the next report arrives with its trace attached.",
+    "Then close the loop — that trace becomes an eval case, so this specific failure can never regress silently."
+   ],
+   "numbers": [
+    "Three components move without a deploy: prompt version, model version, corpus snapshot",
+    "Sampling is fine for cost, but 100% of failures and escalations must be retained",
+    "The mature end state is one click from a failed production trace to a regression test case"
+   ],
+   "traps": [
+    "Promising a root cause from the logs you have. You cannot localize a multi-step run from text lines with no causal structure.",
+    "Blaming the model because it is correct today. Intermittent correctness is evidence about retrieval or versions, not about the model.",
+    "Adding tracing without the versioning block, which leaves you exactly as unable to answer 'what changed'.",
+    "Fixing the one answer and moving on, instead of making it a permanent eval case."
+   ],
+   "termdrops": [
+    "structured tracing",
+    "correlation id",
+    "versioning block",
+    "corpus snapshot",
+    "trace sampling with failure retention",
+    "trace-to-eval pipeline"
+   ],
+   "followups": [
+    {
+     "q": "Can you tell me anything at all from what you have?",
+     "a": "Only the shape. If the application log records which documents were fetched, I can check whether the SSL configuration page existed and was current yesterday — that distinguishes a corpus-freshness problem from a retrieval-ranking one. Without it, I would be guessing and I would say so."
+    },
+    {
+     "q": "Which single field would you add first, if you could add only one?",
+     "a": "The corpus snapshot id on every run. Retrieval-side change is the most common cause of \"it got worse and we don't know why\", and it is the one nobody is watching because a document edit is not a deploy."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Structured tracing with a versioning block",
+     "over": "More verbose text logging",
+     "because": "Text lines have no causal structure, so a 40-step run cannot be localized to a step no matter how much you log."
+    },
+    {
+     "choice": "Retain 100% of failures while sampling successes",
+     "over": "Uniform sampling to control cost",
+     "because": "The runs you need are exactly the ones uniform sampling throws away."
+    },
+    {
+     "choice": "A 'this was wrong' button capturing the run id",
+     "over": "Asking engineers to report the ticket number",
+     "because": "They will not remember it — this report already arrived without one."
+    }
+   ],
+   "topics": [
+    "llm-observability",
+    "ai-testing-and-evals",
+    "corpus-provenance"
+   ],
+   "cite": [
+    "doc: agentic-ai-system-design-deep-dive §12",
+    "doc: ai-architect-edge-playbook §8",
+    "issue 010, §5",
+    "doc: agentic-ai-system-design-deep-dive §17"
    ]
   },
   {
@@ -4333,6 +4959,256 @@
    ]
   },
   {
+   "id": "d-t1-free-text-between-steps",
+   "tier": 1,
+   "level": "senior",
+   "theme": "reliability-operations",
+   "title": "Step two reads step one's prose. It broke silently after a model upgrade. Redesign the seam.",
+   "problem": "Assumption: the triage flow has three LLM steps. Step one summarises the alert in prose. Step two reads that prose and decides the classification. Step three drafts the tier-2 handoff. After a routine model upgrade, classifications quietly skewed toward 'maintenance window' for two weeks before anyone noticed, and nothing errored. The team's theory is that the new model is worse. Tell me what actually broke and how you would build the seam so that this failure class is impossible rather than unlikely.",
+   "assesses": [
+    "Knowing free-form text between steps is the classic silent-breakage source",
+    "Typed contracts at every inter-step handoff",
+    "Schema versus semantic validation",
+    "Why this failed silently rather than loudly",
+    "Testing the seam without the model"
+   ],
+   "skeleton": [
+    "Name the mechanism: free-form text between LLM steps is the most common source of silent breakage.",
+    "The new model phrased the summary slightly differently. Step two's implicit expectations no longer matched, and there was no contract to violate — so nothing threw.",
+    "That is the whole failure: an unstated contract cannot fail loudly. It produces plausible garbage instead of an exception.",
+    "Replace the seam with a typed contract: step one emits a structured object — alert class, affected entities, change-window flag, evidence ids, confidence.",
+    "Validate the schema, then validate semantics: does the referenced device exist, is the change window in the past, is confidence in range.",
+    "Now a phrasing change either satisfies the schema or fails at the boundary, immediately and locally.",
+    "Make the classification decision read fields, not prose — and where it must read text, pass the text as a labelled field rather than the whole summary.",
+    "Test the seam with the model mocked: feed recorded step-one outputs and assert step two's behaviour deterministically.",
+    "Add a model-swap gate to the release process: the eval set runs against the new snapshot before it reaches production."
+   ],
+   "numbers": [
+    "Two weeks of skew before detection is the cost of an unstated contract",
+    "A schema violation is caught in single-digit milliseconds at the boundary; a semantic drift is caught only by an eval",
+    "Deterministic replay of recorded step-one outputs tests the seam at zero token cost"
+   ],
+   "traps": [
+    "Accepting 'the new model is worse'. It may be different; the design made the difference undetectable.",
+    "Adding a prompt instruction telling step one to keep its phrasing stable. That is a request, not a contract.",
+    "Validating the schema and stopping — a well-formed object can name a device that does not exist.",
+    "Fixing this seam only. The same failure exists at every step boundary that passes prose."
+   ],
+   "termdrops": [
+    "typed contract",
+    "structured output",
+    "schema versus semantic validation",
+    "silent breakage",
+    "deterministic replay",
+    "model-swap gate"
+   ],
+   "followups": [
+    {
+     "q": "Doesn't a rigid schema lose nuance the prose captured?",
+     "a": "Some, deliberately. Keep a free-text field for the nuance and make every decision-bearing value a typed field. The rule is that nothing downstream may branch on prose — nuance can travel, it just cannot be load-bearing."
+    },
+    {
+     "q": "How would you have caught this in week one?",
+     "a": "A distribution alert on the classification output. Any classifier whose class mix shifts materially without a corresponding input change is telling you something moved — and that check is cheap and model-agnostic."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Typed contract between steps",
+     "over": "Prose summaries with careful prompting",
+     "because": "An unstated contract cannot fail loudly; it yields plausible garbage instead of an exception, which is how two weeks passed."
+    },
+    {
+     "choice": "Schema validation plus semantic checks",
+     "over": "Schema validation alone",
+     "because": "Well-formed is not real — a valid device id can be nonexistent and a valid date can be in the past."
+    },
+    {
+     "choice": "Deterministic replay against recorded outputs",
+     "over": "Re-running the full eval suite to test the seam",
+     "because": "Replay isolates harness logic from model behaviour and costs no tokens, so it can run on every commit."
+    }
+   ],
+   "topics": [
+    "resilience-patterns",
+    "tool-calling-anatomy",
+    "ai-testing-and-evals",
+    "llm-observability"
+   ],
+   "cite": [
+    "doc: agentic-ai-system-design-deep-dive §9",
+    "doc: agentic-ai-system-design-deep-dive §17",
+    "doc: agent-harness-loop-llmops-deep-dive §31",
+    "issue 010, §8"
+   ]
+  },
+  {
+   "id": "d-t1-how-do-you-know-it-works",
+   "tier": 1,
+   "level": "senior",
+   "theme": "evaluation",
+   "title": "You ship the copilot Monday. How do you know it works before users tell you?",
+   "problem": "Assumption: the support copilot is functionally complete and the team has been testing by using it — everyone agrees it 'feels good'. There is no eval set. Launch is Monday to 80 tier-1 engineers. Someone has proposed shipping to 10% first and watching CSAT, which they describe as 'a real-world eval'. You have three days. Tell me what you build, what you refuse to launch without, and what the 10% plan actually measures.",
+   "assesses": [
+    "Knowing 'it feels good' is unfalsifiable and why that matters",
+    "Building an eval set from the right distribution under time pressure",
+    "Separating what blocks a launch from what is monitored",
+    "Understanding CSAT as a lagging indicator",
+    "Who authors the eval set"
+   ],
+   "skeleton": [
+    "Name the problem: 'feels good' is not a measurement, so there is no baseline and no way to detect a regression.",
+    "Three days is enough for a small honest eval set — sample real tickets from production traffic, not invented examples.",
+    "Sample the distribution deliberately: common intents by volume, plus the ambiguous, multi-intent, angry and malformed tail.",
+    "Have tier-1 engineers author the expected outcomes, not the automation team, whose blind spots match the build.",
+    "Split what you measure: zero-tolerance gates versus thresholded gates versus monitored-only signals.",
+    "Zero tolerance blocks launch at any occurrence — policy violations, cross-tenant exposure, unauthorised action.",
+    "Thresholded gates: task success, tool selection, tool arguments, groundedness. Set the numbers before running, not after.",
+    "Deterministic checks do the deterministic work — citations present, schema valid, no PII, tool names correct.",
+    "Then explain what the 10% rollout actually is: a blast-radius control, not an eval. It measures exposure, not correctness.",
+    "CSAT is lagging by days and confounded by everything else shipping — useful, not a gate."
+   ],
+   "numbers": [
+    "50-200 cases is a working first eval set; the corpus's own pyramid puts the largest investment there",
+    "A 95% pass rate on a happy-path-only set is exactly the issue 007 failure — CSAT fell 4.5 to 3.2 in two days",
+    "n=100 has a ±7-point confidence interval, so set thresholds you can actually detect"
+   ],
+   "traps": [
+    "Accepting the 10% rollout as the eval. It bounds damage; it does not tell you whether the answers are right.",
+    "Building the eval set from imagined tickets. That reproduces the happy-path disaster exactly.",
+    "Letting the builder write the expected outcomes — same mental model as the bug.",
+    "Setting thresholds after seeing the first run, which is how a number becomes whatever the system already scores."
+   ],
+   "termdrops": [
+    "eval set",
+    "production sampling",
+    "zero-tolerance gate",
+    "thresholded gate",
+    "deterministic evaluator",
+    "groundedness",
+    "lagging indicator"
+   ],
+   "followups": [
+    {
+     "q": "Three days isn't enough for a real eval set. Isn't a small one worse than none?",
+     "a": "No — a small set from the right distribution gives you a baseline and catches gross regressions, which is the difference between iterating and doing a random walk. What it cannot do is detect a two-point change, and I'd say that out loud rather than over-claiming."
+    },
+    {
+     "q": "What would you refuse to launch without?",
+     "a": "The zero-tolerance checks — no cross-tenant retrieval, no unauthorised action, no ungrounded policy statement. Those are the failures that are not recoverable by iterating, and they are cheap to test deterministically."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "50-200 cases sampled from production traffic",
+     "over": "A larger set of invented examples",
+     "because": "Distribution matters more than size: 200 happy-path cases scoring 95% is what tanked CSAT in the issue 007 incident."
+    },
+    {
+     "choice": "Tier-1 engineers author expected outcomes",
+     "over": "The automation team writing them",
+     "because": "A builder-authored eval shares the mental model that produced the bug, so it is blind to exactly the failures that matter."
+    },
+    {
+     "choice": "10% rollout as a blast-radius control",
+     "over": "10% rollout as the evaluation",
+     "because": "It bounds exposure but measures nothing about correctness, and CSAT lags by days and is confounded by everything else shipping."
+    }
+   ],
+   "topics": [
+    "ai-testing-and-evals",
+    "ai-slis-slos",
+    "ai-product-metrics",
+    "pre-pilot-checklist"
+   ],
+   "cite": [
+    "issue 007, §6",
+    "issue 006, §7",
+    "doc: agentic-ai-system-design-deep-dive §7",
+    "doc: ai-architect-edge-playbook §8"
+   ]
+  },
+  {
+   "id": "d-t1-it-worked-in-the-demo",
+   "tier": 1,
+   "level": "senior",
+   "theme": "agents-orchestration",
+   "title": "\"It worked in the demo.\" Which of the five gaps did the demo not cross?",
+   "problem": "Assumption: a two-week internal prototype answered 20 support questions convincingly in a demo and leadership approved a pilot. Six weeks into the pilot with 15 engineers: cost is 8x the projection, roughly a fifth of tickets produce an answer the engineer discards, one config suggestion was acted on and was wrong, and the team is spending most of its time on prompt fixes. Nobody understands what changed — the code is largely the same. Explain what changed, using a frame that generalises.",
+   "assesses": [
+    "Naming the demo-to-production gaps rather than listing symptoms",
+    "Mapping each observed symptom to its gap",
+    "Knowing which gap each building block exists to close",
+    "Reasoning about drift over time as a distinct gap",
+    "Turning a diagnosis into a build order"
+   ],
+   "skeleton": [
+    "Give the frame first: input distribution, failure surface, scale economics, consequence, and time.",
+    "Then map each symptom, because the mapping is the answer, not the list.",
+    "The discarded fifth is input distribution — the demo used 20 questions someone chose; production brings typos, multi-intent, out-of-scope and half-finished thoughts.",
+    "The 8x cost is scale economics — 20 runs made cost invisible; per-run design decisions only become money at volume.",
+    "The wrong config suggestion is consequence — in the demo nothing was real, so no gate was needed and none was built.",
+    "The endless prompt fixes are the failure surface plus time: tools time out and return stale data, and the model, prompts and docs drift underneath a fixed prototype.",
+    "Now the build order follows from the mapping: scope gate and out-of-scope path first, then an action gate, then cost controls, then tracing and evals.",
+    "Say the generalisable line: every building block in a production AI system exists to close one of those five gaps.",
+    "Close with the reframe leadership needs — the prototype did not regress, it was never crossing these gaps and nobody had asked it to."
+   ],
+   "numbers": [
+    "20 demo runs versus a pilot's volume is why a 3-cent design and a 30-cent design look identical in a demo",
+    "At 200K runs/month those two designs are $6K and $60K — the same code, a 10x bill",
+    "A fifth of answers discarded is a distribution problem, not a quality problem — the tail was never in the demo set"
+   ],
+   "traps": [
+    "Listing the symptoms back. Leadership already has the list; they need the frame that explains all four at once.",
+    "Calling it a model problem. The model did not change; the inputs, the volume, the consequences and the environment did.",
+    "Proposing a rewrite. The gaps are closed by adding specific components, and naming them in order is the credible answer.",
+    "Skipping the time gap. It is the one that explains why this will happen again in six months without versioning and evals."
+   ],
+   "termdrops": [
+    "input distribution",
+    "failure surface",
+    "scale economics",
+    "consequence",
+    "drift",
+    "scope gate",
+    "out-of-scope path"
+   ],
+   "followups": [
+    {
+     "q": "Which gap would you close first, with one engineer?",
+     "a": "Consequence — the action gate. A wrong config suggestion that gets acted on is the only symptom on that list that can end the programme. Everything else costs money or patience; that one costs trust and possibly a customer."
+    },
+    {
+     "q": "How do you stop this recurring at the next stage?",
+     "a": "Make the five gaps the pre-pilot checklist. Before each expansion, state explicitly which gap the new stage crosses that the last one didn't — going from 15 internal engineers to 500 customer portals crosses input distribution and consequence simultaneously."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Close the consequence gap first",
+     "over": "Fixing cost first, which is the loudest number",
+     "because": "Cost is recoverable and a wrong acted-on config suggestion is not; blast radius outranks bill size."
+    },
+    {
+     "choice": "Add components in gap order",
+     "over": "Rewriting the prototype properly",
+     "because": "The prototype is not wrong, it is incomplete — each gap maps to a specific component, which is a fundable plan rather than a restart."
+    }
+   ],
+   "topics": [
+    "pre-pilot-checklist",
+    "scaling-ai-adoption",
+    "token-economics",
+    "hitl-design"
+   ],
+   "cite": [
+    "doc: agentic-ai-system-design-deep-dive §1",
+    "doc: ai-platform-system-design-handbook-vol1 §1",
+    "issue 007, §6",
+    "issue 004, §6"
+   ]
+  },
+  {
    "id": "d-t1-model-returned-a-refund-amount",
    "tier": 1,
    "level": "senior",
@@ -4500,6 +5376,95 @@
     "doc: agentic-ai-system-design-deep-dive §17",
     "doc: agent-harness-loop-llmops-deep-dive §4",
     "issue 006, §2"
+   ]
+  },
+  {
+   "id": "d-t1-what-does-this-cost-at-ten-x",
+   "tier": 1,
+   "level": "senior",
+   "theme": "cost-performance",
+   "title": "Do the cost math out loud: what does this copilot cost at 10x adoption?",
+   "problem": "Assumption: the copilot handles 800 tickets a day for 80 engineers. A ticket averages 4 model calls: intent classification, a retrieval-grounded answer, a draft reply, and a summary. Rough token counts per ticket are 30K input and 3K output, mostly on a frontier tier. Adoption is going to 800 engineers. Finance wants a number before approving, and they will hold you to it. Build the estimate live, then tell me which levers you would pull and what each is worth.",
+   "assesses": [
+    "Building a cost model from first principles without a spreadsheet",
+    "Knowing input and output tokens price differently",
+    "Which levers are free and which trade accuracy",
+    "Stating assumptions explicitly so the number is auditable",
+    "Cost per successful task rather than cost per call"
+   ],
+   "skeleton": [
+    "Build the arithmetic in the open, and label every assumption so finance can audit it.",
+    "Today: 800 tickets × 33K tokens ≈ 26M tokens a day. State the per-million rate you are assuming and that it is a frontier tier.",
+    "At 10x engineers, assume tickets scale roughly linearly to 8,000/day ≈ 264M tokens a day — and flag that assumption as the biggest risk in the estimate.",
+    "Do not give finance one number. Give naive, expected-after-optimization, and a ceiling.",
+    "Lever one, prompt caching: the system prompt and tool definitions are a stable prefix, worth 50-90% off that portion at zero accuracy cost.",
+    "Lever two, the cascade: intent classification and summarisation do not need a frontier model — that is 2 of the 4 calls.",
+    "Lever three, context discipline: 30K input per ticket is the real driver, so trim retrieval to a measured k and compact history.",
+    "Lever four, caching answers for genuinely repeated questions, tenant-scoped and provenance-linked so staleness cannot serve an operational fact.",
+    "Report the metric that matters: cost per successful task, not cost per call — a cheap run that fails costs the full amount and delivers nothing.",
+    "Then commit to a ceiling mechanism, not just a forecast: per-tenant daily cost caps enforced in the request path."
+   ],
+   "numbers": [
+    "800 × 33K ≈ 26M tokens/day today; 8,000 × 33K ≈ 264M tokens/day at 10x",
+    "Input dominates at roughly 10:1 here (30K in, 3K out), so input-side levers matter most",
+    "Caching the stable prefix returns 50-90% on that portion; moving 2 of 4 calls off the frontier tier is a step change, not a trim",
+    "Cost of failed runs is pure loss — track cost per successful task"
+   ],
+   "traps": [
+    "Giving finance a single number. You will be held to it, and the linear-scaling assumption is the shakiest part of the model.",
+    "Leading with a cheaper model. Caching and the cascade come first because they cost no accuracy.",
+    "Forgetting that input and output price differently — with 30K in and 3K out, an output-focused optimization barely moves the bill.",
+    "Quoting a forecast with no enforcement. A projection is not a control; a per-tenant cap in the request path is."
+   ],
+   "termdrops": [
+    "cost per successful task",
+    "stable prefix",
+    "prompt caching",
+    "model cascade",
+    "context discipline",
+    "per-tenant cost ceiling",
+    "token mix"
+   ],
+   "followups": [
+    {
+     "q": "Which assumption in your estimate is most likely to be wrong?",
+     "a": "Linear scaling of tickets with engineers. Adoption per engineer usually rises as the tool gets better, so tickets-per-engineer is not constant — I would present the estimate with that sensitivity rather than hiding it."
+    },
+    {
+     "q": "Finance asks for a single number anyway. What do you give them?",
+     "a": "The expected-after-optimization figure, with the ceiling stated as the number I will actually enforce with per-tenant caps. A forecast I cannot enforce is a promise; a cap is a control, and finance can budget against a control."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Three numbers — naive, optimized, ceiling",
+     "over": "A single forecast",
+     "because": "The linear-scaling assumption is the weakest part of the model, and a single number hides the sensitivity you will be held to."
+    },
+    {
+     "choice": "Caching and cascade before any tier change",
+     "over": "Switching to a cheaper model first",
+     "because": "Both are accuracy-neutral; a tier change alters behaviour everywhere to solve a cost problem that is mostly cacheable prefix."
+    },
+    {
+     "choice": "Per-tenant daily cost caps in the request path",
+     "over": "Monthly spend alerts on the provider dashboard",
+     "because": "Alerts are post-hoc — the $40K-in-four-hours incident happened with dashboards available."
+    }
+   ],
+   "topics": [
+    "token-economics",
+    "prompt-caching",
+    "model-cascade-and-batch",
+    "cost-visibility-chargeback",
+    "rate-limiting-and-quotas-for-ai"
+   ],
+   "cite": [
+    "issue 004, §9",
+    "doc: ai-architect-edge-playbook §3",
+    "doc: agentic-ai-system-design-deep-dive §10",
+    "issue 003, §6",
+    "issue 008, §5"
    ]
   },
   {
