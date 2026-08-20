@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-20 06:04 UTC",
+ "generated": "2026-08-20 06:11 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -1289,6 +1289,66 @@
    "cite": "issue 010, §13"
   },
   {
+   "id": "c-ary-tac-case-state",
+   "front": "The case-state object for a TAC troubleshooting agent.",
+   "back": "case_id, customer_impact severity, symptom, confirmed, ruled_out, hypotheses with confidence, actions_taken with results, blocked_actions with reasons, next_action, evidence refs.",
+   "hook": "The case, not the conversation",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §13"
+  },
+  {
+   "id": "c-ary-ruled-out-is-state",
+   "front": "On a P1 packet-loss case, why does ruled_out earn its own field?",
+   "back": "'Customer LAN' and 'tunnel administrative state' ruled out is what stops the next step re-checking them. Eliminations are findings; drop them and the investigation restarts.",
+   "hook": "Eliminations are findings too",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §13"
+  },
+  {
+   "id": "c-ary-blocked-actions-reason",
+   "front": "The copilot cannot make a production change. Where does that live?",
+   "back": "blocked_actions, with the reason — 'production configuration change: customer approval required'. Without the reason it reads as impossible rather than pending, and never gets escalated.",
+   "hook": "Blocked without a reason looks impossible",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "hitl-design",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §13"
+  },
+  {
+   "id": "c-ary-tunnel-reset-twice",
+   "front": "Why the copilot resets the same tunnel twice.",
+   "back": "Tunnel reset gave no improvement, then compaction flattened it to 'investigated packet loss'. The tunnel looks suspicious again. Lost negative knowledge became a repeated customer-impacting action.",
+   "hook": "Compaction turned a dead end into a fresh idea",
+   "kind": "fail",
+   "theme": "aryaka-ops",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §5"
+  },
+  {
+   "id": "c-ary-network-domain-fields",
+   "front": "Four compaction fields specific to a network troubleshooting agent.",
+   "back": "customer_impact, change_window, rollback_safety, approval_state. The generic contract is a starting point; the domain decides which fields are unsafe to lose.",
+   "hook": "Change window and rollback safety are state",
+   "kind": "rule",
+   "theme": "aryaka-ops",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §15"
+  },
+  {
+   "id": "c-ary-account-investigation-fanout",
+   "front": "A long account-health investigation: how to keep the parent thin.",
+   "back": "Orchestrator holds goal, confirmed findings, hypotheses, tried_and_failed and evidence refs. Traffic, network-stability and business-signal analyzers run as children returning structured findings.",
+   "hook": "Parent holds state, children hold the digging",
+   "kind": "pat",
+   "theme": "aryaka-ops",
+   "topic": "supervisor-worker-pattern",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §12"
+  },
+  {
    "id": "c-bw-a2a",
    "front": "A2A — what problem does it solve that MCP doesn't?",
    "back": "Sold as: agents talking to agents | Actually: Google's cross-vendor protocol where an agent card advertises skills, auth and endpoints so agents can delegate tasks; MCP is agent-to-tool, A2A is agent-to-agent | Changes: cross-vendor delegation with long-running task callbacks becomes possible | Say: \"MCP plus A2A is the complete interop story — tools and peers.\"",
@@ -2546,6 +2606,46 @@
    "cite": "doc: agentic-ai-evaluation-definitive-reference §9"
   },
   {
+   "id": "c-d4-compaction-is-llm-op",
+   "front": "Why can't compaction be treated as deterministic plumbing?",
+   "back": "It is itself an LLM operation, so it can distort or drop state. An untested compaction step is an untested state mutation in the middle of your run.",
+   "hook": "Your summarizer is an untested state mutation",
+   "kind": "rule",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §6"
+  },
+  {
+   "id": "c-d4-seven-preservation-checks",
+   "front": "What does a compaction eval actually check?",
+   "back": "Preservation of goal, constraints, decisions, findings, negative knowledge, state and uncertainty — plus action safety. Eight dimensions, because losing any one changes what happens next.",
+   "hook": "Eight preservation checks, not one score",
+   "kind": "check",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §7"
+  },
+  {
+   "id": "c-d4-behavioral-eval-strongest",
+   "front": "Strongest way to evaluate a compaction, and the weakest.",
+   "back": "Strongest is behavioral: does the agent continue correctly from the compacted state? Weakest is summary similarity — it measures resemblance to the history, not usefulness for the next step.",
+   "hook": "Test the continuation, not the prose",
+   "kind": "rule",
+   "theme": "evaluation",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §8"
+  },
+  {
+   "id": "c-d4-context-metrics",
+   "front": "Four metric families to watch on a compacting agent.",
+   "back": "Context (fill level, compactions per run), quality (state preserved, downstream success), behavioral (repeated failed actions, loops), and cost. Repeated failed actions is the giveaway that compaction is lossy.",
+   "hook": "Repeat rate exposes lossy compaction",
+   "kind": "metric",
+   "theme": "evaluation",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §19"
+  },
+  {
    "id": "c-bj-fw-1",
    "front": "Storing a customer's site count in the vector database.",
    "back": "❌ Memory says 47 sites; Salesforce says 52. The agent is confidently stale. ✅ Structured facts come from the authoritative API at call time; vectors hold only the fuzzy.",
@@ -3093,6 +3193,56 @@
    "cite": "doc: ai-platform-system-design-interview-handbook §3"
   },
   {
+   "id": "c-d4-fw-compact-at-95",
+   "front": "Compacting only when the window is nearly full.",
+   "back": "❌ At 95-100% there is no headroom left to run the compaction call itself, so it is rushed or fails. ✅ Trigger at 60-70% and treat headroom as a design budget.",
+   "hook": "No headroom to summarize",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-prose-summary",
+   "front": "Compacting a long run into a generic prose summary.",
+   "back": "❌ 'Investigated packet loss…' loses operational state — what was ruled out, what is blocked, what already failed. ✅ Compact into a schema with named fields the next step reads.",
+   "hook": "Prose loses the fields that decide the next action",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-conclusions-only",
+   "front": "Preserving only the conclusions across a compaction.",
+   "back": "❌ Reasoning context disappears, so the agent cannot tell a firm finding from a lucky guess. ✅ Preserve decisions with their reasons and evidence refs.",
+   "hook": "A conclusion without its reason is a rumour",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-agents-to-save-tokens",
+   "front": "Spawning sub-agents mainly to reduce token usage.",
+   "back": "❌ You buy orchestration complexity and often still pay, because the parent absorbs the transcripts. ✅ Delegate bounded subtasks that return structured findings.",
+   "hook": "Multi-agent is not a compression strategy",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-bigger-context-fixes-it",
+   "front": "Assuming a larger context window solves context exhaustion.",
+   "back": "❌ More room means more noise and more cost, and the state question stays unanswered. ✅ Manage state intentionally — runtime state plus retrieval plus an immutable trace.",
+   "hook": "A bigger window buys time, not a design",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
    "id": "c-approval-rate-theater",
    "front": "Your approval rate is above 95%. What is that?",
    "back": "Approval theater, not a control. The response is to shrink what needs a human with deterministic auto-approve bands, and make the remainder genuinely informative.",
@@ -3604,6 +3754,107 @@
    "theme": "harness-loop-memory",
    "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §6"
+  },
+  {
+   "id": "c-d4-exhaustion-is-state",
+   "front": "Context running out mid-task is which kind of problem?",
+   "back": "A state-management problem, not a token-budget one. The question is what is essential to continue correctly — a bigger window postpones it without answering it.",
+   "hook": "Bigger window, same unanswered question",
+   "kind": "def",
+   "theme": "harness-loop-memory",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §1"
+  },
+  {
+   "id": "c-d4-three-layers",
+   "front": "The three layers of a long agent run.",
+   "back": "Immutable evidence (full trace, never deleted), working context (what the model sees now), durable task state (operational truth for continuation). Different lifetimes, different stores.",
+   "hook": "Evidence, working context, task state",
+   "kind": "pat",
+   "theme": "harness-loop-memory",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §2"
+  },
+  {
+   "id": "c-d4-compaction-not-summary",
+   "front": "Compaction is not summarization. What is it?",
+   "back": "A controlled transformation from execution history into a smaller operational state representation. Summaries read well; state is what the next step can act on.",
+   "hook": "Prose reads well; state is actionable",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §1"
+  },
+  {
+   "id": "c-d4-compact-at-60-70",
+   "front": "At what fill level should compaction trigger?",
+   "back": "60-70%, not 95-100%. Compaction is itself an LLM call needing room to run — triggering at the ceiling leaves no headroom to do it well.",
+   "hook": "Compaction needs room to compact",
+   "kind": "number",
+   "theme": "harness-loop-memory",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §3"
+  },
+  {
+   "id": "c-d4-negative-knowledge-first-class",
+   "front": "Which state field is the highest-value one to preserve?",
+   "back": "tried_and_failed. Lose it and the agent rediscovers a failed approach — repeating work, tokens, and possibly a customer-impacting remediation it already knows does not help.",
+   "hook": "Forgotten failures get retried",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §5",
+   "aryaka": "Compaction dropping 'tunnel reset — no improvement' is how the copilot resets the tunnel twice."
+  },
+  {
+   "id": "c-d4-retry-allowed",
+   "front": "Does 'failed before' mean 'never retry'?",
+   "back": "No. Record why it failed and under what conditions a retry is valid — a retry_allowed or retry_conditions field. Conditions change; a flat blocklist forgets that.",
+   "hook": "Store the reason, not just the verdict",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §5"
+  },
+  {
+   "id": "c-d4-state-over-history",
+   "front": "State versus history: which one continues the task?",
+   "back": "History is evidence; state is the operational truth used to continue. Like distributed systems — nothing should replay the whole event log just to learn where it is.",
+   "hook": "History is evidence, state is truth",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §16"
+  },
+  {
+   "id": "c-d4-versioned-state",
+   "front": "Why does the compaction state object need a version?",
+   "back": "The schema evolves and compaction is model-and-prompt dependent. Stamping compaction_version, model and prompt_version is what lets you attribute a bad continuation to a bad compaction.",
+   "hook": "Unversioned state cannot be blamed",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "corpus-provenance",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §17"
+  },
+  {
+   "id": "c-d4-structured-findings-contract",
+   "front": "A sub-agent finishes. What may it return to the parent?",
+   "back": "Structured findings only, never its full reasoning transcript. Handing the parent the transcript pollutes exactly the context the delegation was meant to protect.",
+   "hook": "Delegation that returns everything saved nothing",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-raw-trace-survives",
+   "front": "Compaction runs. What happens to the raw transcript?",
+   "back": "It survives, immutably, in the trace store. Compaction shrinks the working context; it is not a deletion policy. Auditability lives in the evidence layer, not the prompt.",
+   "hook": "Compact the context, keep the record",
+   "kind": "rule",
+   "theme": "harness-loop-memory",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §9"
   },
   {
    "id": "c-bj-memory-visible-to-user",
