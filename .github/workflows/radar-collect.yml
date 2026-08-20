@@ -65,7 +65,15 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -q -m "radar: $(date -u '+%Y-%m-%d') — ${{ steps.collect.outputs.summary }}"
-            git push -q
+            # A publish from the laptop, or the daily-drop job, can land on main while this
+            # one is collecting — the collector takes ~2 minutes, so the window is real and
+            # a bare push loses the whole run to a non-fast-forward. Rebase and retry.
+            for attempt in 1 2 3; do
+              if git push -q; then echo "pushed on attempt $attempt"; break; fi
+              echo "push rejected — rebasing onto origin/main (attempt $attempt)"
+              git pull --rebase -q origin main || { echo "rebase failed"; exit 1; }
+              [ "$attempt" = 3 ] && { echo "still cannot push after 3 attempts"; exit 1; }
+            done
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
