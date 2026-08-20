@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-20 01:20 UTC",
+ "generated": "2026-08-20 01:32 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -385,6 +385,86 @@
    "theme": "agents-orchestration",
    "topic": "memory-systems",
    "cite": "doc: interview-questions-with-explanations §11"
+  },
+  {
+   "id": "c-fp-api-as-tool-three-problems",
+   "front": "Three problems with hand-wrapping an API as a tool.",
+   "back": "Tedious to code, brittle when the code changes, and the vigilance is expected of the caller rather than the producer. The third is the one MCP actually fixes.",
+   "hook": "You find out from a failure",
+   "kind": "fail",
+   "theme": "agents-orchestration",
+   "topic": "mcp",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
+   "id": "c-fp-harness-plus-llm",
+   "front": "Complete the equation: harness + LLM = ?",
+   "back": "An agent. You own three of the four parts — agent code and system prompt, tools, memory. The LLM is the rented piece in the middle.",
+   "hook": "You own three, you rent one",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-systems-from-first-principles §1"
+  },
+  {
+   "id": "c-fp-llm-definition-generalises",
+   "front": "Define an LLM so the definition survives multimodality.",
+   "back": "A neural network trained to predict the next token of any input sequence. \"Any input sequence\" is what lets the next token be an image or a sound token without changing the definition.",
+   "hook": "Say \"any sequence\", not \"text\"",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "context-engineering",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
+   "id": "c-fp-mcp-ownership-flip",
+   "front": "MCP's sharpest justification in one sentence.",
+   "back": "The maintenance burden moves to whoever causes the change. Wrapping a partner API means their change breaks your tool; an MCP server emits a change event and your agent updates itself.",
+   "hook": "Vigilance belongs to the producer",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "mcp",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
+   "id": "c-fp-model-holds-exit-condition",
+   "front": "In a ReAct loop, who decides whether it continues?",
+   "back": "The model. Which is exactly why the iteration, cost and wall-clock caps have to live outside it, in the harness.",
+   "hook": "The exit condition can't police itself",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
+   "id": "c-fp-no-tools-no-agent",
+   "front": "What does an agent with no tools actually do?",
+   "back": "Tells you to go look it up yourself. \"Like what are you there for then?\" Tools are what convert a text generator into something that can act.",
+   "hook": "No tools, no actions, no agent",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
+   "id": "c-fp-task-not-data",
+   "front": "A tool is mechanically a function. What is the real difference?",
+   "back": "What it is named after. \"An LLM has a task to do, not data to fetch\" — so tools are named make_booking or change_seat, not update or delete.",
+   "hook": "Tasks, not capabilities",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
+   "id": "c-fp-tool-description-six-parts",
+   "front": "What goes in a tool description?",
+   "back": "What it does, when to invoke it, what each parameter means, what it returns, and examples of input parameters — because USD versus United States dollars is exactly the ambiguity that breaks a call.",
+   "hook": "Examples earn their place",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-systems-from-first-principles §2"
   },
   {
    "id": "c-hb-autonomy-is-earned",
@@ -1230,6 +1310,26 @@
    "cite": "issue 005, §9"
   },
   {
+   "id": "c-fp-definitions-resent-every-call",
+   "front": "Why is prompt-prefix caching worth so much for a tool-heavy agent?",
+   "back": "The model is stateless, so every tool definition is re-sent on every call. That fixed cost — roughly 6,000 tokens at 40 tools — is paid whether the tools are used or not.",
+   "hook": "Stateless means resend, always",
+   "kind": "number",
+   "theme": "cost-performance",
+   "topic": "prompt-caching",
+   "cite": "doc: agentic-systems-from-first-principles §5"
+  },
+  {
+   "id": "c-fp-never-train-add-context",
+   "front": "The API signature changed. Do you retrain the model?",
+   "back": "\"The word training should be out of our vocabulary.\" We practically never train and rarely fine-tune — we add context. The model is stateless and gets the tool definition on every call.",
+   "hook": "Add context, don't train",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "context-engineering",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
    "id": "c-hb-more-context-less-accuracy",
    "front": "Complete the rule: more context equals…",
    "back": "More cost, more latency, and less accuracy. The third one is the surprise, and it's why \"retrieve the smallest sufficient context\" is a rule rather than a preference.",
@@ -1935,6 +2035,56 @@
    "cite": "doc: broken-rag-repo-live-debug §4"
   },
   {
+   "id": "c-fp-fw-1",
+   "front": "Putting a spend cap in the system prompt.",
+   "back": "❌ Demonstrated live — instruction in place, tool call failed, model still produced a confident booking answer. ✅ A deterministic check in front of the tool, which an injected or hallucinated amount cannot talk past.",
+   "hook": "The talk's own counter-example",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-systems-from-first-principles §4"
+  },
+  {
+   "id": "c-fp-fw-2",
+   "front": "Naming tools after your CRUD endpoints.",
+   "back": "❌ The model reasons about tasks and has to reinvent the workflow from primitives every call. ✅ Name them after the business action — make_booking, change_seat.",
+   "hook": "It thinks in bookings, not updates",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-systems-from-first-principles §4"
+  },
+  {
+   "id": "c-fp-fw-3",
+   "front": "Wrapping a partner's API as a tool you maintain.",
+   "back": "❌ Their change breaks your tool and you learn about it from a production failure. ✅ Consume an MCP server that emits change events, so the definition updates itself.",
+   "hook": "Vigilance on the wrong party",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "mcp",
+   "cite": "doc: agentic-systems-from-first-principles §4"
+  },
+  {
+   "id": "c-fp-fw-4",
+   "front": "Trusting the answer when the tool call failed.",
+   "back": "❌ The model falls back to pretrained knowledge and sounds exactly as confident as when grounded. ✅ Detect the failed observation in code and force an abstention path.",
+   "hook": "Same confidence, no data",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-systems-from-first-principles §4"
+  },
+  {
+   "id": "c-fp-fw-5",
+   "front": "Hand-writing tool descriptions.",
+   "back": "❌ The description drifts from the function that changed, and only the model notices — by calling it wrong. ✅ Decorate the function and generate the definition from the signature.",
+   "hook": "A toy-project pattern",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-systems-from-first-principles §4"
+  },
+  {
    "id": "c-fw-40k-reflection-loop",
    "front": "An unusual ticket at 2:14 AM sent the agent into a reflection loop.",
    "back": "❌ Tool A, B, C all failed, so it reflected and retried for four hours — $40,200, no cap, no alarm. ✅ Step cap, cost cap, wall-clock cap and oscillation detection on hashed (tool, args).",
@@ -2480,6 +2630,16 @@
    "theme": "harness-loop-memory",
    "topic": "memory-systems",
    "cite": "doc: agent-harness-loop-llmops-deep-dive §6"
+  },
+  {
+   "id": "c-fp-memory-is-observations",
+   "front": "What does memory store, beyond the messages?",
+   "back": "Previous interactions and tool calls with their observations. It sits inside context engineering, and the trade is explicit: more tokens bought for expected response quality.",
+   "hook": "Tool calls plus what came back",
+   "kind": "def",
+   "theme": "harness-loop-memory",
+   "topic": "memory-systems",
+   "cite": "doc: agentic-systems-from-first-principles §2"
   },
   {
    "id": "c-harness-definition",
@@ -3209,6 +3369,36 @@
    "aryaka": "An overnight re-triage backfill can 429 the live portal copilot unless interactive traffic outranks it."
   },
   {
+   "id": "c-fp-error-body-is-a-response",
+   "front": "The tool returned. Did it succeed?",
+   "back": "Unknown — you were given the function's response, and an error body is still a response. Inspect it; a 200-shaped envelope carrying an error is how a failed lookup gets treated as data.",
+   "hook": "Returned is not succeeded",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-systems-from-first-principles §4"
+  },
+  {
+   "id": "c-fp-failed-tool-falls-back-to-weights",
+   "front": "A tool call fails and returns nothing. What does the model do?",
+   "back": "Answers anyway from its pretrained weights, with the same confidence as a grounded answer. Demonstrated live: it invented a Tokyo hotel price and reached a booking conclusion.",
+   "hook": "It goes back to its world model",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "resilience-patterns",
+   "cite": "doc: agentic-systems-from-first-principles §3"
+  },
+  {
+   "id": "c-fp-tool-call-ids",
+   "front": "Two send_email calls in one turn. Why do tool-call ids matter?",
+   "back": "They have independent outcomes — one may bounce while the other delivers. The id is what lets the loop reason about partial success instead of treating the turn as one result.",
+   "hook": "Partial success needs an id",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "tool-calling-anatomy",
+   "cite": "doc: agentic-systems-from-first-principles §2"
+  },
+  {
    "id": "c-hb-error-budget-breach-sequence",
    "front": "The error budget is exceeded. What happens, in order?",
    "back": "Disable autonomy, route to human review, run root-cause analysis, improve retrieval and evals, then re-enable only after validation. Re-enabling without validation is how the same breach repeats.",
@@ -3673,6 +3863,47 @@
    "theme": "security-data",
    "topic": "hitl-design",
    "cite": "doc: ai-architect-edge-playbook §5"
+  },
+  {
+   "id": "c-fp-guardrail-prompt-failed-live",
+   "front": "A booking guardrail was added to the system prompt. What happened next?",
+   "back": "The model guessed anyway. Instruction present, tool call failed, and it still produced a confident booking conclusion — the presenter's own verdict was that LLMs can't be trusted much.",
+   "hook": "The advice failed on camera",
+   "kind": "fail",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-systems-from-first-principles §3"
+  },
+  {
+   "id": "c-fp-guardrail-strength-model-coupled",
+   "front": "Why is a prompt-based guardrail coupled to the model version?",
+   "back": "Stronger models need less hammering, weaker ones need explicit prohibitions — so guardrail strength changes silently on a model upgrade, and almost nobody tests that coupling.",
+   "hook": "A model upgrade moves your guardrails",
+   "kind": "signal",
+   "theme": "security-data",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-systems-from-first-principles §8"
+  },
+  {
+   "id": "c-fp-mcp-standardises-interface-not-security",
+   "front": "MCP flips maintenance ownership. What does it not flip?",
+   "back": "Security. It standardises the interface, not the security model — authorization, tenancy and blast radius per tool remain yours. Trusting a third-party server means trusting its intelligence, not just its intent.",
+   "hook": "Their intent and their competence",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "mcp",
+   "cite": "doc: agentic-systems-from-first-principles §2",
+   "aryaka": "Any partner MCP server we connect gets its own credential scope and a sandbox, not our service account."
+  },
+  {
+   "id": "c-fp-where-a-spend-limit-lives",
+   "front": "Where does a spend limit belong, and why not the system prompt?",
+   "back": "The deterministic policy layer in front of the tool. A prompt is a suggestion — an injected or hallucinated amount fails a code check regardless of phrasing, and cannot argue with it.",
+   "hook": "Prompts persuade; checks refuse",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: agentic-systems-from-first-principles §3"
   },
   {
    "id": "c-hb-policy-between-model-and-tools",
@@ -5549,6 +5780,100 @@
     "issue 004, §21",
     "issue 006, §9",
     "issue 002, §2"
+   ]
+  },
+  {
+   "id": "d-t1-where-does-the-spend-limit-live",
+   "tier": 1,
+   "level": "senior",
+   "theme": "security-data",
+   "title": "A senior engineer says the booking limit goes in the system prompt. Respond.",
+   "problem": "Assumption: an internal travel-booking agent can book flights for field engineers. In a design review a respected senior engineer says the spend cap — no single booking above ₹1 lakh — belongs in the system prompt, alongside the other behavioural instructions, and points out correctly that modern models follow instructions well and that the team already does this for tone and scope. Two people nod. You disagree. You have about ninety seconds before the room moves on, and being right rudely is worse than being quiet.",
+   "assesses": [
+    "Separating probabilistic guardrails from deterministic authorization",
+    "Conceding the true part of an opposing argument before disagreeing",
+    "Knowing what a failed tool call does to a model's answer",
+    "Reasoning about consequence class rather than instruction quality",
+    "Proposing a placement, not just an objection"
+   ],
+   "skeleton": [
+    "Concede the true part first, because it is genuinely true: prompts do shape behaviour and modern models follow them well.",
+    "Then draw the line by consequence: content guardrails are probabilistic and I expect them to fail some percentage of the time.",
+    "A spend cap is not a tone preference. It is authorization, and authorization cannot have a failure rate.",
+    "Give the mechanism, not the principle: an instruction competes for attention with everything else in a long context, and it degrades under context growth.",
+    "Give the demonstrated case — an agent told 'unless you are sure, do not guess, especially around booking' guessed anyway once its tool call failed, and answered confidently from pretrained knowledge.",
+    "Name the second failure mode: a prompt instruction is injectable. Retrieved or user-supplied text can argue with it; a code check cannot be argued with.",
+    "Name the third, quietest one: guardrail strength is coupled to model version, so a routine upgrade silently changes how strong that cap is, and nobody tests it.",
+    "Propose the placement: the cap is a deterministic check in the tool wrapper, evaluated on the re-derived amount before execution.",
+    "Keep the prompt instruction as well — it reduces how often the check has to fire, which is a real benefit, just not a control.",
+    "Close with the test that settles it: write the eval case that tries to book above the cap, and see which layer stops it."
+   ],
+   "numbers": [
+    "A guardrail failing 'some percentage of the time' is fine for tone and unacceptable for money — the acceptable rate for an unauthorized booking is zero",
+    "The deterministic check costs single-digit milliseconds against an action worth ₹1 lakh",
+    "Prompt-based guardrails are model-version coupled; a check in code is not"
+   ],
+   "traps": [
+    "Winning on principle without conceding the true part. The senior engineer is right about behaviour shaping, and ignoring that costs you the room.",
+    "Arguing it abstractly. The live counter-example — instruction present, model guessed anyway after a failed tool call — is what actually moves people.",
+    "Proposing to remove the prompt instruction. Keep both: the prompt reduces firing rate, the check provides the guarantee.",
+    "Framing it as a security lecture. It is a consequence-class decision, and framing it that way keeps it a design conversation."
+   ],
+   "termdrops": [
+    "probabilistic versus deterministic control",
+    "authorization",
+    "consequence class",
+    "injectable instruction",
+    "model-version coupling",
+    "policy layer in front of the tool"
+   ],
+   "followups": [
+    {
+     "q": "So you don't trust the model at all?",
+     "a": "I trust it to draft, plan and explain. I don't ask it to be the enforcement point for something irreversible, for the same reason we don't put an authorization check in a UI tooltip. It is about where the guarantee lives, not about how good the model is."
+    },
+    {
+     "q": "This adds engineering work for a case that may never happen.",
+     "a": "It is one comparison in the tool wrapper, which we already own. And the case does happen — the documented pattern is a failed lookup followed by a confident invented answer, which is exactly the path to an over-cap booking with no bad actor involved."
+    },
+    {
+     "q": "What if the check itself is wrong?",
+     "a": "Then it fails closed and someone gets a clear message and a human path — a blocked legitimate booking, which is recoverable. The prompt failing means an unauthorized booking that is already made, which is not."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Deterministic check in the tool wrapper",
+     "over": "The limit stated in the system prompt",
+     "because": "Authorization cannot have a failure rate, and a prompt instruction is both injectable and degrades as context grows."
+    },
+    {
+     "choice": "Keep the prompt instruction as well",
+     "over": "Replacing it with the code check",
+     "because": "It lowers how often the check has to fire, which is a genuine benefit — it just is not a control."
+    },
+    {
+     "choice": "Settle it with an eval case",
+     "over": "Settling it by seniority in the room",
+     "because": "A test that tries to book above the cap shows which layer actually stops it, and converts an argument into evidence."
+    },
+    {
+     "choice": "Fail closed on the check",
+     "over": "Fail open to avoid blocking legitimate bookings",
+     "because": "A blocked booking is recoverable in minutes; a completed over-cap booking is not."
+    }
+   ],
+   "topics": [
+    "agent-loop-guardrails",
+    "prompt-injection-defense",
+    "hitl-design",
+    "plan-before-execute"
+   ],
+   "cite": [
+    "doc: agentic-systems-from-first-principles §3",
+    "doc: ai-architect-edge-playbook §5",
+    "doc: agentic-ai-system-design-deep-dive §8",
+    "doc: agentic-ai-system-design-deep-dive §17"
    ]
   },
   {
