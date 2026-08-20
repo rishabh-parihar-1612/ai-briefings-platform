@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-19 16:49 UTC",
+ "generated": "2026-08-20 01:00 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -385,6 +385,36 @@
    "theme": "agents-orchestration",
    "topic": "memory-systems",
    "cite": "doc: interview-questions-with-explanations §11"
+  },
+  {
+   "id": "c-i10-dspy-numbers",
+   "front": "What do DSPy adopters report, and why is it under-adopted?",
+   "back": "10-30% quality improvement over hand-crafted prompts at lower ongoing maintenance cost. Most teams have never heard of it — it reads as \"just another framework\" until you see the optimization loop.",
+   "hook": "10-30%, and most teams haven't heard of it",
+   "kind": "metric",
+   "theme": "agents-orchestration",
+   "topic": "context-engineering",
+   "cite": "issue 010, §2"
+  },
+  {
+   "id": "c-i10-dspy-what",
+   "front": "DSPy — what does it actually replace?",
+   "back": "Hand-crafted prompts. You declare a signature (inputs, outputs, types) and it compiles an optimized prompt against your training data — data-driven rather than intuition-driven.",
+   "hook": "Compiled prompts, not tweaked ones",
+   "kind": "def",
+   "theme": "agents-orchestration",
+   "topic": "context-engineering",
+   "cite": "issue 010, §2"
+  },
+  {
+   "id": "c-i10-dspy-why-exists",
+   "front": "The three problems with hand-written prompts DSPy attacks.",
+   "back": "Prompts are brittle — small wording changes cause large behaviour swings; tuning is intuition-driven with no measurement; and every model change re-opens the tuning work.",
+   "hook": "Brittle, unmeasured, re-tuned each upgrade",
+   "kind": "fail",
+   "theme": "agents-orchestration",
+   "topic": "prompt-caching",
+   "cite": "issue 010, §2"
   },
   {
    "id": "c-iq-agentic-rag-trigger",
@@ -909,6 +939,56 @@
    "cite": "doc: 2026-08-19-buzzword-terms §6"
   },
   {
+   "id": "c-brd-chunk-count-estimate",
+   "front": "554 chunks from a 15-page PDF. Is that plausible?",
+   "back": "No — 15 pages at ~300 words, chunked at ~100 words, is ~45 chunks, generously 90. Being 6-12x out locates the defect in the splitter before you read any code.",
+   "hook": "One division finds the bug",
+   "kind": "metric",
+   "theme": "cost-performance",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: broken-rag-repo-live-debug §3"
+  },
+  {
+   "id": "c-brd-list-as-vector-store",
+   "front": "A Python list used as the vector store — name all three failures.",
+   "back": "Sequential embedding calls with no batching, linear scan at query time with no index, and in-process state that dies on restart and cannot be shared across replicas.",
+   "hook": "Slow, unindexed, and not multi-instance",
+   "kind": "fail",
+   "theme": "cost-performance",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: broken-rag-repo-live-debug §2"
+  },
+  {
+   "id": "c-brd-split-on-fullstop",
+   "front": "Why does splitting text on \".\" destroy retrieval?",
+   "back": "Abbreviations, decimals in tables and numbered lists all contain full stops, so text shatters into fragments too small to mean anything. Retrieved sources come back as \"0125\".",
+   "hook": "Sources display as bare numbers",
+   "kind": "fail",
+   "theme": "cost-performance",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: broken-rag-repo-live-debug §2"
+  },
+  {
+   "id": "c-brd-why-overlap",
+   "front": "Why does chunk overlap exist, in one sentence?",
+   "back": "A boundary cutting mid-discussion strands the reference — the next chunk opens with a conclusion whose subject lived in the previous one. Overlap keeps each chunk interpretable alone.",
+   "hook": "Otherwise the chunk loses its subject",
+   "kind": "def",
+   "theme": "cost-performance",
+   "topic": "kg-rag",
+   "cite": "doc: broken-rag-repo-live-debug §2"
+  },
+  {
+   "id": "c-brd-word-boundary-backoff",
+   "front": "You chunk on characters. The interviewer asks about the word \"character\". What now?",
+   "back": "Don't end at the raw index — find the last space inside the window and end there. The principled version splits on paragraph, then sentence, then word, falling back to characters.",
+   "hook": "car + acter means nothing",
+   "kind": "pat",
+   "theme": "cost-performance",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: broken-rag-repo-live-debug §2"
+  },
+  {
    "id": "c-cascade-blended-cost",
    "front": "Three-tier cascade at 70/25/5 — say the blended cost out loud.",
    "back": "0.70 × $0.10 + 0.25 × $3.00 + 0.05 × $15.00 = $1.57 per million tokens, against $15.00 for top-tier-only. That is 9.6x cheaper for about one extra second on 30% of queries.",
@@ -1007,6 +1087,36 @@
    "theme": "cost-performance",
    "topic": "token-economics",
    "cite": "issue 005, §9"
+  },
+  {
+   "id": "c-i10-embedding-cost-scales-with-volume",
+   "front": "Why is embedding cost different in kind from model cost?",
+   "back": "Model cost scales with query complexity; embedding cost scales with query volume, which only grows. So optimizing it is a one-time investment with recurring savings.",
+   "hook": "Volume only goes one way",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "token-economics",
+   "cite": "issue 010, §9"
+  },
+  {
+   "id": "c-i10-embedding-cost-share",
+   "front": "How much of AI spend is embeddings, and why is it ignored?",
+   "back": "5-15% at scale. Each call looks negligible at $0.0001, so teams optimize the 50-70% model spend and never look — at 1M queries/day that is $100-300/day, $3-9K/month.",
+   "hook": "$0.0001 each, $9K a month",
+   "kind": "metric",
+   "theme": "cost-performance",
+   "topic": "token-economics",
+   "cite": "issue 010, §9"
+  },
+  {
+   "id": "c-i10-embedding-reuse-savings",
+   "front": "What does embedding reuse actually save?",
+   "back": "80-95% of embedding cost. Document embeddings should be computed once and reused across every query; naive RAG re-embeds the same documents on every query.",
+   "hook": "Compute once, reuse forever",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "issue 010, §9"
   },
   {
    "id": "c-iq-10k-to-100m",
@@ -1632,6 +1742,46 @@
    "theme": "fails-vs-works",
    "topic": "multi-tenant-ai-security",
    "cite": "doc: interview-questions-with-explanations §9"
+  },
+  {
+   "id": "c-brd-fw-1",
+   "front": "Guessing at the cause of a 500 on file upload.",
+   "back": "❌ Reading code top-to-bottom hunting for something that looks wrong. ✅ Read the log and the request header and meet in the middle — \"invalid start byte\" plus multipart is the whole answer.",
+   "hook": "Two facts, one conclusion",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "llm-observability",
+   "cite": "doc: broken-rag-repo-live-debug §4"
+  },
+  {
+   "id": "c-brd-fw-2",
+   "front": "Splitting document text on the full stop.",
+   "back": "❌ 554 chunks from 15 pages, retrieved sources rendering as \"0125\". ✅ Sliding window at 500 characters with 50 overlap, backing off to the last word boundary.",
+   "hook": "An order of magnitude too many chunks",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: broken-rag-repo-live-debug §4"
+  },
+  {
+   "id": "c-brd-fw-3",
+   "front": "Using an in-process list as the vector store.",
+   "back": "❌ Sequential embeds, linear scan, and everything lost on restart. ✅ Batch the embeddings and move to an ANN index — and say where the wall is: fine at 15 pages, fatal at 15,000.",
+   "hook": "It dies with the process",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: broken-rag-repo-live-debug §4"
+  },
+  {
+   "id": "c-brd-fw-4",
+   "front": "Writing code in silence during a live debug.",
+   "back": "❌ The interviewer cannot grade a thought process they cannot hear. ✅ Narrate the estimate, the trade-off, and why you chose the naive fix under time pressure.",
+   "hook": "Silence scores zero",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: broken-rag-repo-live-debug §4"
   },
   {
    "id": "c-fw-40k-reflection-loop",
@@ -2525,6 +2675,36 @@
    "cite": "doc: interview-questions-with-explanations §2"
   },
   {
+   "id": "c-i10-latency-accuracy-central",
+   "front": "What is the central PM decision in an AI product, and why?",
+   "back": "Latency versus accuracy. In traditional software faster is always better; in AI, faster usually means less accurate — smaller models, cheaper models, fewer-shot prompts all trade one for the other.",
+   "hook": "Faster is not free here",
+   "kind": "rule",
+   "theme": "product-metrics",
+   "topic": "ai-product-metrics",
+   "cite": "issue 010, §4"
+  },
+  {
+   "id": "c-i10-latency-accuracy-multiplicative",
+   "front": "Why can't you tune latency one dimension at a time?",
+   "back": "The trade-off is multiplicative — model size, prompt complexity, retrieval depth and tool calls each move both latency and accuracy. It is a joint optimization, not four independent dials.",
+   "hook": "Four dials, one surface",
+   "kind": "rule",
+   "theme": "product-metrics",
+   "topic": "ai-product-metrics",
+   "cite": "issue 010, §4"
+  },
+  {
+   "id": "c-i10-latency-targets-per-usecase",
+   "front": "There is no universal \"fast enough\". Give the three targets.",
+   "back": "Chat needs 2s p95, search needs 500ms p95, classification needs 200ms p95. The right trade-off is use-case dependent, so a single latency SLO across a product is wrong somewhere.",
+   "hook": "2s, 500ms, 200ms",
+   "kind": "metric",
+   "theme": "product-metrics",
+   "topic": "ai-slis-slos",
+   "cite": "issue 010, §4"
+  },
+  {
    "id": "c-iq-eval-from-production",
    "front": "How should the eval set evolve?",
    "back": "Cluster real failed production sessions — slow responses, repeated misunderstandings, rephrasing, drop-offs — and feed those patterns back in. Offline eval must track production reality.",
@@ -2677,6 +2857,46 @@
    "cite": "issue 009, §20"
   },
   {
+   "id": "c-brd-invalid-start-byte",
+   "front": "HTTP 500 on upload, log says \"invalid start byte\" from request.json(). Diagnose.",
+   "back": "The body is multipart/form-data — it starts with a boundary marker, not a brace, so it cannot parse as JSON. Use FastAPI's File/UploadFile and await file.read().",
+   "hook": "Header plus log is a full diagnosis",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: broken-rag-repo-live-debug §2"
+  },
+  {
+   "id": "c-brd-one-fix-reveals-next",
+   "front": "What should you expect after fixing the first bug?",
+   "back": "The next one. These repos are seeded so that one fix surfaces another — saying so out loud pre-empts looking surprised when it happens.",
+   "hook": "Fixing one reveals another",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: broken-rag-repo-live-debug §1"
+  },
+  {
+   "id": "c-brd-read-the-constants",
+   "front": "You are handed an unfamiliar RAG repo. What do you read first?",
+   "back": "The existing constants. chunk_size=500, overlap=50, top_k=4 tell you the intended design, and reading them before writing anything is itself a scored signal.",
+   "hook": "The clues are already in the file",
+   "kind": "check",
+   "theme": "reliability-operations",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: broken-rag-repo-live-debug §1"
+  },
+  {
+   "id": "c-brd-syntax-versus-logic",
+   "front": "In a live debugging round, what is fine to look up and what is not?",
+   "back": "Syntax is lookup — asking to search a framework signature is expected. Logic is not: knowing why 554 chunks from 15 pages is wrong cannot be Googled in the moment.",
+   "hook": "Look up the signature, not the judgement",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: broken-rag-repo-live-debug §1"
+  },
+  {
    "id": "c-ed-cache-key-scope",
    "front": "Where do gateways leak data?",
    "back": "The cache key. It must include model, every output-affecting parameter, and the full permission/tenant scope. A prompt-hash key serves Tenant A's answer to Tenant B — and prompts collide more than you would think.",
@@ -2776,6 +2996,38 @@
    "topic": "rate-limiting-and-quotas-for-ai",
    "cite": "doc: ai-architect-edge-playbook §11",
    "aryaka": "An overnight re-triage backfill can 429 the live portal copilot unless interactive traffic outranks it."
+  },
+  {
+   "id": "c-i10-rule-based-alerting-ceiling",
+   "front": "Why does rule-based alerting fail at scale, specifically?",
+   "back": "It produces too many false positives for humans to triage, and it cannot surface the dependency context that diagnosis requires. Adding rules makes both worse.",
+   "hook": "10,000 rules made it harder, not better",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "ai-slis-slos",
+   "cite": "issue 010, §3"
+  },
+  {
+   "id": "c-i10-uber-scale",
+   "front": "Uber's observability problem, in numbers.",
+   "back": "5,000+ microservices across 30+ regions, 10M+ alerts a day from 10,000+ alerting rules, MTTD for novel incidents over 30 minutes, and 60%+ on-call burnout measured as transfer requests within six months.",
+   "hook": "10M alerts a day, 60% burnout",
+   "kind": "metric",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "issue 010, §3",
+   "aryaka": "The closest published analogue to our NOC: distributed infra, alert fatigue, and a topology graph as the grounding."
+  },
+  {
+   "id": "c-i10-uber-topology-grounding",
+   "front": "Why is Uber's case the most relevant one for us?",
+   "back": "Same shape: large distributed infrastructure, alert fatigue at scale, and a topology graph that is the natural grounding for AI reasoning — dependency context is essential for diagnosis and normally not surfaced at alert time.",
+   "hook": "The topology graph is the grounding",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "kg-rag",
+   "cite": "issue 010, §3",
+   "aryaka": "Our MyAryaka topology is the equivalent asset — the thing that makes triage answers defensible."
   },
   {
    "id": "c-iq-autoregressive-floor",
@@ -3735,6 +3987,88 @@
     "doc: agentic-ai-system-design-deep-dive §17",
     "doc: ai-architect-edge-playbook §7",
     "issue 003, §1"
+   ]
+  },
+  {
+   "id": "d-t1-broken-rag-repo-live-debug",
+   "tier": 1,
+   "level": "senior",
+   "theme": "reliability-operations",
+   "title": "Here is a repo that ingests a PDF and answers questions. It's broken. Fix it, out loud.",
+   "problem": "A FastAPI app, two files. POST /upload takes a PDF; POST /chat answers from it. Upload returns HTTP 500. The log says 'invalid start byte' originating from request.json(). After you fix that, upload succeeds but takes a long time and reports 554 chunks indexed for a 15-page PDF. /chat does answer, but the four cited sources render as fragments like '0125'. The file already defines chunk_size=500, overlap=50 and top_k=4. You may look things up. You have 45 minutes and you are expected to narrate.",
+   "assesses": [
+    "Whether debugging has a method or is guesswork",
+    "Reading the log and the request header rather than scanning code",
+    "Doing an order-of-magnitude sanity check out loud",
+    "Separating syntax (lookup-able) from logic (not)",
+    "Naming the production wall rather than only making the demo work"
+   ],
+   "skeleton": [
+    "Read the flow first and say it back: upload parses, extracts, chunks, embeds, stores; chat retrieves top_k and synthesises.",
+    "Read the constants before writing anything — 500/50/4 tell you the intended design.",
+    "Bug one from two facts: content-type is multipart/form-data, and request.json() cannot parse a boundary-prefixed body.",
+    "Fix with File/UploadFile and await file.read(); say plainly that the syntax is lookup and the diagnosis is not.",
+    "Bug two by arithmetic, out loud: 15 pages × ~300 words ÷ ~100 = ~45 chunks, ~90 generously. 554 is 6-12x out, so it is the splitter.",
+    "Confirm from the code: it splits on '.', so abbreviations, decimals and list numbering shatter the text — which is exactly why sources render as '0125'.",
+    "Replace with a sliding window at 500 characters and 50 overlap; explain overlap as preserving the stranded reference.",
+    "Pre-empt the word-boundary question: back the end index off to the last space, and note the principled version splits paragraph → sentence → word.",
+    "Handle the edges you were given for free: strip first, return empty for whitespace-only input, guard the end index against the length.",
+    "Then name the thing that is slow-by-design: sequential embeds into an in-process list, which has no index and dies on restart."
+   ],
+   "numbers": [
+    "15 pages × ~300 words ÷ 100 ≈ 45 chunks; 554 observed is 6-12x out",
+    "500-char chunks with 50 overlap and top_k=4 were already in the file — infer, don't invent",
+    "An in-process list is fine at 15 pages and fatal at 15,000 — say where the wall is"
+   ],
+   "traps": [
+    "Scanning the code for something that looks wrong instead of reading the traceback and the header.",
+    "Rewriting the chunker without first estimating the expected chunk count — you fix it without proving it was the bug.",
+    "Apologising for looking up the FastAPI signature. Looking it up is expected; not knowing why 554 is wrong is not.",
+    "Making the demo work and stopping, without naming that the list has no index and no persistence.",
+    "Working in silence. The thought process is the artifact being graded."
+   ],
+   "termdrops": [
+    "multipart/form-data",
+    "sliding window",
+    "chunk overlap",
+    "word-boundary back-off",
+    "ANN index",
+    "order-of-magnitude check",
+    "top_k"
+   ],
+   "followups": [
+    {
+     "q": "You fixed the chunker. How do you know it is better and not just different?",
+     "a": "I'd hold a small set of questions with known answers from this PDF and compare retrieval before and after — did the right passage make top_k. Without that I have changed behaviour, not demonstrated improvement, and that is exactly the change nobody should ship."
+    },
+    {
+     "q": "When does the list actually stop working?",
+     "a": "Retrieval is a full scan per query, so it degrades linearly with corpus size while embedding cost is a one-off per document. At a few thousand chunks the scan starts dominating; that is the point to move to an ANN index, and restart persistence forces it sooner."
+    }
+   ],
+   "decisions": [
+    {
+     "choice": "Character sliding window with word-boundary back-off",
+     "over": "A sentence-aware splitter written properly",
+     "because": "Under 45 minutes the naive fix is defensible and testable; saying that paragraph → sentence → word is the principled version shows the choice was deliberate."
+    },
+    {
+     "choice": "Batch the embeddings and name the ANN index as the real fix",
+     "over": "Swapping in a vector database during the interview",
+     "because": "The scope is fixing the seeded bugs; introducing infrastructure spends the clock and dodges what is being graded."
+    }
+   ],
+   "topics": [
+    "embeddings-and-vector-databases",
+    "kg-rag",
+    "ai-system-design-interview",
+    "llm-observability"
+   ],
+   "cite": [
+    "doc: broken-rag-repo-live-debug §2",
+    "doc: broken-rag-repo-live-debug §3",
+    "doc: broken-rag-repo-live-debug §4",
+    "doc: rag01 §3"
    ]
   },
   {
