@@ -52,7 +52,7 @@ TIER_CYCLE = [1, 2, 3, 4]
 # One reserved slot each per 8-card block. aryaka-ops is here because a card about the
 # SASE support copilot is the one most likely to change what gets built this week;
 # left to the round-robin it would surface once every ten days.
-FLAVOUR_THEMES = ("fails-vs-works", "buzzword-decoder", "aryaka-ops")
+FLAVOUR_THEMES = ("fails-vs-works", "buzzword-decoder", "framing-questions")
 EPOCH = date(2026, 8, 18)   # day 1 of the habit
 MIRROR = os.environ.get("DECK_MIRROR_URL",
                         "https://rishabh-parihar-1612.github.io/ai-briefings-platform/")
