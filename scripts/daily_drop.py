@@ -42,6 +42,7 @@ DECK_JSON = BASE / "Deck" / "deck.json"
 SCHEDULE = BASE / "Deck" / "schedule.json"
 DAILY_DIR = BASE / "Daily"
 HTML_OUT = BASE / "Deck" / "daily.html"
+JUDGMENT = BASE / "Judgment" / "judgment.json"
 
 CARDS_PER_DROP = 8
 REVIEW_CAP = 4          # at most this many due-review cards, rest are new material
@@ -66,6 +67,22 @@ def load_deck():
     if not DECK_JSON.exists():
         sys.exit("Deck/deck.json missing — run: python3 scripts/build_deck.py")
     return json.loads(DECK_JSON.read_text())
+
+
+def load_judgment():
+    """Reps, if the Judgment layer is built. Absent file is not an error.
+
+    The Telegram cron in the mirror renders this read-only, so a mirror that has not yet
+    received judgment.json must degrade to cards + drill rather than crash. Nothing here
+    is imported from build_judgment for the same reason: the cron gets a copy of this one
+    file and nothing else from scripts/.
+    """
+    if not JUDGMENT.exists():
+        return None
+    try:
+        return json.loads(JUDGMENT.read_text())
+    except json.JSONDecodeError:
+        return None
 
 
 def load_schedule():
@@ -225,7 +242,23 @@ def pick_drill(deck, state, day: date):
                                        seed(ds, d["id"])))[0]
 
 
-def drop_for(deck, state, day: date):
+def pick_rep(judgment, day: date):
+    """Exact serve_date lookup, deliberately not an algorithm.
+
+    A rep is written for a specific day by /rep --batch, so there is nothing to compute and
+    nothing for the platform's JS mirror to drift away from — the one selector in this file
+    that cannot fall out of parity.
+    """
+    if not judgment:
+        return None
+    ds = day.isoformat()
+    for r in judgment.get("reps", []):
+        if r.get("serve_date") == ds:
+            return r
+    return None
+
+
+def drop_for(deck, state, day: date, judgment=None, short=False):
     ds = day.isoformat()
     hist = state.get("history", {}).get(ds)
     if hist:
@@ -233,10 +266,12 @@ def drop_for(deck, state, day: date):
         dr_by_id = {d["id"]: d for d in deck["drills"]}
         cards = [by_id[c] for c in hist.get("cards", []) if c in by_id]
         return {"date": ds, "day": (day - EPOCH).days + 1, "cards": cards,
-                "drill": dr_by_id.get(hist.get("drill")), "replayed": True}
+                "drill": None if short else dr_by_id.get(hist.get("drill")),
+                "rep": pick_rep(judgment, day), "replayed": True}
     return {"date": ds, "day": (day - EPOCH).days + 1,
             "cards": pick_cards(deck, state, day),
-            "drill": pick_drill(deck, state, day), "replayed": False}
+            "drill": None if short else pick_drill(deck, state, day),
+            "rep": pick_rep(judgment, day), "replayed": False}
 
 
 # -------------------------------------------------------------- renderers
@@ -279,7 +314,18 @@ def render_text(drop) -> str:
         if d.get("termdrops"):
             out += ["", "Term drops: " + ", ".join(d["termdrops"])]
         out += ["", f"({cite_of(d)})"]
-    out += ["", f"grade it:  python3 scripts/daily_drop.py --grade \"1g 2g 3a … d:partial\""]
+    r = drop.get("rep")
+    if r:
+        out += ["", f"🧭 Rep · {r['lens']} · level {r['level']} · trains {r['decision']}", ""]
+        out += r["situation"]
+        out += ["", f"You get {r['question_budget']} questions. Anything outside them is "
+                    "not knowable — ask, then commit.", "",
+                f"COMMIT: {r['decision_required']}"]
+        if r.get("options"):
+            out += ["Options: " + " · ".join(r["options"])]
+        out += ["State a confidence 0-1. Scoring optional; reviewing is not.",
+                "", f"reveal: Judgment/views/reps/{r['id']}.md"]
+    out += ["", f"grade it:  python3 scripts/daily_drop.py --grade \"1g 2g 3a … d:partial r:done\""]
     return "\n".join(out)
 
 
@@ -317,6 +363,32 @@ def render_md(drop) -> str:
         links = " · ".join(f"[[{t}]]" for t in (d.get("topics") or []))
         out += ["", f"*Source: {cite_of(d)}.*" + (f" · *Wiki:* {links}" if links else ""),
                 "</details>", ""]
+    r = drop.get("rep")
+    if r:
+        out += [f"## Rep — {r['decision']}", "",
+                f"`{r['id']}` · {r['lens']} · {r['mode']} · level {r['level']}"
+                + (f" · project `{r['project']}` stage {r.get('stage')}" if r.get("project") else ""),
+                ""]
+        for ln in r["situation"]:
+            out += [ln, ""]
+        out += [f"**You get {r['question_budget']} questions.** Anything outside them is "
+                "*not knowable* — same as the real conversation.", "",
+                f"**Commit:** {r['decision_required']}", ""]
+        if r.get("options"):
+            out += ["Options: " + " · ".join(f"`{o}`" for o in r["options"]), ""]
+        out += ["State a confidence 0-1 with it. Scoring is optional — reviewing is not.", "",
+                "<details><summary>Show the reveal</summary>", "",
+                "**The facts you had to ask for**", ""]
+        for x in r["withheld"]:
+            out += [f"- **{x['ask']}**{' ⭐' if x.get('decisive') else ''} → {x['fact']}"]
+        out += ["", "**What a strong answer commits to**", ""]
+        out += [f"- {b}" for b in r["strong_answer"]]
+        if r.get("traps"):
+            out += ["", "**Traps**", ""] + [f"- {t}" for t in r["traps"]]
+        out += ["", "**The part no model can decide**", "", r["human_only_beat"]]
+        if r.get("followups"):
+            out += ["", "**Pushback**", ""] + [f"- *{f['q']}* — {f['a']}" for f in r["followups"]]
+        out += ["", f"*Source: {cite_of(r)}.*", "</details>", ""]
     return "\n".join(out)
 
 
@@ -367,6 +439,43 @@ def render_telegram(drop):
             block = trimmed[:TG_LIMIT - 120] + \
                 f'\n<a href="{MIRROR}#/drill/{d["id"]}">full drill →</a>'
         msgs.append(block)
+
+    r = drop.get("rep")
+    if r:
+        # TWO messages, for the same reason cards get one each: a rep's situation plus its
+        # full reveal runs past the 4096 cap, and the old single-message trim dropped the
+        # reveal silently — a situation with no way to check yourself is worse than nothing.
+        ask = (f"🧭 <b>Rep · {e(r['lens'])} · level {r['level']}</b>\n"
+               f"<i>trains {e(r['decision'])}</i>\n\n"
+               + e("\n\n".join(r["situation"])) + "\n\n"
+               f"<b>You get {r['question_budget']} questions.</b> Anything outside them is "
+               "not knowable.\n\n"
+               f"<b>Commit:</b> {e(r['decision_required'])}\n"
+               + (("Options: " + e(" · ".join(r["options"])) + "\n") if r.get("options") else "")
+               + "State a confidence 0-1. Scoring optional; reviewing is not.")
+        if len(ask) > TG_LIMIT:
+            ask = ask[:TG_LIMIT - 90] + f"\n<i>full: Judgment/views/reps/{r['id']}.md</i>"
+        msgs.append(ask)
+
+        body = ["🧭 <b>Reveal</b> — answer first.", "<tg-spoiler>"]
+        for x in r["withheld"]:
+            body.append(("⭐ " if x.get("decisive") else "") + f"{e(x['ask'])} → {e(x['fact'])}")
+        body += ["", "<b>Strong answer:</b> " + e(" | ".join(r["strong_answer"]))]
+        if r.get("traps"):
+            body += ["", "<b>Traps:</b> " + e(" | ".join(r["traps"]))]
+        body += ["", "<b>No model decides:</b> " + e(r["human_only_beat"]),
+                 "</tg-spoiler>", f"<i>{e(cite_of(r))}</i>"]
+        rev = "\n".join(body)
+        if len(rev) > TG_LIMIT:
+            # keep the decisive asks and the beat; those are the teaching payload
+            keep = ["🧭 <b>Reveal</b> — answer first.", "<tg-spoiler>"]
+            keep += [f"⭐ {e(x['ask'])} → {e(x['fact'])}"
+                     for x in r["withheld"] if x.get("decisive")]
+            keep += ["", "<b>No model decides:</b> " + e(r["human_only_beat"]),
+                     "</tg-spoiler>",
+                     f'<i>full reveal: Judgment/views/reps/{r["id"]}.md</i>']
+            rev = "\n".join(keep)[:TG_LIMIT]
+        msgs.append(rev)
     return msgs
 
 
@@ -470,15 +579,18 @@ def bury(state, card_id: str, ds: str, reason: str = ""):
     state.get("cards", {}).pop(card_id, None)      # drop its box state; it is out of rotation
 
 
-def apply_grades(deck, state, day: date, spec: str):
-    drop = drop_for(deck, state, day)
+def apply_grades(deck, state, day: date, spec: str, judgment=None):
+    drop = drop_for(deck, state, day, judgment)
     ds = day.isoformat()
     cards, drill = drop["cards"], drop["drill"]
     logged = []
-    dgrade = None
+    dgrade = rgrade = None
     for token in spec.replace(",", " ").split():
         if token.startswith("d:"):
             dgrade = token[2:]
+            continue
+        if token.startswith("r:"):
+            rgrade = token[2:]
             continue
         idx, _, letter = token[:-1], None, token[-1].lower()
         if not idx.isdigit() or letter not in (set(GRADE_MAP) | {BURY_LETTER}):
@@ -508,11 +620,25 @@ def apply_grades(deck, state, day: date, spec: str):
         e["last"], e["grade"] = ds, dgrade
         e["seen"] = e.get("seen", 0) + 1
 
+    rep = drop.get("rep")
+    if rgrade and rep:
+        # 'done' = committed and reviewed against the reveal, which is what the ladder
+        # counts. A number is accepted when offered and never required: gating progress on
+        # a score is how a practice layer becomes an exam and then becomes unused.
+        e = state.setdefault("reps", {}).setdefault(rep["id"], {"seen": 0})
+        e["last"] = ds
+        e["seen"] = e.get("seen", 0) + 1
+        e["reviewed"] = rgrade != "skip"
+        e["score"] = int(rgrade) if rgrade.isdigit() else None
+        if rgrade.isdigit():
+            e["total"] = 6
+
     state["history"][ds] = {"cards": [c["id"] for c in cards],
                             "drill": drill["id"] if drill else None,
+                            "rep": rep["id"] if rep else None,
                             "graded": True}
     save_schedule(state)
-    return logged, (drill, dgrade)
+    return logged, (drill, dgrade), (rep, rgrade)
 
 
 def stats(deck, state):
@@ -529,6 +655,8 @@ def main():
     p = argparse.ArgumentParser(description="8 cards + 1 drill, every day, free.")
     p.add_argument("--date", default=date.today().isoformat())
     p.add_argument("--dry-run", type=int, metavar="N", help="preview N days, write nothing")
+    p.add_argument("--short", action="store_true",
+                   help="bad-day dose: cards + rep, drill dropped")
     p.add_argument("--md", action="store_true", help="write Daily/<date>.md")
     p.add_argument("--html", action="store_true", help="write Deck/daily.html")
     p.add_argument("--telegram", action="store_true", help="push to Telegram")
@@ -543,6 +671,8 @@ def main():
     args = p.parse_args()
 
     deck = load_deck()
+
+    judgment = load_judgment()
     state = load_schedule()
     day = datetime.strptime(args.date, "%Y-%m-%d").date()
 
@@ -577,7 +707,8 @@ def main():
         return
 
     if args.grade:
-        logged, (drill, dgrade) = apply_grades(deck, state, day, args.grade)
+        logged, (drill, dgrade), (rep, rgrade) = apply_grades(
+            deck, state, day, args.grade, judgment)
         for cid, grade, box in logged:
             if grade == "buried":
                 print(f"  {cid}: retired — will not appear again (--unbury to undo)")
@@ -586,6 +717,10 @@ def main():
             print(f"  {cid}: {grade} → box {box} (next in {nxt}d)")
         if dgrade and drill:
             print(f"  {drill['id']}: {dgrade}")
+        if rgrade and rep:
+            note = "skipped" if rgrade == "skip" else (
+                f"reviewed, scored {rgrade}/6" if rgrade.isdigit() else "committed and reviewed")
+            print(f"  {rep['id']}: {note}")
         print("\n" + stats(deck, state))
         print("\nDrill grades also belong in Quizzes/attempts.json — run /daily --grade "
               "through Claude if you want the attempts log and Wiki/_index.md refreshed.")
@@ -594,14 +729,15 @@ def main():
     if args.dry_run:
         for i in range(args.dry_run):
             d = day + timedelta(days=i)
-            drop = drop_for(deck, state, d)
+            drop = drop_for(deck, state, d, judgment, args.short)
             themes = Counter(c.get("theme") for c in drop["cards"])
             print(f"{drop['date']} day {drop['day']:>3}  drill {drop['drill']['id'] if drop['drill'] else '—':<34}"
+                  f" rep {drop['rep']['id'][2:] if drop.get('rep') else '—':<28}"
                   f" cards: " + ", ".join(c["id"].replace("c-", "") for c in drop["cards"]))
             print(f"{'':>16}  themes: " + " ".join(f"{k}:{v}" for k, v in themes.most_common()))
         return
 
-    drop = drop_for(deck, state, day)
+    drop = drop_for(deck, state, day, judgment, args.short)
     print(render_text(drop))
     if args.md:
         DAILY_DIR.mkdir(exist_ok=True)

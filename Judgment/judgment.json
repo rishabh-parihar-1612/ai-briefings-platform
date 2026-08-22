@@ -1,0 +1,1663 @@
+{
+ "version": 1,
+ "built": "2026-08-21",
+ "reasons": {
+  "accountability": "Someone must answer for the outcome, and a model cannot be accountable.",
+  "value-tradeoff": "The choice distributes harm and benefit across people, and no metric encodes whose loss counts.",
+  "private-context": "The deciding facts live in heads and politics, not in any corpus.",
+  "irreversibility": "A one-way door: being wrong is unbounded or unrecoverable.",
+  "legitimacy": "The decision needs authority to be respected at all."
+ },
+ "decisions": [
+  {
+   "id": "hd-deserves-a-system",
+   "name": "Whether the problem deserves a system at all",
+   "one_line": "The decision to not build, or to solve it with a script and a runbook instead.",
+   "why_human": "private-context",
+   "why_human_long": "The deciding facts are opportunity cost and appetite: what the team stops doing to build this. Neither is in any corpus, and no eval scores the project you did not run.",
+   "evidence_required": [
+    "what the manual path costs today",
+    "how often it happens",
+    "what happens if we do nothing",
+    "what the team stops doing to build it"
+   ],
+   "decided_badly_looks_like": "Solving the wrong problem well, then defending it with adoption numbers nobody asked for.",
+   "skill": "problem framing before architecture",
+   "practice": {
+    "lens": "framing",
+    "topics": [
+     "pre-pilot-checklist",
+     "customer-interviews-for-ai"
+    ],
+    "drills": []
+   },
+   "trains_level": 5,
+   "cite": "doc: agentic-platform-leadership-framework §9"
+  },
+  {
+   "id": "hd-non-goals",
+   "name": "What we deliberately will not build",
+   "one_line": "The stated non-goals: the memory system, the tool registry, the framework we are choosing not to have yet.",
+   "why_human": "legitimacy",
+   "why_human_long": "A non-goal only holds if someone with standing declares it. Written by the system it reads as a limitation; declared by the owner it reads as a decision, and survives the next roadmap conversation.",
+   "evidence_required": [
+    "what a prototype must prove before the abstraction is earned",
+    "which generalization is currently speculative",
+    "who will ask for it anyway"
+   ],
+   "decided_badly_looks_like": "An elaborate multi-agent framework and a universal memory system before one workflow has proven value.",
+   "skill": "saying no in writing, early, with a reason",
+   "practice": {
+    "lens": "platform",
+    "topics": [
+     "abstraction-seams",
+     "pre-pilot-checklist"
+    ],
+    "drills": []
+   },
+   "trains_level": 6,
+   "cite": "doc: agentic-platform-leadership-framework §14"
+  },
+  {
+   "id": "hd-autonomy-line",
+   "name": "Where the autonomy line sits",
+   "one_line": "How much the system may do with no human in the path.",
+   "why_human": "accountability",
+   "why_human_long": "An eval measures how often the agent is right. Only a person decides how often being wrong is acceptable, and answers for it when it is not.",
+   "evidence_required": [
+    "blast radius of a wrong action",
+    "reversibility of the action",
+    "who is accountable today",
+    "detection latency for a wrong action"
+   ],
+   "decided_badly_looks_like": "One autonomy model for a summarizer and a config-pusher.",
+   "skill": "risk classification driving architecture, not the reverse",
+   "practice": {
+    "lens": "risk",
+    "topics": [
+     "hitl-design",
+     "agent-loop-guardrails"
+    ],
+    "drills": []
+   },
+   "trains_level": 4,
+   "cite": "doc: agentic-platform-leadership-framework §11"
+  },
+  {
+   "id": "hd-acceptable-failure",
+   "name": "What counts as an acceptable failure, and to whom",
+   "one_line": "Which wrong outputs we will ship with, and who absorbs them.",
+   "why_human": "value-tradeoff",
+   "why_human_long": "Every threshold accepts some failures. Choosing which ones distributes cost onto specific people — a tier-1 engineer, a tenant, a customer. No metric encodes whose loss counts.",
+   "evidence_required": [
+    "failure taxonomy from real cases",
+    "who is harmed by each class",
+    "whether the harm is visible to the person harmed",
+    "what recourse they have"
+   ],
+   "decided_badly_looks_like": "A single accuracy number standing in for a harm distribution.",
+   "skill": "naming the loser in every trade-off out loud",
+   "practice": {
+    "lens": "eval",
+    "topics": [
+     "ai-testing-and-evals",
+     "ai-slis-slos"
+    ],
+    "drills": []
+   },
+   "trains_level": 3,
+   "cite": "doc: agentic-platform-leadership-framework §3"
+  },
+  {
+   "id": "hd-release-gate",
+   "name": "The release gate when the evidence is mixed",
+   "one_line": "Ship or hold, when the eval suite is close to the threshold but not past it.",
+   "why_human": "accountability",
+   "why_human_long": "The thresholds are a judgment encoded before the pressure arrives. Holding at 88 against a 90 bar costs a quarter; shipping costs credibility. Someone signs either way.",
+   "evidence_required": [
+    "the pre-agreed thresholds",
+    "which failures are critical versus tolerable",
+    "the trend, not the snapshot",
+    "what a rollback actually costs"
+   ],
+   "decided_badly_looks_like": "Discovering the threshold during the argument about whether to ship.",
+   "skill": "setting thresholds before the pressure, then honouring them",
+   "practice": {
+    "lens": "eval",
+    "topics": [
+     "ai-testing-and-evals",
+     "ai-slis-slos"
+    ],
+    "drills": []
+   },
+   "trains_level": 3,
+   "cite": "doc: agentic-platform-leadership-framework §15"
+  },
+  {
+   "id": "hd-which-axis-loses",
+   "name": "Which trade-off axis loses",
+   "one_line": "Accuracy, cost, latency, autonomy, determinism, maintainability, team autonomy — one of them gives.",
+   "why_human": "value-tradeoff",
+   "why_human_long": "The axes are measurable; their exchange rate is not. What a point of accuracy is worth in latency depends on whose job the latency lands in, which is a business fact, not a model fact.",
+   "evidence_required": [
+    "the binding constraint, named",
+    "the exchange rate you are assuming",
+    "who feels each axis",
+    "what the user actually notices"
+   ],
+   "decided_badly_looks_like": "Optimizing every axis in the design review and none of them in production.",
+   "skill": "trade-off reasoning with an explicit exchange rate",
+   "practice": {
+    "lens": "architecture",
+    "topics": [
+     "token-economics",
+     "model-cascade-and-batch"
+    ],
+    "drills": []
+   },
+   "trains_level": 2,
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "hd-when-to-platformize",
+   "name": "When to platformize",
+   "one_line": "Extract the shared runtime, gateway, or registry now, or keep it bespoke one more time.",
+   "why_human": "private-context",
+   "why_human_long": "The trigger is repeated proven need across teams, and whether those teams will actually adopt a shared thing. Adoption intent lives in relationships, not telemetry.",
+   "evidence_required": [
+    "how many workflows genuinely need the abstraction",
+    "whether the second use was actually the same shape",
+    "who commits to adopting it",
+    "cost of getting the seam wrong"
+   ],
+   "decided_badly_looks_like": "Agent-first platform development: infrastructure built because future agents might need it.",
+   "skill": "extraction timing from evidence, not from aesthetics",
+   "practice": {
+    "lens": "platform",
+    "topics": [
+     "abstraction-seams",
+     "build-buy-partner"
+    ],
+    "drills": []
+   },
+   "trains_level": 6,
+   "cite": "doc: agentic-platform-leadership-framework §8"
+  },
+  {
+   "id": "hd-never-remembered",
+   "name": "What may never be remembered",
+   "one_line": "The tenancy boundary and the data the system must be structurally unable to retain.",
+   "why_human": "irreversibility",
+   "why_human_long": "A leak cannot be un-leaked. Retention is a one-way door: the design that makes cross-tenant contamination impossible must exist before the first write, not after the first incident.",
+   "evidence_required": [
+    "data classes in play",
+    "tenancy model",
+    "where memory is written and by whom",
+    "how incorrect or leaked memory would be corrected"
+   ],
+   "decided_badly_looks_like": "A shared embedding index across tenants, discovered during a customer audit.",
+   "skill": "designing for the failure you cannot undo",
+   "practice": {
+    "lens": "security",
+    "topics": [
+     "multi-tenant-ai-security",
+     "memory-systems",
+     "corpus-provenance"
+    ],
+    "drills": []
+   },
+   "trains_level": 4,
+   "cite": "doc: agentic-platform-leadership-framework §13"
+  },
+  {
+   "id": "hd-who-approves",
+   "name": "Who approves, who is accountable, and how it escalates",
+   "one_line": "The human control surface: approval gates, escalation, override, rollback.",
+   "why_human": "accountability",
+   "why_human_long": "Accountability must land on a named person before the system runs, because after an incident everyone discovers they were not the approver.",
+   "evidence_required": [
+    "who currently owns the manual decision",
+    "what they need to approve competently",
+    "escalation path when they are unavailable",
+    "who can override and who is told"
+   ],
+   "decided_badly_looks_like": "An approval gate nobody is staffed to honour at 2am, so it gets clicked through.",
+   "skill": "designing human control surfaces people will actually use",
+   "practice": {
+    "lens": "ops",
+    "topics": [
+     "hitl-design",
+     "kill-switch-framework"
+    ],
+    "drills": []
+   },
+   "trains_level": 4,
+   "cite": "doc: agentic-platform-leadership-framework §16"
+  },
+  {
+   "id": "hd-build-buy-partner",
+   "name": "Build, buy, partner — and how much lock-in we accept",
+   "one_line": "Also: automate, simplify, defer, reject. Six options, not two.",
+   "why_human": "private-context",
+   "why_human_long": "The answer turns on hiring plans, vendor relationships, roadmap sequencing and what the org can maintain. None of it is in the corpus, and the lock-in half is a one-way door.",
+   "evidence_required": [
+    "what exists already",
+    "true maintenance cost of building",
+    "exit cost from the vendor",
+    "what a delay actually costs"
+   ],
+   "decided_badly_looks_like": "Building a differentiator-free component because building is more interesting than integrating.",
+   "skill": "prioritization across six options, not a build-or-buy binary",
+   "practice": {
+    "lens": "business",
+    "topics": [
+     "build-buy-partner",
+     "abstraction-seams"
+    ],
+    "drills": []
+   },
+   "trains_level": 5,
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "hd-kill-criterion",
+   "name": "The kill criterion, and when to stop investing",
+   "one_line": "The number and date at which we sunset this, stated before we need it.",
+   "why_human": "legitimacy",
+   "why_human_long": "A kill criterion volunteered by the owner is a commitment. Extracted under questioning it is a concession, and produced by the system it is ignored. Same sentence, three different weights.",
+   "evidence_required": [
+    "the metric that would prove this is not working",
+    "the date by which it must move",
+    "sunk cost already committed",
+    "what we do with the learning if we stop"
+   ],
+   "decided_badly_looks_like": "A pilot with no kill criterion, alive for two years on the strength of its demo.",
+   "skill": "volunteering the kill criterion first",
+   "practice": {
+    "lens": "business",
+    "topics": [
+     "kill-switch-framework",
+     "scaling-ai-adoption"
+    ],
+    "drills": []
+   },
+   "trains_level": 6,
+   "cite": "doc: agentic-platform-leadership-framework §3"
+  },
+  {
+   "id": "hd-reversibility-class",
+   "name": "One-way door or two-way door",
+   "one_line": "Classifying each action by whether a wrong one can be undone, and designing accordingly.",
+   "why_human": "irreversibility",
+   "why_human_long": "The classification sets how much process an action deserves. Getting it wrong is expensive in both directions: ceremony on reversible actions, and nothing guarding the irreversible one.",
+   "evidence_required": [
+    "which actions are idempotent",
+    "what happens after partial completion",
+    "how a wrong action is detected",
+    "what undo actually requires"
+   ],
+   "decided_badly_looks_like": "A retry that re-applies a mutating action, discovered when a tenant gets it three times.",
+   "skill": "reversibility classification before autonomy design",
+   "practice": {
+    "lens": "harness",
+    "topics": [
+     "idempotency-for-ai-operations",
+     "resilience-patterns"
+    ],
+    "drills": []
+   },
+   "trains_level": 4,
+   "cite": "doc: agentic-platform-leadership-framework §13"
+  },
+  {
+   "id": "hd-destructive-tools",
+   "name": "Which destructive tools an agent may ever hold",
+   "one_line": "Read-only or mutating, and which mutations are gated behind a human.",
+   "why_human": "irreversibility",
+   "why_human_long": "Granting a mutating tool is granting the blast radius. The grant is a decision made once and inherited by every future prompt, including the injected ones.",
+   "evidence_required": [
+    "tool inventory split read versus mutating",
+    "permissions each tool carries",
+    "which mutations are gated",
+    "what an injected prompt could reach"
+   ],
+   "decided_badly_looks_like": "A diagnosis agent holding a config-push tool because it was convenient during the prototype.",
+   "skill": "least privilege as a design act, not a hardening pass",
+   "practice": {
+    "lens": "security",
+    "topics": [
+     "prompt-injection-defense",
+     "tool-calling-anatomy",
+     "multi-tenant-ai-security"
+    ],
+    "drills": []
+   },
+   "trains_level": 4,
+   "cite": "doc: agentic-platform-leadership-framework §13"
+  },
+  {
+   "id": "hd-own-the-miss",
+   "name": "Owning a miss while keeping the investment ask",
+   "one_line": "Presenting a failure honestly in the same meeting where you ask for more.",
+   "why_human": "accountability",
+   "why_human_long": "Only the accountable person can own a miss; a report that explains a shortfall without someone standing behind it reads as excuse-making, and the ask dies with it.",
+   "evidence_required": [
+    "the honest number against the target",
+    "whether the cause is capability or adoption, with proof",
+    "the specific ask",
+    "the kill criterion you volunteer"
+   ],
+   "decided_badly_looks_like": "Blending measured, unrealized and speculative value into one number so the miss disappears.",
+   "skill": "three-tier reporting under adversarial questioning",
+   "practice": {
+    "lens": "comms",
+    "topics": [
+     "ai-product-metrics",
+     "scaling-ai-adoption"
+    ],
+    "drills": [
+     "d-t4-board-narrative-pilot-underperformed"
+    ]
+   },
+   "trains_level": 6,
+   "cite": "issue 009, §20"
+  },
+  {
+   "id": "hd-pre-registration",
+   "name": "Pre-registering what would change your mind",
+   "one_line": "Writing down, before the data arrives, which result would make you abandon the approach.",
+   "why_human": "legitimacy",
+   "gap": true,
+   "why_human_long": "Stated in advance it is intellectual honesty and it binds you. Discovered afterwards it is rationalization, and everyone present can tell the difference.",
+   "evidence_required": [
+    "the falsifiable claim",
+    "the confidence attached to it",
+    "the date it gets checked",
+    "what you do if it fails"
+   ],
+   "decided_badly_looks_like": "A prediction rewritten after the result to be the thing that happened.",
+   "skill": "calibration through pre-commitment",
+   "practice": {
+    "lens": "eval",
+    "topics": [
+     "ai-testing-and-evals"
+    ],
+    "drills": []
+   },
+   "trains_level": 3,
+   "cite": "modeled"
+  },
+  {
+   "id": "hd-not-our-problem",
+   "name": "Whose problem this is not",
+   "one_line": "Declining scope that belongs to another team, or to no system at all.",
+   "why_human": "legitimacy",
+   "why_human_long": "Refusing work needs standing. The same refusal from an engineer reads as reluctance and from the owner reads as focus, which is why the decision cannot be delegated downward or to a system.",
+   "evidence_required": [
+    "who owns the problem today",
+    "whether solving it here creates a permanent dependency",
+    "what we drop to take it",
+    "the honest alternative for them"
+   ],
+   "decided_badly_looks_like": "Absorbing adjacent scope until the platform is a support queue with an LLM in it.",
+   "skill": "reject as a first-class option",
+   "practice": {
+    "lens": "business",
+    "topics": [
+     "build-buy-partner",
+     "pre-pilot-checklist"
+    ],
+    "drills": []
+   },
+   "trains_level": 6,
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "hd-approval-fatigue",
+   "name": "Approval fatigue against safety",
+   "one_line": "How many human checkpoints before the human stops reading them.",
+   "why_human": "value-tradeoff",
+   "why_human_long": "More gates look safer on the diagram and are less safe in practice, because an approver who clicks through fifty a day is not an approver. Where that line sits is a judgment about people.",
+   "evidence_required": [
+    "approvals per approver per shift",
+    "how long a competent approval takes",
+    "what fraction are ever rejected",
+    "what a rubber-stamped approval costs"
+   ],
+   "decided_badly_looks_like": "An approval gate with a 99% approve rate, cited as evidence of human oversight.",
+   "skill": "designing for the tired operator, not the diagram",
+   "practice": {
+    "lens": "ops",
+    "topics": [
+     "hitl-design",
+     "agent-loop-guardrails"
+    ],
+    "drills": []
+   },
+   "trains_level": 4,
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "hd-disclose-uncertainty",
+   "name": "When a wrong answer must be visible to the customer",
+   "one_line": "Whether the system shows its uncertainty, and to whom.",
+   "why_human": "value-tradeoff",
+   "gap": true,
+   "why_human_long": "Disclosure trades trust against confidence. Hiding uncertainty raises adoption and transfers the cost of being wrong onto whoever acted on it — a distribution choice, not a UX preference.",
+   "evidence_required": [
+    "what the reader will do with the answer",
+    "cost of unearned confidence",
+    "whether a confidence signal changes behaviour",
+    "what recourse exists after a wrong answer"
+   ],
+   "decided_badly_looks_like": "A confident recommendation with no provenance, acted on during an outage.",
+   "skill": "deciding what the user is owed, not what looks polished",
+   "practice": {
+    "lens": "comms",
+    "topics": [
+     "corpus-provenance",
+     "hitl-design"
+    ],
+    "drills": []
+   },
+   "trains_level": 5,
+   "cite": "modeled"
+  }
+ ],
+ "reps": [
+  {
+   "id": "r-2026-08-21-tenant-auto-remediate",
+   "serve_date": "2026-08-21",
+   "decision": "hd-autonomy-line",
+   "lens": "risk",
+   "level": 4,
+   "mode": "decide",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "issue 004 §19 support copilot spec",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "The internal tier-1 copilot has been running two quarters. Triage fans out to four workers, a tier-1 engineer reviews the plan in 30-60 seconds, and only then does anything execute. It is doing well: p95 under 5s to first response, about $0.41 per ticket against a $0.50 budget.",
+    "A VP has watched a demo and wants the tenant-facing version by end of quarter: customers open the MyAryaka portal, describe the problem, and the agent diagnoses and fixes it. Self-service. No tier-1 in the path.",
+    "The pitch writes itself. Roughly 40% of tier-1 volume is a handful of shapes — a flapping tunnel, an MTU mismatch after a customer-side change, a stale route. Each has a known remediation tier-1 applies by hand dozens of times a week.",
+    "Engineering's read is that this is mostly done: the diagnosis chain works, the MCP servers exist, and the remediation tools are already wired for tier-1 use. What is missing is 'just the portal front-end and removing the approval step'.",
+    "The scale envelope is 1,000 tickets/day at launch to 10K over 18 months, 50 tenants to 500.",
+    "You have the design review on Thursday. The VP will be there, and so will the engineer who wrote the remediation tools.",
+    "Nobody in the room has yet said the word 'rollback'."
+   ],
+   "withheld": [
+    {
+     "ask": "What is the blast radius of a wrong remediation on a tenant edge?",
+     "fact": "The same tool tier-1 uses can push config to a live tenant edge device. A wrong push on a hub site can black-hole traffic for every branch behind it — in the largest tenant, 60+ sites.",
+     "decisive": true
+    },
+    {
+     "ask": "How long until a wrong action is detected?",
+     "fact": "Telemetry lag to the monitoring pipeline is 3-7 minutes, and a customer-reported outage typically arrives 10-20 minutes after impact. Nothing detects a bad push in under three minutes.",
+     "decisive": true
+    },
+    {
+     "ask": "Is the remediation reversible, and how fast?",
+     "fact": "Config pushes are versioned and revertible, but the revert is another push through the same queue — 2-4 minutes when the queue is quiet, and the queue is not quiet during an incident.",
+     "decisive": true
+    },
+    {
+     "ask": "Who is accountable for a wrong action today?",
+     "fact": "The tier-1 engineer who approved the plan. Their name is on the change record. In the self-service flow there is no equivalent field, and nobody has proposed one.",
+     "decisive": true
+    },
+    {
+     "ask": "What fraction of tier-1 plan reviews currently result in a change?",
+     "fact": "About 8% of plans are edited or rejected. The other 92% are approved unchanged.",
+     "decisive": false
+    },
+    {
+     "ask": "What is the tenant mix, and are any regulated?",
+     "fact": "Of 50 tenants, 6 are ZDR-required and SOC2-audited; those 6 are about 30% of revenue.",
+     "decisive": false
+    },
+    {
+     "ask": "What does a diagnosis cost per run today?",
+     "fact": "$0.41 per ticket, roughly 40 tool calls, inside the $0.50 budget.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "By Thursday, commit to one autonomy model for the tenant-facing flow, and say what you will not ship this quarter.",
+   "options": [
+    "build",
+    "simplify",
+    "defer",
+    "reject",
+    "escalate"
+   ],
+   "rubric": [
+    {
+     "dim": "problem",
+     "looks_for": "separates diagnosis from remediation instead of treating 'self-service' as one feature",
+     "weight": 1
+    },
+    {
+     "dim": "system",
+     "looks_for": "autonomy derived from blast radius and detection latency, not from the 92% approval rate",
+     "weight": 2
+    },
+    {
+     "dim": "ops",
+     "looks_for": "names the detection gap: a revert path slower than the damage is not a rollback",
+     "weight": 1
+    },
+    {
+     "dim": "business",
+     "looks_for": "gives the VP something shippable this quarter rather than a flat no",
+     "weight": 1
+    }
+   ],
+   "strong_answer": [
+    "Split the feature: tenant-facing diagnosis ships, tenant-triggered remediation does not.",
+    "Justify it from blast radius, not from the approval rate — 92% approved unchanged argues for less friction only if the 8% is harmless, and here the 8% is the hub-site push.",
+    "Name the disqualifying number: detection takes 3-7 minutes minimum, revert 2-4 more, so a wrong push can run ~10 minutes across 60 sites with no human aware.",
+    "So autonomy is bounded by detection, not by accuracy. An action you cannot see fail inside its damage window cannot be unattended at any accuracy.",
+    "Ship the read-only half with disclosure: diagnosis, the evidence behind it, and the exact remediation the customer can request — routed to tier-1's existing gate.",
+    "Offer a real path to full self-service: per-action classification, and the first mutating action goes unattended only when detection for that action class is under 60 seconds.",
+    "Volunteer the kill criterion: if under 30% of diagnoses are accepted without tier-1 contact in 90 days, the self-service premise is wrong and we stop.",
+    "Say out loud that the 6 ZDR tenants are out of scope for v1, before someone else notices."
+   ],
+   "traps": [
+    "Arguing the model is not accurate enough. It probably is — accuracy is the wrong axis, and that argument is unwinnable on Thursday because the demo looked fine.",
+    "Accepting 'remove the approval step' as the framing. That step is not friction; it is the only thing currently converting a wrong plan into a non-event.",
+    "Saying no to all of it. The diagnosis half is valuable, safe and shippable this quarter — refusing everything spends credibility you need for the remediation fight.",
+    "Proposing a customer confirmation dialog. A customer clicking 'yes, apply' is not an approval; they have neither the context nor the accountability tier-1 has."
+   ],
+   "human_only_beat": "The disqualifying fact is that detection is slower than damage, and no eval surfaces it — the model is right 92% of the time either way. Deciding a 10-minute unattended blast window across 60 sites is unacceptable is `accountability`: someone signs for that outage, and it cannot be the agent.",
+   "termdrops": [
+    "blast radius",
+    "detection latency",
+    "autonomy bounded by detection",
+    "per-action classification",
+    "kill criterion"
+   ],
+   "followups": [
+    {
+     "q": "Tier-1 approves 92% unchanged. Isn't that gate theatre?",
+     "a": "Theatre for the 92%, load-bearing for the 8%. The question is not how often it fires but what it catches — here, the hub-site push. Remove it and you keep the convenience and inherit the tail."
+    },
+    {
+     "q": "Competitors ship self-healing networks. Why can't we?",
+     "a": "Most ship self-healing on reversible, locally-scoped actions with sub-minute detection. That is the rule I am proposing, not a different one. Match the detection first and the autonomy follows."
+    },
+    {
+     "q": "What if we cap it to low-risk tenants only?",
+     "a": "Tenant risk is not the axis — action risk is. A stale-route refresh on a regulated tenant is safer than a hub-site MTU change on a small one. Classify actions, not customers."
+    }
+   ],
+   "aryaka": "Previews the stage-3 gate for Projects/sdwan-self-troubleshoot. The project itself is still at gate 1, so treat the autonomy call here as rehearsal — the binding version comes after the problem and suitability gates are written.",
+   "topics": [
+    "hitl-design",
+    "agent-loop-guardrails",
+    "kill-switch-framework"
+   ],
+   "cite": [
+    "issue 004, §19",
+    "doc: agentic-platform-leadership-framework §11"
+   ]
+  },
+  {
+   "id": "r-2026-08-22-alarm-seam-split",
+   "serve_date": "2026-08-22",
+   "decision": "hd-which-axis-loses",
+   "lens": "architecture",
+   "level": 2,
+   "mode": "design",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "framework §12 workflow-before-agent",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "You are designing the alarm-triggered diagnosis system. An alarm fires — tunnel down, packet loss, latency, port down — for a site of a customer, and the system must produce a root cause with next steps.",
+    "Seven evidence sources are available: alarm history for recurrence, alarm topology for site-versus-POP scope, JIRA for known engineering issues, the Salesforce case corpus for probable causes from case summaries and email threads in comment fields, the SOP mapped 1:1 to the alarm class, related SOPs, and live device and platform APIs.",
+    "The SOPs exist as prose. Each describes a sequence of checks — run this command, look at this counter, if it is above X go here, otherwise go there.",
+    "An architect on your team has drawn it as a single agent with all seven sources as tools and the SOP text in the system prompt. It demos beautifully on three alarms.",
+    "Volume envelope for the estate is 1,000 tickets/day now to 10K over 18 months, 50 tenants to 500.",
+    "You have to produce the design that goes into the gate-2 suitability argument.",
+    "Nobody has yet written down which steps are deterministic."
+   ],
+   "withheld": [
+    {
+     "ask": "How much of the SOP branching is actually fixed versus discovered at runtime?",
+     "fact": "About 80% of SOP steps are a fixed sequence with two-way branches on threshold checks. The remaining 20% say things like 'investigate further based on findings' with no defined next step.",
+     "decisive": true
+    },
+    {
+     "ask": "How large is the Salesforce corpus and how is it searched today?",
+     "fact": "Roughly 400K cases. Engineers search it by keyword and give up after the first page. Case type and sub-type are populated reliably; comment fields are free text and often contain the actual resolution.",
+     "decisive": true
+    },
+    {
+     "ask": "Is the alarm-to-SOP mapping really 1:1?",
+     "fact": "Yes, and it is maintained as a table. No inference required.",
+     "decisive": true
+    },
+    {
+     "ask": "What does a device call cost in latency?",
+     "fact": "1-4 seconds per show command, and some devices rate-limit to one session at a time per site.",
+     "decisive": false
+    },
+    {
+     "ask": "How often do SOPs change?",
+     "fact": "Monthly-ish, edited by the NOC team directly, with no versioning or review process.",
+     "decisive": false
+    },
+    {
+     "ask": "What is the latency expectation for the RCA?",
+     "fact": "Nobody has set one. The implicit target is 'faster than a human', which today is 20-40 minutes to first diagnosis.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "Draw the design. Name every seam: which steps are deterministic code, which are retrieval, which are LLM calls, which are tool executions, and where the stop condition lives.",
+   "rubric": [
+    {
+     "dim": "system",
+     "looks_for": "the four LLM roles are named and bounded, and everything else is code, lookup or retrieval",
+     "weight": 2
+    },
+    {
+     "dim": "problem",
+     "looks_for": "recognizes the 1:1 SOP table makes the dominant path a state machine, not a plan",
+     "weight": 1
+    },
+    {
+     "dim": "eval",
+     "looks_for": "notices retrieval over 400K cases is the layer carrying the risk",
+     "weight": 1
+    },
+    {
+     "dim": "ops",
+     "looks_for": "a stop condition that exists somewhere concrete, and device rate limits respected",
+     "weight": 1
+    }
+   ],
+   "attack_vectors": [
+    "scale-10x",
+    "stale-tool-data",
+    "loop-no-stop",
+    "token-math",
+    "injection-tenancy",
+    "operator-3am"
+   ],
+   "strong_answer": [
+    "Deterministic: recurrence lookup, site-versus-POP scope aggregation, alarm-to-SOP table lookup. No model touches these.",
+    "Retrieval: JIRA, related SOPs, and the case corpus — with case type and sub-type as hard filters before any semantic search, because those fields are reliable and cut 400K down before ranking.",
+    "LLM, exactly four roles: synthesize top-X causes from retrieved case text; compile SOP prose into executable steps; interpret device output against expectation; synthesize the root cause.",
+    "Tools: device show commands and platform API reads, serialized per site to respect the one-session limit, with a per-tool circuit breaker.",
+    "The 80% fixed SOP path is a state machine over a compiled graph — replayable, testable, cheap. Only the 20% 'investigate further' tail needs open-ended planning.",
+    "So the honest architecture is an LLM-powered workflow with a bounded agentic escape hatch, not an agent with seven tools.",
+    "Stop condition lives in the graph, not in the model: SOP exhausted, or confidence in a cause crosses a bar, or a step budget is hit. Three independent limits.",
+    "SOP compilation is cached and versioned per SOP revision — recompiling prose to steps on every alarm is the cost mistake at 10K/day."
+   ],
+   "traps": [
+    "Everything-as-tools on one agent. It demos well on three alarms because three alarms never exercise the branch space, and it makes the 80% deterministic path nondeterministic for no gain.",
+    "Semantic search over 400K cases without the type and sub-type filter. Ranking quality collapses and the cost per diagnosis scales with corpus size instead of with the filtered slice.",
+    "Putting the SOP text in the system prompt. It is monthly-changing, unversioned prose being used as code, and there is no way to test a change before it ships.",
+    "Skipping the stop condition because the SOP 'ends'. The 20% tail does not end, and that is where a loop lives."
+   ],
+   "human_only_beat": "Choosing to ship a state machine when a demo of an agent already impressed the room is `legitimacy`: the simpler design only survives if someone with standing says out loud that the fixed 80% is not a planning problem. No benchmark makes that argument for you.",
+   "termdrops": [
+    "seam",
+    "compiled SOP graph",
+    "hard filter before semantic search",
+    "bounded escape hatch",
+    "stop condition"
+   ],
+   "followups": [
+    {
+     "q": "Why not let the model plan? It handled all three demo alarms.",
+     "a": "Three alarms do not exercise the branch space. The 80% path has known branches, so planning it at runtime buys nondeterminism, higher cost and an untestable path in exchange for nothing measurable."
+    },
+    {
+     "q": "Isn't a state machine brittle when SOPs change monthly?",
+     "a": "Compilation makes change cheap and reviewable: recompile on SOP revision, diff the graph, test it. Prose in a prompt changes silently, which is the brittleness people actually mean."
+    }
+   ],
+   "aryaka": "This is the gate-4 and gate-5 argument for Projects/sdwan-self-troubleshoot, and the reason gate 2 can defend an LLM-powered workflow rather than climbing to an agent.",
+   "topics": [
+    "agent-suitability-ladder",
+    "workflow-engines-for-ai",
+    "tool-calling-anatomy",
+    "kg-rag"
+   ],
+   "cite": [
+    "doc: agentic-platform-leadership-framework §12",
+    "doc: agentic-platform-leadership-cheat-sheet §4",
+    "doc: agentic-ai-system-design-deep-dive §6",
+    "issue 004, §19"
+   ]
+  },
+  {
+   "id": "r-2026-08-23-case-retrieval-eval",
+   "serve_date": "2026-08-23",
+   "decision": "hd-release-gate",
+   "lens": "eval",
+   "level": 3,
+   "mode": "decide",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "framework §4 evaluation layers",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "The alarm diagnosis system's probable-cause step mines a 400K-case Salesforce corpus and returns the top three likely causes with the cases behind each.",
+    "Your team reports it is working: on a 60-alarm test set, the engineer agreed with the top cause 71% of the time and the correct cause was somewhere in the top three 88% of the time.",
+    "The final RCA synthesis, which reads those causes plus device output, is rated 'good or very good' by reviewers on 82% of the 60.",
+    "The VP wants this in front of the NOC next month. The team wants to know what threshold you need.",
+    "Nobody has separated the retrieval number from the synthesis number. When the RCA is wrong, no one can currently say whether the right cases were not retrieved or the right cases were retrieved and misread.",
+    "The test set was assembled by the same engineer who tuned the retrieval.",
+    "There is no regression suite. Fixes are verified by re-running the same 60."
+   ],
+   "withheld": [
+    {
+     "ask": "How was the 60-alarm test set sampled?",
+     "fact": "Hand-picked from alarms that had a clean documented resolution. Alarms that were closed as 'no fault found' or with an empty resolution field were excluded — those are about 35% of real volume.",
+     "decisive": true
+    },
+    {
+     "ask": "What happens downstream when the RCA is wrong?",
+     "fact": "The engineer follows it. On the two wrong cases in the pilot, the engineer spent 25 and 40 minutes on the wrong subsystem before backing out.",
+     "decisive": true
+    },
+    {
+     "ask": "Can the system currently say it does not know?",
+     "fact": "No. It always returns three causes and always synthesizes an RCA. There is no abstain path and no confidence attached to the output.",
+     "decisive": true
+    },
+    {
+     "ask": "Is the evidence chain shown to the engineer?",
+     "fact": "The case IDs are shown. The specific comment-field text that drove the cause is not.",
+     "decisive": false
+    },
+    {
+     "ask": "What is the cost per diagnosis?",
+     "fact": "About $0.55, above the $0.50 per-ticket budget the copilot programme was held to.",
+     "decisive": false
+    },
+    {
+     "ask": "How stable are the numbers run to run?",
+     "fact": "Unmeasured. The 60-alarm set has been run once per change.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "State the release thresholds this system must meet before it goes in front of the NOC, and what you will not ship without.",
+   "options": [
+    "build",
+    "simplify",
+    "defer",
+    "reject",
+    "escalate"
+   ],
+   "rubric": [
+    {
+     "dim": "eval",
+     "looks_for": "separates layer 2 retrieval from layer 4 synthesis, and refuses a blended number",
+     "weight": 2
+    },
+    {
+     "dim": "problem",
+     "looks_for": "spots that excluding no-fault-found cases removed the hard third of the distribution",
+     "weight": 1
+    },
+    {
+     "dim": "ops",
+     "looks_for": "requires an abstain path, because a confident wrong RCA costs more than no RCA",
+     "weight": 1
+    },
+    {
+     "dim": "business",
+     "looks_for": "a threshold set on accepted-RCA rate, not on reviewer-rated quality",
+     "weight": 1
+    }
+   ],
+   "strong_answer": [
+    "Refuse the blended read. Retrieval and synthesis are layers 2 and 4, and until they are measured separately no fix can be attributed.",
+    "The 82% is measured on a set that excluded the hardest 35% of real volume, so it is not an estimate of production behaviour at all — it is an estimate on the easy slice.",
+    "Rebuild the test set by stratified sampling from real alarm distribution, including no-fault-found and empty-resolution cases. Those are where a confident wrong answer is most likely.",
+    "Hard requirement before NOC exposure: an abstain path. The expensive failure here is a confident RCA with a thin evidence chain sending an engineer 40 minutes the wrong way.",
+    "Thresholds worth stating: top-3 retrieval recall on the stratified set, an unsupported-claim ceiling of zero for RCAs presented without a shown evidence chain, and abstain-rather-than-guess on anything below the confidence bar.",
+    "Measure the metric that matters: accepted-RCA rate by the receiving engineer, not reviewer-rated quality. Reviewers rate plausibility; engineers act.",
+    "Every wrong case from the pilot becomes a permanent regression case — that loop is the only thing that makes the system improve rather than merely change.",
+    "Independence: whoever tunes retrieval does not own the test set."
+   ],
+   "traps": [
+    "Accepting 82% as the number. It is a number on a curated set, and the curation removed exactly the cases the abstain path exists for.",
+    "Setting a single task-success threshold. A blended number buries the retrieval failure inside the synthesis score and vice versa.",
+    "Treating reviewer 'good or very good' as quality. It measures whether the RCA reads well, which is what a confident wrong answer also does.",
+    "Negotiating the threshold now that the demo has happened. The framework's point is that thresholds must exist before the pressure, not that they must be high."
+   ],
+   "human_only_beat": "No eval can tell you that 40 minutes of an engineer's wrong-subsystem time is worse than an abstention — that is `value-tradeoff`, a choice about who absorbs the failure. And deciding to hold a shipping date on a stratified rebuild is `accountability`: the number will get worse before it gets honest, and someone signs for the delay.",
+   "termdrops": [
+    "stratified eval set",
+    "abstain path",
+    "unsupported-claim ceiling",
+    "layer separation",
+    "accepted-RCA rate"
+   ],
+   "followups": [
+    {
+     "q": "The stratified set will score much lower. How do you sell that?",
+     "a": "As the first honest number. The 82% was never a production estimate, so the drop is a correction, not a regression — and the alternative is discovering it in front of the NOC."
+    },
+    {
+     "q": "Isn't abstaining just reduced coverage?",
+     "a": "Coverage of a wrong answer is negative value here: measured at 25 and 40 minutes of misdirected work. Abstention converts a costly failure into a cheap one."
+    },
+    {
+     "q": "Cost is $0.55 against a $0.50 budget. Blocker?",
+     "a": "Not yet — it is a tuning problem, and the hard filter on case type before semantic search is the obvious lever. It becomes a blocker only if it survives that."
+    }
+   ],
+   "aryaka": "This is the gate-7 evaluation plan for Projects/sdwan-self-troubleshoot, and the abstain requirement traces straight back to the tension recorded at gate 1.",
+   "topics": [
+    "evaluation-layers",
+    "ai-testing-and-evals",
+    "corpus-provenance",
+    "ai-slis-slos"
+   ],
+   "cite": [
+    "doc: agentic-platform-leadership-framework §4",
+    "doc: agentic-platform-leadership-framework §15",
+    "doc: agentic-platform-leadership-framework §5",
+    "issue 004, §19"
+   ]
+  },
+  {
+   "id": "r-2026-08-24-case-corpus-tenancy",
+   "serve_date": "2026-08-24",
+   "decision": "hd-never-remembered",
+   "lens": "security",
+   "level": 4,
+   "mode": "decide",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "framework §13 architecture questions — state and security",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "The probable-cause step is the system's best feature: it mines 400K Salesforce cases and finds that this alarm shape was resolved eleven times before — sometimes for this customer, more often for others.",
+    "Cross-customer learning is the entire value. A tunnel-flap cause discovered at customer A is exactly what customer B's engineer needs.",
+    "The case corpus contains free-text comment fields and pasted email threads. Those threads contain customer names, site names, IP addressing, occasionally credentials someone pasted during an incident, and in six tenants' cases, data those tenants have contractually required stay in their region.",
+    "The current prototype embeds all 400K cases into one index and retrieves across it. Retrieved case text goes into the prompt that synthesizes the top three causes.",
+    "The output shown to the engineer cites case IDs.",
+    "Of 50 tenants, six are ZDR-required and SOC2-audited, and they are about 30% of revenue.",
+    "A customer security questionnaire is due in three weeks and asks, in writing, whether their support data trains or informs any AI feature used for other customers."
+   ],
+   "withheld": [
+    {
+     "ask": "Does the retrieved case text reach an engineer from a different customer?",
+     "fact": "Yes. The synthesis prompt receives raw comment-field text from other customers' cases, and fragments of it appear verbatim in the generated cause descriptions.",
+     "decisive": true
+    },
+    {
+     "ask": "Is there any tenant tagging on the index?",
+     "fact": "No. Tenant is a field on the case record but is not carried into the embedding index or the retrieval filter.",
+     "decisive": true
+    },
+    {
+     "ask": "What is in the comment fields, concretely?",
+     "fact": "A sample of 500 found customer-identifiable site names in 41%, public IP addressing in 18%, and credentials or tokens in 2%.",
+     "decisive": true
+    },
+    {
+     "ask": "Can a case be deleted, and does deletion propagate?",
+     "fact": "Cases can be redacted in Salesforce. Nothing propagates to the embedding index, which is rebuilt quarterly.",
+     "decisive": true
+    },
+    {
+     "ask": "Do the six regulated tenants' contracts prohibit this outright?",
+     "fact": "Unclear — the clauses restrict data location and third-party processing, and nobody has read them against this design.",
+     "decisive": false
+    },
+    {
+     "ask": "How much does the cross-customer signal contribute?",
+     "fact": "Unmeasured. The team believes it is most of the value but has never run same-customer-only as a comparison.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "Decide what this system may never retain or surface, and what you will answer on the security questionnaire in three weeks.",
+   "options": [
+    "build",
+    "simplify",
+    "defer",
+    "reject",
+    "escalate"
+   ],
+   "rubric": [
+    {
+     "dim": "system",
+     "looks_for": "separates the transferable lesson from the customer-identifiable text that carried it",
+     "weight": 2
+    },
+    {
+     "dim": "ops",
+     "looks_for": "notices deletion does not propagate to a quarterly-rebuilt index",
+     "weight": 1
+    },
+    {
+     "dim": "business",
+     "looks_for": "protects the cross-customer value instead of killing the feature to be safe",
+     "weight": 1
+    },
+    {
+     "dim": "problem",
+     "looks_for": "measures the cross-customer contribution before trading anything away for it",
+     "weight": 1
+    }
+   ],
+   "strong_answer": [
+    "The valuable thing is the causal pattern, not the case text. Those are separable, and the whole design follows from separating them.",
+    "So: extract structured cause records from case text — symptom, contributing factor, resolution, alarm class — and index those. Never index or retrieve raw comment text across tenants.",
+    "Raw case text stays retrievable within its own tenant only, enforced by a tenant filter on the index and not by a prompt instruction.",
+    "Credentials and public IP addressing are scrubbed at extraction, not at display. Scrubbing at display means the secret already reached the prompt and the trace and the logs.",
+    "Deletion has to propagate: a redaction in Salesforce must invalidate the derived cause record. A quarterly rebuild means up to 90 days of serving deleted data, which is the answer you cannot give on a questionnaire.",
+    "Run same-customer-only as a measured comparison before anyone argues about how much cross-customer learning is worth. Right now that value is asserted, not known.",
+    "The six regulated tenants are excluded from cross-tenant contribution until someone has actually read the clauses — and say so in the design, not in a footnote.",
+    "Questionnaire answer, written now while it is still true: derived non-identifiable cause patterns are shared; customer case content is not; and here is the enforcement mechanism."
+   ],
+   "traps": [
+    "Prompt-level instructions not to reveal other customers' data. That is a request, not a control, and it appears in the trace and the logs regardless.",
+    "Killing cross-customer retrieval entirely. It is the feature's value, and a safe useless system loses the argument next quarter rather than this one.",
+    "Redacting at display. The data has already crossed the boundary into the prompt, the trace and the provider.",
+    "Treating tenant tiering as the control. Regulated tenants are a compliance axis; the leak risk is on every tenant's comment fields."
+   ],
+   "human_only_beat": "Retention is a one-way door: a leak cannot be un-leaked, so the boundary has to be structural before the first index build rather than a remediation after an audit. That is `irreversibility`. And deciding that 30%-of-revenue tenants are excluded until the contracts are read is `accountability` — a person signs that, not a policy engine.",
+   "termdrops": [
+    "derived cause record",
+    "tenant filter at the index",
+    "scrub at extraction",
+    "deletion propagation",
+    "structural not instructional"
+   ],
+   "followups": [
+    {
+     "q": "Nobody has complained. Why now?",
+     "a": "The questionnaire is in three weeks and the honest current answer is bad. Fixing it before answering costs a sprint; answering wrong costs a contract and the feature."
+    },
+    {
+     "q": "Extraction adds a pipeline. Isn't raw retrieval simpler?",
+     "a": "Simpler and unshippable. Extraction also makes retrieval cheaper and better — structured cause records rank far better than 400K free-text blobs."
+    }
+   ],
+   "aryaka": "Gate-3 and gate-5 material for Projects/sdwan-self-troubleshoot: the never-remember boundary has to exist before the index is built, which makes it a gate-3 decision even though it looks like an implementation detail.",
+   "topics": [
+    "multi-tenant-ai-security",
+    "corpus-provenance",
+    "memory-systems",
+    "prompt-injection-defense"
+   ],
+   "cite": [
+    "doc: agentic-platform-leadership-framework §13",
+    "doc: agentic-platform-leadership-framework §11",
+    "issue 004, §19"
+   ]
+  },
+  {
+   "id": "r-2026-08-25-sop-loop-stop",
+   "serve_date": "2026-08-25",
+   "decision": "hd-reversibility-class",
+   "lens": "harness",
+   "level": 4,
+   "mode": "design",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "issue 004 §19 loop caps and circuit breakers",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "The diagnosis loop runs SOP steps: issue a show command or API read, interpret the output against expectation, decide the next step, repeat.",
+    "Most SOPs terminate. About a fifth of steps end in prose like 'investigate further based on findings', with no defined next step.",
+    "In a soak test over a weekend, 3 of 210 alarms produced runs that made 60+ device calls before someone noticed on Monday. Two of the three were on the same POP during a real outage, when every device was returning errors and the loop kept re-reading to 'confirm'.",
+    "Devices rate-limit to one session per site, and a show command takes 1-4 seconds.",
+    "Cost per normal diagnosis is about $0.55. The three runaway runs cost $9, $11 and $14.",
+    "Nobody is on call for this system; it runs unattended and posts its RCA into the ticket.",
+    "The team's proposed fix is to add 'stop when you have enough information' to the prompt."
+   ],
+   "withheld": [
+    {
+     "ask": "What did the runaway runs actually do — new steps or repeats?",
+     "fact": "Repeats. The same three show commands re-issued against the same devices, because the error output never matched the SOP's expectation, so no branch was ever satisfied.",
+     "decisive": true
+    },
+    {
+     "ask": "Is a show command idempotent, and are any executed steps mutating?",
+     "fact": "Show commands are read-only and idempotent. Two SOPs include a 'clear counters' step, which is mutating and not idempotent — running it twice destroys the baseline you were comparing against.",
+     "decisive": true
+    },
+    {
+     "ask": "What happens if the run dies halfway?",
+     "fact": "Nothing is persisted mid-run. A crash loses all gathered evidence and the next attempt starts from the alarm, re-issuing every device call.",
+     "decisive": true
+    },
+    {
+     "ask": "Was the POP outage detectable at the time?",
+     "fact": "Yes — the site-versus-POP scope aggregation would have flagged it, but it runs once at the start and is never re-checked during the loop.",
+     "decisive": false
+    },
+    {
+     "ask": "How long did the runaway runs take?",
+     "fact": "47, 52 and 71 minutes, all serialized behind the one-session-per-site limit.",
+     "decisive": false
+    },
+    {
+     "ask": "Is there a per-tenant cost ceiling?",
+     "fact": "No. Cost is tracked per run after the fact.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "Redesign the loop's termination and failure handling. Name every limit, where it lives, and what happens when each one fires.",
+   "rubric": [
+    {
+     "dim": "ops",
+     "looks_for": "limits live in the harness, not in the prompt, and each has a defined behaviour on trip",
+     "weight": 2
+    },
+    {
+     "dim": "system",
+     "looks_for": "separates the read-only steps from the two mutating ones and treats them differently",
+     "weight": 1
+    },
+    {
+     "dim": "eval",
+     "looks_for": "no-progress detection — repeats, not step count, were the actual signal",
+     "weight": 1
+    },
+    {
+     "dim": "business",
+     "looks_for": "a per-tenant cost ceiling, since unattended cost is unbounded by construction",
+     "weight": 1
+    }
+   ],
+   "attack_vectors": [
+    "loop-no-stop",
+    "partial-completion",
+    "stale-tool-data",
+    "token-math",
+    "scale-100x",
+    "operator-3am"
+   ],
+   "strong_answer": [
+    "A prompt instruction is not a limit. 'Stop when you have enough' failed in exactly the case where the model could not tell it had enough.",
+    "Three independent limits in the harness: hard step cap, context cap, and a per-tenant cost ceiling. Independent because any one of them can be the binding one.",
+    "Add the limit the incident actually calls for: no-progress detection. Repeating a call whose output has not changed is the signal — step count alone would have let 60 distinct calls through.",
+    "Re-check POP scope during the loop, not once at the start. A POP-wide outage means the SOP's per-site expectations cannot be satisfied, and the correct action is abandon and escalate, not confirm harder.",
+    "Split the two mutating steps out. 'Clear counters' is not idempotent and destroys its own baseline on retry — it needs an explicit gate and must never be inside a retry path.",
+    "Checkpoint after each evidence acquisition so a crash resumes rather than re-issuing every device call. Without it, failure multiplies device load exactly when devices are already unhealthy.",
+    "On every trip: stop, post what was gathered with an explicit 'diagnosis incomplete, here is the evidence', and escalate. Never silently return a confident RCA built on a failed run.",
+    "Per-tool circuit breaker, per tool rather than per provider, so one dead API does not take the topology lookup with it."
+   ],
+   "traps": [
+    "Raising the step cap. The runaway runs were repeats; a higher cap buys more repeats.",
+    "Prompt-based termination. The failure mode is the model being unable to recognize the state it is in — the same faculty you are asking to stop it.",
+    "Retrying the whole run on failure. With no checkpointing that re-issues every device call, against devices that were already erroring.",
+    "Treating this as a cost incident. $14 is not the story; 71 minutes of unattended device hammering during a live outage is."
+   ],
+   "human_only_beat": "Deciding that an incomplete diagnosis posted honestly is better than a confident one built on a failed run is `value-tradeoff` — it lowers the system's apparent quality to protect the engineer who reads it. And 'clear counters' can never sit inside a retry path is `irreversibility`: it destroys the baseline it was measuring, and no amount of accuracy recovers it.",
+   "termdrops": [
+    "no-progress detection",
+    "three independent limits",
+    "checkpoint per acquisition",
+    "per-tool circuit breaker",
+    "abandon and escalate"
+   ],
+   "followups": [
+    {
+     "q": "Why not just alert a human when it runs long?",
+     "a": "Nobody is on call for it. An alert with no responder is a log line — and the fix belongs in the harness, which does not sleep."
+    },
+    {
+     "q": "Won't hard limits truncate legitimate deep diagnoses?",
+     "a": "Sometimes, and truncation is visible and cheap. Post the partial evidence and escalate; the failure mode you are trading away is invisible and expensive."
+    }
+   ],
+   "aryaka": "Gate-8 hardening material, but the mutating-step split is really a gate-3 finding — two SOPs contain a non-idempotent action nobody had classified.",
+   "topics": [
+    "agent-loop-guardrails",
+    "idempotency-for-ai-operations",
+    "resilience-patterns",
+    "context-compression"
+   ],
+   "cite": [
+    "issue 004, §19",
+    "issue 005, §13",
+    "doc: agentic-platform-leadership-framework §13",
+    "doc: agentic-platform-leadership-framework §16"
+   ]
+  },
+  {
+   "id": "r-2026-08-26-what-to-extract",
+   "serve_date": "2026-08-26",
+   "decision": "hd-when-to-platformize",
+   "lens": "platform",
+   "level": 6,
+   "mode": "decide",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "framework §8 platform thinking",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "The alarm diagnosis system is your first real agentic workload. It works, in a pilot.",
+    "Two other requests have landed this month. A customer-intelligence idea wants account signals scored and summarized. A capacity-planning team wants a thing that reads utilization trends and drafts recommendations.",
+    "Your director has started saying 'agent platform' in meetings and has asked you for a platform roadmap by end of month.",
+    "What the diagnosis system built along the way: an MCP tool layer with per-tool circuit breakers, per-tenant cost tagging on every model call, a trace schema, an eval harness with a stratified test set, a compiled-SOP graph runner, and a case-extraction pipeline.",
+    "Your team is small. Building a platform capability means not shipping diagnosis improvements for that period.",
+    "The canonical capability list runs twelve items long: identity, model gateway, prompt management, tool registry, agent runtime, memory, RAG, orchestration, evaluation, observability, security, cost management.",
+    "Nobody has asked the other two teams whether they would actually adopt a shared thing."
+   ],
+   "withheld": [
+    {
+     "ask": "Are the other two workloads the same shape, or just the same word?",
+     "fact": "Neither is a diagnosis loop. Customer-intelligence is batch scoring over structured signals; capacity planning is a scheduled report generator. Both need an LLM and a retrieval step; neither needs tool execution against live devices.",
+     "decisive": true
+    },
+    {
+     "ask": "Would those teams adopt a shared runtime if it existed?",
+     "fact": "Unasked. One of the two has already prototyped in a notebook with a direct provider SDK call and is happy with it.",
+     "decisive": true
+    },
+    {
+     "ask": "What is currently hardest to retrofit?",
+     "fact": "Cost attribution. The diagnosis system tags every model call with tenant and feature; the notebook prototype tags nothing, and nobody can say what it costs.",
+     "decisive": true
+    },
+    {
+     "ask": "How stable is the diagnosis system's own design?",
+     "fact": "The loop and the tool layer have changed twice in six weeks. The trace schema and cost tagging have not changed since week one.",
+     "decisive": false
+    },
+    {
+     "ask": "Is there budget pressure to show platform progress?",
+     "fact": "The director wants a roadmap, not a build commitment. No budget line exists yet.",
+     "decisive": false
+    },
+    {
+     "ask": "What did the corpus say about extracting tool integrations?",
+     "fact": "Ticketing plus network topology first, because those are what every diagnosis needs, so they earn the integration cost fastest.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "Name what you will extract now, what you will explicitly not build yet, and the evidence bar for each deferred item.",
+   "options": [
+    "build",
+    "buy",
+    "simplify",
+    "defer",
+    "reject",
+    "escalate"
+   ],
+   "rubric": [
+    {
+     "dim": "problem",
+     "looks_for": "tests whether the second and third needs are the same shape or the same noun",
+     "weight": 2
+    },
+    {
+     "dim": "business",
+     "looks_for": "extracts on retrofit cost, not on how platform-like the capability sounds",
+     "weight": 1
+    },
+    {
+     "dim": "system",
+     "looks_for": "declares non-goals with a stated evidence bar rather than silence",
+     "weight": 1
+    },
+    {
+     "dim": "product",
+     "looks_for": "asks the other two teams before building for them",
+     "weight": 1
+    }
+   ],
+   "strong_answer": [
+    "Extract exactly one thing now: cost attribution — tag every model call with tenant and feature, aggregate at trace level, roll up per tenant.",
+    "Justify it on retrofit cost, not on abstraction beauty. Untagged spend cannot be defended, attributed or charged back, and the notebook prototype is already accumulating untagged spend.",
+    "It is also the one capability all three workloads need in the same shape, which is the actual extraction test.",
+    "Extract nothing else. The tool layer, the loop runner and the SOP graph are diagnosis-specific — the other two workloads have no live device execution at all.",
+    "Say the non-goals out loud with evidence bars: agent runtime on the third workload that genuinely needs tool execution; tool registry at five or more shared tools; prompt management when two teams edit the same prompt; memory when anything needs cross-session state.",
+    "Go ask the other two teams before designing for them. One has already chosen a notebook and a direct SDK call, which is data about adoption intent, not a gap to be closed.",
+    "Deliver the roadmap as a sequence gated on evidence, not a list of twelve capabilities with dates. The director asked for a roadmap, not a build commitment.",
+    "The line that makes the case: without shared cost attribution we cannot say what the AI programme costs, and that question arrives before any of the other eleven."
+   ],
+   "traps": [
+    "Treating the twelve-item capability list as a build order. It is a checklist of eventual concerns, and reading it as a roadmap is the agent-first failure exactly.",
+    "Extracting the tool layer because it is the most impressive artifact. Neither new workload executes tools.",
+    "Building a shared runtime for a team that has already chosen a notebook. That is a migration project sold as a platform.",
+    "Saying yes to the roadmap request by producing a plan for all twelve. The credible answer is one extraction and eleven stated evidence bars."
+   ],
+   "human_only_beat": "Whether the second need is genuinely the same shape, and whether another team will actually adopt the shared thing, are `private-context` — the facts live in those teams' intentions, not in any telemetry. And declaring eleven non-goals is `legitimacy`: written by an engineer it reads as reluctance, declared by the owner it reads as sequencing.",
+   "termdrops": [
+    "extraction on retrofit cost",
+    "same shape not same word",
+    "evidence bar per deferred capability",
+    "adoption intent",
+    "evidence-driven platform development"
+   ],
+   "followups": [
+    {
+     "q": "The director wants a platform. Isn't one extraction a weak answer?",
+     "a": "It is a defensible one. Twelve capabilities with dates is a plan that will be wrong by Q2; one extraction plus eleven stated triggers is a plan that survives contact and shows the reasoning."
+    },
+    {
+     "q": "What if a third workload does need the runtime?",
+     "a": "Then the bar is met and we extract it — that is precisely the trigger I am writing down. The rule is evidence-driven, not never."
+    }
+   ],
+   "aryaka": "Directly relevant to sequencing Projects/customer-intelligence: it starts when diagnosis reaches gate 7, and this rep decides what it inherits versus rebuilds.",
+   "topics": [
+    "platform-extraction-timing",
+    "abstraction-seams",
+    "cost-visibility-chargeback",
+    "build-buy-partner"
+   ],
+   "cite": [
+    "doc: agentic-platform-leadership-framework §8",
+    "doc: agentic-platform-leadership-framework §14",
+    "issue 004, §13",
+    "issue 001, §13"
+   ]
+  },
+  {
+   "id": "r-2026-08-27-rca-disclosure",
+   "serve_date": "2026-08-27",
+   "decision": "hd-disclose-uncertainty",
+   "lens": "comms",
+   "level": 5,
+   "mode": "decide",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "framework §7 communication and product judgment",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "The diagnosis system posts its root cause into the ticket. Engineers read it during an incident, often on a phone, often at 3am.",
+    "Product wants the output to read cleanly: one root cause, the next steps, done. Their argument is that a hedged answer will be ignored, and an ignored feature has no value.",
+    "Your eval data says top-cause agreement is 71%, correct-cause-in-top-three is 88%, and on the pilot's two wrong answers the engineer spent 25 and 40 minutes on the wrong subsystem.",
+    "The system currently has no abstain path and attaches no confidence to its output.",
+    "Two of your engineers have told you privately that they have started skimming the RCA because it 'sounds the same whether it is right or not'.",
+    "One customer has begun quoting the RCA text back in escalation emails, treating it as Aryaka's official position on their outage.",
+    "The NOC lead wants the feature and has not asked about any of this."
+   ],
+   "withheld": [
+    {
+     "ask": "Is the customer-visible use intended?",
+     "fact": "No. The ticket field the RCA is posted into is visible in the customer portal. Nobody designed for that; it was a field that happened to be available.",
+     "decisive": true
+    },
+    {
+     "ask": "Does a confidence signal change engineer behaviour?",
+     "fact": "Untested. But the two engineers who skim said they would read it properly if the evidence chain were shown, because they could verify in seconds instead of trusting.",
+     "decisive": true
+    },
+    {
+     "ask": "What does the evidence chain look like today?",
+     "fact": "Case IDs are listed. The specific comment-field text that drove the cause is not shown, so verifying means opening cases one by one.",
+     "decisive": true
+    },
+    {
+     "ask": "Would product accept a two-tier output?",
+     "fact": "Unasked. Their objection is to hedging language, not to structure.",
+     "decisive": false
+    },
+    {
+     "ask": "How often is the RCA the only thing in the ticket?",
+     "fact": "About 40% of pilot tickets closed with no human-written diagnosis added.",
+     "decisive": false
+    },
+    {
+     "ask": "Is there any legal review of customer-visible automated statements?",
+     "fact": "None. Nobody has raised it.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "Decide what the system discloses, to whom, and what changes before the next customer reads an RCA.",
+   "options": [
+    "build",
+    "simplify",
+    "defer",
+    "escalate"
+   ],
+   "rubric": [
+    {
+     "dim": "product",
+     "looks_for": "solves product's real objection — hedging language — without hiding uncertainty",
+     "weight": 2
+    },
+    {
+     "dim": "problem",
+     "looks_for": "catches that customer visibility was accidental and is now load-bearing",
+     "weight": 2
+    },
+    {
+     "dim": "ops",
+     "looks_for": "makes verification cheap rather than asking for trust",
+     "weight": 1
+    },
+    {
+     "dim": "business",
+     "looks_for": "names who absorbs the cost of a confident wrong answer",
+     "weight": 1
+    }
+   ],
+   "strong_answer": [
+    "Separate the two audiences immediately. The internal RCA and a customer-visible statement are different artifacts, and they are currently the same field by accident.",
+    "Stop writing to the customer-visible field until someone has decided what Aryaka is willing to assert automatically. That is escalation-worthy and cheap to do today.",
+    "Product's objection is to hedging prose, and they are right that hedging gets ignored. The answer is structure, not adjectives: a stated cause, then the evidence, then what would disconfirm it.",
+    "Show the evidence chain inline — the actual comment-field text that drove the cause. The engineers who skim said this is what would make them read, and it converts trust into verification.",
+    "Add the abstain path. 'Insufficient evidence, here is what I gathered' is a useful output; a confident wrong cause measured at 25-40 minutes of misdirected work is a negative one.",
+    "Confidence has to be earned before it is displayed: a number nobody has calibrated is worse than no number, so tie the tier to measured top-cause agreement rather than to a model score.",
+    "Name who absorbs the failure. Today it is the on-call engineer at 3am and, accidentally, the customer in an escalation thread. Neither chose that.",
+    "Frame it to the NOC lead as the thing that makes the feature trusted rather than merely used — 40% of tickets closing with no human diagnosis means this text is already the record."
+   ],
+   "traps": [
+    "Adding hedging language everywhere. Product's objection is legitimate and this makes the output ignorable, which is the worst outcome for a correct RCA.",
+    "Displaying a raw model confidence score. Uncalibrated, it launders a guess into a number and makes skimming feel justified.",
+    "Treating customer visibility as a permissions bug to fix quietly. It is a decision about what the company asserts automatically, and it needs someone with standing.",
+    "Waiting for the eval numbers to improve first. Disclosure design does not get easier at 85%, and the customer is reading it now."
+   ],
+   "human_only_beat": "Hiding uncertainty raises adoption and transfers the cost of being wrong onto whoever acted on it — a `value-tradeoff` about harm distribution, not a UX preference. And deciding what the company will assert automatically to a customer is `legitimacy`: it needs authority, which is why the right move is escalation rather than a quiet field change.",
+   "termdrops": [
+    "two audiences, two artifacts",
+    "structure not hedging",
+    "evidence chain inline",
+    "calibrated before displayed",
+    "abstain as an output"
+   ],
+   "followups": [
+    {
+     "q": "Product will say uncertainty kills adoption. Answer?",
+     "a": "Adoption of a wrong answer is negative value — measured at 25 and 40 minutes. And the engineers already skim because it sounds identical either way, so the current design has quietly lost the adoption it appears to have."
+    },
+    {
+     "q": "Isn't stopping the customer-visible write a regression?",
+     "a": "It is removing something nobody decided to ship. The regression already happened when a customer started quoting it as Aryaka's official position."
+    }
+   ],
+   "aryaka": "The load-bearing human decision for Projects/sdwan-self-troubleshoot, ahead of the autonomy line — recorded as the central tension at gate 1.",
+   "topics": [
+    "corpus-provenance",
+    "hitl-design",
+    "ai-product-metrics",
+    "human-only-decisions"
+   ],
+   "cite": [
+    "doc: agentic-platform-leadership-framework §7",
+    "doc: agentic-platform-leadership-framework §4",
+    "issue 009, §20"
+   ]
+  },
+  {
+   "id": "r-2026-08-28-noise-and-ceiling",
+   "serve_date": "2026-08-28",
+   "decision": "hd-deserves-a-system",
+   "lens": "business",
+   "level": 5,
+   "mode": "decide",
+   "project": "sdwan-self-troubleshoot",
+   "anchor": {
+    "kind": "corpus",
+    "source": "framework §17 measure business value",
+    "url": "",
+    "date": "",
+    "confidence": ""
+   },
+   "situation": [
+    "Six weeks into the alarm diagnosis pilot. The system works: it retrieves, it runs SOP steps, it produces an RCA the NOC broadly likes.",
+    "You are preparing the quarterly review, where you will ask for two engineers and a further quarter.",
+    "Someone from finance has asked a simple question you cannot answer: how much of the incident cost does this actually remove?",
+    "What you have: cost per diagnosis around $0.55, a fully-loaded human ticket cost of $4.50, and a NOC that says the RCA saves them time.",
+    "What you do not have: how much of MTTR is triage versus diagnosis versus fix, and what share of alarms deserved diagnosis at all.",
+    "The pilot ran on alarms the NOC forwarded to it. Nobody characterized the alarms they did not forward.",
+    "Your director's framing in the last meeting was that this is 'clearly going to be huge'."
+   ],
+   "withheld": [
+    {
+     "ask": "What share of alarms are actionable versus noise?",
+     "fact": "Of a week's raw alarms, 62% self-clear within 10 minutes with no action. The NOC has learned to ignore whole alarm classes. The pilot was fed only alarms that had already survived that human filter.",
+     "decisive": true
+    },
+    {
+     "ask": "How does MTTR split across triage, diagnosis and fix?",
+     "fact": "Median incident: 12 minutes triage, 18 minutes diagnosis, 96 minutes fix. Fix time dominates and this system touches none of it.",
+     "decisive": true
+    },
+    {
+     "ask": "How many alarms per day, raw?",
+     "fact": "About 4,000 raw, of which roughly 1,500 survive the human filter and about 300 become tickets.",
+     "decisive": true
+    },
+    {
+     "ask": "What does the RCA-accepted rate look like?",
+     "fact": "Engineers accept the top cause 71% of the time, and 40% of pilot tickets closed with no human diagnosis added at all.",
+     "decisive": false
+    },
+    {
+     "ask": "Would running on all raw alarms be affordable?",
+     "fact": "4,000/day at $0.55 is $2,200/day, about $800K/year, against a programme that has never had a budget line above $400K.",
+     "decisive": false
+    },
+    {
+     "ask": "Is the human filter documented anywhere?",
+     "fact": "No. It lives in the heads of about six senior NOC engineers.",
+     "decisive": false
+    }
+   ],
+   "question_budget": 3,
+   "decision_required": "Decide what you ask for at the quarterly review, and state the kill criterion yourself before anyone asks for it.",
+   "options": [
+    "build",
+    "simplify",
+    "defer",
+    "reject",
+    "escalate"
+   ],
+   "rubric": [
+    {
+     "dim": "business",
+     "looks_for": "computes the honest ceiling from the MTTR split instead of from cost per ticket",
+     "weight": 2
+    },
+    {
+     "dim": "problem",
+     "looks_for": "sees the human alarm filter as the undocumented asset the pilot was silently borrowing",
+     "weight": 2
+    },
+    {
+     "dim": "product",
+     "looks_for": "reframes toward the higher-value problem rather than defending the built thing",
+     "weight": 1
+    },
+    {
+     "dim": "ops",
+     "looks_for": "refuses to run on raw alarm volume at $0.55 each",
+     "weight": 1
+    }
+   ],
+   "strong_answer": [
+    "Do the ceiling arithmetic out loud: 18 minutes of diagnosis in a 126-minute median incident is roughly 14%. Removing all of it perfectly caps this project at ~14% of MTTR.",
+    "So the honest headline is not cost per ticket. $0.55 against $4.50 is a true number that answers a question nobody asked.",
+    "Name the borrowed asset: the pilot ran on alarms already filtered by six senior engineers' undocumented judgment, which removed 62% self-clearing noise. The system's measured performance includes their work.",
+    "That reframes the opportunity. Alarm correlation and suppression — encoding the filter — touches 4,000 alarms a day and is mostly deterministic. Diagnosis touches 300 and is expensive per unit.",
+    "Refuse raw-volume rollout on the current design: 4,000/day at $0.55 is ~$800K/year against a programme that has never held a budget above $400K. That is a gate, not a detail.",
+    "The ask, specific: keep diagnosis at pilot scope, and spend the two engineers on suppression plus the abstain path. Suppression is the bigger lever and the cheaper build.",
+    "Volunteer the kill criterion first: if accepted-RCA rate stays under 60% at 90 days, or diagnosis stays under 10% of measured MTTR reduction, we stop expanding diagnosis and keep only suppression.",
+    "Handle the 'clearly going to be huge' framing directly and early. It is the most expensive sentence in the room, and correcting it now costs far less than correcting it at the next review."
+   ],
+   "traps": [
+    "Leading with $0.55 versus $4.50. It is the flattering number and it is answering the wrong question — finance asked what share of cost is removed.",
+    "Asking to scale to all raw alarms. It multiplies cost by 13x to process alarms that self-clear, and it is the request that gets the programme cancelled rather than trimmed.",
+    "Defending diagnosis because it is what you built. Six weeks of work is not an argument, and the framework's prioritization list includes simplify and defer for a reason.",
+    "Letting the director's framing stand because correcting it is awkward. Every quarter it survives makes the correction more expensive."
+   ],
+   "human_only_beat": "No metric tells you that the more valuable project is the one you did not build — that is `private-context`, resting on opportunity cost and what the team stops doing. And volunteering the kill criterion before it is demanded is `legitimacy`: extracted under questioning it is a concession, stated first it is the thing that buys you the next quarter.",
+   "termdrops": [
+    "MTTR split",
+    "ceiling arithmetic",
+    "borrowed human filter",
+    "suppression before diagnosis",
+    "volunteered kill criterion"
+   ],
+   "followups": [
+    {
+     "q": "Aren't you talking yourself out of your own project?",
+     "a": "I am scoping it to the part that pays. Diagnosis stays at pilot scope with a measured ceiling; suppression gets the new headcount because it touches thirteen times the volume at a fraction of the unit cost."
+    },
+    {
+     "q": "Suppression sounds like it needs no AI. Isn't that a downgrade?",
+     "a": "It is the right answer, and mostly deterministic correlation. The framework's own rule is to prefer deterministic automation where it works — climbing the ladder is not the goal."
+    },
+    {
+     "q": "The NOC likes the RCA. Doesn't that count?",
+     "a": "It counts as a signal, not a business case. 40% of tickets closing with no human diagnosis added says it is load-bearing; 71% acceptance says it is not yet trustworthy. Both are true and both need fixing before scale."
+    }
+   ],
+   "aryaka": "This is gate 1 and gate 9 colliding: the numbers marked NEEDS REAL NUMBER in stages/01_problem.md are exactly the ones that decide whether the project earns its next quarter.",
+   "topics": [
+    "ai-product-metrics",
+    "decision-calibration",
+    "kill-switch-framework",
+    "pre-pilot-checklist"
+   ],
+   "cite": [
+    "doc: agentic-platform-leadership-framework §17",
+    "doc: agentic-platform-leadership-framework §9",
+    "doc: agentic-platform-leadership-framework §10",
+    "issue 009, §20"
+   ]
+  }
+ ],
+ "ladder": {
+  "levels": [
+   {
+    "n": 1,
+    "name": "Fundamentals",
+    "goal": "Explain what each component does and when it should be used.",
+    "score": 0,
+    "evidence": [],
+    "blocked_at": 1
+   },
+   {
+    "n": 2,
+    "name": "System Design",
+    "goal": "Design a production-grade system without blindly depending on a framework.",
+    "score": 0,
+    "evidence": [],
+    "blocked_at": 1
+   },
+   {
+    "n": 3,
+    "name": "Evaluation",
+    "goal": "Be able to prove whether an agentic system works.",
+    "score": 0,
+    "evidence": [],
+    "blocked_at": 1
+   },
+   {
+    "n": 4,
+    "name": "Production Engineering",
+    "goal": "Make systems survive real workloads.",
+    "score": 0,
+    "evidence": [],
+    "blocked_at": 1
+   },
+   {
+    "n": 5,
+    "name": "Product & Business",
+    "goal": "Build the right system, not merely a technically impressive system.",
+    "score": 0,
+    "evidence": [],
+    "blocked_at": 1
+   },
+   {
+    "n": 6,
+    "name": "Leadership",
+    "goal": "Guide the organization through AI adoption.",
+    "score": 0,
+    "evidence": [],
+    "blocked_at": 1
+   }
+  ],
+  "ceiling": {
+   "value": 4,
+   "reason": "Exposure is artifacts-yes, shipping-no. Predictions close against a reviewer or prototype telemetry, never against production consequence. Level 4 here is not level 4 with a paged incident behind it, and the difference is not cosmetic.",
+   "what_would_lift_it": "Shipping one agent to real users with real rollback authority."
+  },
+  "bars": {
+   "1": "recall — cards in this level's themes graded good or easy",
+   "2": "explained — a /teachback or /flow on this level's topics",
+   "3": "decided — a project stage gate passed with a prediction, or two reps at this level scored >=4/6 plus a redraw that survived its attack",
+   "4": "reviewed — a prediction closed against measured prototype evidence or a named reviewer's decision"
+  }
+ },
+ "calibration": {
+  "n": 0,
+  "note": "no prediction has closed yet — every number below is a score, and a score is not evidence"
+ },
+ "inflation": {
+  "status": "insufficient",
+  "note": "0 scored reps; need 6 before a trend means anything"
+ },
+ "weak": [],
+ "projects": [
+  {
+   "slug": "customer-intelligence",
+   "name": "Customer intelligence agent",
+   "status": "parked",
+   "stage": 0,
+   "stages": [],
+   "attacks": []
+  },
+  {
+   "slug": "sdwan-self-troubleshoot",
+   "name": "Alarm-triggered autonomous diagnosis and RCA for SD-WAN/SASE",
+   "status": "active",
+   "stage": 1,
+   "stages": [],
+   "attacks": []
+  }
+ ],
+ "lens_weighting": {
+  "design": [
+   "architecture",
+   "eval",
+   "harness",
+   "security",
+   "platform"
+  ],
+  "share": 0.6
+ }
+}

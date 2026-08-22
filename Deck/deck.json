@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-21 06:36 UTC",
+ "generated": "2026-08-21 10:06 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -12,7 +12,8 @@
   "fails-vs-works": "What Fails vs What Works",
   "buzzword-decoder": "Buzzword Decoder",
   "aryaka-ops": "Aryaka Ops (Applied)",
-  "framing-questions": "Questions That Frame the Problem"
+  "framing-questions": "Questions That Frame the Problem",
+  "human-judgment": "Decisions Only a Human Can Take"
  },
  "kinds": {
   "def": "concept",
@@ -4936,6 +4937,229 @@
    "theme": "harness-loop-memory",
    "topic": "semantic-cache",
    "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §16"
+  },
+  {
+   "id": "c-hj-five-reasons",
+   "front": "Name the five reasons a decision cannot be delegated to a system.",
+   "back": "Accountability, value-tradeoff, private-context, irreversibility, legitimacy. A model can gather evidence for all five and hold none of them.",
+   "hook": "Gather the evidence, hold none of it",
+   "kind": "def",
+   "theme": "human-judgment",
+   "topic": "human-only-decisions",
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "c-hj-reason-tells-you-what-to-get",
+   "front": "Why bother naming which reason makes a decision human-only?",
+   "back": "It tells you what evidence would settle it, and whether any would. Most bad AI leadership is needing-to-decide misdiagnosed as needing-more-analysis.",
+   "hook": "Analysis paralysis is a misdiagnosis",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "human-only-decisions",
+   "cite": "doc: agentic-platform-leadership-framework §18"
+  },
+  {
+   "id": "c-hj-autonomy-eval-cannot-decide",
+   "front": "An eval says the agent is right 92% of the time. What can it not tell you?",
+   "back": "How often being wrong is acceptable, and who answers for it. That is accountability, and no accuracy number contains it.",
+   "hook": "Right 92% of the time, acceptable never measured",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "human-only-decisions",
+   "cite": "doc: agentic-platform-leadership-framework §11"
+  },
+  {
+   "id": "c-hj-summarizer-vs-config-pusher",
+   "front": "The framework's one-line test for a botched autonomy decision.",
+   "back": "A low-risk summarization agent and a network remediation agent should never have the same autonomy model. Same design for both is most bad AI architecture.",
+   "hook": "Summarizer and config-pusher, same design",
+   "kind": "fail",
+   "theme": "human-judgment",
+   "topic": "risk-and-consequence-classification",
+   "cite": "doc: agentic-platform-leadership-framework §11"
+  },
+  {
+   "id": "c-hj-detection-bounds-autonomy",
+   "front": "Which latency, not which accuracy, sets the autonomy ceiling?",
+   "back": "Detection latency. An action you cannot see fail inside its own damage window cannot be unattended at any accuracy. Accuracy and detection are independent axes.",
+   "hook": "Only one of the two is on the dashboard",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "risk-and-consequence-classification",
+   "cite": "doc: agentic-platform-leadership-framework §11"
+  },
+  {
+   "id": "c-hj-seven-things-risk-sets",
+   "front": "Risk classification decides seven things. Name them.",
+   "back": "Autonomy, approval requirements, evaluation depth, observability, rollback strategy, model choice, tool permissions. Change any without revisiting risk and you are deciding by preference.",
+   "hook": "Seven downstream, one upstream",
+   "kind": "check",
+   "theme": "human-judgment",
+   "topic": "risk-and-consequence-classification",
+   "cite": "doc: agentic-platform-leadership-framework §11"
+  },
+  {
+   "id": "c-hj-approval-rate-is-not-evidence",
+   "front": "\"Tier-1 approves 92% unchanged, so the gate is theatre.\" What is wrong?",
+   "back": "Theatre for the 92%, load-bearing for the 8%. The question is what the gate catches, never how often it fires.",
+   "hook": "Ask what it catches, not how often",
+   "kind": "signal",
+   "theme": "human-judgment",
+   "topic": "hitl-design",
+   "cite": "doc: agentic-platform-leadership-framework §16"
+  },
+  {
+   "id": "c-hj-thresholds-must-exist",
+   "front": "What is the leadership skill in setting release thresholds?",
+   "back": "Not picking the numbers — those depend on the use case. Knowing that the thresholds must exist, and agreeing them before the shipping pressure arrives.",
+   "hook": "The number is local, the discipline is not",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "evaluation-layers",
+   "cite": "doc: agentic-platform-leadership-framework §15"
+  },
+  {
+   "id": "c-hj-acceptable-failure-to-whom",
+   "front": "Every threshold accepts some failures. What does choosing which ones actually decide?",
+   "back": "Who absorbs them — a tier-1 engineer, a tenant, a customer. A single accuracy number standing in for a harm distribution hides the choice.",
+   "hook": "One number, hiding a harm distribution",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "human-only-decisions",
+   "cite": "doc: agentic-platform-leadership-framework §3"
+  },
+  {
+   "id": "c-hj-which-axis-loses",
+   "front": "The axes are measurable. What is not, and why does that matter?",
+   "back": "Their exchange rate. What a point of accuracy is worth in latency depends on whose job the latency lands in — a business fact, not a model fact.",
+   "hook": "Measurable axes, unmeasurable exchange rate",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "token-economics",
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "c-hj-extract-from-proven-need",
+   "front": "When does a shared capability earn extraction into platform infrastructure?",
+   "back": "Repeated proven need — appeared twice, in the same shape not the same word, with a second owner committed to adopting it. Not because future agents might.",
+   "hook": "Same word is not same shape",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "platform-extraction-timing",
+   "cite": "doc: agentic-platform-leadership-framework §8"
+  },
+  {
+   "id": "c-hj-agent-first-vs-evidence-driven",
+   "front": "Name the two modes of platform development the framework contrasts.",
+   "back": "Agent-first: build infrastructure because future agents might need it. Evidence-driven: extract shared infrastructure from repeated proven needs. Only the second survives review.",
+   "hook": "Might need it versus has needed it",
+   "kind": "pat",
+   "theme": "human-judgment",
+   "topic": "platform-extraction-timing",
+   "cite": "doc: agentic-platform-leadership-framework §8"
+  },
+  {
+   "id": "c-hj-never-remembered-one-way",
+   "front": "Why is the never-remember boundary decided before the first write?",
+   "back": "A leak cannot be un-leaked. Retention is a one-way door, so structural impossibility of cross-tenant contamination has to precede data, not follow an incident.",
+   "hook": "Un-leaking is not an operation",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: agentic-platform-leadership-framework §13"
+  },
+  {
+   "id": "c-hj-destructive-tool-grant-inherited",
+   "front": "You grant an agent a mutating tool. What exactly did you grant?",
+   "back": "The blast radius, once, inherited by every future prompt — including the injected ones. Read-only versus mutating is the permission question that outlives the design.",
+   "hook": "Granted once, inherited by every prompt",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "prompt-injection-defense",
+   "cite": "doc: agentic-platform-leadership-framework §13"
+  },
+  {
+   "id": "c-hj-action-risk-not-actor-risk",
+   "front": "Classify risk by tenant tier or by action? Say why.",
+   "back": "By action. A stale-route refresh on a regulated tenant is safer than a hub-site MTU change on a small one. Tenant tiering is compliance, not risk.",
+   "hook": "Classify actions, not customers",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "risk-and-consequence-classification",
+   "cite": "doc: agentic-platform-leadership-framework §11"
+  },
+  {
+   "id": "c-hj-kill-criterion-who-says-it",
+   "front": "Same kill criterion, three speakers. Why does the weight differ?",
+   "back": "Volunteered by the owner it is a commitment; extracted under questioning it is a concession; produced by the system it is ignored. Legitimacy, not content.",
+   "hook": "Identical sentence, three different weights",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "kill-switch-framework",
+   "cite": "doc: agentic-platform-leadership-framework §3"
+  },
+  {
+   "id": "c-hj-six-options-not-two",
+   "front": "Build or buy is a false binary. Name the six options.",
+   "back": "Build, buy, automate, simplify, defer, reject. Prioritization is choosing among six; treating it as two is how undifferentiated components get built.",
+   "hook": "Reject is a first-class option",
+   "kind": "check",
+   "theme": "human-judgment",
+   "topic": "build-buy-partner",
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "c-hj-approval-fatigue",
+   "front": "Why can more approval gates make a system less safe?",
+   "back": "An approver clicking through fifty a day is not an approver. A gate with a 99% approve rate is cited as oversight and functions as latency.",
+   "hook": "99% approve rate is not oversight",
+   "kind": "fail",
+   "theme": "human-judgment",
+   "topic": "hitl-design",
+   "cite": "doc: agentic-platform-leadership-framework §7"
+  },
+  {
+   "id": "c-hj-prediction-before-data",
+   "front": "What makes a written prediction worth anything?",
+   "back": "The confidence was claimed before the outcome was known. Rewritten afterwards it is retrospective coherence, and everyone in the room can tell.",
+   "hook": "Rewritten afterwards is rationalization",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "decision-calibration",
+   "cite": "modeled",
+   "gap": true
+  },
+  {
+   "id": "c-hj-overconfidence-is-the-number",
+   "front": "Hit rate or overconfidence — which number tells you more?",
+   "back": "Overconfidence. Claiming 0.8 and landing 0.5 is a finding; claiming 0.5 and landing 0.5 is calibrated even though half failed.",
+   "hook": "A high hit rate may mean safe predictions",
+   "kind": "metric",
+   "theme": "human-judgment",
+   "topic": "decision-calibration",
+   "cite": "modeled",
+   "gap": true
+  },
+  {
+   "id": "c-hj-disclosure-transfers-cost",
+   "front": "Hiding a system's uncertainty raises adoption. What does it also do?",
+   "back": "Transfers the cost of being wrong onto whoever acted on it. Disclosure is a distribution choice about harm, not a UX preference.",
+   "hook": "Adoption up, cost moved onto the reader",
+   "kind": "rule",
+   "theme": "human-judgment",
+   "topic": "corpus-provenance",
+   "cite": "modeled",
+   "gap": true
+  },
+  {
+   "id": "c-hj-leadership-test",
+   "front": "Junior asks how to implement. Architect asks how it works. What does the platform leader ask?",
+   "back": "Should we build this at all, what is the simplest architecture that creates the outcome, how will we know it works, what could go wrong, what becomes reusable.",
+   "hook": "Five clauses, all human-only",
+   "kind": "def",
+   "theme": "human-judgment",
+   "topic": "human-only-decisions",
+   "cite": "doc: agentic-platform-leadership-cheat-sheet §11"
   },
   {
    "id": "c-bj-memory-visible-to-user",
