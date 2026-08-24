@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-24 09:29 UTC",
+ "generated": "2026-08-24 10:23 UTC",
  "themes": {
   "agents-orchestration": "Agents & Orchestration",
   "cost-performance": "Cost & Performance",
@@ -276,6 +276,76 @@
    "theme": "agents-orchestration",
    "topic": "langgraph-state-and-checkpointing",
    "cite": "doc: agentic-ai-system-design-deep-dive §6"
+  },
+  {
+   "id": "c-ao-s5-event-driven-threshold",
+   "front": "At roughly what concurrency do AI platforms converge on event-driven orchestration?",
+   "back": "Around 100 concurrent workflows. Externalising state to an event log makes each step an independent, replayable consumer — which fixes memory, blocking and observability at once.",
+   "hook": "~100 concurrent is the inflection",
+   "kind": "number",
+   "theme": "agents-orchestration",
+   "topic": "queue-architecture-for-ai",
+   "cite": "issue 006, §5"
+  },
+  {
+   "id": "c-ao-s5-five-layer-platform",
+   "front": "Name the five layers of the agent platform, L1 up to L5.",
+   "back": "L1 inference gateway, L2 tool layer, L3 agent runtime, L4 orchestration, L5 agent clients. L3 is the layer most teams under-build.",
+   "hook": "Runtime is the under-built layer",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "abstraction-seams",
+   "cite": "issue 001, §5"
+  },
+  {
+   "id": "c-ao-s5-gateway-adds-six",
+   "front": "What does an AI gateway do that a traditional API gateway does not?",
+   "back": "Per-tenant token and cost quotas, model routing, prompt caching, streaming proxy, provider schema transformation, and token/cost instrumentation.",
+   "hook": "Six additions beyond auth and routing",
+   "kind": "pat",
+   "theme": "agents-orchestration",
+   "topic": "abstraction-seams",
+   "cite": "issue 009, §5"
+  },
+  {
+   "id": "c-ao-s5-gateway-is-the-seam",
+   "front": "Why is the AI gateway described as the abstraction seam?",
+   "back": "It is what lets you swap OpenAI for Anthropic for self-hosted vLLM without touching application code. Get it wrong and you spend six months patching it.",
+   "hook": "Swap the provider, not the app",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "abstraction-seams",
+   "cite": "issue 009, §5"
+  },
+  {
+   "id": "c-ao-s5-sync-breaks-at-thousand",
+   "front": "Synchronous orchestration at 1,000 concurrent workflows — what breaks, and in what order?",
+   "back": "Memory first: 50-200KB of context each, so 50-200MB in state alone. Then failure handling, as one tool timeout blocks a thread. Then observability — state is buried thread-local.",
+   "hook": "1,000 workflows is 200MB of nothing but state",
+   "kind": "scale",
+   "theme": "agents-orchestration",
+   "topic": "queue-architecture-for-ai",
+   "cite": "issue 006, §5"
+  },
+  {
+   "id": "c-ao-s5-token-preflight-local",
+   "front": "Where does the gateway count tokens before a request, and why there?",
+   "back": "Locally, with tiktoken, in the validation layer — not by calling the provider API. A pre-flight that costs a round trip defeats the point of pre-flighting.",
+   "hook": "Count locally or do not count",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "token-economics",
+   "cite": "issue 009, §5"
+  },
+  {
+   "id": "c-ao-s5-tool-five-attributes",
+   "front": "Every tool in L2 carries five attributes. Name them.",
+   "back": "Schema, auth scope, idempotency key, cost budget, and a side-effect class — read, write, or irreversible. The runtime refuses irreversible calls without an explicit HITL signal.",
+   "hook": "Irreversible is a schema field, not a convention",
+   "kind": "rule",
+   "theme": "agents-orchestration",
+   "topic": "tool-calling-anatomy",
+   "cite": "issue 001, §5"
   },
   {
    "id": "c-ao-shared-orchestration-platform",
@@ -2133,6 +2203,76 @@
    "cite": "issue 004, §9"
   },
   {
+   "id": "c-cp-s5-ai-ratelimit-four-diffs",
+   "front": "Why can't you rate-limit an AI API the way you rate-limit a web API?",
+   "back": "Asymmetric cost — one request can be $0.50, 1000x a normal call. Requests run 5-60s, so concurrency matters more than RPS. Noisy tenants degrade everyone. Provider quota and GPU quota are separate.",
+   "hook": "RPS limits do not protect a cost budget",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "rate-limiting-and-quotas-for-ai",
+   "cite": "issue 008, §5"
+  },
+  {
+   "id": "c-cp-s5-embedding-cache-hundred-x",
+   "front": "Re-embedding the same documents per query: give the cost math.",
+   "back": "1M queries at 5K tokens is about $500/year — trivial. Re-embed the same 100 docs each query and it is 100x, $50K/year. The cache pays for itself in week one.",
+   "hook": "$500 becomes $50K on one missing cache",
+   "kind": "number",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "issue 004, §5"
+  },
+  {
+   "id": "c-cp-s5-embedding-cache-key",
+   "front": "How is an embedding cache keyed, and at what hit rate does it run?",
+   "back": "SHA-256 of the text plus the model ID, 30-day TTL in Redis or Postgres. Production RAG sees 60-80% hits because users ask similar questions.",
+   "hook": "Hash the text AND the model id",
+   "kind": "rule",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "issue 004, §5"
+  },
+  {
+   "id": "c-cp-s5-five-cache-layers",
+   "front": "The AI caching stack has five layers. Name them and what each keys on.",
+   "back": "HTTP on idempotent GETs, embedding on text hash, prompt on prefix, response on request hash, semantic on vector match. Most teams stop at prompt caching.",
+   "hook": "Stopping at prompt cache leaves 30-60% on the table",
+   "kind": "pat",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "issue 004, §5"
+  },
+  {
+   "id": "c-cp-s5-http-cache-rebilled",
+   "front": "Which cache layer is most underused, and what does skipping it re-bill you for?",
+   "back": "The HTTP layer. Model catalogues, tool-definition JSON and MCP resource listings get re-fetched per request — and re-sent tool definitions are re-billed as tokens.",
+   "hook": "Re-sent tool definitions are re-billed",
+   "kind": "fail",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "issue 004, §5"
+  },
+  {
+   "id": "c-cp-s5-semantic-threshold",
+   "front": "In the five-layer cache stack, what similarity clears the semantic layer?",
+   "back": "Vector similarity at or above 0.95, and the hit carries a confidence score. Below that it falls through to the prompt cache.",
+   "hook": "0.95, and carry the confidence",
+   "kind": "number",
+   "theme": "cost-performance",
+   "topic": "semantic-cache",
+   "cite": "issue 003, §5"
+  },
+  {
+   "id": "c-cp-s5-under-cache-penalty",
+   "front": "What does under-caching cost a typical AI platform?",
+   "back": "30-60% of latency and cost savings left on the table. The most common architectural mistake is conflating the layers, since each has different semantics, hit rates and invalidation rules.",
+   "hook": "Conflating the layers is the mistake",
+   "kind": "number",
+   "theme": "cost-performance",
+   "topic": "caching-layers",
+   "cite": "issue 003, §5"
+  },
+  {
    "id": "c-ed-cache-aware-routing",
    "front": "What is cache-aware routing?",
    "back": "Routing a request to the replica that already holds its prefix in cache rather than round-robin. Round-robin throws away the hit you already paid for.",
@@ -3038,6 +3178,56 @@
    "cite": "doc: broken-rag-repo-live-debug §4"
   },
   {
+   "id": "c-d4-fw-agents-to-save-tokens",
+   "front": "Spawning sub-agents mainly to reduce token usage.",
+   "back": "❌ You buy orchestration complexity and often still pay, because the parent absorbs the transcripts. ✅ Delegate bounded subtasks that return structured findings.",
+   "hook": "Multi-agent is not a compression strategy",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-bigger-context-fixes-it",
+   "front": "Assuming a larger context window solves context exhaustion.",
+   "back": "❌ More room means more noise and more cost, and the state question stays unanswered. ✅ Manage state intentionally — runtime state plus retrieval plus an immutable trace.",
+   "hook": "A bigger window buys time, not a design",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-compact-at-95",
+   "front": "Compacting only when the window is nearly full.",
+   "back": "❌ At 95-100% there is no headroom left to run the compaction call itself, so it is rushed or fails. ✅ Trigger at 60-70% and treat headroom as a design budget.",
+   "hook": "No headroom to summarize",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-conclusions-only",
+   "front": "Preserving only the conclusions across a compaction.",
+   "back": "❌ Reasoning context disappears, so the agent cannot tell a firm finding from a lucky guess. ✅ Preserve decisions with their reasons and evidence refs.",
+   "hook": "A conclusion without its reason is a rumour",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
+   "id": "c-d4-fw-prose-summary",
+   "front": "Compacting a long run into a generic prose summary.",
+   "back": "❌ 'Investigated packet loss…' loses operational state — what was ruled out, what is blocked, what already failed. ✅ Compact into a schema with named fields the next step reads.",
+   "hook": "Prose loses the fields that decide the next action",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
+  },
+  {
    "id": "c-fp-fw-1",
    "front": "Putting a spend cap in the system prompt.",
    "back": "❌ Demonstrated live — instruction in place, tool call failed, model still produced a confident booking answer. ✅ A deterministic check in front of the tool, which an injected or hallucinated amount cannot talk past.",
@@ -3290,6 +3480,66 @@
    "cite": "doc: agentic-system-design-interview-answer-patterns §4"
   },
   {
+   "id": "c-fw-iv-coding-at-scale-focus",
+   "front": "A 30-minute AI coding interview: where does the value actually sit?",
+   "back": "❌ Spending all 30 minutes implementing. ✅ Clarify 3, design 5, implement 15, then 7 on tests and production hardening — the interviewer cares most about the hardening discussion.",
+   "hook": "Leave time for the hardening talk",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "resilience-patterns",
+   "cite": "issue 007, §22"
+  },
+  {
+   "id": "c-fw-iv-estimate-single-number",
+   "front": "'How long would this take to build?' in a Principal+ interview.",
+   "back": "❌ One number, which loses the job. ✅ A structured estimate that shows the reasoning — components, risk multipliers, and the data long pole named explicitly.",
+   "hook": "A single number is the failing answer",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-fw-iv-improve-copilot",
+   "front": "'How would you improve the support copilot?' — answered in 40 seconds.",
+   "back": "❌ 'Fine-tune for network terms and integrate the topology graph.' Solutions before the problem. ✅ Ask current CSAT and top complaint first, then: the problem is not wrong answers, it is not knowing when to escalate.",
+   "hook": "Forty seconds is the tell",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "ai-product-metrics",
+   "cite": "issue 008, §22"
+  },
+  {
+   "id": "c-fw-iv-multi-agent-default",
+   "front": "'Design a multi-agent system for this workflow.'",
+   "back": "❌ Defaulting to multi-agent because the prompt said so. ✅ Justify why multi-agent beats one agent here, or say plainly that it does not — the prompt is not the design.",
+   "hook": "The prompt is not the justification",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "issue 012, §22"
+  },
+  {
+   "id": "c-fw-iv-pick-one-feature",
+   "front": "Asked to pick one AI feature to ship next.",
+   "back": "❌ Listing five features and refusing to rank — prioritisation was the whole question. ✅ Pick one, justify on user value, cost and risk, then name what you would do second.",
+   "hook": "Refusing to rank is the wrong answer",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "ai-product-metrics",
+   "cite": "issue 008, §22"
+  },
+  {
+   "id": "c-fw-iv-whiteboard-hedging",
+   "front": "Whiteboard versus design doc — what does the whiteboard punish?",
+   "back": "❌ Drawing every detail, hedging with 'it depends', talking over the interviewer's questions. ✅ Clarity over completeness, decisions over options, failure modes over happy path.",
+   "hook": "'It depends' costs you the round",
+   "kind": "contrast",
+   "theme": "fails-vs-works",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 012, §22"
+  },
+  {
    "id": "c-fw-logs-without-traces",
    "front": "Text logs from a 40-step agent run.",
    "back": "❌ No causal structure, so failures can't be localized to a step. ✅ Structured tracing with a step hierarchy and one correlation id.",
@@ -3495,64 +3745,14 @@
    "cite": "doc: ai-platform-system-design-interview-handbook §3"
   },
   {
-   "id": "c-d4-fw-compact-at-95",
-   "front": "Compacting only when the window is nearly full.",
-   "back": "❌ At 95-100% there is no headroom left to run the compaction call itself, so it is rushed or fails. ✅ Trigger at 60-70% and treat headroom as a design budget.",
-   "hook": "No headroom to summarize",
-   "kind": "contrast",
-   "theme": "fails-vs-works",
-   "topic": "context-compression",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
-  },
-  {
-   "id": "c-d4-fw-prose-summary",
-   "front": "Compacting a long run into a generic prose summary.",
-   "back": "❌ 'Investigated packet loss…' loses operational state — what was ruled out, what is blocked, what already failed. ✅ Compact into a schema with named fields the next step reads.",
-   "hook": "Prose loses the fields that decide the next action",
-   "kind": "contrast",
-   "theme": "fails-vs-works",
-   "topic": "context-compression",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
-  },
-  {
-   "id": "c-d4-fw-conclusions-only",
-   "front": "Preserving only the conclusions across a compaction.",
-   "back": "❌ Reasoning context disappears, so the agent cannot tell a firm finding from a lucky guess. ✅ Preserve decisions with their reasons and evidence refs.",
-   "hook": "A conclusion without its reason is a rumour",
-   "kind": "contrast",
-   "theme": "fails-vs-works",
-   "topic": "context-compression",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
-  },
-  {
-   "id": "c-d4-fw-agents-to-save-tokens",
-   "front": "Spawning sub-agents mainly to reduce token usage.",
-   "back": "❌ You buy orchestration complexity and often still pay, because the parent absorbs the transcripts. ✅ Delegate bounded subtasks that return structured findings.",
-   "hook": "Multi-agent is not a compression strategy",
-   "kind": "contrast",
-   "theme": "fails-vs-works",
-   "topic": "single-vs-multi-agent-decision",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
-  },
-  {
-   "id": "c-d4-fw-bigger-context-fixes-it",
-   "front": "Assuming a larger context window solves context exhaustion.",
-   "back": "❌ More room means more noise and more cost, and the state question stays unanswered. ✅ Manage state intentionally — runtime state plus retrieval plus an immutable trace.",
-   "hook": "A bigger window buys time, not a design",
-   "kind": "contrast",
-   "theme": "fails-vs-works",
-   "topic": "context-compression",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §14"
-  },
-  {
-   "id": "c-fq-vague-on-purpose",
-   "front": "The problem you are handed is vague. What is actually being tested?",
-   "back": "Whether you fill the vacuum with architecture or with requirements questions. Vagueness is the test, not an oversight — drawing boxes in minute two is the failure.",
-   "hook": "Vagueness is the test, not an oversight",
+   "id": "c-fq-agent-debugging-is-distributed",
+   "front": "Which existing discipline does agent debugging most resemble, and so what?",
+   "back": "Distributed systems — multiple components, state transitions, partial failures, version changes. So you need tracing, state inspection, replay and controlled experiments, not better prompts.",
+   "hook": "Borrow from distributed systems, not from prompting",
    "kind": "rule",
    "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §7"
+   "topic": "resilience-patterns",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §11"
   },
   {
    "id": "c-fq-ask-first-seven",
@@ -3565,6 +3765,16 @@
    "cite": "doc: ai-architect-interview-playbook §10"
   },
   {
+   "id": "c-fq-ask-scale-before-rightsizing",
+   "front": "Why must volume come before architecture, not after?",
+   "back": "Because multi-agent, a queue and a service mesh for 500 requests a day is the classic over-engineering failure. Ask scale first, then right-size — the reverse order cannot be undone politely.",
+   "hook": "Right-size after you know the volume",
+   "kind": "fail",
+   "theme": "framing-questions",
+   "topic": "queue-architecture-for-ai",
+   "cite": "doc: ai-architect-interview-playbook §1"
+  },
+  {
    "id": "c-fq-blast-radius-first-two-minutes",
    "front": "Which single question should you ask inside the first two minutes, and why that one?",
    "back": "\"What is the blast radius of a wrong action?\" Without it you give a summarizer and a config-pusher the same design — and that one confusion produces most bad AI architecture.",
@@ -3573,96 +3783,6 @@
    "theme": "framing-questions",
    "topic": "ai-system-design-interview",
    "cite": "doc: ai-architect-interview-playbook §1"
-  },
-  {
-   "id": "c-fq-seven-step-clarify-first",
-   "front": "Order the seven steps for answering any AI design question.",
-   "back": "Clarify the real problem, identify stakeholders and competing goals, list trade-offs, think in architectures not point solutions, define success metrics, explain business impact, then recommend and justify.",
-   "hook": "Clarify before you architect — always",
-   "kind": "pat",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-platform-system-design-interview-handbook §0"
-  },
-  {
-   "id": "c-fq-requirements-time-budget",
-   "front": "In a 45-minute design conversation, how long belongs to requirements?",
-   "back": "Five to seven minutes, announced up front. That is where the conversation is won or lost; announcing the structure buys you permission to spend the time.",
-   "hook": "Seven minutes before a single box",
-   "kind": "number",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §2"
-  },
-  {
-   "id": "c-fq-latency-class-question",
-   "front": "Before designing for speed, which question comes first?",
-   "back": "Which latency class is this — instant, interactive, or background? There is no universal \"fast enough\", so a single latency target across a product is wrong somewhere by construction.",
-   "hook": "Instant, interactive, or background",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-slis-slos",
-   "cite": "issue 010, §4"
-  },
-  {
-   "id": "c-fq-cost-of-being-wrong",
-   "front": "How do you turn \"how accurate must it be?\" into a useful question?",
-   "back": "Ask what being wrong costs: low (user retries), medium (user misled), or high (financial, medical, legal). That answer sets the accuracy bar and how much latency you may spend buying it.",
-   "hook": "Accuracy targets come from consequence, not ambition",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "hitl-design",
-   "cite": "issue 010, §4"
-  },
-  {
-   "id": "c-fq-highest-consequence-action",
-   "front": "One question reveals an org's real AI maturity in fifteen seconds. Which?",
-   "back": "\"What is the highest-consequence action any of your agents can take today?\" It surfaces their actual autonomy posture, and asking it signals consequence-class thinking is your default.",
-   "hook": "Fifteen seconds to their real maturity",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "agent-loop-guardrails",
-   "cite": "doc: ai-architect-interview-playbook §6"
-  },
-  {
-   "id": "c-fq-where-does-authorization-come-from",
-   "front": "An agent calls a tool on a user's behalf. What must you ask about permissions?",
-   "back": "Does it inherit the user's permissions, or hold its own? Answering \"its own, over-broad\" is how blast radius becomes everything the service account can reach.",
-   "hook": "Inherited or its own — never assume",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "multi-tenant-ai-security",
-   "cite": "doc: ai-architect-interview-playbook §6"
-  },
-  {
-   "id": "c-fq-reversibility-question",
-   "front": "You must decide whether an action needs human approval. What do you ask?",
-   "back": "Is it reversible, and what does undoing it cost? Reversibility reduces blast radius without eliminating it, so approval should track consequence rather than a blanket rule.",
-   "hook": "Reversible is not the same as safe",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "hitl-design",
-   "cite": "issue 006, §17"
-  },
-  {
-   "id": "c-fq-is-an-agent-the-right-shape",
-   "front": "\"Build us an agent for this.\" What is the principal-level first move?",
-   "back": "Question the shape: would a deterministic pipeline with two model calls ship far sooner and be much easier to operate? Then ask what the agentic version actually buys.",
-   "hook": "Ask what the agent buys before designing one",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "single-vs-multi-agent-decision",
-   "cite": "doc: ai-architect-interview-playbook §8"
-  },
-  {
-   "id": "c-fq-name-the-owner",
-   "front": "Which question stops a project that should not start?",
-   "back": "\"Who owns this for the next eighteen months?\" If the owner cannot be named, that is an argument against starting — not a detail to resolve later.",
-   "hook": "No nameable owner, no start",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "scaling-ai-adoption",
-   "cite": "doc: ai-architect-interview-playbook §8"
   },
   {
    "id": "c-fq-build-is-the-cheap-part",
@@ -3675,154 +3795,14 @@
    "cite": "doc: ai-architect-interview-playbook §8"
   },
   {
-   "id": "c-fq-who-owns-the-risk-decision",
-   "front": "Autonomous customer-facing send is on the table. Whose decision is it?",
-   "back": "The business's, explicitly. Give the trade-off honestly, then make the risk decision assigned and visible — it should never be resolved silently as an engineering default.",
-   "hook": "Make the risk decision owned, not defaulted",
-   "kind": "rule",
+   "id": "c-fq-can-we-replay",
+   "front": "Which two questions decide whether a team can debug their own agent?",
+   "back": "Is the raw transcript retained, and can we replay the run? Without both, every investigation is a re-enactment from memory and every fix is unverifiable.",
+   "hook": "No replay, no root cause",
+   "kind": "check",
    "theme": "framing-questions",
-   "topic": "hitl-design",
-   "cite": "doc: ai-architect-interview-playbook §8"
-  },
-  {
-   "id": "c-fq-should-it-be-built",
-   "front": "What separates a principal-level answer from a staff-level one?",
-   "back": "Staff names trade-offs with numbers and says what to cut. Principal reframes the problem, asks whether it should be built at all, and weighs the two-year maintenance cost.",
-   "hook": "Staff cuts scope; principal questions the premise",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §8"
-  },
-  {
-   "id": "c-fq-deflect-or-assist",
-   "front": "\"We want a support copilot.\" What is the scoping question that changes everything?",
-   "back": "Deflection or assist-the-human? And can it take actions — refunds, plan changes — or only answer? Those two answers decide autonomy, guardrails and the entire eval design.",
-   "hook": "Deflect or assist; answer or act",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "hitl-design",
-   "cite": "doc: ai-architect-interview-playbook §5"
-  },
-  {
-   "id": "c-fq-who-can-see-what",
-   "front": "An internal knowledge assistant over company documents. What is the whole problem?",
-   "back": "Who can see what. Permission-aware retrieval is the design, not a feature bolted on later — ask it before corpus size, formats or refresh rate.",
-   "hook": "Permissions are the design, not a feature",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "multi-tenant-ai-security",
-   "cite": "doc: ai-architect-interview-playbook §5"
-  },
-  {
-   "id": "c-fq-who-validates-correctness",
-   "front": "\"Let users query the warehouse in natural language.\" What do you ask?",
-   "back": "Read-only? How many tables? Who validates that the answer is right — and what happens when it is wrong? A confident wrong number is worse than no answer.",
-   "hook": "A confident wrong number beats no answer to nobody",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-architect-interview-playbook §5"
-  },
-  {
-   "id": "c-fq-what-already-exists",
-   "front": "Why ask what already exists before proposing anything?",
-   "back": "Because integrating with the incumbent ticketing, ITSM or helpdesk is usually the constraint that decides whether the design ships. A proposal requiring their migration first will not launch.",
-   "hook": "Never make their migration your prerequisite",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "abstraction-seams",
-   "cite": "doc: ai-architect-interview-playbook §5"
-  },
-  {
-   "id": "c-fq-ask-scale-before-rightsizing",
-   "front": "Why must volume come before architecture, not after?",
-   "back": "Because multi-agent, a queue and a service mesh for 500 requests a day is the classic over-engineering failure. Ask scale first, then right-size — the reverse order cannot be undone politely.",
-   "hook": "Right-size after you know the volume",
-   "kind": "fail",
-   "theme": "framing-questions",
-   "topic": "queue-architecture-for-ai",
-   "cite": "doc: ai-architect-interview-playbook §1"
-  },
-  {
-   "id": "c-fq-how-do-you-know-it-got-better",
-   "front": "What question exposes whether a team has real AI discipline?",
-   "back": "\"How do you currently know whether a change made it better?\" No answer means every improvement so far has been unverified — and that reframes the whole engagement.",
-   "hook": "No eval story means no known progress",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-architect-interview-playbook §6"
-  },
-  {
-   "id": "c-fq-cost-per-successful-task",
-   "front": "A team quotes you their cost per call. What do you ask instead?",
-   "back": "Cost per *successful* task, or the closest thing they track. Cost per call ignores retries and wrong answers, so it flatters every system that fails often and cheaply.",
-   "hook": "Per call flatters a system that fails cheaply",
-   "kind": "metric",
-   "theme": "framing-questions",
-   "topic": "token-economics",
-   "cite": "doc: ai-architect-interview-playbook §6"
-  },
-  {
-   "id": "c-fq-which-gap-did-the-demo-not-cross",
-   "front": "\"It worked in the demo.\" What do you ask?",
-   "back": "Which gap the demo did not cross — input distribution, failure surface, scale economics, consequence, or time. Naming the gap turns an argument about vibes into a testable claim.",
-   "hook": "Name the gap the demo skipped",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "pre-pilot-checklist",
-   "cite": "doc: agentic-ai-system-design-deep-dive §1"
-  },
-  {
-   "id": "c-fq-vendor-pilot-question",
-   "front": "A vendor demos 95% accuracy. What is the only question that settles it?",
-   "back": "\"What is the smallest pilot that validates that on our data?\" Demos are tuned to their test set. A refusal to support a scoped pilot is itself the answer.",
-   "hook": "Refusing a pilot is the answer",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "build-buy-partner",
-   "cite": "issue 008, §21"
-  },
-  {
-   "id": "c-fq-hallucination-is-not-a-diagnosis",
-   "front": "Someone says \"the model hallucinated\". What is the diagnostic question?",
-   "back": "Was the source passage in the retrieved top-K? Absent means it is a retrieval failure; present means generation. \"Hallucination\" names no stage, no owner and no fix.",
-   "hook": "Hallucination names no stage and no owner",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
-  },
-  {
-   "id": "c-fq-decision-rule-beats-opinion",
-   "front": "Pushed for yes or no on something genuinely contested. What do you give?",
-   "back": "A decision rule: \"I need X first. If X, then A because…; if not-X, then B.\" A decision rule beats an opinion, and it shows the reasoning is transportable.",
-   "hook": "A decision rule beats an opinion",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §7"
-  },
-  {
-   "id": "c-fq-dont-know-format",
-   "front": "You are asked something you genuinely do not know. What is the format?",
-   "back": "Say so, then reason: \"Based on how this analogous thing behaves I would expect X, and I would verify by Y.\" Confident wrongness is the only unrecoverable answer.",
-   "hook": "Confident wrongness is the unrecoverable answer",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §7"
-  },
-  {
-   "id": "c-fq-disagreement-question",
-   "front": "Someone contradicts your position from their own experience. What do you ask?",
-   "back": "\"What was the context where it went the other way?\" Then update if they are right. Real-time updating on good evidence is a senior signal; digging in is not.",
-   "hook": "Ask for their context, then actually update",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §7"
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
   },
   {
    "id": "c-fq-certainty-theater",
@@ -3835,36 +3815,6 @@
    "cite": "doc: ai-architect-interview-playbook §1"
   },
   {
-   "id": "c-fq-what-breaks-first-at-scale",
-   "front": "\"What happens at ten times this volume?\" What must your answer name?",
-   "back": "The specific first bottleneck — usually provider rate limits, KV-cache concurrency, or cost. \"The database\" is the wrong answer and signals you have not run one of these.",
-   "hook": "Rate limits and KV cache, not the database",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "rate-limiting-and-quotas-for-ai",
-   "cite": "doc: ai-architect-interview-playbook §7"
-  },
-  {
-   "id": "c-fq-name-what-you-would-cut",
-   "front": "What should you volunteer, unprompted, before the conversation ends?",
-   "back": "What you would cut. Naming the scope you would drop and why proves you hold a priority order rather than a wish list — it is the staff-level move.",
-   "hook": "Volunteer the cut; it proves priority",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §8"
-  },
-  {
-   "id": "c-fq-what-only-humans-supply",
-   "front": "A model can produce the architecture. What can it not supply?",
-   "back": "The problem framing — which question to ask, whose goal wins when two conflict, and what consequence is acceptable. Those are judgment calls with an owner, not retrievable facts.",
-   "hook": "It can draw the design; it cannot choose the constraint",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-platform-system-design-interview-handbook §0"
-  },
-  {
    "id": "c-fq-competing-goals-question",
    "front": "Step two of the frame is stakeholders. What are you really looking for?",
    "back": "Whose goals compete. Support wants deflection, sales wants no angry customers, legal wants no unapproved claims. A design that ignores the conflict gets vetoed after it is built.",
@@ -3875,290 +3825,40 @@
    "cite": "doc: ai-platform-system-design-interview-handbook §0"
   },
   {
-   "id": "c-fq-what-not-to-do-with-ai",
-   "front": "Three questions define an AI vision. Which is hardest and most valuable?",
-   "back": "What we will deliberately NOT do with AI. Outcomes and capabilities are easy to list; the refusals are what prevent AI-washing and give the roadmap a real edge.",
-   "hook": "The refusals are the vision",
+   "id": "c-fq-cost-of-being-wrong",
+   "front": "How do you turn \"how accurate must it be?\" into a useful question?",
+   "back": "Ask what being wrong costs: low (user retries), medium (user misled), or high (financial, medical, legal). That answer sets the accuracy bar and how much latency you may spend buying it.",
+   "hook": "Accuracy targets come from consequence, not ambition",
    "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 003, §20"
-  },
-  {
-   "id": "c-fq-trust-with-incomplete-information",
-   "front": "At architect level, what is actually being assessed?",
-   "back": "Whether you would be trusted to make a call on incomplete information and own the consequence. Every behaviour — numbers, failure modes, admitted uncertainty — either builds that or destroys it.",
-   "hook": "Not what you know — whether you'd be trusted to decide",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §1"
-  },
-  {
-   "id": "c-fq-review-beats-which-llm",
-   "front": "You review an agent architecture. Which line of questioning beats \"which model?\"",
-   "back": "Ask what happens as context fills, what survives compaction, and whether failed approaches are represented. Those reveal architectural weakness faster than any model comparison.",
-   "hook": "Model choice is the shallowest question in the room",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-why-that-threshold",
-   "front": "A team says they compact at 70%. What is the follow-up that matters?",
-   "back": "Why 70? A number nobody can justify was copied, which means it was never measured against their own window, prompt size or turn length. The reasoning is the signal.",
-   "hook": "Ask why the number, not what the number",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "context-compression",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-failed-vs-not-tried",
-   "front": "One question exposes whether an agent's state model is real. Which?",
-   "back": "Can it distinguish \"tried and failed\" from \"not yet tried\"? Systems that cannot will either repeat work or silently skip an untried option, and both look like reasoning.",
-   "hook": "Failed and untried must not look alike",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "memory-systems",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-what-crosses-the-boundary",
-   "front": "Reviewing a multi-agent design, what do you ask about each boundary?",
-   "back": "What information crosses it, and is the sub-agent's output schema-constrained? An unconstrained boundary means the parent inherits the child's whole transcript and its mistakes.",
-   "hook": "Every agent boundary is a contract or a leak",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "multi-agent-patterns",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-can-we-replay",
-   "front": "Which two questions decide whether a team can debug their own agent?",
-   "back": "Is the raw transcript retained, and can we replay the run? Without both, every investigation is a re-enactment from memory and every fix is unverifiable.",
-   "hook": "No replay, no root cause",
-   "kind": "check",
-   "theme": "framing-questions",
-   "topic": "llm-observability",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-rollback-to-previous-state",
-   "front": "Compaction produces a bad state. What must the architecture allow?",
-   "back": "Rolling back to the previous state. If compaction is a one-way transformation, a single bad summarization is unrecoverable and the run is lost mid-task.",
-   "hook": "One-way compaction makes bad state permanent",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "langgraph-state-and-checkpointing",
-   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-design-so-localization-is-cheap",
-   "front": "\"How do you debug agent failures?\" What is the mature answer?",
-   "back": "\"I design the system so failure localization is cheap.\" Then name the capabilities: structured traces, version correlation, replay, counterfactual runners, seam evals, stage-level metrics.",
-   "hook": "Design for localization, don't heroically debug",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "llm-observability",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §11"
-  },
-  {
-   "id": "c-fq-agent-debugging-is-distributed",
-   "front": "Which existing discipline does agent debugging most resemble, and so what?",
-   "back": "Distributed systems — multiple components, state transitions, partial failures, version changes. So you need tracing, state inspection, replay and controlled experiments, not better prompts.",
-   "hook": "Borrow from distributed systems, not from prompting",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "resilience-patterns",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §11"
-  },
-  {
-   "id": "c-fq-which-loop-owns-the-fix",
-   "front": "A failure arrives. Which question routes it to the right fix?",
-   "back": "Which loop owns it — inner execution, middle memory and retrieval, or outer regression? A retry, a compaction change and an eval-set entry are three different fixes.",
-   "hook": "Route the failure to its loop first",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "llm-observability",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §12"
-  },
-  {
-   "id": "c-fq-platform-over-another-provider",
-   "front": "Budget for one platform investment: another model provider, or what instead?",
-   "back": "Debuggability — traces, replay, counterfactual runners, seam evals, regression datasets. A second provider adds an option; localization capability compounds on every future incident.",
-   "hook": "Buy localization, not another provider",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "llm-observability",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §11"
-  },
-  {
-   "id": "c-fq-what-layer-does-that-test",
-   "front": "A team shows you their agent test suite. What is the sharpest question?",
-   "back": "Which property is tested at which layer? Many tests at the wrong layer is worse than few at the right one — end-to-end tests cannot localize, unit tests cannot see composition.",
-   "hook": "Right property, right layer",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §2"
-  },
-  {
-   "id": "c-fq-is-the-model-your-only-oracle",
-   "front": "Which question reveals that a test suite is secretly all flaky?",
-   "back": "Is model output the only oracle? If so, every failure is ambiguous and no test can distinguish a broken harness from an unlucky sample.",
-   "hook": "One oracle, every test flaky",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §19"
-  },
-  {
-   "id": "c-fq-what-invariant-would-you-add",
-   "front": "Asked to improve an agent's safety story cheaply, what do you propose?",
-   "back": "An invariant, not another eval. High-impact write implies approval; request account_id equals retrieved account_id. Deterministic, always-on, and it cannot be talked out of.",
-   "hook": "Propose an invariant, not another eval",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "agent-loop-guardrails",
-   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §20"
-  },
-  {
-   "id": "c-fq-did-that-failure-become-a-test",
-   "front": "After an AI incident, what is the only question that prevents the second one?",
-   "back": "Did it become a regression case in the eval set and a deploy gate? A post-mortem with no test attached documents the failure and preserves it.",
-   "hook": "No test attached, no lesson learned",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §13"
-  },
-  {
-   "id": "c-fq-is-this-memory-or-a-fact",
-   "front": "Someone proposes storing something as \"agent memory\". What do you ask?",
-   "back": "Is this memory, or a structured fact with an owner and a source of truth? Most enterprise information is the latter, and calling it memory removes its owner.",
-   "hook": "Most 'memory' is a fact with an owner",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "memory-systems",
-   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §1"
-  },
-  {
-   "id": "c-fq-how-much-retrieved-is-used",
-   "front": "A team reports high retrieval recall. What do you ask instead?",
-   "back": "What fraction of retrieved evidence the answer actually references. High recall with low utilization means paying tokens and latency for context the model ignores.",
-   "hook": "Recall without utilization is just spend",
-   "kind": "metric",
-   "theme": "framing-questions",
-   "topic": "ai-product-metrics",
-   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §9"
-  },
-  {
-   "id": "c-fq-how-stale-may-this-be",
-   "front": "Before choosing between a cache, an index and a live API, what do you ask?",
-   "back": "How stale may this field be for this decision? Freshness tolerance varies per field, and it — not storage preference — decides the retrieval route.",
-   "hook": "Staleness tolerance picks the route",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "caching-layers",
-   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §16"
-  },
-  {
-   "id": "c-fq-who-does-the-database-work",
-   "front": "A design has the model filtering and ranking records. What do you challenge?",
-   "back": "Who does the database-scale work. Filtering, ranking, dedup, permissions and limits belong in deterministic retrieval; the model decides what is needed, not how to fetch it.",
-   "hook": "The model chooses; infrastructure fetches",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "embeddings-and-vector-databases",
-   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §8"
-  },
-  {
-   "id": "c-fq-where-did-this-summary-come-from",
-   "front": "An agent cites a summary. What must you be able to ask of it?",
-   "back": "Which source records produced it, and when. Without provenance a summary cannot be re-verified, corrected, or deleted when its source is — it becomes unfalsifiable.",
-   "hook": "An unsourced summary is unfalsifiable",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "corpus-provenance",
-   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §7"
-  },
-  {
-   "id": "c-fq-read-then-write-ladder",
-   "front": "Asked how much autonomy to ship in v1, what ladder do you give?",
-   "back": "Read, then low-risk reversible write, then high-risk write. Every rung buys production learning at a blast radius you survive. Shipping destructive capability in v1 bets the reputation on a prompt.",
-   "hook": "Read, reversible write, then the dangerous one",
-   "kind": "pat",
    "theme": "framing-questions",
    "topic": "hitl-design",
-   "cite": "doc: agentic-ai-system-design-deep-dive §7"
-  },
-  {
-   "id": "c-fq-what-would-change-your-mind",
-   "front": "You hold a design position under challenge. What question keeps it honest?",
-   "back": "What evidence would change my mind? Naming it converts a preference into a testable claim, and it is the difference between conviction and certainty theater.",
-   "hook": "Name the evidence that would flip you",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "doc: ai-architect-interview-playbook §1"
-  },
-  {
-   "id": "c-fq-who-is-harmed-when-it-is-wrong",
-   "front": "Beyond cost, what must you ask about a wrong AI output?",
-   "back": "Who is harmed, and can they tell? A wrong answer nobody can detect is worse than a loud failure, because it accumulates silently into decisions and into the corpus.",
-   "hook": "Undetectable wrongness compounds",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "ai-testing-and-evals",
    "cite": "issue 010, §4"
   },
   {
-   "id": "c-fq-what-does-the-human-do-now",
-   "front": "You add an approval gate. Which question decides whether it works?",
-   "back": "What exactly does the human see, and how long do they have? A gate presenting unreviewable detail under time pressure produces rubber-stamping, which is worse than no gate.",
-   "hook": "An unreadable gate is a rubber stamp",
-   "kind": "rule",
+   "id": "c-fq-cost-per-successful-task",
+   "front": "A team quotes you their cost per call. What do you ask instead?",
+   "back": "Cost per *successful* task, or the closest thing they track. Cost per call ignores retries and wrong answers, so it flatters every system that fails often and cheaply.",
+   "hook": "Per call flatters a system that fails cheaply",
+   "kind": "metric",
    "theme": "framing-questions",
-   "topic": "hitl-design",
-   "cite": "issue 004, §19"
+   "topic": "token-economics",
+   "cite": "doc: ai-architect-interview-playbook §6"
   },
   {
-   "id": "c-fq-which-metric-would-you-be-fired-for",
-   "front": "Which question forces a team to name their real success metric?",
-   "back": "Which single number would you be judged on in six months? It cuts through dashboards to the one outcome that is owned, and it is usually not the one being optimized.",
-   "hook": "One owned number beats a dashboard",
-   "kind": "signal",
-   "theme": "framing-questions",
-   "topic": "ai-product-metrics",
-   "cite": "issue 009, §20"
-  },
-  {
-   "id": "c-fq-what-do-we-stop-doing",
-   "front": "A new AI capability is approved. What is the unasked question?",
-   "back": "What does the team stop doing to staff it? Capacity is the constraint nobody names, and an initiative with no displaced work is an initiative with no owner.",
-   "hook": "Every new initiative displaces something",
+   "id": "c-fq-da-build-it-they-come",
+   "front": "A working AI feature is about to launch. What is the unasked question?",
+   "back": "What is the 90-day adoption plan — training, workflow redesign, success metrics? \"We'll figure it out\" predicts 10-20% adoption; a detailed plan predicts 60-80%.",
+   "hook": "No adoption plan predicts 10-20%",
    "kind": "rule",
    "theme": "framing-questions",
    "topic": "scaling-ai-adoption",
-   "cite": "doc: ai-architect-interview-playbook §8"
-  },
-  {
-   "id": "c-fq-da-model-is-the-product",
-   "front": "A team leads with which model they picked. What do you ask instead?",
-   "back": "What is your eval set, gateway, prompt versioning and observability? Frontier models sit within a few percent of each other, so model choice is config — those four are the product.",
-   "hook": "Model is config; the four are the product",
-   "kind": "rule",
-   "theme": "framing-questions",
-   "topic": "build-buy-partner",
    "cite": "issue 009, §21"
   },
   {
-   "id": "c-fq-da-more-data",
-   "front": "\"More data will fix the quality.\" What is the question that tests it?",
-   "back": "What was the marginal quality gain from the last 10x of data? The curve is logarithmic — most teams find under 2% past the first thousand examples, which does not pay for the engineering.",
-   "hook": "Ask for the marginal gain, not the total",
+   "id": "c-fq-da-eval-optional-for-mvp",
+   "front": "\"We'll add the eval set after the MVP ships.\" What question closes it?",
+   "back": "How will we know if a change made things better or worse? If the answer is gut feel or user feedback, there is no eval set. Fifty curated examples is enough — existing beats perfect.",
+   "hook": "Gut feel is the absence of an eval set",
    "kind": "rule",
    "theme": "framing-questions",
    "topic": "ai-testing-and-evals",
@@ -4185,6 +3885,26 @@
    "cite": "issue 009, §21"
   },
   {
+   "id": "c-fq-da-model-is-the-product",
+   "front": "A team leads with which model they picked. What do you ask instead?",
+   "back": "What is your eval set, gateway, prompt versioning and observability? Frontier models sit within a few percent of each other, so model choice is config — those four are the product.",
+   "hook": "Model is config; the four are the product",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §21"
+  },
+  {
+   "id": "c-fq-da-more-data",
+   "front": "\"More data will fix the quality.\" What is the question that tests it?",
+   "back": "What was the marginal quality gain from the last 10x of data? The curve is logarithmic — most teams find under 2% past the first thousand examples, which does not pay for the engineering.",
+   "hook": "Ask for the marginal gain, not the total",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 009, §21"
+  },
+  {
    "id": "c-fq-da-security-later",
    "front": "\"We'll add security once the feature works.\" What is the reframe?",
    "back": "Which architectural decisions are irreversible from a security standpoint? Auth belongs in the gateway, tenant isolation in the cache, audit in the trace store — retrofitting those is a rewrite.",
@@ -4195,24 +3915,464 @@
    "cite": "issue 009, §21"
   },
   {
-   "id": "c-fq-da-eval-optional-for-mvp",
-   "front": "\"We'll add the eval set after the MVP ships.\" What question closes it?",
-   "back": "How will we know if a change made things better or worse? If the answer is gut feel or user feedback, there is no eval set. Fifty curated examples is enough — existing beats perfect.",
-   "hook": "Gut feel is the absence of an eval set",
+   "id": "c-fq-decision-rule-beats-opinion",
+   "front": "Pushed for yes or no on something genuinely contested. What do you give?",
+   "back": "A decision rule: \"I need X first. If X, then A because…; if not-X, then B.\" A decision rule beats an opinion, and it shows the reasoning is transportable.",
+   "hook": "A decision rule beats an opinion",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §7"
+  },
+  {
+   "id": "c-fq-deflect-or-assist",
+   "front": "\"We want a support copilot.\" What is the scoping question that changes everything?",
+   "back": "Deflection or assist-the-human? And can it take actions — refunds, plan changes — or only answer? Those two answers decide autonomy, guardrails and the entire eval design.",
+   "hook": "Deflect or assist; answer or act",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "hitl-design",
+   "cite": "doc: ai-architect-interview-playbook §5"
+  },
+  {
+   "id": "c-fq-design-so-localization-is-cheap",
+   "front": "\"How do you debug agent failures?\" What is the mature answer?",
+   "back": "\"I design the system so failure localization is cheap.\" Then name the capabilities: structured traces, version correlation, replay, counterfactual runners, seam evals, stage-level metrics.",
+   "hook": "Design for localization, don't heroically debug",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §11"
+  },
+  {
+   "id": "c-fq-did-that-failure-become-a-test",
+   "front": "After an AI incident, what is the only question that prevents the second one?",
+   "back": "Did it become a regression case in the eval set and a deploy gate? A post-mortem with no test attached documents the failure and preserves it.",
+   "hook": "No test attached, no lesson learned",
    "kind": "rule",
    "theme": "framing-questions",
    "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §13"
+  },
+  {
+   "id": "c-fq-disagreement-question",
+   "front": "Someone contradicts your position from their own experience. What do you ask?",
+   "back": "\"What was the context where it went the other way?\" Then update if they are right. Real-time updating on good evidence is a senior signal; digging in is not.",
+   "hook": "Ask for their context, then actually update",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §7"
+  },
+  {
+   "id": "c-fq-dont-know-format",
+   "front": "You are asked something you genuinely do not know. What is the format?",
+   "back": "Say so, then reason: \"Based on how this analogous thing behaves I would expect X, and I would verify by Y.\" Confident wrongness is the only unrecoverable answer.",
+   "hook": "Confident wrongness is the unrecoverable answer",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §7"
+  },
+  {
+   "id": "c-fq-failed-vs-not-tried",
+   "front": "One question exposes whether an agent's state model is real. Which?",
+   "back": "Can it distinguish \"tried and failed\" from \"not yet tried\"? Systems that cannot will either repeat work or silently skip an untried option, and both look like reasoning.",
+   "hook": "Failed and untried must not look alike",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
+  },
+  {
+   "id": "c-fq-grain-of-truth-is-the-bait",
+   "front": "Why are the eight dangerous AI assumptions dangerous specifically?",
+   "back": "Each feels obviously true and carries a grain of truth. The grain is the bait; the systematic wrong decision is the trap. Memorizing the list is weaker than building the habit of testing premises.",
+   "hook": "The grain of truth is the bait",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
    "cite": "issue 009, §21"
   },
   {
-   "id": "c-fq-da-build-it-they-come",
-   "front": "A working AI feature is about to launch. What is the unasked question?",
-   "back": "What is the 90-day adoption plan — training, workflow redesign, success metrics? \"We'll figure it out\" predicts 10-20% adoption; a detailed plan predicts 60-80%.",
-   "hook": "No adoption plan predicts 10-20%",
+   "id": "c-fq-hallucination-is-not-a-diagnosis",
+   "front": "Someone says \"the model hallucinated\". What is the diagnostic question?",
+   "back": "Was the source passage in the retrieved top-K? Absent means it is a retrieval failure; present means generation. \"Hallucination\" names no stage, no owner and no fix.",
+   "hook": "Hallucination names no stage and no owner",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: agentic-system-design-interview-answer-patterns §4"
+  },
+  {
+   "id": "c-fq-highest-consequence-action",
+   "front": "One question reveals an org's real AI maturity in fifteen seconds. Which?",
+   "back": "\"What is the highest-consequence action any of your agents can take today?\" It surfaces their actual autonomy posture, and asking it signals consequence-class thinking is your default.",
+   "hook": "Fifteen seconds to their real maturity",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: ai-architect-interview-playbook §6"
+  },
+  {
+   "id": "c-fq-how-do-you-know-it-got-better",
+   "front": "What question exposes whether a team has real AI discipline?",
+   "back": "\"How do you currently know whether a change made it better?\" No answer means every improvement so far has been unverified — and that reframes the whole engagement.",
+   "hook": "No eval story means no known progress",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-interview-playbook §6"
+  },
+  {
+   "id": "c-fq-how-much-retrieved-is-used",
+   "front": "A team reports high retrieval recall. What do you ask instead?",
+   "back": "What fraction of retrieved evidence the answer actually references. High recall with low utilization means paying tokens and latency for context the model ignores.",
+   "hook": "Recall without utilization is just spend",
+   "kind": "metric",
+   "theme": "framing-questions",
+   "topic": "ai-product-metrics",
+   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §9"
+  },
+  {
+   "id": "c-fq-how-stale-may-this-be",
+   "front": "Before choosing between a cache, an index and a live API, what do you ask?",
+   "back": "How stale may this field be for this decision? Freshness tolerance varies per field, and it — not storage preference — decides the retrieval route.",
+   "hook": "Staleness tolerance picks the route",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "caching-layers",
+   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §16"
+  },
+  {
+   "id": "c-fq-is-an-agent-the-right-shape",
+   "front": "\"Build us an agent for this.\" What is the principal-level first move?",
+   "back": "Question the shape: would a deterministic pipeline with two model calls ship far sooner and be much easier to operate? Then ask what the agentic version actually buys.",
+   "hook": "Ask what the agent buys before designing one",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "single-vs-multi-agent-decision",
+   "cite": "doc: ai-architect-interview-playbook §8"
+  },
+  {
+   "id": "c-fq-is-the-model-your-only-oracle",
+   "front": "Which question reveals that a test suite is secretly all flaky?",
+   "back": "Is model output the only oracle? If so, every failure is ambiguous and no test can distinguish a broken harness from an unlucky sample.",
+   "hook": "One oracle, every test flaky",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §19"
+  },
+  {
+   "id": "c-fq-is-this-memory-or-a-fact",
+   "front": "Someone proposes storing something as \"agent memory\". What do you ask?",
+   "back": "Is this memory, or a structured fact with an owner and a source of truth? Most enterprise information is the latter, and calling it memory removes its owner.",
+   "hook": "Most 'memory' is a fact with an owner",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "memory-systems",
+   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §1"
+  },
+  {
+   "id": "c-fq-iv-product-sense-reframe",
+   "front": "In a product-sense answer, which single step decides the rest?",
+   "back": "Reframing as the user problem: 'the user problem is X, not Y'. Get the reframe right and the options, the pick and the metrics follow.",
+   "hook": "Reframe first; everything else follows",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-product-metrics",
+   "cite": "issue 008, §22"
+  },
+  {
+   "id": "c-fq-iv-requirements-are-graded",
+   "front": "Requirements-gathering in the 45-minute agentic design interview: how long, and if skipped?",
+   "back": "5-7 minutes, and interviewers grade it explicitly. Drawing before asking about latency, cost, HITL, tenancy and residency is a fail on its own.",
+   "hook": "Draw before you ask and you have already failed",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 004, §22"
+  },
+  {
+   "id": "c-fq-iv-review-interview-order",
+   "front": "Handed a design, asked for three issues. What order?",
+   "back": "Sweep data, orchestration, failure modes, cost and security; then prioritise by impact; then propose fixes with effort estimates. Unranked findings read as a list, not judgment.",
+   "hook": "Find, rank, cost — ranking is the grade",
+   "kind": "pat",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 005, §22"
+  },
+  {
+   "id": "c-fq-iv-scale-is-the-question",
+   "front": "'Design X for 1M req/day, 1K tenants, 50ms p99.' What is actually being asked?",
+   "back": "The scale is the question. Every design decision has to reference the given numbers — an answer that would be identical at 1/100th the scale is not an answer.",
+   "hook": "If the numbers change nothing, you did not design",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 012, §22"
+  },
+  {
+   "id": "c-fq-iv-six-clarifiers-copilot",
+   "front": "Asked to design an AI support copilot — which six clarifiers come before any drawing?",
+   "back": "Ticket volume, latency target, autonomy level, multi-tenancy and isolation, tool surface, success metric. Each one drives a different layer of the design.",
+   "hook": "Six questions, six architectural forks",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 002, §22"
+  },
+  {
+   "id": "c-fq-iv-whiteboard-failure-pass",
+   "front": "Whiteboarding a workflow — which pass do most candidates skip?",
+   "back": "The failure-mode pass: for each box what if it fails, for each arrow what if data is lost. 5-8 minutes of red annotation, before the NFR pass.",
+   "hook": "Happy path only is the standard failure",
+   "kind": "check",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 012, §22"
+  },
+  {
+   "id": "c-fq-latency-class-question",
+   "front": "Before designing for speed, which question comes first?",
+   "back": "Which latency class is this — instant, interactive, or background? There is no universal \"fast enough\", so a single latency target across a product is wrong somewhere by construction.",
+   "hook": "Instant, interactive, or background",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-slis-slos",
+   "cite": "issue 010, §4"
+  },
+  {
+   "id": "c-fq-name-the-owner",
+   "front": "Which question stops a project that should not start?",
+   "back": "\"Who owns this for the next eighteen months?\" If the owner cannot be named, that is an argument against starting — not a detail to resolve later.",
+   "hook": "No nameable owner, no start",
    "kind": "rule",
    "theme": "framing-questions",
    "topic": "scaling-ai-adoption",
-   "cite": "issue 009, §21"
+   "cite": "doc: ai-architect-interview-playbook §8"
+  },
+  {
+   "id": "c-fq-name-what-you-would-cut",
+   "front": "What should you volunteer, unprompted, before the conversation ends?",
+   "back": "What you would cut. Naming the scope you would drop and why proves you hold a priority order rather than a wish list — it is the staff-level move.",
+   "hook": "Volunteer the cut; it proves priority",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §8"
+  },
+  {
+   "id": "c-fq-platform-over-another-provider",
+   "front": "Budget for one platform investment: another model provider, or what instead?",
+   "back": "Debuggability — traces, replay, counterfactual runners, seam evals, regression datasets. A second provider adds an option; localization capability compounds on every future incident.",
+   "hook": "Buy localization, not another provider",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §11"
+  },
+  {
+   "id": "c-fq-read-then-write-ladder",
+   "front": "Asked how much autonomy to ship in v1, what ladder do you give?",
+   "back": "Read, then low-risk reversible write, then high-risk write. Every rung buys production learning at a blast radius you survive. Shipping destructive capability in v1 bets the reputation on a prompt.",
+   "hook": "Read, reversible write, then the dangerous one",
+   "kind": "pat",
+   "theme": "framing-questions",
+   "topic": "hitl-design",
+   "cite": "doc: agentic-ai-system-design-deep-dive §7"
+  },
+  {
+   "id": "c-fq-requirements-time-budget",
+   "front": "In a 45-minute design conversation, how long belongs to requirements?",
+   "back": "Five to seven minutes, announced up front. That is where the conversation is won or lost; announcing the structure buys you permission to spend the time.",
+   "hook": "Seven minutes before a single box",
+   "kind": "number",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §2"
+  },
+  {
+   "id": "c-fq-reversibility-question",
+   "front": "You must decide whether an action needs human approval. What do you ask?",
+   "back": "Is it reversible, and what does undoing it cost? Reversibility reduces blast radius without eliminating it, so approval should track consequence rather than a blanket rule.",
+   "hook": "Reversible is not the same as safe",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "hitl-design",
+   "cite": "issue 006, §17"
+  },
+  {
+   "id": "c-fq-review-beats-which-llm",
+   "front": "You review an agent architecture. Which line of questioning beats \"which model?\"",
+   "back": "Ask what happens as context fills, what survives compaction, and whether failed approaches are represented. Those reveal architectural weakness faster than any model comparison.",
+   "hook": "Model choice is the shallowest question in the room",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
+  },
+  {
+   "id": "c-fq-rollback-to-previous-state",
+   "front": "Compaction produces a bad state. What must the architecture allow?",
+   "back": "Rolling back to the previous state. If compaction is a one-way transformation, a single bad summarization is unrecoverable and the run is lost mid-task.",
+   "hook": "One-way compaction makes bad state permanent",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "langgraph-state-and-checkpointing",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
+  },
+  {
+   "id": "c-fq-seven-step-clarify-first",
+   "front": "Order the seven steps for answering any AI design question.",
+   "back": "Clarify the real problem, identify stakeholders and competing goals, list trade-offs, think in architectures not point solutions, define success metrics, explain business impact, then recommend and justify.",
+   "hook": "Clarify before you architect — always",
+   "kind": "pat",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-interview-handbook §0"
+  },
+  {
+   "id": "c-fq-should-it-be-built",
+   "front": "What separates a principal-level answer from a staff-level one?",
+   "back": "Staff names trade-offs with numbers and says what to cut. Principal reframes the problem, asks whether it should be built at all, and weighs the two-year maintenance cost.",
+   "hook": "Staff cuts scope; principal questions the premise",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §8"
+  },
+  {
+   "id": "c-fq-trust-with-incomplete-information",
+   "front": "At architect level, what is actually being assessed?",
+   "back": "Whether you would be trusted to make a call on incomplete information and own the consequence. Every behaviour — numbers, failure modes, admitted uncertainty — either builds that or destroys it.",
+   "hook": "Not what you know — whether you'd be trusted to decide",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §1"
+  },
+  {
+   "id": "c-fq-vague-on-purpose",
+   "front": "The problem you are handed is vague. What is actually being tested?",
+   "back": "Whether you fill the vacuum with architecture or with requirements questions. Vagueness is the test, not an oversight — drawing boxes in minute two is the failure.",
+   "hook": "Vagueness is the test, not an oversight",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §7"
+  },
+  {
+   "id": "c-fq-vendor-pilot-question",
+   "front": "A vendor demos 95% accuracy. What is the only question that settles it?",
+   "back": "\"What is the smallest pilot that validates that on our data?\" Demos are tuned to their test set. A refusal to support a scoped pilot is itself the answer.",
+   "hook": "Refusing a pilot is the answer",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "build-buy-partner",
+   "cite": "issue 008, §21"
+  },
+  {
+   "id": "c-fq-what-already-exists",
+   "front": "Why ask what already exists before proposing anything?",
+   "back": "Because integrating with the incumbent ticketing, ITSM or helpdesk is usually the constraint that decides whether the design ships. A proposal requiring their migration first will not launch.",
+   "hook": "Never make their migration your prerequisite",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "abstraction-seams",
+   "cite": "doc: ai-architect-interview-playbook §5"
+  },
+  {
+   "id": "c-fq-what-breaks-first-at-scale",
+   "front": "\"What happens at ten times this volume?\" What must your answer name?",
+   "back": "The specific first bottleneck — usually provider rate limits, KV-cache concurrency, or cost. \"The database\" is the wrong answer and signals you have not run one of these.",
+   "hook": "Rate limits and KV cache, not the database",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "rate-limiting-and-quotas-for-ai",
+   "cite": "doc: ai-architect-interview-playbook §7"
+  },
+  {
+   "id": "c-fq-what-crosses-the-boundary",
+   "front": "Reviewing a multi-agent design, what do you ask about each boundary?",
+   "back": "What information crosses it, and is the sub-agent's output schema-constrained? An unconstrained boundary means the parent inherits the child's whole transcript and its mistakes.",
+   "hook": "Every agent boundary is a contract or a leak",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "multi-agent-patterns",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
+  },
+  {
+   "id": "c-fq-what-do-we-stop-doing",
+   "front": "A new AI capability is approved. What is the unasked question?",
+   "back": "What does the team stop doing to staff it? Capacity is the constraint nobody names, and an initiative with no displaced work is an initiative with no owner.",
+   "hook": "Every new initiative displaces something",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "scaling-ai-adoption",
+   "cite": "doc: ai-architect-interview-playbook §8"
+  },
+  {
+   "id": "c-fq-what-does-the-human-do-now",
+   "front": "You add an approval gate. Which question decides whether it works?",
+   "back": "What exactly does the human see, and how long do they have? A gate presenting unreviewable detail under time pressure produces rubber-stamping, which is worse than no gate.",
+   "hook": "An unreadable gate is a rubber stamp",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "hitl-design",
+   "cite": "issue 004, §19"
+  },
+  {
+   "id": "c-fq-what-invariant-would-you-add",
+   "front": "Asked to improve an agent's safety story cheaply, what do you propose?",
+   "back": "An invariant, not another eval. High-impact write implies approval; request account_id equals retrieved account_id. Deterministic, always-on, and it cannot be talked out of.",
+   "hook": "Propose an invariant, not another eval",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "agent-loop-guardrails",
+   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §20"
+  },
+  {
+   "id": "c-fq-what-layer-does-that-test",
+   "front": "A team shows you their agent test suite. What is the sharpest question?",
+   "back": "Which property is tested at which layer? Many tests at the wrong layer is worse than few at the right one — end-to-end tests cannot localize, unit tests cannot see composition.",
+   "hook": "Right property, right layer",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d8-testing-agent-detailed-reference §2"
+  },
+  {
+   "id": "c-fq-what-not-to-do-with-ai",
+   "front": "Three questions define an AI vision. Which is hardest and most valuable?",
+   "back": "What we will deliberately NOT do with AI. Outcomes and capabilities are easy to list; the refusals are what prevent AI-washing and give the roadmap a real edge.",
+   "hook": "The refusals are the vision",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 003, §20"
+  },
+  {
+   "id": "c-fq-what-only-humans-supply",
+   "front": "A model can produce the architecture. What can it not supply?",
+   "back": "The problem framing — which question to ask, whose goal wins when two conflict, and what consequence is acceptable. Those are judgment calls with an owner, not retrievable facts.",
+   "hook": "It can draw the design; it cannot choose the constraint",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-platform-system-design-interview-handbook §0"
+  },
+  {
+   "id": "c-fq-what-would-change-your-mind",
+   "front": "You hold a design position under challenge. What question keeps it honest?",
+   "back": "What evidence would change my mind? Naming it converts a preference into a testable claim, and it is the difference between conviction and certainty theater.",
+   "hook": "Name the evidence that would flip you",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-system-design-interview",
+   "cite": "doc: ai-architect-interview-playbook §1"
   },
   {
    "id": "c-fq-what-would-have-to-be-true",
@@ -4225,14 +4385,114 @@
    "cite": "issue 009, §21"
   },
   {
-   "id": "c-fq-grain-of-truth-is-the-bait",
-   "front": "Why are the eight dangerous AI assumptions dangerous specifically?",
-   "back": "Each feels obviously true and carries a grain of truth. The grain is the bait; the systematic wrong decision is the trap. Memorizing the list is weaker than building the habit of testing premises.",
-   "hook": "The grain of truth is the bait",
+   "id": "c-fq-where-did-this-summary-come-from",
+   "front": "An agent cites a summary. What must you be able to ask of it?",
+   "back": "Which source records produced it, and when. Without provenance a summary cannot be re-verified, corrected, or deleted when its source is — it becomes unfalsifiable.",
+   "hook": "An unsourced summary is unfalsifiable",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "corpus-provenance",
+   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §7"
+  },
+  {
+   "id": "c-fq-where-does-authorization-come-from",
+   "front": "An agent calls a tool on a user's behalf. What must you ask about permissions?",
+   "back": "Does it inherit the user's permissions, or hold its own? Answering \"its own, over-broad\" is how blast radius becomes everything the service account can reach.",
+   "hook": "Inherited or its own — never assume",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: ai-architect-interview-playbook §6"
+  },
+  {
+   "id": "c-fq-which-gap-did-the-demo-not-cross",
+   "front": "\"It worked in the demo.\" What do you ask?",
+   "back": "Which gap the demo did not cross — input distribution, failure surface, scale economics, consequence, or time. Naming the gap turns an argument about vibes into a testable claim.",
+   "hook": "Name the gap the demo skipped",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "pre-pilot-checklist",
+   "cite": "doc: agentic-ai-system-design-deep-dive §1"
+  },
+  {
+   "id": "c-fq-which-loop-owns-the-fix",
+   "front": "A failure arrives. Which question routes it to the right fix?",
+   "back": "Which loop owns it — inner execution, middle memory and retrieval, or outer regression? A retry, a compaction change and an eval-set entry are three different fixes.",
+   "hook": "Route the failure to its loop first",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §12"
+  },
+  {
+   "id": "c-fq-which-metric-would-you-be-fired-for",
+   "front": "Which question forces a team to name their real success metric?",
+   "back": "Which single number would you be judged on in six months? It cuts through dashboards to the one outcome that is owned, and it is usually not the one being optimized.",
+   "hook": "One owned number beats a dashboard",
    "kind": "signal",
    "theme": "framing-questions",
-   "topic": "ai-system-design-interview",
-   "cite": "issue 009, §21"
+   "topic": "ai-product-metrics",
+   "cite": "issue 009, §20"
+  },
+  {
+   "id": "c-fq-who-can-see-what",
+   "front": "An internal knowledge assistant over company documents. What is the whole problem?",
+   "back": "Who can see what. Permission-aware retrieval is the design, not a feature bolted on later — ask it before corpus size, formats or refresh rate.",
+   "hook": "Permissions are the design, not a feature",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "multi-tenant-ai-security",
+   "cite": "doc: ai-architect-interview-playbook §5"
+  },
+  {
+   "id": "c-fq-who-does-the-database-work",
+   "front": "A design has the model filtering and ranking records. What do you challenge?",
+   "back": "Who does the database-scale work. Filtering, ranking, dedup, permissions and limits belong in deterministic retrieval; the model decides what is needed, not how to fetch it.",
+   "hook": "The model chooses; infrastructure fetches",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "embeddings-and-vector-databases",
+   "cite": "doc: ai-agentic-d9-long-term-memory-enterprise-retrieval-detailed-reference §8"
+  },
+  {
+   "id": "c-fq-who-is-harmed-when-it-is-wrong",
+   "front": "Beyond cost, what must you ask about a wrong AI output?",
+   "back": "Who is harmed, and can they tell? A wrong answer nobody can detect is worse than a loud failure, because it accumulates silently into decisions and into the corpus.",
+   "hook": "Undetectable wrongness compounds",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "issue 010, §4"
+  },
+  {
+   "id": "c-fq-who-owns-the-risk-decision",
+   "front": "Autonomous customer-facing send is on the table. Whose decision is it?",
+   "back": "The business's, explicitly. Give the trade-off honestly, then make the risk decision assigned and visible — it should never be resolved silently as an engineering default.",
+   "hook": "Make the risk decision owned, not defaulted",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "hitl-design",
+   "cite": "doc: ai-architect-interview-playbook §8"
+  },
+  {
+   "id": "c-fq-who-validates-correctness",
+   "front": "\"Let users query the warehouse in natural language.\" What do you ask?",
+   "back": "Read-only? How many tables? Who validates that the answer is right — and what happens when it is wrong? A confident wrong number is worse than no answer.",
+   "hook": "A confident wrong number beats no answer to nobody",
+   "kind": "rule",
+   "theme": "framing-questions",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-architect-interview-playbook §5"
+  },
+  {
+   "id": "c-fq-why-that-threshold",
+   "front": "A team says they compact at 70%. What is the follow-up that matters?",
+   "back": "Why 70? A number nobody can justify was copied, which means it was never measured against their own window, prompt size or turn length. The reasoning is the signal.",
+   "hook": "Ask why the number, not what the number",
+   "kind": "signal",
+   "theme": "framing-questions",
+   "topic": "context-compression",
+   "cite": "doc: ai-agentic-d4-context-exhaustion-detailed-reference §20"
   },
   {
    "id": "c-approval-rate-theater",
@@ -5455,6 +5715,56 @@
    "cite": "doc: broken-rag-repo-live-debug §1"
   },
   {
+   "id": "c-d7-composition-failure",
+   "front": "Every component tests healthy and the product is still wrong. What is this?",
+   "back": "A composition failure. Retrieval, planning, tool and generation each look defensible, but their combination misses a critical distinction. Component tests cannot see it.",
+   "hook": "All green components, red product",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §6"
+  },
+  {
+   "id": "c-d7-context-assembly-distinct",
+   "front": "Retrieval returned the right evidence and the answer is still wrong. Where do you look?",
+   "back": "Context assembly. Truncation, dropped items, duplicates, stale context, compaction loss or conflicting facts — retrieved is not the same as arrived.",
+   "hook": "Retrieved is not arrived",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "context-engineering",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §2"
+  },
+  {
+   "id": "c-d7-counterfactual-attribution",
+   "front": "How do you move from suspecting a stage to proving it caused the failure?",
+   "back": "Counterfactual attribution: replace one stage's output with a known-good one and rerun. If swapping retrieval fixes the answer, retrieval is a causal suspect — not a guess.",
+   "hook": "Swap one stage, watch the outcome",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §5"
+  },
+  {
+   "id": "c-d7-seam-eval-question",
+   "front": "What exactly does a seam eval ask?",
+   "back": "Given this output from stage A, does stage B interpret and use it correctly? The seams to cover: retrieval→planning, planning→tool selection, tool result→planning, planning→generation.",
+   "hook": "Test the joins, not just the parts",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "ai-testing-and-evals",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §6"
+  },
+  {
+   "id": "c-d7-stage-taxonomy",
+   "front": "An agent gave a wrong answer. Name the stages you rule out, in order.",
+   "back": "Scope gate, memory routing, retrieval, context assembly, planning, tool selection, tool arguments, tool execution, policy, generation. Generation is last — label it only when evidence points there.",
+   "hook": "Generation is the last suspect, not the first",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §2"
+  },
+  {
    "id": "c-ed-cache-key-scope",
    "front": "Where do gateways leak data?",
    "back": "The cache key. It must include model, every output-affecting parameter, and the full permission/tenant scope. A prompt-hash key serves Tenant A's answer to Tenant B — and prompts collide more than you would think.",
@@ -5808,6 +6118,86 @@
    "cite": "doc: agentic-ai-system-design-deep-dive §9"
   },
   {
+   "id": "c-ro-s5-ai-workload-three-traits",
+   "front": "Three properties of AI agent loops that traditional request-response lacks.",
+   "back": "Long — 30s to 30min, not sub-second. Stateful — history, tool results, intermediate decisions. Failure-prone — model timeouts, tool outages, rate limits.",
+   "hook": "Long, stateful, failure-prone",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "workflow-engines-for-ai",
+   "cite": "issue 007, §5"
+  },
+  {
+   "id": "c-ro-s5-duplicate-ticket-mechanism",
+   "front": "A Jira call returns 500, the retry succeeds, and there are two tickets. What happened?",
+   "back": "The first call succeeded server-side; the 500 was a response timeout. The agent cannot tell which ticket is real, so it updates both.",
+   "hook": "The 500 was the response, not the write",
+   "kind": "fail",
+   "theme": "reliability-operations",
+   "topic": "idempotency-for-ai-operations",
+   "cite": "issue 005, §5"
+  },
+  {
+   "id": "c-ro-s5-durable-execution-why",
+   "front": "A 20-minute agent loop crashes at minute 18. Why can't you just retry?",
+   "back": "That is another 18 minutes of model cost and the user is gone. Durable execution checkpoints after every step and resumes from the last one.",
+   "hook": "Minute 18 is not a place to restart from",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "workflow-engines-for-ai",
+   "cite": "issue 007, §5"
+  },
+  {
+   "id": "c-ro-s5-five-obs-pillars",
+   "front": "Name the observability pillars for an AI system beyond logs, metrics and traces.",
+   "back": "Cost and quality join them as first-class pillars — five, not three. Traces are hierarchical spans from agent_run down to step.",
+   "hook": "Cost and quality are pillars, not fields",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "issue 010, §5"
+  },
+  {
+   "id": "c-ro-s5-four-queues-sweet-spots",
+   "front": "Four production queue candidates for AI workloads — match each to its sweet spot.",
+   "back": "Kafka for high-volume event streams, audit trails and fan-out. Redis Streams under 10K msg/s, co-located, rapid MVP. RabbitMQ for rich routing. Choosing wrong is a $500K rewrite you notice at 18 months.",
+   "hook": "An 18-month-delayed $500K mistake",
+   "kind": "pat",
+   "theme": "reliability-operations",
+   "topic": "queue-architecture-for-ai",
+   "cite": "issue 002, §5"
+  },
+  {
+   "id": "c-ro-s5-four-retry-sources",
+   "front": "Name the four reasons an AI agent retries a state-changing tool call.",
+   "back": "Transient tool failure, supervisor re-routing after a worker timeout, user re-submission, and queue redelivery. Every one of them duplicates without an idempotency key.",
+   "hook": "Four independent paths to a duplicate",
+   "kind": "check",
+   "theme": "reliability-operations",
+   "topic": "idempotency-for-ai-operations",
+   "cite": "issue 005, §5"
+  },
+  {
+   "id": "c-ro-s5-idempotency-key-composition",
+   "front": "What composes a good idempotency key for an agent tool call?",
+   "back": "agent_run_id plus step_idx plus tool_name. The server stores the key for 24h and returns the original response on a duplicate rather than creating a second resource.",
+   "hook": "Run id, step index, tool name",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "idempotency-for-ai-operations",
+   "cite": "issue 005, §5"
+  },
+  {
+   "id": "c-ro-s5-obs-four-differences",
+   "front": "Why is AI observability not traditional observability with extra fields?",
+   "back": "Non-deterministic output means you must capture the actual output. Cost is a first-class metric. Model and prompt version are request context. Quality needs measuring — 0% errors can still be 50% quality.",
+   "hook": "Zero errors, fifty percent quality",
+   "kind": "rule",
+   "theme": "reliability-operations",
+   "topic": "llm-observability",
+   "cite": "issue 010, §5"
+  },
+  {
    "id": "c-ro-sample-but-keep-failures",
    "front": "What is the sampling rule at production volume?",
    "back": "Sample traces for cost, but always retain 100% of failures and escalations. Sampled-away failures are the ones you needed.",
@@ -5877,56 +6267,6 @@
    "theme": "reliability-operations",
    "topic": "llm-observability",
    "cite": "doc: agentic-ai-system-design-deep-dive §12"
-  },
-  {
-   "id": "c-d7-stage-taxonomy",
-   "front": "An agent gave a wrong answer. Name the stages you rule out, in order.",
-   "back": "Scope gate, memory routing, retrieval, context assembly, planning, tool selection, tool arguments, tool execution, policy, generation. Generation is last — label it only when evidence points there.",
-   "hook": "Generation is the last suspect, not the first",
-   "kind": "pat",
-   "theme": "reliability-operations",
-   "topic": "llm-observability",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §2"
-  },
-  {
-   "id": "c-d7-context-assembly-distinct",
-   "front": "Retrieval returned the right evidence and the answer is still wrong. Where do you look?",
-   "back": "Context assembly. Truncation, dropped items, duplicates, stale context, compaction loss or conflicting facts — retrieved is not the same as arrived.",
-   "hook": "Retrieved is not arrived",
-   "kind": "rule",
-   "theme": "reliability-operations",
-   "topic": "context-engineering",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §2"
-  },
-  {
-   "id": "c-d7-counterfactual-attribution",
-   "front": "How do you move from suspecting a stage to proving it caused the failure?",
-   "back": "Counterfactual attribution: replace one stage's output with a known-good one and rerun. If swapping retrieval fixes the answer, retrieval is a causal suspect — not a guess.",
-   "hook": "Swap one stage, watch the outcome",
-   "kind": "pat",
-   "theme": "reliability-operations",
-   "topic": "llm-observability",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §5"
-  },
-  {
-   "id": "c-d7-composition-failure",
-   "front": "Every component tests healthy and the product is still wrong. What is this?",
-   "back": "A composition failure. Retrieval, planning, tool and generation each look defensible, but their combination misses a critical distinction. Component tests cannot see it.",
-   "hook": "All green components, red product",
-   "kind": "fail",
-   "theme": "reliability-operations",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §6"
-  },
-  {
-   "id": "c-d7-seam-eval-question",
-   "front": "What exactly does a seam eval ask?",
-   "back": "Given this output from stage A, does stage B interpret and use it correctly? The seams to cover: retrieval→planning, planning→tool selection, tool result→planning, planning→generation.",
-   "hook": "Test the joins, not just the parts",
-   "kind": "rule",
-   "theme": "reliability-operations",
-   "topic": "ai-testing-and-evals",
-   "cite": "doc: ai-agentic-d7-debugging-wrong-answer-detailed-reference §6"
   },
   {
    "id": "c-bj-auto-write-persistent-injection",
@@ -6337,6 +6677,36 @@
    "cite": "doc: agentic-ai-system-design-deep-dive §13"
   },
   {
+   "id": "c-sd-s5-mt-cache-four-challenges",
+   "front": "Four ways multi-tenant caching is harder than single-tenant.",
+   "back": "Isolation — a missing tenant_id in the key is a security incident. Per-tenant invalidation. Cross-tenant poisoning via a shared semantic cache. Fairness, since a loud tenant evicts a quiet one.",
+   "hook": "A missing tenant_id is an incident, not a bug",
+   "kind": "rule",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 011, §5"
+  },
+  {
+   "id": "c-sd-s5-semantic-cache-poisoning",
+   "front": "How does a shared semantic cache become an attack path between tenants?",
+   "back": "If tenant A can influence what tenant B reads from it, an attacker in A poisons B's responses. Shared semantic cache is the one layer where isolation is not optional.",
+   "hook": "Shared meaning is shared blast radius",
+   "kind": "fail",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 011, §5"
+  },
+  {
+   "id": "c-sd-s5-strongest-isolation-cost",
+   "front": "The strongest multi-tenant cache isolation pattern — and what it costs.",
+   "back": "Per-tenant cache instances: separate Redis per tenant. Highest cost, N instances to run. Justified for regulated industries, not as a default.",
+   "hook": "Strongest isolation, N Redis bills",
+   "kind": "pat",
+   "theme": "security-data",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 011, §5"
+  },
+  {
    "id": "c-sd-samsung-data-boundary",
    "front": "The Samsung leak, 2023 — what was missing?",
    "back": "A policy on what may cross into a third-party model provider. The failure was a data-boundary decision nobody had made, not a model behaviour.",
@@ -6622,6 +6992,256 @@
    "cite": "doc: ai-architect-interview-playbook §8"
   },
   {
+   "id": "c-ss-iv-architect-loop-four-rounds",
+   "front": "The 90-minute AI architect loop: name the four rounds and their minutes.",
+   "back": "System design 45, architecture review 30, leadership/behavioural 30, hiring manager 30. Review is a distinct round — critique, not creation.",
+   "hook": "Four rounds, only one is greenfield",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 005, §22"
+  },
+  {
+   "id": "c-ss-iv-architect-vs-swe-loop",
+   "front": "AI architect loops versus SWE loops — where does the bar move?",
+   "back": "Coding bar drops, design bar rises sharply. Every design answer must answer 'what if the model is wrong?' — a question deterministic systems never pose.",
+   "hook": "Lower coding bar, much higher design bar",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 005, §22"
+  },
+  {
+   "id": "c-ss-iv-capacity-flips-question",
+   "front": "Capacity-based estimation flips the question. From what, to what?",
+   "back": "From 'when will it be done?' to 'what will be done by then?'. Right when the deadline is fixed and scope is flexible; output is a ranked must-have list.",
+   "hook": "Fixed date, negotiable scope",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-ss-iv-eight-story-bar",
+   "front": "At Staff+, behavioural rounds stop assessing fit. What do they assess?",
+   "back": "Leadership. Did you drive decisions that mattered, influence without authority, mentor, navigate ambiguity. The technical bar is assumed; the leadership bar differentiates.",
+   "hook": "Assumed technical, tested on leadership",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "human-only-decisions",
+   "cite": "issue 003, §22"
+  },
+  {
+   "id": "c-ss-iv-eighty-percent-breakpoint",
+   "front": "In bottom-up estimation, what is a breakpoint and which one should you aim at?",
+   "back": "A point where the project can stop and still deliver value. Aim at the 80% breakpoint; the 100% version is a nice-to-have.",
+   "hook": "Ship the 80% breakpoint",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-ss-iv-estimation-three-differences",
+   "front": "Why is AI effort estimation harder than SWE estimation? Three reasons.",
+   "back": "Quality is a variable not a constant; the model can be deprecated mid-project; data is the long pole, not engineering.",
+   "hook": "Quality varies, models expire, data dominates",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-ss-iv-most-common-failure-mode",
+   "front": "Most candidates fail behavioural rounds not for lacking stories. Then why?",
+   "back": "They tell technical stories when the interviewer wanted leadership stories. The story exists; the framing is wrong.",
+   "hook": "Right story, wrong frame",
+   "kind": "fail",
+   "theme": "strategy-scale",
+   "topic": "human-only-decisions",
+   "cite": "issue 003, §22"
+  },
+  {
+   "id": "c-ss-iv-reference-class-trap",
+   "front": "Reference-class forecasting is the most accurate technique — and the most dangerous. Why?",
+   "back": "Teams without reference data invent a class ('like a CRUD app, 2 weeks') and land 5x off. Use it only with actual reference data.",
+   "hook": "An invented reference class is worse than none",
+   "kind": "fail",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-ss-iv-review-is-the-daily-job",
+   "front": "Why do scaled companies weight the architecture-review interview so highly?",
+   "back": "Greenfield is rare; review is constant. Staff+ engineers review PRs, architecture docs, vendor proposals and team designs daily.",
+   "hook": "Greenfield rare, review constant",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "ai-system-design-interview",
+   "cite": "issue 006, §22"
+  },
+  {
+   "id": "c-ss-iv-senior-vs-principal-eval",
+   "front": "One sentence each: what are Senior and Principal engineers evaluated on?",
+   "back": "Senior: can you do the work. Principal: can you lead the work. At Principal+ the technical chops are assumed across every candidate.",
+   "hook": "Do the work versus lead the work",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "human-only-decisions",
+   "cite": "issue 011, §22"
+  },
+  {
+   "id": "c-ss-iv-spike-threshold",
+   "front": "At what risk multiplier should you spike before estimating, and why is it not throwaway?",
+   "back": "3x or higher. A 1-2 week spike answers the highest-risk question and produces the knowledge that makes the rest of the estimate accurate.",
+   "hook": "Two weeks of spike beats three months of slip",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-ss-iv-staff-vs-principal-comms",
+   "front": "What separates Staff from Principal in communication terms?",
+   "back": "Staff communicate to engineers; Principal communicate to executives, customers and cross-functional leaders — audiences that control budget and whose cooperation you need.",
+   "hook": "Your code does not speak for itself",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 010, §22"
+  },
+  {
+   "id": "c-ss-iv-star-result-reflects",
+   "front": "How does STAR's Result element change for AI work at Staff+?",
+   "back": "Measurable outcome plus what you would do differently. Staff+ candidates reflect, not just report — the honest retrospective is the signal.",
+   "hook": "Report is Senior; reflect is Staff+",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "decision-calibration",
+   "cite": "issue 003, §22"
+  },
+  {
+   "id": "c-ss-iv-three-audiences",
+   "front": "Communicating architecture upward: name the three audiences and each one's lead.",
+   "back": "Executives lead with business outcome and quantified cost/risk. Customers lead with value and honest limitations. Cross-functional leaders lead with impact on their work.",
+   "hook": "Three audiences, three different first sentences",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 010, §22"
+  },
+  {
+   "id": "c-ss-iv-triage-agent-49-days",
+   "front": "The worked triage-agent estimate totals how long, and which component is largest?",
+   "back": "49 days, about 10 eng-weeks. HITL workflow is the largest at XL/15 days — L sized then doubled as a new pattern.",
+   "hook": "49 days, and HITL is a third of it",
+   "kind": "number",
+   "theme": "strategy-scale",
+   "topic": "hitl-design",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-ss-iv-tshirt-risk-multipliers",
+   "front": "T-shirt sizing with risk multipliers — what are the three multipliers?",
+   "back": "1x for known patterns, 2x for new patterns, 3x for research. Size each component S/M/L/XL, multiply, sum. Fastest technique and the right default.",
+   "hook": "1x known, 2x new, 3x research",
+   "kind": "number",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 009, §22"
+  },
+  {
+   "id": "c-st-capabilities-not-vendors",
+   "front": "What makes a roadmap bet a five-year bet rather than a twelve-month one?",
+   "back": "Betting on a capability, not a vendor. \"Multi-model routing capability\" survives; \"provider X's current model\" does not. Roadmaps should be capability-first by construction.",
+   "hook": "Capabilities outlive vendors",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 008, §17"
+  },
+  {
+   "id": "c-st-maturity-five-stages",
+   "front": "Name the five stages of AI organizational maturity, and each stage's tell.",
+   "back": "Ad-hoc (POCs only), pilot (features shipped but owned by one team, no shared infra), platform (a platform team and shared tooling), production, then optimized. The org signal identifies the stage, not the ambition.",
+   "hook": "The org signal, not the ambition, names the stage",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 008, §20"
+  },
+  {
+   "id": "c-st-revisit-quarterly",
+   "front": "What keeps an AI roadmap from silently expiring?",
+   "back": "A quarterly re-evaluation against model releases, vendor pricing and regulation — dropping bets that stopped making sense and adding ones that became possible. Annual review is too slow for a six-month domain.",
+   "hook": "Quarterly, because the domain moves in six months",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 008, §17"
+  },
+  {
+   "id": "c-st-risk-as-advantage",
+   "front": "How does a real AI risk framework become a competitive advantage?",
+   "back": "Faster sales cycles, lower insurance premiums, customer trust. The framework answers the security questionnaire that would otherwise stall the deal — so it converts a cost centre into a closing tool.",
+   "hook": "The framework closes deals, not just audits",
+   "kind": "win",
+   "theme": "strategy-scale",
+   "topic": "build-buy-partner",
+   "cite": "issue 011, §20"
+  },
+  {
+   "id": "c-st-risk-four-drivers",
+   "front": "Why did AI risk management become a board-level concern? Four drivers.",
+   "back": "Regulatory enforcement with revenue-percentage fines, enterprise due-diligence questionnaires that gate deals, insurers requiring evidence to underwrite, and shareholders asking questions the board must answer.",
+   "hook": "Regulation, deals, insurance, shareholders",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "multi-tenant-ai-security",
+   "cite": "issue 011, §20"
+  },
+  {
+   "id": "c-st-roadmap-harder-four-reasons",
+   "front": "Why is an AI roadmap structurally harder than a normal one? Four reasons.",
+   "back": "Model capability is exogenous, vendor pricing is volatile, agent patterns commoditize fast, and regulation is shifting. Traditional planning assumes a stable environment; AI planning must assume instability.",
+   "hook": "Plan for instability, not around it",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 008, §17"
+  },
+  {
+   "id": "c-st-separate-platform-product-horizons",
+   "front": "Which two kinds of roadmap bet must never share a time horizon?",
+   "back": "Platform bets — proxy, observability, eval harness — run 3-5 years. Product bets run 12 months. Mixing the horizons is how platform work gets cancelled for missing a quarterly date.",
+   "hook": "Platform is 3-5 years; product is 12 months",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 008, §17"
+  },
+  {
+   "id": "c-st-three-year-is-capability-bet",
+   "front": "What does a defensible three-year AI horizon actually name?",
+   "back": "Which patterns become commodity, which stay differentiators, and which org structures emerge. Not a feature list — a directional bet on where the moat sits once today's edge is table stakes.",
+   "hook": "Name what commoditizes, then what differentiates",
+   "kind": "pat",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 008, §17"
+  },
+  {
+   "id": "c-st-twelve-month-commitment-line",
+   "front": "Where is the line between a roadmap commitment and a prediction?",
+   "back": "Twelve months. Inside it, every item has an owner, a date and a measurable outcome. Beyond 12 months it is directional; beyond 24 it is a vision, not a roadmap.",
+   "hook": "One year commits; three years directs; five envisions",
+   "kind": "rule",
+   "theme": "strategy-scale",
+   "topic": "scaling-ai-adoption",
+   "cite": "issue 008, §17"
+  },
+  {
    "id": "c-v1-knows-why-they-exist",
    "front": "The one-line difference between a good and a great system designer.",
    "back": "\"A good system designer knows technologies. A great system designer knows why those technologies exist.\"",
@@ -6660,96 +7280,6 @@
    "theme": "strategy-scale",
    "topic": "build-buy-partner",
    "cite": "issue 008, §21"
-  },
-  {
-   "id": "c-st-roadmap-harder-four-reasons",
-   "front": "Why is an AI roadmap structurally harder than a normal one? Four reasons.",
-   "back": "Model capability is exogenous, vendor pricing is volatile, agent patterns commoditize fast, and regulation is shifting. Traditional planning assumes a stable environment; AI planning must assume instability.",
-   "hook": "Plan for instability, not around it",
-   "kind": "rule",
-   "theme": "strategy-scale",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 008, §17"
-  },
-  {
-   "id": "c-st-capabilities-not-vendors",
-   "front": "What makes a roadmap bet a five-year bet rather than a twelve-month one?",
-   "back": "Betting on a capability, not a vendor. \"Multi-model routing capability\" survives; \"provider X's current model\" does not. Roadmaps should be capability-first by construction.",
-   "hook": "Capabilities outlive vendors",
-   "kind": "rule",
-   "theme": "strategy-scale",
-   "topic": "build-buy-partner",
-   "cite": "issue 008, §17"
-  },
-  {
-   "id": "c-st-separate-platform-product-horizons",
-   "front": "Which two kinds of roadmap bet must never share a time horizon?",
-   "back": "Platform bets — proxy, observability, eval harness — run 3-5 years. Product bets run 12 months. Mixing the horizons is how platform work gets cancelled for missing a quarterly date.",
-   "hook": "Platform is 3-5 years; product is 12 months",
-   "kind": "rule",
-   "theme": "strategy-scale",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 008, §17"
-  },
-  {
-   "id": "c-st-twelve-month-commitment-line",
-   "front": "Where is the line between a roadmap commitment and a prediction?",
-   "back": "Twelve months. Inside it, every item has an owner, a date and a measurable outcome. Beyond 12 months it is directional; beyond 24 it is a vision, not a roadmap.",
-   "hook": "One year commits; three years directs; five envisions",
-   "kind": "rule",
-   "theme": "strategy-scale",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 008, §17"
-  },
-  {
-   "id": "c-st-three-year-is-capability-bet",
-   "front": "What does a defensible three-year AI horizon actually name?",
-   "back": "Which patterns become commodity, which stay differentiators, and which org structures emerge. Not a feature list — a directional bet on where the moat sits once today's edge is table stakes.",
-   "hook": "Name what commoditizes, then what differentiates",
-   "kind": "pat",
-   "theme": "strategy-scale",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 008, §17"
-  },
-  {
-   "id": "c-st-revisit-quarterly",
-   "front": "What keeps an AI roadmap from silently expiring?",
-   "back": "A quarterly re-evaluation against model releases, vendor pricing and regulation — dropping bets that stopped making sense and adding ones that became possible. Annual review is too slow for a six-month domain.",
-   "hook": "Quarterly, because the domain moves in six months",
-   "kind": "rule",
-   "theme": "strategy-scale",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 008, §17"
-  },
-  {
-   "id": "c-st-maturity-five-stages",
-   "front": "Name the five stages of AI organizational maturity, and each stage's tell.",
-   "back": "Ad-hoc (POCs only), pilot (features shipped but owned by one team, no shared infra), platform (a platform team and shared tooling), production, then optimized. The org signal identifies the stage, not the ambition.",
-   "hook": "The org signal, not the ambition, names the stage",
-   "kind": "pat",
-   "theme": "strategy-scale",
-   "topic": "scaling-ai-adoption",
-   "cite": "issue 008, §20"
-  },
-  {
-   "id": "c-st-risk-four-drivers",
-   "front": "Why did AI risk management become a board-level concern? Four drivers.",
-   "back": "Regulatory enforcement with revenue-percentage fines, enterprise due-diligence questionnaires that gate deals, insurers requiring evidence to underwrite, and shareholders asking questions the board must answer.",
-   "hook": "Regulation, deals, insurance, shareholders",
-   "kind": "rule",
-   "theme": "strategy-scale",
-   "topic": "multi-tenant-ai-security",
-   "cite": "issue 011, §20"
-  },
-  {
-   "id": "c-st-risk-as-advantage",
-   "front": "How does a real AI risk framework become a competitive advantage?",
-   "back": "Faster sales cycles, lower insurance premiums, customer trust. The framework answers the security questionnaire that would otherwise stall the deal — so it converts a cost centre into a closing tool.",
-   "hook": "The framework closes deals, not just audits",
-   "kind": "win",
-   "theme": "strategy-scale",
-   "topic": "build-buy-partner",
-   "cite": "issue 011, §20"
   }
  ],
  "drills": [
@@ -7849,7 +8379,7 @@
     "doc: agentic-ai-system-design-deep-dive §8",
     "doc: agentic-ai-system-design-deep-dive §13",
     "doc: agentic-ai-system-design-deep-dive §17",
-    "issue 003, §4",
+    "issue 003, §3",
     "issue 005, §5"
    ]
   },
@@ -8575,7 +9105,7 @@
     "plan-before-execute"
    ],
    "cite": [
-    "issue 003, §4",
+    "issue 003, §3",
     "issue 005, §5",
     "doc: agentic-ai-system-design-deep-dive §9",
     "doc: agentic-ai-system-design-deep-dive §20",
