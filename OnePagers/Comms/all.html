@@ -1,0 +1,232 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Play cards — print all</title><style>
+:root{
+  --ink:#12161c; --ink-2:#3d4653; --ink-3:#6b7684; --line:#e2e6ec; --paper:#fff;
+  --ground:#f4f6f9; --accent:#1d4ed8; --accent-soft:#eef2ff;
+  --good:#0f7a4f; --good-soft:#e8f6ef; --warn:#a1560a; --warn-soft:#fdf3e6;
+  --bad:#b02020; --bad-soft:#fdecec; --tile:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8ecf2; --ink-2:#b6c0cd; --ink-3:#8a95a3; --line:#2b323c; --paper:#161b22;
+  --ground:#0d1117; --accent:#7aa2ff; --accent-soft:#1a2340;
+  --good:#4ade9b; --good-soft:#122a20; --warn:#e6b467; --warn-soft:#2c2314;
+  --bad:#f87171; --bad-soft:#2c1717; --tile:#0b1020;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:13px/1.45 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.card{background:var(--paper);max-width:210mm;margin:14px auto;padding:11mm 11mm 8mm;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* ── header ─────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);
+  padding-bottom:6px;margin-bottom:9px}
+.hd h1{margin:0;font-size:23px;line-height:1.1;letter-spacing:-.02em;flex:1}
+.hd .tag{color:var(--ink-3);font-size:12px;margin:3px 0 0;font-weight:400}
+.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 6px;border-radius:3px;background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line);white-space:nowrap}
+.b.core{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.thin{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.b.mixed{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high{background:var(--good-soft);color:var(--good);border-color:transparent}
+.b.daily{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.situational{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high-stakes{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+/* ── blocks ─────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.pair section{margin:0;display:flex;flex-direction:column}
+.pair section>div{flex:1}
+section{margin:0 0 8px}
+h2{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
+  color:var(--ink-3);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.hook{font-size:15.5px;line-height:1.32;font-weight:600;letter-spacing:-.01em;
+  border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:0}
+.model p{margin:0 0 8px;color:var(--ink-2);font-style:italic}
+.flow{display:flex;flex-wrap:wrap;gap:3px}
+.flow span{background:var(--tile);color:#fff;font:600 10.5px/1 var(--mono);padding:7px 9px 7px 14px;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);
+  flex:1;min-width:76px;text-align:center;letter-spacing:.01em}
+.flow span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);
+  padding-left:9px}
+.flow span:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,7px 50%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-3);border-bottom:1px solid var(--line);padding:0 6px 5px 0}
+td{padding:4px 6px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr td:first-child{font-weight:600;white-space:nowrap}
+tr td:last-child{color:var(--bad)}
+/* Script inverts the Anatomy convention: the *first* column is the line not to say, and
+   the last column is the reason it lands. Both cells hold whole spoken sentences, so the
+   nowrap-and-bold treatment for a first cell has to be undone here or the table cannot
+   wrap at all. */
+.tbl-script td:first-child{white-space:normal;font-weight:400;color:var(--bad);
+  text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.tbl-script td:nth-child(2){font-weight:600;color:var(--ink)}
+.tbl-script td:last-child{color:var(--ink-3);font-size:.94em}
+.tbl-script th:nth-child(2){color:var(--good)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:6px}
+.tile{background:var(--tile);color:#fff;border-radius:5px;padding:7px 8px}
+.tile b{display:block;font:700 15.5px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:4px}
+.tile span{display:block;font-size:10.5px;line-height:1.35;color:#c3ccdb}
+.tile i{display:block;font-size:10px;line-height:1.35;color:#8b97ab;margin-top:3px;font-style:normal}
+.dec{border-radius:5px;padding:8px 10px}
+.dec.use{background:var(--good-soft);border-left:3px solid var(--good)}
+.dec.skip{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.dec b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;
+  margin-bottom:5px}
+.dec.use b{color:var(--good)} .dec.skip b{color:var(--bad)}
+.dec b span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.72;
+  font-family:var(--sans);font-size:10.5px}
+.dec ul{margin:0;padding-left:15px} .dec li{margin:0 0 3px;font-size:12px;line-height:1.4}
+.aryaka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.45}
+.aryaka p{margin:0 0 6px} .aryaka p:last-child{margin:0}
+.say{background:var(--tile);color:#fff;border-radius:5px;padding:9px 11px;font-size:12.8px;
+  line-height:1.4;font-weight:500}
+.trap{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.4}
+.probe details{border:1px solid var(--line);border-radius:4px;padding:5px 8px;margin:0 0 4px;
+  font-size:12px;background:var(--ground)}
+.probe summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:11px;
+  font-family:var(--mono);list-style:none}
+.probe summary::-webkit-details-marker{display:none}
+.probe .q{font-weight:600;margin:0 0 4px;font-size:12.5px}
+.probe details p{margin:6px 0 0;color:var(--ink-2)}
+.src{border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.8px;
+  color:var(--ink-3)}
+.src ul{margin:4px 0 0;padding-left:15px} .src li{margin:0 0 2px}
+.src code{font-family:var(--mono);font-size:10px}
+code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1px 3px;
+  border-radius:3px}
+.tile code,.say code{background:rgba(255,255,255,.14);color:#e8ecf2;padding:0 2px}
+.bar{max-width:210mm;margin:14px auto -4px;display:flex;gap:8px;align-items:center;
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.bar a,.bar button,.bar label{font:500 11.5px/1 var(--sans);color:var(--accent);
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 9px;
+  cursor:pointer;text-decoration:none}
+.bar input{margin-right:5px;vertical-align:-1px}
+/* ── print: one card, one page, answers hidden ───────── */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  :root{--paper:#fff;--ground:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--line:#ccc}
+  /* One card must be one page. Everything below is the density step that gets it there;
+     if a card still spills, the markdown is over budget — split a subfeature. */
+  body{background:#fff;font-size:10px}
+  .bar,.noprint{display:none!important}
+  .hd h1{font-size:19px} .hd{padding-bottom:4px;margin-bottom:7px}
+  .hook{font-size:12.6px;line-height:1.28}
+  .say{font-size:10.6px;padding:7px 9px} .tile b{font-size:13px;margin-bottom:3px}
+  .tile{padding:6px 7px} .tile span,.tile i{font-size:8.8px;line-height:1.3}
+  .aryaka,.trap{font-size:9.8px;line-height:1.38;padding:7px 9px}
+  .aryaka p{margin:0 0 4px}
+  table{font-size:9.8px} td{padding:3px 5px 3px 0} th{padding:0 5px 3px 0;font-size:8.4px}
+  .dec{padding:6px 8px} .dec li{margin:0 0 2px;font-size:9.8px}
+  .flow span{padding:5px 7px 5px 12px;font-size:9.2px}
+  .probe details{padding:4px 7px;margin:0 0 3px;font-size:9.8px}
+  h2{font-size:8.4px;margin:0 0 4px}
+  section{margin:0 0 5px} .grid,.pair{gap:7px}
+  /* Provenance is required (CLAUDE.md rule 5) but it is a footnote: two columns at
+     footnote size instead of 124px of full-width citation prose. */
+  .src{font-size:7.6px;line-height:1.3;margin-top:5px;padding-top:4px}
+  .src ul{columns:2;column-gap:11px;padding-left:12px;margin-top:3px}
+  .src li{break-inside:avoid;margin:0 0 1px}
+  .src code{font-size:7.2px}
+  .probe details{padding:3px 6px;margin:0 0 2px}
+  .probe .q{font-size:9.8px;margin:0 0 3px}
+  .card{margin:0;border:0;box-shadow:none;padding:0;max-width:none}
+  /* break BEFORE each card after the first — a trailing break-after would emit a blank
+     final page, and `.card:last-child` never matches because a <script> closes the body */
+  .card+.card{break-before:page;page-break-before:always}
+  .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .probe details>*:not(summary){display:none}
+  body.answers .probe details>*{display:revert}
+  section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
+}
+/* ── index page ─────────────────────────────────────── */
+.ix{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.ix h1{font-size:27px;margin:0 0 3px;letter-spacing:-.02em}
+.ix .sub{color:var(--ink-3);margin:0 0 18px;font-size:13px}
+.ix input[type=search]{width:100%;padding:10px 12px;font:14px var(--sans);color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ix h2{font:600 10px/1 var(--mono);margin:22px 0 9px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.ic{display:block;background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:12px 13px;text-decoration:none;color:var(--ink)}
+.ic:hover{border-color:var(--accent)}
+.ic h3{margin:0 0 3px;font-size:15px;letter-spacing:-.01em}
+.ic p{margin:0 0 7px;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.ic .subs{font:10px/1.5 var(--mono);color:var(--ink-3)}
+.ic .subs a{color:var(--accent);text-decoration:none}
+</style></head><body><div class="bar noprint"><a href="index.html">← all cards</a><button id="openall">Reveal answers</button><button onclick="window.print()">Print</button><label><input type="checkbox" id="ans">print with answers</label><span>one card = one A4 page</span></div><article class="card"><div class="hd"><div><h1>Telling Your Team AI Is Coming</h1><p class="tag">Name the disruption, fund the answer · <code>ai-disruption</code></p></div><div class="badges"><span class="b high-stakes">high-stakes</span><span class="b thin">thin confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">Your team already read the headlines. The only thing you add by softening it is the discovery, later, that you knew and said nothing.</p></section>
+<section class="model"><h2>The move</h2><p>Concede the disruption, then narrow it. Go function by function rather than company-wide, say what you cannot promise, and attach a funded, dated reskilling commitment — the number is what makes it a plan instead of reassurance.</p><div class="flow"><span>Concede it</span><span>Narrow to functions</span><span>State the non-promise</span><span>Name the commitment</span><span>Date the review</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>"AI isn't going to change what we do here."</td><td>"It will change this team. Here's the part I can see and the part I can't."</td><td>A denial they can falsify costs you every later sentence.</td></tr><tr><td>"Nobody's job is at risk."</td><td>"I can't promise the org chart holds. I can promise you're trained for what's next."</td><td>A promise you don't control is a bet on someone else's decision.</td></tr><tr><td>"We're investing heavily in AI."</td><td>"Two engineers, one quarter, on evals — that's the budget I've actually got."</td><td>A named number is checkable; "heavily" is a mood.</td></tr><tr><td>"Today's models can't do your job."</td><td>"Today's models are the worst we'll ever use — plan for next year's."</td><td>Stops the argument being about a demo you both saw last week.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>Function by function</b><span>Disruption lands per role, not per company</span><i>"The industry will change" is unactionable; "our config-review step" is</i></div><div class='tile'><b>Say the non-promise</b><span>Name out loud the one thing you cannot guarantee</span><i>The unsaid guarantee is the one they'll hold you to</i></div><div class='tile'><b>1 funded number</b><span>Every reskilling claim carries hours, headcount or budget</span><i>Unfunded reskilling is a slogan with a review date</i></div><div class='tile'><b>Re-brief each quarter</b><span>Capability moves faster than your org's planning cycle</span><i>A one-off announcement ages into a broken promise in 90 days</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>the question is already in the room</span></b><ul><li>Your team asks directly whether AI replaces their work</li><li>You are announcing automation that removes a manual step</li><li>A reorg or headcount change is already rumoured</li></ul></div><div class="dec skip"><b>Skip when <span>you cannot back the sentence yet</span></b><ul><li>You have no funded commitment yet — get one first</li><li>HR or Legal has not cleared what you can say about roles</li><li>The question is one person's — take it to a one-on-one</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — team meeting of 9 NetDevOps engineers, a week after you demoed an agent that drafts SD-WAN config diffs. The manual review step it touches is part of two people's jobs.</p>
+<p><strong>What you said</strong> — "Straight answer: this changes the review step, and that's part of two of your jobs. What I can't promise is that the org chart looks the same in a year. What I can promise is 4 hours a week each, protected, to move into evals and pipeline ownership — funded, starting Monday. Ask me again in December."</p>
+<p><strong>How it landed</strong> — one engineer said the honesty was worse than the rumour and better than the silence. Both reviewers took the 4 hours; by the December re-brief one owned the eval suite. The other asked to move teams, which you would not have known otherwise.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>Straight answer: this changes our work. I can't promise the org chart holds — I can promise funded hours to move you into what comes next. Ask me again in a quarter.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Reassurance with no number in it. <strong>The tell:</strong> you said "heavily" or "committed", and nobody in the room could repeat your commitment back with a figure attached.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">An engineer asks in a team meeting: "Is this agent replacing my job?" Write your first two sentences.</div><details><summary>Show answer</summary><p>Concede and narrow: "It changes the config-review step, and that's part of your job today. What I can't promise is the org chart — what I can promise is protected hours to own the eval side." No denial, one non-promise, one funded commitment.</p></details><div class="q">The question comes and you have no reskilling budget approved yet. Write your reply.</div><details><summary>Show answer</summary><p>Say the gap out loud rather than inventing a commitment: "I don't have budget for this yet. I'm asking for it this quarter, and I'll tell you the answer either way by the end of the month." A dated non-answer is honest; "we're committed to your growth" is not.</p></details><div class="q">Why does "nobody's job is at risk" cost you more than it buys?</div><details><summary>Show answer</summary><p>It is a guarantee about a decision you do not own. The day headcount moves, every other sentence you said gets re-read as spin — including the true ones. Trading it for "I can't promise the chart, I can promise the training" keeps the promises inside your control.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-harvard-business-review-vGbjLTtd9PI.md</code> §1 [00:00–01:23] — Harvard Business Review, "AI Disruption Is Coming. How Should Leaders Prepare?", 2026-09-04</li><li>Confidence is <strong>thin</strong>: one clip, one executive speaking about their own company. The clip names a dollar figure for a reskilling fund and a company; <strong>the figure is deliberately not reproduced here</strong> — it came off an auto-caption, and hard rule 2 forbids attributing a number to a speaker from a caption. The move is the funded-and-dated commitment, not the amount</li><li>"Today's models are the worst we'll ever use" is the speaker's framing, paraphrased, not a caption string</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; its numbers are illustrative, not measured</li></ul></div></article><article class="card"><div class="hd"><div><h1>Pause Before You Answer</h1><p class="tag">Four seconds buys the whole answer · <code>answering-on-the-spot</code></p></div><div class="badges"><span class="b daily">daily</span><span class="b thin">thin confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">The four seconds you are afraid to take are the four seconds that build the answer. Answer instantly and you spend the sentence hunting for its end.</p></section>
+<section class="model"><h2>The move</h2><p>Take the pause before the first word, not inside the sentence. Use it to pick the shape of the answer — how many points, in what order — then say the shape out loud and walk it.</p><div class="flow"><span>Hear the question</span><span>Pause 3–4 seconds</span><span>Pick the shape</span><span>Name it</span><span>Walk it</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>"Um, so, yeah — I think what happens is…"</td><td><em>(three seconds of silence)</em> "Two things."</td><td>The silence reads as thinking; the count tells the room how long you will be.</td></tr><tr><td>"That's a great question."</td><td>"Let me think about that for a second."</td><td>Buys the same time without the flattery that signals you are stalling.</td></tr><tr><td>Answering the first half while hunting for the second</td><td>"Short answer is no. The reason matters more — can I take a minute on it?"</td><td>Lands the verdict first, so the detail is optional rather than load-bearing.</td></tr><tr><td>"I don't know." (full stop)</td><td>"I don't know. I'll have it by Thursday and here's how I'll find out."</td><td>A pause plus a date beats a guess, and it survives being checked.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>4 seconds</b><span>The pause that feels endless to you is barely noticed by the room</span><i>Long enough to see the path, short enough to read as composure</i></div><div class='tile'><b>Pause before, not during</b><span>Silence ahead of the first word is authority; mid-sentence it is a stumble</span><i>Same silence, opposite signal</i></div><div class='tile'><b>Say the count</b><span>"Two things" or "one caveat" commits you to a length</span><i>The room stops scanning for your exit and listens</i></div><div class='tile'><b>Filler is a tell</b><span>Um, so, basically, actually — each one is the pause you refused to take</span><i>Cutting filler without a pause just speeds up the panic</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>the answer has a shape worth choosing</span></b><ul><li>A VP or customer puts a live question to you</li><li>The answer has structure worth ordering before you speak</li><li>You are on camera or a bridge with an audience</li></ul></div><div class="dec skip"><b>Skip when <span>the pause costs more than it buys</span></b><ul><li>The answer is a single fact someone needs now</li><li>On a Sev-2 bridge where seconds are operational, not rhetorical</li><li>Rapid back-and-forth banter where a pause reads as offence</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — QBR with a customer's network director, 14 minutes in. She asks why last quarter's SD-WAN edge onboarding took 9 days when the contract says 3.</p>
+<p><strong>What you said</strong> — you let four seconds sit, then: "Two things. First, the number is right — 9 days, and 6 of those were waiting on us. Second, the cause was a manual IP-pool step my team owns. I'll have the fix dated by Friday."</p>
+<p><strong>How it landed</strong> — she wrote down "6 of 9 ours" and moved on. The pause read as ownership rather than hesitation, and the meeting spent its remaining 20 minutes on the fix instead of on the 9 days.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>"Let me think about that for a second." Then: "Two things." The pause and the count do more for you than any opening sentence you could rehearse.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Filling the pause with noise. <strong>The tell:</strong> your first three words are "um", "so" and "basically", and you are still deciding the answer at word twelve.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">Your VP asks on a live call why the automation rollout slipped. Write the first words you say.</div><details><summary>Show answer</summary><p>Three seconds of nothing, then a count and the verdict: "Two things. The new date is the 24th, and the blocker is the IP-pool step." The silence is doing the work the filler would have wasted.</p></details><div class="q">A customer asks something you genuinely cannot answer. Write your reply.</div><details><summary>Show answer</summary><p>"I don't know. I'll have it by Thursday, and here's how I'll find out — I'll pull the push logs for those edges." A pause plus a date plus a method beats a guess, and it survives being checked.</p></details><div class="q">Why does a pause before the first word read differently from a pause inside the sentence?</div><details><summary>Show answer</summary><p>Same silence, opposite signal. Ahead of the first word it reads as choosing — the room waits. Mid-sentence it reads as losing the thread, because you have already committed to a shape you cannot finish.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-vinh-giang-2UOZrF6koII.md</code> §1 [00:00–00:49] — Vinh Giang, "Life hack: Pause before answering", 2026-09-05</li><li>Confidence is <strong>thin</strong>: one clip, one voice. The four-second figure is the speaker's own description of his pause, read off an auto-caption — treat it as an order of magnitude, not a measurement</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; its numbers are illustrative, not measured</li></ul></div></article><article class="card"><div class="hd"><div><h1>Arguing Without Damage</h1><p class="tag">Win the point, keep the person · <code>hard-conversations</code></p></div><div class="badges"><span class="b high-stakes">high-stakes</span><span class="b high">high confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">People forget who won the argument. They remember how you made them feel in it — and that follows you into every review, every one-on-one and every staffing call after.</p></section>
+<section class="model"><h2>The move</h2><p>Volume is a symptom, not an argument. When your tone sharpens, stop tracking who is winning, ask what you want to be remembered for, and make the same point at your normal volume.</p><div class="flow"><span>Notice tone</span><span>Name the goal</span><span>Drop volume</span><span>Restate point</span><span>Close the loop</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>That's not what I said — you're twisting it.</td><td>Let me re-state my point, then tell me where you disagree.</td><td>Separates the claim from the contest, so there is something to answer.</td></tr><tr><td>We have been over this three times already.</td><td>We're stuck on the same point — what would change your mind?</td><td>Asks for the blocker instead of scoring the repetition.</td></tr><tr><td>I don't think you understand the impact.</td><td>Here's the impact I'm worried about, in one number.</td><td>Swaps a judgement about them for evidence about the system.</td></tr><tr><td>Fine. Do it your way.</td><td>I still disagree, and I'll back the call — record me as the dissent.</td><td>Ends it without the resentment tail that outlives the decision.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>Volume ≠ strength</b><span>A climbing voice is the brain trying to win, not to be understood</span><i>The point stops landing at exactly the moment it gets loudest</i></div><div class='tile'><b>Ask one question</b><span>"How do I want to be remembered after this?" — before you reply</span><i>Moves the goal from winning the exchange to holding a position</i></div><div class='tile'><b>Voice is habit</b><span>Delivery is a set of behaviours, not a trait you were issued</span><i>So it is trainable; "this is just how I argue" is a choice</i></div><div class='tile'><b>Only bad if you stay</b><span>A quiet default volume is fine until it becomes the only setting</span><i>Range is what you are building, not a different personality</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>the tone is the problem, not the position</span></b><ul><li>A disagreement with a peer or manager is escalating in tone</li><li>You will still be working with this person next quarter</li><li>The dispute is about a judgement call, not a lookup-able fact</li></ul></div><div class="dec skip"><b>Skip when <span>a softer voice is the wrong instrument</span></b><ul><li>Someone is abusive — that is an escalation path, not a conversation</li><li>A safety, security or compliance breach needs an immediate hard no</li><li>The room decides nothing; move it to a one-on-one instead</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — Sev-2 bridge, 40 minutes in. A customer's 12 SD-WAN edges are flapping after a config push and the network lead says the NetDevOps pipeline caused it. Your voice is already climbing.</p>
+<p><strong>What you said</strong> — "Let me re-state it, then tell me where you disagree. The push went to 12 edges, 3 flapped, and all 3 were on the old firmware. I want to roll those 3 back now and hold the rest. If you still think the pipeline did it, what would you need to see?"</p>
+<p><strong>How it landed</strong> — He named a check you had not run. Rollback took 6 minutes, the firmware gap turned out to be the actual fix, and the postmortem recorded a disagreement about evidence instead of a fight about the pipeline.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>I think this is the wrong call, and I'll say so once, at this volume. Then I'll back whatever we decide — you won't hear it again in the hallway.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Winning the exchange and losing the person. <strong>The tell:</strong> you are rehearsing your next sentence while they are still talking, and your volume rose without you deciding it.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">In a design review a colleague says your automation caused last week's outage. Write your first sentence.</div><details><summary>Show answer</summary><p>Re-state and hand them the disagreement: "Let me lay out what the push did, then tell me where you disagree." No defence, no counter-accusation — you are asking for the specific objection.</p></details><div class="q">You lost the argument and still disagree with the decision. Write the one line you say before committing to it.</div><details><summary>Show answer</summary><p>"I still disagree, and I'll back the call — record me as the dissent." It preserves the position, ends the argument, and removes any reason to relitigate it later.</p></details><div class="q">You notice your volume rising mid-meeting. What do you ask yourself, and what do you do with the answer?</div><details><summary>Show answer</summary><p>"How do I want to be remembered after this conversation?" — then make the same point at normal volume. The question is a brake, not a retreat: the position does not change, the delivery does.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-ritesh-giri-2yQEyXFrcRg.md</code> §1 [00:00–01:45] — Ritesh Giri, "Your voice doesn't need to get louder for your point to get stronger", 2026-09-07</li><li><code>Sources/clips/clip-vinh-giang-RCou4U75jiA.md</code> §1 [00:00–00:52] — Vinh Giang, "Your voice is just a series of habits", 2026-09-07</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; the numbers in it are illustrative, not measured</li></ul></div></article><article class="card"><div class="hd"><div><h1>Don't Step Into the Frame</h1><p class="tag">Answer the work, refuse the premise · <code>hard-conversations › dont-take-the-frame</code></p></div><div class="badges"><span class="b situational">situational</span><span class="b thin">thin confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">A passive-aggressive message is not information, it is a frame: you are the problem and I am suffering. Reply inside it and you have agreed to it.</p></section>
+<section class="model"><h2>The move</h2><p>Don't match the energy. Name what you noticed without accusing anyone, offer a call, and if they deny it, believe them and stop — then keep a private note, because the pattern is the evidence, not the message.</p><div class="flow"><span>Don't react</span><span>Name it plainly</span><span>Offer a call</span><span>Accept the denial</span><span>Log the pattern</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>"Happy to explain again, since it seems unclear 🙂"</td><td>"Your message came across a bit off — is everything okay?"</td><td>Sarcasm accepts the fight; a plain observation makes them choose.</td></tr><tr><td>A four-paragraph defence of the timeline</td><td>"Want to hop on a call for ten minutes and sort it?"</td><td>Over-explaining is the reaction they asked for, in longer form.</td></tr><tr><td>"Fine, whatever, I'll fix it."</td><td>"Okay — I'll take you at your word." (then note the date)</td><td>Ends it without conceding the premise, and starts the record.</td></tr><tr><td>Forwarding one message to your manager</td><td>"This is the second time — can we talk about how we're exchanging these?"</td><td>One message is noise; naming the count makes it a pattern.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>Never match energy</b><span>Their tone is the invitation; declining it is the whole move</span><i>Matched sarcasm makes the exchange the story, not the issue</i></div><div class='tile'><b>Notice, don't accuse</b><span>"Came across a bit off" beats "you're being passive-aggressive"</span><i>The first they can explain; the second they will argue forever</i></div><div class='tile'><b>1 denial, then log it</b><span>Take the first "everything's fine" at face value, and date it</span><i>Belief costs nothing once; a dated note costs nothing either</i></div><div class='tile'><b>2 messages are a pattern</b><span>Say the count out loud the second time it happens</span><i>One message is a mood; a count is much harder to deflect</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>the taunt is riding on a real request</span></b><ul><li>A written message carries a taunt under a normal ask</li><li>You will keep working with this person for months</li><li>The channel is public and others are watching your reply</li></ul></div><div class="dec skip"><b>Skip when <span>this is not a tone problem</span></b><ul><li>The content is a real blocker — answer the work first</li><li>It is harassment or discrimination; that is an HR path</li><li>The pattern is already documented and escalation is due</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — a peer team lead posts in the shared channel: "Still waiting on the config-validation gate. Some of us are trying to ship this quarter." Your gate has been blocked 5 days on their own firewall change.</p>
+<p><strong>What you said</strong> — in the channel: "The gate's blocked on the FW-2 change — I'll post status daily until it clears." Then in a DM: "Your message came across a bit off. Is everything okay? Happy to hop on a call."</p>
+<p><strong>How it landed</strong> — he said it was fine, which you took and dated. The channel saw a status, not a fight. Three weeks later the same tone arrived, you opened with "this is the second time", and he did not deny it — the channel posts stopped.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>Your message came across a bit off — is everything okay? Happy to jump on a call if something isn't working on your side.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Winning the reply. <strong>The tell:</strong> you drafted, deleted and redrafted it three times, and the version you sent has an emoji doing the sarcasm for you.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">A peer posts "Some of us are trying to ship this quarter" in a public channel. Write your channel reply and your DM.</div><details><summary>Show answer</summary><p>Channel — the work only: "Blocked on the FW-2 change; I'll post status daily until it clears." DM — the tone, once: "Your message came across a bit off. Is everything okay?" Two channels, two jobs; never do the second one in public.</p></details><div class="q">They deny there was any edge to the message. Write your reply.</div><details><summary>Show answer</summary><p>"Okay — I'll take you at your word." Then stop, and date a private note. Pushing past a denial hands them the reaction the message was fishing for; the note is what turns a second instance into a count.</p></details><div class="q">Why is "you're being passive-aggressive" a worse sentence than "that came across a bit off"?</div><details><summary>Show answer</summary><p>The first is a claim about their intent, which they can argue forever and which makes the argument the topic. The second is a report of your reading, which they can only accept or explain — and either answer moves you forward.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-ritesh-giri-P0nBn_5EAhw.md</code> §1 [00:00–01:59] — Ritesh Giri, "Passive aggression is a trap disguised as a message — don't step in the frame", 2026-09-04</li><li>Confidence is <strong>thin</strong>: one clip, one voice. The clip is delivered in mixed Hindi and English, so every line here is a paraphrase of the move rather than a caption string</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; its numbers are illustrative, not measured</li></ul></div></article><article class="card"><div class="hd"><div><h1>Briefing a Decision-Maker</h1><p class="tag">Five minutes, then let them pull · <code>leadership-updates</code></p></div><div class="badges"><span class="b situational">situational</span><span class="b mixed">mixed confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">A 30-minute slot holds 20 minutes of content, and five of them are yours. If the idea does not fit in five, you do not understand it well enough yet.</p></section>
+<section class="model"><h2>The move</h2><p>Give the high-level story, then stop and let the decision-maker draw the detail out of you. Three parts discussion to one part presentation — after minute five your job is steering the discussion toward the decision, not talking.</p><div class="flow"><span>Frame the ask</span><span>Five-minute story</span><span>Stop</span><span>Answer the pulls</span><span>Book next step</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>Let me walk you through the deck.</td><td>Three slides, five minutes, then questions — the ask is on slide three.</td><td>Sets the clock and the decision before attention is spent.</td></tr><tr><td>…and finally, to summarise… (at minute 22)</td><td>That's the story. What do you want to go deeper on?</td><td>Hands the agenda to the person who has to decide.</td></tr><tr><td>I'll follow up with the details after.</td><td>The detail is in the appendix — which part do you want now?</td><td>Detail on demand beats detail on a schedule.</td></tr><tr><td>I have a lot to cover, so I'll be quick.</td><td>Here's the decision I need, then the two options.</td><td>Compression is ordering, not speaking faster.</td></tr><tr><td>"We're adjusting our approach."</td><td>"I called this wrong. Here's the new plan and what changed my mind."</td><td>Naming a reversal costs less than being caught managing it quietly.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>3 : 1</b><span>Three parts discussion to one part presentation</span><i>Decisions get made in the discussion, not in the pitch</i></div><div class='tile'><b>5 of 20</b><span>In a 30-minute slot you speak for five minutes</span><i>Late starts and next-steps eat ten before you begin</i></div><div class='tile'><b>Five-minute test</b><span>If it does not fit in five, you do not understand it yet</span><i>The compression is the preparation, not a summary</i></div><div class='tile'><b>Let them pull</b><span>The decision-maker draws the details out of you</span><i>Their questions show which detail actually mattered</i></div><div class='tile'><b>Same register both ways</b><span>Never too up on good news, never too down on bad</span><i>The room calibrates on your face before it reads your slides</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>someone in the room has to decide</span></b><ul><li>You are asking a decision-maker to approve, fund or choose</li><li>The slot is under an hour and carries other agenda items</li><li>You know the material well enough to be interrupted safely</li></ul></div><div class="dec skip"><b>Skip when <span>the room needs the content, not the discussion</span></b><ul><li>The session is a training or a walkthrough by design</li><li>Nobody shares enough context yet for discussion to work</li><li>An auditor, regulator or customer asked for the full record</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — a 30-minute slot with the VP of Engineering to approve moving config validation into CI ahead of pushes to 400+ SD-WAN edges. Your deck was 14 slides.</p>
+<p><strong>What you said</strong> — in five minutes: "Today a bad config reaches an edge before anything checks it. I want every push gated behind validation in CI. It costs one engineer three weeks. The decision I need from you is whether we hold pushes while it is built, or run both paths for a month. Slides 6 to 14 are the detail — ask me for them."</p>
+<p><strong>How it landed</strong> — 12 minutes of questions, none of them from the slides you prepared. He chose dual-running, asked for a rollback story you did not have, and signed off in the room.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>Three slides and five minutes, then I'll stop and you pull whatever you need. The ask is on slide three, so you can decide before we get into the detail.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Filling the slot because it was booked. <strong>The tell:</strong> you are on slide 9 of 14 with six minutes left and nobody has interrupted you yet.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">You have a 30-minute slot with your VP to get a rollout approved. Write your first two sentences.</div><details><summary>Show answer</summary><p>Name the shape and the ask: "Three slides, five minutes, then questions — the ask is on slide three. Today a bad config reaches an edge before anything checks it." The clock and the decision arrive before any content.</p></details><div class="q">Your exec interrupts at minute two with a question from slide 9. Write your reply.</div><details><summary>Show answer</summary><p>Answer it and stay on the pull: "Short version: three weeks of one engineer. Do you want the breakdown now, or the risk it removes first?" An interruption is the discussion starting, which is the point — never "I'll get to that".</p></details><div class="q">Why does a 30-minute meeting leave you only five speaking minutes?</div><details><summary>Show answer</summary><p>Five minutes go to a late start, five to next steps, leaving 20 — and at three-to-one, one part of that 20 is presentation. The rest is the discussion where the decision actually happens.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-simon-sinek-143nmE2yiEA.md</code> §1 [00:00–01:07] — Simon Sinek with Rob Willis, "A Simple Hack for Presentations", 2026-09-08</li><li><code>Sources/clips/clip-harvard-business-review-R3nybNNS_TM.md</code> §1 [00:00–01:06] — Harvard Business Review, "What It Really Takes to Lead Through Constant Change", 2026-08-24</li><li><strong>Update from the change clip</strong>: the reversal row and the "same register both ways" rule come from that clip — admit it when you are wrong, course-correct, and never run too up or too down, because the good news and the bad news always arrive in that order</li><li>Confidence is <strong>mixed</strong>: two clips, two voices. The 3:1 ratio and the five-minute test are Sinek's, as is the arithmetic of the 30-minute slot; the register rule is the HBR interviewee's, paraphrased</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; its numbers are illustrative, not measured</li></ul></div></article>
+<script>
+(function(){
+  var cb=document.getElementById('ans');
+  if(cb)cb.addEventListener('change',function(){document.body.classList.toggle('answers',cb.checked);});
+  var all=document.getElementById('openall');
+  if(all)all.addEventListener('click',function(){
+    var d=document.querySelectorAll('details'),shut=[].some.call(d,function(x){return !x.open;});
+    [].forEach.call(d,function(x){x.open=shut;});
+    all.textContent=shut?'Collapse answers':'Reveal answers';});
+})();
+</script>
+</body></html>

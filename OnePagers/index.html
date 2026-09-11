@@ -1,0 +1,165 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Cram cards</title><style>
+:root{
+  --ink:#12161c; --ink-2:#3d4653; --ink-3:#6b7684; --line:#e2e6ec; --paper:#fff;
+  --ground:#f4f6f9; --accent:#1d4ed8; --accent-soft:#eef2ff;
+  --good:#0f7a4f; --good-soft:#e8f6ef; --warn:#a1560a; --warn-soft:#fdf3e6;
+  --bad:#b02020; --bad-soft:#fdecec; --tile:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8ecf2; --ink-2:#b6c0cd; --ink-3:#8a95a3; --line:#2b323c; --paper:#161b22;
+  --ground:#0d1117; --accent:#7aa2ff; --accent-soft:#1a2340;
+  --good:#4ade9b; --good-soft:#122a20; --warn:#e6b467; --warn-soft:#2c2314;
+  --bad:#f87171; --bad-soft:#2c1717; --tile:#0b1020;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:13px/1.45 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.card{background:var(--paper);max-width:210mm;margin:14px auto;padding:11mm 11mm 8mm;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* ── header ─────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);
+  padding-bottom:6px;margin-bottom:9px}
+.hd h1{margin:0;font-size:23px;line-height:1.1;letter-spacing:-.02em;flex:1}
+.hd .tag{color:var(--ink-3);font-size:12px;margin:3px 0 0;font-weight:400}
+.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 6px;border-radius:3px;background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line);white-space:nowrap}
+.b.core{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.thin{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.b.mixed{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high{background:var(--good-soft);color:var(--good);border-color:transparent}
+.b.daily{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.situational{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high-stakes{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+/* ── blocks ─────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.pair section{margin:0;display:flex;flex-direction:column}
+.pair section>div{flex:1}
+section{margin:0 0 8px}
+h2{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
+  color:var(--ink-3);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.hook{font-size:15.5px;line-height:1.32;font-weight:600;letter-spacing:-.01em;
+  border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:0}
+.model p{margin:0 0 8px;color:var(--ink-2);font-style:italic}
+.flow{display:flex;flex-wrap:wrap;gap:3px}
+.flow span{background:var(--tile);color:#fff;font:600 10.5px/1 var(--mono);padding:7px 9px 7px 14px;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);
+  flex:1;min-width:76px;text-align:center;letter-spacing:.01em}
+.flow span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);
+  padding-left:9px}
+.flow span:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,7px 50%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-3);border-bottom:1px solid var(--line);padding:0 6px 5px 0}
+td{padding:4px 6px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr td:first-child{font-weight:600;white-space:nowrap}
+tr td:last-child{color:var(--bad)}
+/* Script inverts the Anatomy convention: the *first* column is the line not to say, and
+   the last column is the reason it lands. Both cells hold whole spoken sentences, so the
+   nowrap-and-bold treatment for a first cell has to be undone here or the table cannot
+   wrap at all. */
+.tbl-script td:first-child{white-space:normal;font-weight:400;color:var(--bad);
+  text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.tbl-script td:nth-child(2){font-weight:600;color:var(--ink)}
+.tbl-script td:last-child{color:var(--ink-3);font-size:.94em}
+.tbl-script th:nth-child(2){color:var(--good)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:6px}
+.tile{background:var(--tile);color:#fff;border-radius:5px;padding:7px 8px}
+.tile b{display:block;font:700 15.5px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:4px}
+.tile span{display:block;font-size:10.5px;line-height:1.35;color:#c3ccdb}
+.tile i{display:block;font-size:10px;line-height:1.35;color:#8b97ab;margin-top:3px;font-style:normal}
+.dec{border-radius:5px;padding:8px 10px}
+.dec.use{background:var(--good-soft);border-left:3px solid var(--good)}
+.dec.skip{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.dec b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;
+  margin-bottom:5px}
+.dec.use b{color:var(--good)} .dec.skip b{color:var(--bad)}
+.dec b span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.72;
+  font-family:var(--sans);font-size:10.5px}
+.dec ul{margin:0;padding-left:15px} .dec li{margin:0 0 3px;font-size:12px;line-height:1.4}
+.aryaka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.45}
+.aryaka p{margin:0 0 6px} .aryaka p:last-child{margin:0}
+.say{background:var(--tile);color:#fff;border-radius:5px;padding:9px 11px;font-size:12.8px;
+  line-height:1.4;font-weight:500}
+.trap{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.4}
+.probe details{border:1px solid var(--line);border-radius:4px;padding:5px 8px;margin:0 0 4px;
+  font-size:12px;background:var(--ground)}
+.probe summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:11px;
+  font-family:var(--mono);list-style:none}
+.probe summary::-webkit-details-marker{display:none}
+.probe .q{font-weight:600;margin:0 0 4px;font-size:12.5px}
+.probe details p{margin:6px 0 0;color:var(--ink-2)}
+.src{border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.8px;
+  color:var(--ink-3)}
+.src ul{margin:4px 0 0;padding-left:15px} .src li{margin:0 0 2px}
+.src code{font-family:var(--mono);font-size:10px}
+code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1px 3px;
+  border-radius:3px}
+.tile code,.say code{background:rgba(255,255,255,.14);color:#e8ecf2;padding:0 2px}
+.bar{max-width:210mm;margin:14px auto -4px;display:flex;gap:8px;align-items:center;
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.bar a,.bar button,.bar label{font:500 11.5px/1 var(--sans);color:var(--accent);
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 9px;
+  cursor:pointer;text-decoration:none}
+.bar input{margin-right:5px;vertical-align:-1px}
+/* ── print: one card, one page, answers hidden ───────── */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  :root{--paper:#fff;--ground:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--line:#ccc}
+  /* One card must be one page. Everything below is the density step that gets it there;
+     if a card still spills, the markdown is over budget — split a subfeature. */
+  body{background:#fff;font-size:10px}
+  .bar,.noprint{display:none!important}
+  .hd h1{font-size:19px} .hd{padding-bottom:4px;margin-bottom:7px}
+  .hook{font-size:12.6px;line-height:1.28}
+  .say{font-size:10.6px;padding:7px 9px} .tile b{font-size:13px;margin-bottom:3px}
+  .tile{padding:6px 7px} .tile span,.tile i{font-size:8.8px;line-height:1.3}
+  .aryaka,.trap{font-size:9.8px;line-height:1.38;padding:7px 9px}
+  .aryaka p{margin:0 0 4px}
+  table{font-size:9.8px} td{padding:3px 5px 3px 0} th{padding:0 5px 3px 0;font-size:8.4px}
+  .dec{padding:6px 8px} .dec li{margin:0 0 2px;font-size:9.8px}
+  .flow span{padding:5px 7px 5px 12px;font-size:9.2px}
+  .probe details{padding:4px 7px;margin:0 0 3px;font-size:9.8px}
+  h2{font-size:8.4px;margin:0 0 4px}
+  section{margin:0 0 5px} .grid,.pair{gap:7px}
+  /* Provenance is required (CLAUDE.md rule 5) but it is a footnote: two columns at
+     footnote size instead of 124px of full-width citation prose. */
+  .src{font-size:7.6px;line-height:1.3;margin-top:5px;padding-top:4px}
+  .src ul{columns:2;column-gap:11px;padding-left:12px;margin-top:3px}
+  .src li{break-inside:avoid;margin:0 0 1px}
+  .src code{font-size:7.2px}
+  .probe details{padding:3px 6px;margin:0 0 2px}
+  .probe .q{font-size:9.8px;margin:0 0 3px}
+  .card{margin:0;border:0;box-shadow:none;padding:0;max-width:none}
+  /* break BEFORE each card after the first — a trailing break-after would emit a blank
+     final page, and `.card:last-child` never matches because a <script> closes the body */
+  .card+.card{break-before:page;page-break-before:always}
+  .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .probe details>*:not(summary){display:none}
+  body.answers .probe details>*{display:revert}
+  section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
+}
+/* ── index page ─────────────────────────────────────── */
+.ix{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.ix h1{font-size:27px;margin:0 0 3px;letter-spacing:-.02em}
+.ix .sub{color:var(--ink-3);margin:0 0 18px;font-size:13px}
+.ix input[type=search]{width:100%;padding:10px 12px;font:14px var(--sans);color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ix h2{font:600 10px/1 var(--mono);margin:22px 0 9px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.ic{display:block;background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:12px 13px;text-decoration:none;color:var(--ink)}
+.ic:hover{border-color:var(--accent)}
+.ic h3{margin:0 0 3px;font-size:15px;letter-spacing:-.01em}
+.ic p{margin:0 0 7px;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.ic .subs{font:10px/1.5 var(--mono);color:var(--ink-3)}
+.ic .subs a{color:var(--accent);text-decoration:none}
+</style></head><body><div class="ix"><h1>Cram cards</h1><p class="sub">22 features · 49 one-pagers · built 2026-09-10 · <a href="all.html">print every card</a></p><input type="search" id="q" placeholder="Filter by feature, tagline or slug…"><h2>frontier</h2><div class='cards'><div class="ic" data-hay="the three stages of llm training a fault-localisation map, not a taxonomy llm-training fine-tuning-mechanics"><a href="llm-training.html" style="text-decoration:none;color:inherit"><h3>The Three Stages of LLM Training</h3><p>A fault-localisation map, not a taxonomy</p></a><div class="subs"><a href="llm-training--fine-tuning-mechanics.html">fine-tuning-mechanics</a></div></div><div class="ic" data-hay="delegation and automation bias hitl decays; most delegation is fan-out multi-agent-scale agentic-traps cognitive-monoculture"><a href="multi-agent-scale.html" style="text-decoration:none;color:inherit"><h3>Delegation and Automation Bias</h3><p>HITL decays; most delegation is fan-out</p></a><div class="subs"><a href="multi-agent-scale--agentic-traps.html">agentic-traps</a> · <a href="multi-agent-scale--cognitive-monoculture.html">cognitive-monoculture</a></div></div><div class="ic" data-hay="agentic platform leadership the platform isn&#x27;t the product, the outcome is platform-leadership"><a href="platform-leadership.html" style="text-decoration:none;color:inherit"><h3>Agentic Platform Leadership</h3><p>The platform isn't the product, the outcome is</p></a><div class="subs">no sub-cards</div></div><div class="ic" data-hay="ai population simulation &amp; digital twins simulate interventions, not just outcomes population-simulation"><a href="population-simulation.html" style="text-decoration:none;color:inherit"><h3>AI Population Simulation &amp; Digital Twins</h3><p>Simulate interventions, not just outcomes</p></a><div class="subs">no sub-cards</div></div></div><h2>core</h2><div class='cards'><div class="ic" data-hay="loop engineering continuing is a decision agent-loop loop-vs-graph"><a href="agent-loop.html" style="text-decoration:none;color:inherit"><h3>Loop Engineering</h3><p>Continuing is a decision</p></a><div class="subs"><a href="agent-loop--loop-vs-graph.html">loop-vs-graph</a></div></div><div class="ic" data-hay="context engineering the smallest high-signal set context-engineering compaction"><a href="context-engineering.html" style="text-decoration:none;color:inherit"><h3>Context Engineering</h3><p>The smallest high-signal set</p></a><div class="subs"><a href="context-engineering--compaction.html">compaction</a></div></div><div class="ic" data-hay="agent evaluation the reliability contract evals acceptance-evals eval-statistics llm-as-judge testing-pyramid"><a href="evals.html" style="text-decoration:none;color:inherit"><h3>Agent Evaluation</h3><p>The reliability contract</p></a><div class="subs"><a href="evals--acceptance-evals.html">acceptance-evals</a> · <a href="evals--eval-statistics.html">eval-statistics</a> · <a href="evals--llm-as-judge.html">llm-as-judge</a> · <a href="evals--testing-pyramid.html">testing-pyramid</a></div></div><div class="ic" data-hay="guardrails three placements, one that&#x27;s load-bearing guardrails prompt-injection"><a href="guardrails.html" style="text-decoration:none;color:inherit"><h3>Guardrails</h3><p>Three placements, one that's load-bearing</p></a><div class="subs"><a href="guardrails--prompt-injection.html">prompt-injection</a></div></div><div class="ic" data-hay="agent harness the model is rented, the harness is owned harness minimum recovery"><a href="harness.html" style="text-decoration:none;color:inherit"><h3>Agent Harness</h3><p>The model is rented, the harness is owned</p></a><div class="subs"><a href="harness--minimum.html">minimum</a> · <a href="harness--recovery.html">recovery</a></div></div><div class="ic" data-hay="model context protocol the plumbing, not the intelligence mcp code-mode security"><a href="mcp.html" style="text-decoration:none;color:inherit"><h3>Model Context Protocol</h3><p>The plumbing, not the intelligence</p></a><div class="subs"><a href="mcp--code-mode.html">code-mode</a> · <a href="mcp--security.html">security</a></div></div><div class="ic" data-hay="agent memory the model is rented, the memory is owned memory enterprise-retrieval maintenance retrieval write-governance"><a href="memory.html" style="text-decoration:none;color:inherit"><h3>Agent Memory</h3><p>The model is rented, the memory is owned</p></a><div class="subs"><a href="memory--enterprise-retrieval.html">enterprise-retrieval</a> · <a href="memory--maintenance.html">maintenance</a> · <a href="memory--retrieval.html">retrieval</a> · <a href="memory--write-governance.html">write-governance</a></div></div><div class="ic" data-hay="agentic ai system design distributed system, nondeterministic control path system-design cost-economics security"><a href="system-design.html" style="text-decoration:none;color:inherit"><h3>Agentic AI System Design</h3><p>Distributed system, nondeterministic control path</p></a><div class="subs"><a href="system-design--cost-economics.html">cost-economics</a> · <a href="system-design--security.html">security</a></div></div></div><h2>supporting</h2><div class='cards'><div class="ic" data-hay="the agent system stack six layers, one symptom-to-layer map agent-stack open-source-tools"><a href="agent-stack.html" style="text-decoration:none;color:inherit"><h3>The Agent System Stack</h3><p>Six layers, one symptom-to-layer map</p></a><div class="subs"><a href="agent-stack--open-source-tools.html">open-source-tools</a></div></div><div class="ic" data-hay="arithmetic-first system design a wrong number beats no number at all capacity-arithmetic"><a href="capacity-arithmetic.html" style="text-decoration:none;color:inherit"><h3>Arithmetic-First System Design</h3><p>A wrong number beats no number at all</p></a><div class="subs">no sub-cards</div></div><div class="ic" data-hay="token economics &amp; cost levers output costs 3-5x — attack decode, not prefill cost gateway"><a href="cost.html" style="text-decoration:none;color:inherit"><h3>Token Economics &amp; Cost Levers</h3><p>Output costs 3-5x — attack decode, not prefill</p></a><div class="subs"><a href="cost--gateway.html">gateway</a></div></div><div class="ic" data-hay="data engineer to ai engineer connect your domain to the new one data-to-ai-engineer ai-observability-drift grounded-rag-design"><a href="data-to-ai-engineer.html" style="text-decoration:none;color:inherit"><h3>Data Engineer to AI Engineer</h3><p>Connect your domain to the new one</p></a><div class="subs"><a href="data-to-ai-engineer--ai-observability-drift.html">ai-observability-drift</a> · <a href="data-to-ai-engineer--grounded-rag-design.html">grounded-rag-design</a></div></div><div class="ic" data-hay="agent failure debugging localize before you optimize debugging rag-debugging"><a href="debugging.html" style="text-decoration:none;color:inherit"><h3>Agent Failure Debugging</h3><p>Localize before you optimize</p></a><div class="subs"><a href="debugging--rag-debugging.html">rag-debugging</a></div></div><div class="ic" data-hay="the harness contract ui work is context engineering deep-agents production-concerns"><a href="deep-agents.html" style="text-decoration:none;color:inherit"><h3>The Harness Contract</h3><p>UI work is context engineering</p></a><div class="subs"><a href="deep-agents--production-concerns.html">production-concerns</a></div></div><div class="ic" data-hay="framework vs platform-first sequence platform investment behind evidence framework-vs-platform"><a href="framework-vs-platform.html" style="text-decoration:none;color:inherit"><h3>Framework vs Platform-First</h3><p>Sequence platform investment behind evidence</p></a><div class="subs">no sub-cards</div></div><div class="ic" data-hay="business context over technique name the decision before touching the model interview-technique"><a href="interview-technique.html" style="text-decoration:none;color:inherit"><h3>Business Context Over Technique</h3><p>Name the decision before touching the model</p></a><div class="subs">no sub-cards</div></div><div class="ic" data-hay="rag engineering a pipeline you tune, not a purchase rag-engineering retrieval-internals"><a href="rag-engineering.html" style="text-decoration:none;color:inherit"><h3>RAG Engineering</h3><p>A pipeline you tune, not a purchase</p></a><div class="subs"><a href="rag-engineering--retrieval-internals.html">retrieval-internals</a></div></div><div class="ic" data-hay="rag vs agents — the decision boundary two axes, not a vibe about loops rag-vs-agents"><a href="rag-vs-agents.html" style="text-decoration:none;color:inherit"><h3>RAG vs Agents — The Decision Boundary</h3><p>Two axes, not a vibe about loops</p></a><div class="subs">no sub-cards</div></div></div></div><script>var q=document.getElementById('q');q.addEventListener('input',function(){var v=q.value.toLowerCase();document.querySelectorAll('.ic').forEach(function(c){c.style.display=c.dataset.hay.indexOf(v)>-1?'':'none';});});</script></body></html>

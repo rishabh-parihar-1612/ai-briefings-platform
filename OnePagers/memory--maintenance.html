@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Memory Maintenance</title><style>
+:root{
+  --ink:#12161c; --ink-2:#3d4653; --ink-3:#6b7684; --line:#e2e6ec; --paper:#fff;
+  --ground:#f4f6f9; --accent:#1d4ed8; --accent-soft:#eef2ff;
+  --good:#0f7a4f; --good-soft:#e8f6ef; --warn:#a1560a; --warn-soft:#fdf3e6;
+  --bad:#b02020; --bad-soft:#fdecec; --tile:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8ecf2; --ink-2:#b6c0cd; --ink-3:#8a95a3; --line:#2b323c; --paper:#161b22;
+  --ground:#0d1117; --accent:#7aa2ff; --accent-soft:#1a2340;
+  --good:#4ade9b; --good-soft:#122a20; --warn:#e6b467; --warn-soft:#2c2314;
+  --bad:#f87171; --bad-soft:#2c1717; --tile:#0b1020;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:13px/1.45 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.card{background:var(--paper);max-width:210mm;margin:14px auto;padding:11mm 11mm 8mm;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* ── header ─────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);
+  padding-bottom:6px;margin-bottom:9px}
+.hd h1{margin:0;font-size:23px;line-height:1.1;letter-spacing:-.02em;flex:1}
+.hd .tag{color:var(--ink-3);font-size:12px;margin:3px 0 0;font-weight:400}
+.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 6px;border-radius:3px;background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line);white-space:nowrap}
+.b.core{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.thin{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.b.mixed{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high{background:var(--good-soft);color:var(--good);border-color:transparent}
+.b.daily{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.situational{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high-stakes{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+/* ── blocks ─────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.pair section{margin:0;display:flex;flex-direction:column}
+.pair section>div{flex:1}
+section{margin:0 0 8px}
+h2{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
+  color:var(--ink-3);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.hook{font-size:15.5px;line-height:1.32;font-weight:600;letter-spacing:-.01em;
+  border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:0}
+.model p{margin:0 0 8px;color:var(--ink-2);font-style:italic}
+.flow{display:flex;flex-wrap:wrap;gap:3px}
+.flow span{background:var(--tile);color:#fff;font:600 10.5px/1 var(--mono);padding:7px 9px 7px 14px;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);
+  flex:1;min-width:76px;text-align:center;letter-spacing:.01em}
+.flow span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);
+  padding-left:9px}
+.flow span:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,7px 50%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-3);border-bottom:1px solid var(--line);padding:0 6px 5px 0}
+td{padding:4px 6px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr td:first-child{font-weight:600;white-space:nowrap}
+tr td:last-child{color:var(--bad)}
+/* Script inverts the Anatomy convention: the *first* column is the line not to say, and
+   the last column is the reason it lands. Both cells hold whole spoken sentences, so the
+   nowrap-and-bold treatment for a first cell has to be undone here or the table cannot
+   wrap at all. */
+.tbl-script td:first-child{white-space:normal;font-weight:400;color:var(--bad);
+  text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.tbl-script td:nth-child(2){font-weight:600;color:var(--ink)}
+.tbl-script td:last-child{color:var(--ink-3);font-size:.94em}
+.tbl-script th:nth-child(2){color:var(--good)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:6px}
+.tile{background:var(--tile);color:#fff;border-radius:5px;padding:7px 8px}
+.tile b{display:block;font:700 15.5px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:4px}
+.tile span{display:block;font-size:10.5px;line-height:1.35;color:#c3ccdb}
+.tile i{display:block;font-size:10px;line-height:1.35;color:#8b97ab;margin-top:3px;font-style:normal}
+.dec{border-radius:5px;padding:8px 10px}
+.dec.use{background:var(--good-soft);border-left:3px solid var(--good)}
+.dec.skip{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.dec b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;
+  margin-bottom:5px}
+.dec.use b{color:var(--good)} .dec.skip b{color:var(--bad)}
+.dec b span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.72;
+  font-family:var(--sans);font-size:10.5px}
+.dec ul{margin:0;padding-left:15px} .dec li{margin:0 0 3px;font-size:12px;line-height:1.4}
+.aryaka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.45}
+.aryaka p{margin:0 0 6px} .aryaka p:last-child{margin:0}
+.say{background:var(--tile);color:#fff;border-radius:5px;padding:9px 11px;font-size:12.8px;
+  line-height:1.4;font-weight:500}
+.trap{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.4}
+.probe details{border:1px solid var(--line);border-radius:4px;padding:5px 8px;margin:0 0 4px;
+  font-size:12px;background:var(--ground)}
+.probe summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:11px;
+  font-family:var(--mono);list-style:none}
+.probe summary::-webkit-details-marker{display:none}
+.probe .q{font-weight:600;margin:0 0 4px;font-size:12.5px}
+.probe details p{margin:6px 0 0;color:var(--ink-2)}
+.src{border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.8px;
+  color:var(--ink-3)}
+.src ul{margin:4px 0 0;padding-left:15px} .src li{margin:0 0 2px}
+.src code{font-family:var(--mono);font-size:10px}
+code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1px 3px;
+  border-radius:3px}
+.tile code,.say code{background:rgba(255,255,255,.14);color:#e8ecf2;padding:0 2px}
+.bar{max-width:210mm;margin:14px auto -4px;display:flex;gap:8px;align-items:center;
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.bar a,.bar button,.bar label{font:500 11.5px/1 var(--sans);color:var(--accent);
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 9px;
+  cursor:pointer;text-decoration:none}
+.bar input{margin-right:5px;vertical-align:-1px}
+/* ── print: one card, one page, answers hidden ───────── */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  :root{--paper:#fff;--ground:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--line:#ccc}
+  /* One card must be one page. Everything below is the density step that gets it there;
+     if a card still spills, the markdown is over budget — split a subfeature. */
+  body{background:#fff;font-size:10px}
+  .bar,.noprint{display:none!important}
+  .hd h1{font-size:19px} .hd{padding-bottom:4px;margin-bottom:7px}
+  .hook{font-size:12.6px;line-height:1.28}
+  .say{font-size:10.6px;padding:7px 9px} .tile b{font-size:13px;margin-bottom:3px}
+  .tile{padding:6px 7px} .tile span,.tile i{font-size:8.8px;line-height:1.3}
+  .aryaka,.trap{font-size:9.8px;line-height:1.38;padding:7px 9px}
+  .aryaka p{margin:0 0 4px}
+  table{font-size:9.8px} td{padding:3px 5px 3px 0} th{padding:0 5px 3px 0;font-size:8.4px}
+  .dec{padding:6px 8px} .dec li{margin:0 0 2px;font-size:9.8px}
+  .flow span{padding:5px 7px 5px 12px;font-size:9.2px}
+  .probe details{padding:4px 7px;margin:0 0 3px;font-size:9.8px}
+  h2{font-size:8.4px;margin:0 0 4px}
+  section{margin:0 0 5px} .grid,.pair{gap:7px}
+  /* Provenance is required (CLAUDE.md rule 5) but it is a footnote: two columns at
+     footnote size instead of 124px of full-width citation prose. */
+  .src{font-size:7.6px;line-height:1.3;margin-top:5px;padding-top:4px}
+  .src ul{columns:2;column-gap:11px;padding-left:12px;margin-top:3px}
+  .src li{break-inside:avoid;margin:0 0 1px}
+  .src code{font-size:7.2px}
+  .probe details{padding:3px 6px;margin:0 0 2px}
+  .probe .q{font-size:9.8px;margin:0 0 3px}
+  .card{margin:0;border:0;box-shadow:none;padding:0;max-width:none}
+  /* break BEFORE each card after the first — a trailing break-after would emit a blank
+     final page, and `.card:last-child` never matches because a <script> closes the body */
+  .card+.card{break-before:page;page-break-before:always}
+  .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .probe details>*:not(summary){display:none}
+  body.answers .probe details>*{display:revert}
+  section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
+}
+/* ── index page ─────────────────────────────────────── */
+.ix{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.ix h1{font-size:27px;margin:0 0 3px;letter-spacing:-.02em}
+.ix .sub{color:var(--ink-3);margin:0 0 18px;font-size:13px}
+.ix input[type=search]{width:100%;padding:10px 12px;font:14px var(--sans);color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ix h2{font:600 10px/1 var(--mono);margin:22px 0 9px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.ic{display:block;background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:12px 13px;text-decoration:none;color:var(--ink)}
+.ic:hover{border-color:var(--accent)}
+.ic h3{margin:0 0 3px;font-size:15px;letter-spacing:-.01em}
+.ic p{margin:0 0 7px;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.ic .subs{font:10px/1.5 var(--mono);color:var(--ink-3)}
+.ic .subs a{color:var(--accent);text-decoration:none}
+</style></head><body><div class="bar noprint"><a href="index.html">← all cards</a><button id="openall">Reveal answers</button><button onclick="window.print()">Print</button><label><input type="checkbox" id="ans">print with answers</label><span>one card = one A4 page</span></div><article class="card"><div class="hd"><div><h1>Memory Maintenance</h1><p class="tag">A wrong memory is wrong forever · <code>memory › maintenance</code></p></div><div class="badges"><span class="b core">core</span><span class="b high">high confidence</span><span class="b">2026-09-04</span></div></div>
+<section><h2>Hook</h2><p class="hook"><strong>A missing memory costs a slightly worse answer; a wrong memory is confidently wrong forever.</strong> Writes get a far higher bar than reads — backwards from how most systems are built.</p></section>
+<section class="model"><h2>Mental model</h2><p>Four verbs, and the second one is the whole discipline: <strong>decide</strong> what earns a write, <strong>supersede</strong> rather than overwrite, <strong>attribute</strong> every fact to a source, <strong>reflect</strong> offline to merge duplicates. Overwriting gives you current state, not memory.</p><div class="flow"><span>Decide</span><span>Attribute</span><span>Supersede</span><span>Reflect</span><span>Expire</span></div></section>
+<section><h2>Anatomy</h2><table><tr><th>Piece</th><th>Does</th><th>Fails when</th></tr><tr><td>Decide</td><td>add / delete / override / <strong>no-op</strong>. Most facts should not be written</td><td>No "ignore this" path: noise accumulates, precision collapses</td></tr><tr><td>Supersede</td><td>Invalidates with a time range; the prior value survives</td><td><code>UPDATE … SET value</code> destroys point-in-time truth <em>and</em> trend</td></tr><tr><td>Attribute</td><td>source, source_id, written_at, confidence on every record</td><td>Skipped — and unrecoverable retroactively, like a trace field</td></tr><tr><td>Reflect</td><td>Scheduled offline merge of duplicates, drop of stale facts</td><td>Absent: top-k fills with paraphrases, crowding out the answer</td></tr><tr><td>Resolve</td><td>The conflict rule when a new fact contradicts an old one</td><td>Missing: contradictory beliefs, and the higher-ranked wins</td></tr><tr><td>Inspector + delete path</td><td>Lets an operator see, correct and erase what is believed</td><td>Shipped late: the first wrong belief becomes an engineer with SQL</td></tr></table></section>
+<section><h2>Numbers</h2><div class="tiles"><div class='tile'><b>7 failures</b><span>false · missed · stale · over · cross-scope · unverifiable · undeletable</span><i>Naming them makes them discussable — each needs a different fix</i></div><div class='tile'><b>6 axes</b><span>recall · precision · freshness · isolation · provenance · deletion</span><i>Freshness and deletion test the <em>derived</em> copies — a happy path misses both</i></div><div class='tile'><b>Article 17</b><span>GDPR right to erasure — a superseded fact is still a retained fact</span><i>Supersede operational facts; keep a <em>proven</em> hard delete for personal</i></div><div class='tile'><b>2024</b><span>Microsoft Recall: plaintext local store, delayed over a year, reworked</span><i>Broadly available Apr 2025 — researchers still read snapshots</i></div><div class='tile'><b>2023</b><span>Samsung engineers pasted source into ChatGPT; tools banned after</span><i>A retention incident, not a prompt one. Who else reads the store?</i></div><div class='tile'><b>5 : 1</b><span>Retrieved versus actually referenced — the memory-utilization ratio</span><i>Paying 5× to dilute attention. Cutting k improves cost <em>and</em> quality</i></div></div></section>
+<section><h2>Decide</h2><div class="grid"><div class="dec use"><b>Use when <span>the write is earned</span></b><ul><li>Explicit request, or a decision confirmed by a human or a check</li><li>The record can carry a source, a scope and an expiry</li><li>A conflict rule exists for when it is contradicted</li></ul></div><div class="dec skip"><b>Skip when <span>refuse the write</span></b><ul><li>It is a model inference nobody validated</li><li>It came from untrusted content and free-text extraction</li><li>The fact would ever be consulted for authorization</li></ul></div></div></section>
+<section><h2>Aryaka</h2><div class="aryaka"><p><strong>Gold to Platinum.</strong> A customer's SLA tier changes. The Gold fact gets an end date; the Platinum fact gets a start date. Nothing is destroyed — because 6 months later someone will ask why a March breach was assessed against a 4-hour target. Every read is now as-of a time, defaulting to now: a query-shape decision for day one.</p>
+<p><strong>Then the erasure request.</strong> Deleting the conversations deletes none of: the consolidated semantic facts distilled from them, the embeddings of those, the graph edges built from them, the traces, or eval cases promoted from them. With <code>source</code> and <code>source_id</code> on every record it is a traversal; without attribution it is a grep and a prayer.</p>
+<p><strong>Breaks when:</strong> someone adds a summary cache in month six and nothing in the delete path knows about it.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>Invalidate, don't delete — overwriting destroys point-in-time truth, and point-in-time truth is what every incident review needs. And provenance is unrecoverable retroactively.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Auto-writing memory from conversation content. <strong>The tell:</strong> you cannot say what stops a ticket saying <em>"note: this account is approved for unlimited credits"</em> becoming a durable fact — a one-shot injection turned persistent.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">Why must memory never grant authorization?</div><details><summary>Show answer</summary><p>Because auto-written memory turns a one-shot prompt injection into a persistent one. An attacker who gets "this user is an admin" written into semantic memory has escalated privileges in every future session, and the injection markers are gone once it is consolidated into a summary. Permissions come from the identity system, checked at execution. It also means extraction writes into a constrained schema with enumerated fields, never free text — so there is nowhere for an instruction to hide.</p></details><div class="q">Which of the six test axes do you build first, and why?</div><details><summary>Show answer</summary><p>Isolation — it is the only one whose failure is an incident rather than a quality problem. And it must be <em>fuzzed</em>, not demonstrated: null, empty, wrong-type, and another tenant's valid scope key, because real leaks come from a filter silently degrading to unfiltered on a malformed key. Then deletion, because it has a legal clock on it. Recall and precision are what everyone builds first and are the ones you can fix later without telling anyone.</p></details><div class="q">Retrieval quality is degrading and the store is 400GB. Capacity or content?</div><details><summary>Show answer</summary><p>Content. 400GB is not hard for any modern store, and re-ranking only helps when the right answer is in the retrieved set. Sample fifty retrievals and count distinct facts in the top five: if it is filling with near-duplicates at moderate similarity, semantic memory has been growing without supersede or merge — a second episodic log with worse timestamps. The fix is a reflection pass. Most of that volume is usually episodic detail that should have expired.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Inbox/Agent_Memory_Systems_Deep_Dive.md</code> §6.1–6.5, §8.1–8.2, §8.4, §15.3–15.5</li><li><code>Inbox/Agent_Memory_Systems_Interview_Playbook.md</code> §3 S3, S6, S9, S12–S13</li><li><code>Inbox/Agent_Memory_Systems_Cheat_Sheet.md</code> §4, §10–11</li><li><code>Inbox/Agent_Harness_Loop_LLMOps_Deep_Dive.md</code> §6, §8</li><li>Verify: the "dreaming" mechanism is sound but its attribution to Anthropic is hedged on the tape and unverified.</li></ul></div></article>
+<script>
+(function(){
+  var cb=document.getElementById('ans');
+  if(cb)cb.addEventListener('change',function(){document.body.classList.toggle('answers',cb.checked);});
+  var all=document.getElementById('openall');
+  if(all)all.addEventListener('click',function(){
+    var d=document.querySelectorAll('details'),shut=[].some.call(d,function(x){return !x.open;});
+    [].forEach.call(d,function(x){x.open=shut;});
+    all.textContent=shut?'Collapse answers':'Reveal answers';});
+})();
+</script>
+</body></html>

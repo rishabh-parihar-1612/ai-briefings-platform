@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Framework vs Platform-First</title><style>
+:root{
+  --ink:#12161c; --ink-2:#3d4653; --ink-3:#6b7684; --line:#e2e6ec; --paper:#fff;
+  --ground:#f4f6f9; --accent:#1d4ed8; --accent-soft:#eef2ff;
+  --good:#0f7a4f; --good-soft:#e8f6ef; --warn:#a1560a; --warn-soft:#fdf3e6;
+  --bad:#b02020; --bad-soft:#fdecec; --tile:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8ecf2; --ink-2:#b6c0cd; --ink-3:#8a95a3; --line:#2b323c; --paper:#161b22;
+  --ground:#0d1117; --accent:#7aa2ff; --accent-soft:#1a2340;
+  --good:#4ade9b; --good-soft:#122a20; --warn:#e6b467; --warn-soft:#2c2314;
+  --bad:#f87171; --bad-soft:#2c1717; --tile:#0b1020;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:13px/1.45 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.card{background:var(--paper);max-width:210mm;margin:14px auto;padding:11mm 11mm 8mm;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* ── header ─────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);
+  padding-bottom:6px;margin-bottom:9px}
+.hd h1{margin:0;font-size:23px;line-height:1.1;letter-spacing:-.02em;flex:1}
+.hd .tag{color:var(--ink-3);font-size:12px;margin:3px 0 0;font-weight:400}
+.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 6px;border-radius:3px;background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line);white-space:nowrap}
+.b.core{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.thin{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.b.mixed{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high{background:var(--good-soft);color:var(--good);border-color:transparent}
+.b.daily{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.situational{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high-stakes{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+/* ── blocks ─────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.pair section{margin:0;display:flex;flex-direction:column}
+.pair section>div{flex:1}
+section{margin:0 0 8px}
+h2{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
+  color:var(--ink-3);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.hook{font-size:15.5px;line-height:1.32;font-weight:600;letter-spacing:-.01em;
+  border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:0}
+.model p{margin:0 0 8px;color:var(--ink-2);font-style:italic}
+.flow{display:flex;flex-wrap:wrap;gap:3px}
+.flow span{background:var(--tile);color:#fff;font:600 10.5px/1 var(--mono);padding:7px 9px 7px 14px;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);
+  flex:1;min-width:76px;text-align:center;letter-spacing:.01em}
+.flow span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);
+  padding-left:9px}
+.flow span:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,7px 50%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-3);border-bottom:1px solid var(--line);padding:0 6px 5px 0}
+td{padding:4px 6px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr td:first-child{font-weight:600;white-space:nowrap}
+tr td:last-child{color:var(--bad)}
+/* Script inverts the Anatomy convention: the *first* column is the line not to say, and
+   the last column is the reason it lands. Both cells hold whole spoken sentences, so the
+   nowrap-and-bold treatment for a first cell has to be undone here or the table cannot
+   wrap at all. */
+.tbl-script td:first-child{white-space:normal;font-weight:400;color:var(--bad);
+  text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.tbl-script td:nth-child(2){font-weight:600;color:var(--ink)}
+.tbl-script td:last-child{color:var(--ink-3);font-size:.94em}
+.tbl-script th:nth-child(2){color:var(--good)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:6px}
+.tile{background:var(--tile);color:#fff;border-radius:5px;padding:7px 8px}
+.tile b{display:block;font:700 15.5px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:4px}
+.tile span{display:block;font-size:10.5px;line-height:1.35;color:#c3ccdb}
+.tile i{display:block;font-size:10px;line-height:1.35;color:#8b97ab;margin-top:3px;font-style:normal}
+.dec{border-radius:5px;padding:8px 10px}
+.dec.use{background:var(--good-soft);border-left:3px solid var(--good)}
+.dec.skip{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.dec b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;
+  margin-bottom:5px}
+.dec.use b{color:var(--good)} .dec.skip b{color:var(--bad)}
+.dec b span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.72;
+  font-family:var(--sans);font-size:10.5px}
+.dec ul{margin:0;padding-left:15px} .dec li{margin:0 0 3px;font-size:12px;line-height:1.4}
+.aryaka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.45}
+.aryaka p{margin:0 0 6px} .aryaka p:last-child{margin:0}
+.say{background:var(--tile);color:#fff;border-radius:5px;padding:9px 11px;font-size:12.8px;
+  line-height:1.4;font-weight:500}
+.trap{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.4}
+.probe details{border:1px solid var(--line);border-radius:4px;padding:5px 8px;margin:0 0 4px;
+  font-size:12px;background:var(--ground)}
+.probe summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:11px;
+  font-family:var(--mono);list-style:none}
+.probe summary::-webkit-details-marker{display:none}
+.probe .q{font-weight:600;margin:0 0 4px;font-size:12.5px}
+.probe details p{margin:6px 0 0;color:var(--ink-2)}
+.src{border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.8px;
+  color:var(--ink-3)}
+.src ul{margin:4px 0 0;padding-left:15px} .src li{margin:0 0 2px}
+.src code{font-family:var(--mono);font-size:10px}
+code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1px 3px;
+  border-radius:3px}
+.tile code,.say code{background:rgba(255,255,255,.14);color:#e8ecf2;padding:0 2px}
+.bar{max-width:210mm;margin:14px auto -4px;display:flex;gap:8px;align-items:center;
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.bar a,.bar button,.bar label{font:500 11.5px/1 var(--sans);color:var(--accent);
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 9px;
+  cursor:pointer;text-decoration:none}
+.bar input{margin-right:5px;vertical-align:-1px}
+/* ── print: one card, one page, answers hidden ───────── */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  :root{--paper:#fff;--ground:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--line:#ccc}
+  /* One card must be one page. Everything below is the density step that gets it there;
+     if a card still spills, the markdown is over budget — split a subfeature. */
+  body{background:#fff;font-size:10px}
+  .bar,.noprint{display:none!important}
+  .hd h1{font-size:19px} .hd{padding-bottom:4px;margin-bottom:7px}
+  .hook{font-size:12.6px;line-height:1.28}
+  .say{font-size:10.6px;padding:7px 9px} .tile b{font-size:13px;margin-bottom:3px}
+  .tile{padding:6px 7px} .tile span,.tile i{font-size:8.8px;line-height:1.3}
+  .aryaka,.trap{font-size:9.8px;line-height:1.38;padding:7px 9px}
+  .aryaka p{margin:0 0 4px}
+  table{font-size:9.8px} td{padding:3px 5px 3px 0} th{padding:0 5px 3px 0;font-size:8.4px}
+  .dec{padding:6px 8px} .dec li{margin:0 0 2px;font-size:9.8px}
+  .flow span{padding:5px 7px 5px 12px;font-size:9.2px}
+  .probe details{padding:4px 7px;margin:0 0 3px;font-size:9.8px}
+  h2{font-size:8.4px;margin:0 0 4px}
+  section{margin:0 0 5px} .grid,.pair{gap:7px}
+  /* Provenance is required (CLAUDE.md rule 5) but it is a footnote: two columns at
+     footnote size instead of 124px of full-width citation prose. */
+  .src{font-size:7.6px;line-height:1.3;margin-top:5px;padding-top:4px}
+  .src ul{columns:2;column-gap:11px;padding-left:12px;margin-top:3px}
+  .src li{break-inside:avoid;margin:0 0 1px}
+  .src code{font-size:7.2px}
+  .probe details{padding:3px 6px;margin:0 0 2px}
+  .probe .q{font-size:9.8px;margin:0 0 3px}
+  .card{margin:0;border:0;box-shadow:none;padding:0;max-width:none}
+  /* break BEFORE each card after the first — a trailing break-after would emit a blank
+     final page, and `.card:last-child` never matches because a <script> closes the body */
+  .card+.card{break-before:page;page-break-before:always}
+  .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .probe details>*:not(summary){display:none}
+  body.answers .probe details>*{display:revert}
+  section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
+}
+/* ── index page ─────────────────────────────────────── */
+.ix{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.ix h1{font-size:27px;margin:0 0 3px;letter-spacing:-.02em}
+.ix .sub{color:var(--ink-3);margin:0 0 18px;font-size:13px}
+.ix input[type=search]{width:100%;padding:10px 12px;font:14px var(--sans);color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ix h2{font:600 10px/1 var(--mono);margin:22px 0 9px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.ic{display:block;background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:12px 13px;text-decoration:none;color:var(--ink)}
+.ic:hover{border-color:var(--accent)}
+.ic h3{margin:0 0 3px;font-size:15px;letter-spacing:-.01em}
+.ic p{margin:0 0 7px;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.ic .subs{font:10px/1.5 var(--mono);color:var(--ink-3)}
+.ic .subs a{color:var(--accent);text-decoration:none}
+</style></head><body><div class="bar noprint"><a href="index.html">← all cards</a><button id="openall">Reveal answers</button><button onclick="window.print()">Print</button><label><input type="checkbox" id="ans">print with answers</label><span>one card = one A4 page</span></div><article class="card"><div class="hd"><div><h1>Framework vs Platform-First</h1><p class="tag">Sequence platform investment behind evidence · <code>framework-vs-platform</code></p></div><div class="badges"><span class="b supporting">supporting</span><span class="b high">high confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">Don't reject the platform. Reject framework-first thinking when the abstraction is still unproven.</p></section>
+<section class="model"><h2>Mental model</h2><p>Platform is capabilities behind stable interfaces; framework is prescribed composition. Build the seams now, extract a framework only when a third materially-different system confirms the same lifecycle.</p><div class="flow"><span>Platform (capability)</span><span>Application (composition)</span><span>Framework (extracted on evidence)</span></div></section>
+<section><h2>Anatomy</h2><table><tr><th>Piece</th><th>Does</th><th>Fails when</th></tr><tr><td>Platform vs. framework</td><td>Platform = capabilities (gateways, tracing, policy); framework = composition</td><td>Conflated — "we have a framework" is treated as "no platform needed"</td></tr><tr><td>Rule of Three</td><td>Build the first, learn from the second, extract when a third confirms it</td><td>An abstraction is designed from two use cases and breaks on the third</td></tr><tr><td>Build-now seams</td><td>Model gateway, tool contracts, observability, evaluation/replay, policy</td><td>Stay unbuilt while teams argue over which agent framework to standardize on</td></tr><tr><td>Leave-alone list</td><td>Planner, memory architecture, agent loop, state machine, autonomy model</td><td>Forced into one shape across systems with genuinely different lifecycles</td></tr><tr><td>Autonomy ladder</td><td>Deterministic code → workflow → workflow+LLM → bounded agent → multi-agent</td><td>"Agent" is treated as the goal instead of a cost</td></tr><tr><td>Paved road, not gatekeeping</td><td>Templates, SDKs, approved tools make the sanctioned path the cheapest path</td><td>A central AI team becomes a review queue; teams route around it as shadow AI</td></tr></table></section>
+<section><h2>Numbers</h2><div class="tiles"><div class='tile'><b>52 engineer-weeks</b><span>One quarter for a 4-person team (4×13)</span><i>The unit the framework's cost gets measured against</i></div><div class='tile'><b>~29%</b><span>15 engineer-weeks of framework work as a share of that quarter</span><i>The concrete price of an unvalidated abstraction, stated in writing</i></div><div class='tile'><b>3 systems</b><span>Materially different lifecycles needed to confirm a shared pattern</span><i>Three similar systems teach nothing about what's actually common</i></div><div class='tile'><b>6 entry criteria</b><span>Owner, quantified value, risk, data, tool-gap, production target</span><i>Turns "not this quarter" into a reviewable decision, not a political one</i></div><div class='tile'><b>~960K jobs/mo</b><span>Breakeven: $48K/mo internal platform vs. $0.05/job vendor pricing</span><i>Below this volume, buying wins on pure unit economics — do the division</i></div></div></section>
+<section><h2>Decide</h2><div class="grid"><div class="dec use"><b>Use when</b><ul><li>More than one team wants to build agents and duplication is a real, named concern</li><li>Fewer than three materially different production systems exist to learn from</li><li>Leadership is proposing a generalized framework based on future need, not observed use</li></ul></div><div class="dec skip"><b>Skip when</b><ul><li>Three or more materially different systems already share lifecycle, state, and tool model</li><li>No shared platform seams exist yet — build those first regardless of framework timing</li><li>Every candidate use case is a single workflow with one LLM call, not an agent</li></ul></div></div></section>
+<section><h2>Aryaka</h2><div class="aryaka"><p>Aryaka's Benji and a Support Troubleshooting Agent can share one platform — a model gateway routing to GPT/Claude/Llama, a tool gateway exposing Salesforce/telemetry/Aryaka APIs, one identity and tracing layer — while composing it completely differently: Benji runs signals → normalize → health score → CSM briefing → human review; the Support Agent runs understand-issue → search knowledge → query telemetry → correlate evidence → confidence check → human escalation. A 4-engineer team has 52 engineer-weeks per quarter; a generalized framework at 15 weeks is about 29% of it spent standardizing a composition pattern neither system has proven it shares.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>I'm not choosing product over platform. I'm sequencing platform investment behind observed invariants — a platform that accelerates the next ten agents, not a framework that forces them to look like the first.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Extracting a shared agent framework from two production systems. <strong>The tell:</strong> Agent 3 arrives and discovers the abstraction was wrong — a compatibility layer around the first two use cases, wearing the word "framework."</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">Your CTO wants a generalized agent framework so eleven teams can build agents, and you
+have two agents in production. What do you say?</div><details><summary>Show answer</summary><p>Agree with the problem (duplicated gateways, auth, tracing don't scale) but challenge the sequencing, not the destination: build the stable platform seams now, and extract a framework only once a third materially different system confirms the same lifecycle, state, and tool model.</p></details><div class="q">What should you standardize immediately, and what should you deliberately leave alone?</div><details><summary>Show answer</summary><p>Standardize interfaces before application architecture: model gateway, tool contracts, observability, evaluation/replay, and policy. Leave the planner, memory architecture, agent loop, state machine, and autonomy model alone — those are workload-specific and forcing them into one shape produces escape hatches.</p></details><div class="q">Eleven teams want agents built. Should most of them actually be agents?</div><details><summary>Show answer</summary><p>Almost certainly not — use the lowest autonomy that solves each problem. A release-notes generator is a one-call workflow; invoice reconciliation is deterministic matching plus an LLM for ambiguity; only genuinely unpredictable-step-count work earns a bounded agent.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Inbox/AI_Agentic_Framework_vs_Platform_First_Detailed_Reference.md</code> §1–7, §9–13</li><li><code>Inbox/AI_Agentic_Framework_vs_Platform_First_Interview_Playbook.md</code> §1, §3 S1–S3, S6</li><li><code>Inbox/AI_Agentic_Framework_vs_Platform_First_Cheat_Sheet.md</code></li><li><code>Inbox/platform_vs_framework_applied_ai.md</code> §4–5, §9–10, §11–12, §19 (gateway pseudocode,</li><li><code>Inbox/AI_Platform_System_Design_Handbook_Vol1.md</code>, `AI_Platform_System_Design_Interview_</li></ul></div></article>
+<script>
+(function(){
+  var cb=document.getElementById('ans');
+  if(cb)cb.addEventListener('change',function(){document.body.classList.toggle('answers',cb.checked);});
+  var all=document.getElementById('openall');
+  if(all)all.addEventListener('click',function(){
+    var d=document.querySelectorAll('details'),shut=[].some.call(d,function(x){return !x.open;});
+    [].forEach.call(d,function(x){x.open=shut;});
+    all.textContent=shut?'Collapse answers':'Reveal answers';});
+})();
+</script>
+</body></html>

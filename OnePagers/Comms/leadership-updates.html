@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Briefing a Decision-Maker</title><style>
+:root{
+  --ink:#12161c; --ink-2:#3d4653; --ink-3:#6b7684; --line:#e2e6ec; --paper:#fff;
+  --ground:#f4f6f9; --accent:#1d4ed8; --accent-soft:#eef2ff;
+  --good:#0f7a4f; --good-soft:#e8f6ef; --warn:#a1560a; --warn-soft:#fdf3e6;
+  --bad:#b02020; --bad-soft:#fdecec; --tile:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8ecf2; --ink-2:#b6c0cd; --ink-3:#8a95a3; --line:#2b323c; --paper:#161b22;
+  --ground:#0d1117; --accent:#7aa2ff; --accent-soft:#1a2340;
+  --good:#4ade9b; --good-soft:#122a20; --warn:#e6b467; --warn-soft:#2c2314;
+  --bad:#f87171; --bad-soft:#2c1717; --tile:#0b1020;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:13px/1.45 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.card{background:var(--paper);max-width:210mm;margin:14px auto;padding:11mm 11mm 8mm;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* ── header ─────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);
+  padding-bottom:6px;margin-bottom:9px}
+.hd h1{margin:0;font-size:23px;line-height:1.1;letter-spacing:-.02em;flex:1}
+.hd .tag{color:var(--ink-3);font-size:12px;margin:3px 0 0;font-weight:400}
+.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 6px;border-radius:3px;background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line);white-space:nowrap}
+.b.core{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.thin{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.b.mixed{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high{background:var(--good-soft);color:var(--good);border-color:transparent}
+.b.daily{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.situational{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high-stakes{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+/* ── blocks ─────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.pair section{margin:0;display:flex;flex-direction:column}
+.pair section>div{flex:1}
+section{margin:0 0 8px}
+h2{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
+  color:var(--ink-3);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.hook{font-size:15.5px;line-height:1.32;font-weight:600;letter-spacing:-.01em;
+  border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:0}
+.model p{margin:0 0 8px;color:var(--ink-2);font-style:italic}
+.flow{display:flex;flex-wrap:wrap;gap:3px}
+.flow span{background:var(--tile);color:#fff;font:600 10.5px/1 var(--mono);padding:7px 9px 7px 14px;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);
+  flex:1;min-width:76px;text-align:center;letter-spacing:.01em}
+.flow span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);
+  padding-left:9px}
+.flow span:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,7px 50%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-3);border-bottom:1px solid var(--line);padding:0 6px 5px 0}
+td{padding:4px 6px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr td:first-child{font-weight:600;white-space:nowrap}
+tr td:last-child{color:var(--bad)}
+/* Script inverts the Anatomy convention: the *first* column is the line not to say, and
+   the last column is the reason it lands. Both cells hold whole spoken sentences, so the
+   nowrap-and-bold treatment for a first cell has to be undone here or the table cannot
+   wrap at all. */
+.tbl-script td:first-child{white-space:normal;font-weight:400;color:var(--bad);
+  text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.tbl-script td:nth-child(2){font-weight:600;color:var(--ink)}
+.tbl-script td:last-child{color:var(--ink-3);font-size:.94em}
+.tbl-script th:nth-child(2){color:var(--good)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:6px}
+.tile{background:var(--tile);color:#fff;border-radius:5px;padding:7px 8px}
+.tile b{display:block;font:700 15.5px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:4px}
+.tile span{display:block;font-size:10.5px;line-height:1.35;color:#c3ccdb}
+.tile i{display:block;font-size:10px;line-height:1.35;color:#8b97ab;margin-top:3px;font-style:normal}
+.dec{border-radius:5px;padding:8px 10px}
+.dec.use{background:var(--good-soft);border-left:3px solid var(--good)}
+.dec.skip{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.dec b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;
+  margin-bottom:5px}
+.dec.use b{color:var(--good)} .dec.skip b{color:var(--bad)}
+.dec b span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.72;
+  font-family:var(--sans);font-size:10.5px}
+.dec ul{margin:0;padding-left:15px} .dec li{margin:0 0 3px;font-size:12px;line-height:1.4}
+.aryaka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.45}
+.aryaka p{margin:0 0 6px} .aryaka p:last-child{margin:0}
+.say{background:var(--tile);color:#fff;border-radius:5px;padding:9px 11px;font-size:12.8px;
+  line-height:1.4;font-weight:500}
+.trap{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.4}
+.probe details{border:1px solid var(--line);border-radius:4px;padding:5px 8px;margin:0 0 4px;
+  font-size:12px;background:var(--ground)}
+.probe summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:11px;
+  font-family:var(--mono);list-style:none}
+.probe summary::-webkit-details-marker{display:none}
+.probe .q{font-weight:600;margin:0 0 4px;font-size:12.5px}
+.probe details p{margin:6px 0 0;color:var(--ink-2)}
+.src{border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.8px;
+  color:var(--ink-3)}
+.src ul{margin:4px 0 0;padding-left:15px} .src li{margin:0 0 2px}
+.src code{font-family:var(--mono);font-size:10px}
+code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1px 3px;
+  border-radius:3px}
+.tile code,.say code{background:rgba(255,255,255,.14);color:#e8ecf2;padding:0 2px}
+.bar{max-width:210mm;margin:14px auto -4px;display:flex;gap:8px;align-items:center;
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.bar a,.bar button,.bar label{font:500 11.5px/1 var(--sans);color:var(--accent);
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 9px;
+  cursor:pointer;text-decoration:none}
+.bar input{margin-right:5px;vertical-align:-1px}
+/* ── print: one card, one page, answers hidden ───────── */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  :root{--paper:#fff;--ground:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--line:#ccc}
+  /* One card must be one page. Everything below is the density step that gets it there;
+     if a card still spills, the markdown is over budget — split a subfeature. */
+  body{background:#fff;font-size:10px}
+  .bar,.noprint{display:none!important}
+  .hd h1{font-size:19px} .hd{padding-bottom:4px;margin-bottom:7px}
+  .hook{font-size:12.6px;line-height:1.28}
+  .say{font-size:10.6px;padding:7px 9px} .tile b{font-size:13px;margin-bottom:3px}
+  .tile{padding:6px 7px} .tile span,.tile i{font-size:8.8px;line-height:1.3}
+  .aryaka,.trap{font-size:9.8px;line-height:1.38;padding:7px 9px}
+  .aryaka p{margin:0 0 4px}
+  table{font-size:9.8px} td{padding:3px 5px 3px 0} th{padding:0 5px 3px 0;font-size:8.4px}
+  .dec{padding:6px 8px} .dec li{margin:0 0 2px;font-size:9.8px}
+  .flow span{padding:5px 7px 5px 12px;font-size:9.2px}
+  .probe details{padding:4px 7px;margin:0 0 3px;font-size:9.8px}
+  h2{font-size:8.4px;margin:0 0 4px}
+  section{margin:0 0 5px} .grid,.pair{gap:7px}
+  /* Provenance is required (CLAUDE.md rule 5) but it is a footnote: two columns at
+     footnote size instead of 124px of full-width citation prose. */
+  .src{font-size:7.6px;line-height:1.3;margin-top:5px;padding-top:4px}
+  .src ul{columns:2;column-gap:11px;padding-left:12px;margin-top:3px}
+  .src li{break-inside:avoid;margin:0 0 1px}
+  .src code{font-size:7.2px}
+  .probe details{padding:3px 6px;margin:0 0 2px}
+  .probe .q{font-size:9.8px;margin:0 0 3px}
+  .card{margin:0;border:0;box-shadow:none;padding:0;max-width:none}
+  /* break BEFORE each card after the first — a trailing break-after would emit a blank
+     final page, and `.card:last-child` never matches because a <script> closes the body */
+  .card+.card{break-before:page;page-break-before:always}
+  .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .probe details>*:not(summary){display:none}
+  body.answers .probe details>*{display:revert}
+  section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
+}
+/* ── index page ─────────────────────────────────────── */
+.ix{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.ix h1{font-size:27px;margin:0 0 3px;letter-spacing:-.02em}
+.ix .sub{color:var(--ink-3);margin:0 0 18px;font-size:13px}
+.ix input[type=search]{width:100%;padding:10px 12px;font:14px var(--sans);color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ix h2{font:600 10px/1 var(--mono);margin:22px 0 9px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.ic{display:block;background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:12px 13px;text-decoration:none;color:var(--ink)}
+.ic:hover{border-color:var(--accent)}
+.ic h3{margin:0 0 3px;font-size:15px;letter-spacing:-.01em}
+.ic p{margin:0 0 7px;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.ic .subs{font:10px/1.5 var(--mono);color:var(--ink-3)}
+.ic .subs a{color:var(--accent);text-decoration:none}
+</style></head><body><div class="bar noprint"><a href="index.html">← all cards</a><button id="openall">Reveal answers</button><button onclick="window.print()">Print</button><label><input type="checkbox" id="ans">print with answers</label><span>one card = one A4 page</span></div><article class="card"><div class="hd"><div><h1>Briefing a Decision-Maker</h1><p class="tag">Five minutes, then let them pull · <code>leadership-updates</code></p></div><div class="badges"><span class="b situational">situational</span><span class="b mixed">mixed confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">A 30-minute slot holds 20 minutes of content, and five of them are yours. If the idea does not fit in five, you do not understand it well enough yet.</p></section>
+<section class="model"><h2>The move</h2><p>Give the high-level story, then stop and let the decision-maker draw the detail out of you. Three parts discussion to one part presentation — after minute five your job is steering the discussion toward the decision, not talking.</p><div class="flow"><span>Frame the ask</span><span>Five-minute story</span><span>Stop</span><span>Answer the pulls</span><span>Book next step</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>Let me walk you through the deck.</td><td>Three slides, five minutes, then questions — the ask is on slide three.</td><td>Sets the clock and the decision before attention is spent.</td></tr><tr><td>…and finally, to summarise… (at minute 22)</td><td>That's the story. What do you want to go deeper on?</td><td>Hands the agenda to the person who has to decide.</td></tr><tr><td>I'll follow up with the details after.</td><td>The detail is in the appendix — which part do you want now?</td><td>Detail on demand beats detail on a schedule.</td></tr><tr><td>I have a lot to cover, so I'll be quick.</td><td>Here's the decision I need, then the two options.</td><td>Compression is ordering, not speaking faster.</td></tr><tr><td>"We're adjusting our approach."</td><td>"I called this wrong. Here's the new plan and what changed my mind."</td><td>Naming a reversal costs less than being caught managing it quietly.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>3 : 1</b><span>Three parts discussion to one part presentation</span><i>Decisions get made in the discussion, not in the pitch</i></div><div class='tile'><b>5 of 20</b><span>In a 30-minute slot you speak for five minutes</span><i>Late starts and next-steps eat ten before you begin</i></div><div class='tile'><b>Five-minute test</b><span>If it does not fit in five, you do not understand it yet</span><i>The compression is the preparation, not a summary</i></div><div class='tile'><b>Let them pull</b><span>The decision-maker draws the details out of you</span><i>Their questions show which detail actually mattered</i></div><div class='tile'><b>Same register both ways</b><span>Never too up on good news, never too down on bad</span><i>The room calibrates on your face before it reads your slides</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>someone in the room has to decide</span></b><ul><li>You are asking a decision-maker to approve, fund or choose</li><li>The slot is under an hour and carries other agenda items</li><li>You know the material well enough to be interrupted safely</li></ul></div><div class="dec skip"><b>Skip when <span>the room needs the content, not the discussion</span></b><ul><li>The session is a training or a walkthrough by design</li><li>Nobody shares enough context yet for discussion to work</li><li>An auditor, regulator or customer asked for the full record</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — a 30-minute slot with the VP of Engineering to approve moving config validation into CI ahead of pushes to 400+ SD-WAN edges. Your deck was 14 slides.</p>
+<p><strong>What you said</strong> — in five minutes: "Today a bad config reaches an edge before anything checks it. I want every push gated behind validation in CI. It costs one engineer three weeks. The decision I need from you is whether we hold pushes while it is built, or run both paths for a month. Slides 6 to 14 are the detail — ask me for them."</p>
+<p><strong>How it landed</strong> — 12 minutes of questions, none of them from the slides you prepared. He chose dual-running, asked for a rollback story you did not have, and signed off in the room.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>Three slides and five minutes, then I'll stop and you pull whatever you need. The ask is on slide three, so you can decide before we get into the detail.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Filling the slot because it was booked. <strong>The tell:</strong> you are on slide 9 of 14 with six minutes left and nobody has interrupted you yet.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">You have a 30-minute slot with your VP to get a rollout approved. Write your first two sentences.</div><details><summary>Show answer</summary><p>Name the shape and the ask: "Three slides, five minutes, then questions — the ask is on slide three. Today a bad config reaches an edge before anything checks it." The clock and the decision arrive before any content.</p></details><div class="q">Your exec interrupts at minute two with a question from slide 9. Write your reply.</div><details><summary>Show answer</summary><p>Answer it and stay on the pull: "Short version: three weeks of one engineer. Do you want the breakdown now, or the risk it removes first?" An interruption is the discussion starting, which is the point — never "I'll get to that".</p></details><div class="q">Why does a 30-minute meeting leave you only five speaking minutes?</div><details><summary>Show answer</summary><p>Five minutes go to a late start, five to next steps, leaving 20 — and at three-to-one, one part of that 20 is presentation. The rest is the discussion where the decision actually happens.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-simon-sinek-143nmE2yiEA.md</code> §1 [00:00–01:07] — Simon Sinek with Rob Willis, "A Simple Hack for Presentations", 2026-09-08</li><li><code>Sources/clips/clip-harvard-business-review-R3nybNNS_TM.md</code> §1 [00:00–01:06] — Harvard Business Review, "What It Really Takes to Lead Through Constant Change", 2026-08-24</li><li><strong>Update from the change clip</strong>: the reversal row and the "same register both ways" rule come from that clip — admit it when you are wrong, course-correct, and never run too up or too down, because the good news and the bad news always arrive in that order</li><li>Confidence is <strong>mixed</strong>: two clips, two voices. The 3:1 ratio and the five-minute test are Sinek's, as is the arithmetic of the 30-minute slot; the register rule is the HBR interviewee's, paraphrased</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; its numbers are illustrative, not measured</li></ul></div></article>
+<script>
+(function(){
+  var cb=document.getElementById('ans');
+  if(cb)cb.addEventListener('change',function(){document.body.classList.toggle('answers',cb.checked);});
+  var all=document.getElementById('openall');
+  if(all)all.addEventListener('click',function(){
+    var d=document.querySelectorAll('details'),shut=[].some.call(d,function(x){return !x.open;});
+    [].forEach.call(d,function(x){x.open=shut;});
+    all.textContent=shut?'Collapse answers':'Reveal answers';});
+})();
+</script>
+</body></html>

@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Don&#x27;t Step Into the Frame</title><style>
+:root{
+  --ink:#12161c; --ink-2:#3d4653; --ink-3:#6b7684; --line:#e2e6ec; --paper:#fff;
+  --ground:#f4f6f9; --accent:#1d4ed8; --accent-soft:#eef2ff;
+  --good:#0f7a4f; --good-soft:#e8f6ef; --warn:#a1560a; --warn-soft:#fdf3e6;
+  --bad:#b02020; --bad-soft:#fdecec; --tile:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8ecf2; --ink-2:#b6c0cd; --ink-3:#8a95a3; --line:#2b323c; --paper:#161b22;
+  --ground:#0d1117; --accent:#7aa2ff; --accent-soft:#1a2340;
+  --good:#4ade9b; --good-soft:#122a20; --warn:#e6b467; --warn-soft:#2c2314;
+  --bad:#f87171; --bad-soft:#2c1717; --tile:#0b1020;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:13px/1.45 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.card{background:var(--paper);max-width:210mm;margin:14px auto;padding:11mm 11mm 8mm;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* ── header ─────────────────────────────────────────── */
+.hd{display:flex;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);
+  padding-bottom:6px;margin-bottom:9px}
+.hd h1{margin:0;font-size:23px;line-height:1.1;letter-spacing:-.02em;flex:1}
+.hd .tag{color:var(--ink-3);font-size:12px;margin:3px 0 0;font-weight:400}
+.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 6px;border-radius:3px;background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line);white-space:nowrap}
+.b.core{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.thin{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.b.mixed{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high{background:var(--good-soft);color:var(--good);border-color:transparent}
+.b.daily{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.b.situational{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.b.high-stakes{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+/* ── blocks ─────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.pair section{margin:0;display:flex;flex-direction:column}
+.pair section>div{flex:1}
+section{margin:0 0 8px}
+h2{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
+  color:var(--ink-3);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.hook{font-size:15.5px;line-height:1.32;font-weight:600;letter-spacing:-.01em;
+  border-left:4px solid var(--accent);padding:2px 0 2px 12px;margin:0}
+.model p{margin:0 0 8px;color:var(--ink-2);font-style:italic}
+.flow{display:flex;flex-wrap:wrap;gap:3px}
+.flow span{background:var(--tile);color:#fff;font:600 10.5px/1 var(--mono);padding:7px 9px 7px 14px;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);
+  flex:1;min-width:76px;text-align:center;letter-spacing:.01em}
+.flow span:first-child{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);
+  padding-left:9px}
+.flow span:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,7px 50%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-3);border-bottom:1px solid var(--line);padding:0 6px 5px 0}
+td{padding:4px 6px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr td:first-child{font-weight:600;white-space:nowrap}
+tr td:last-child{color:var(--bad)}
+/* Script inverts the Anatomy convention: the *first* column is the line not to say, and
+   the last column is the reason it lands. Both cells hold whole spoken sentences, so the
+   nowrap-and-bold treatment for a first cell has to be undone here or the table cannot
+   wrap at all. */
+.tbl-script td:first-child{white-space:normal;font-weight:400;color:var(--bad);
+  text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.tbl-script td:nth-child(2){font-weight:600;color:var(--ink)}
+.tbl-script td:last-child{color:var(--ink-3);font-size:.94em}
+.tbl-script th:nth-child(2){color:var(--good)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:6px}
+.tile{background:var(--tile);color:#fff;border-radius:5px;padding:7px 8px}
+.tile b{display:block;font:700 15.5px/1.05 var(--sans);letter-spacing:-.02em;margin-bottom:4px}
+.tile span{display:block;font-size:10.5px;line-height:1.35;color:#c3ccdb}
+.tile i{display:block;font-size:10px;line-height:1.35;color:#8b97ab;margin-top:3px;font-style:normal}
+.dec{border-radius:5px;padding:8px 10px}
+.dec.use{background:var(--good-soft);border-left:3px solid var(--good)}
+.dec.skip{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.dec b{font:600 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;
+  margin-bottom:5px}
+.dec.use b{color:var(--good)} .dec.skip b{color:var(--bad)}
+.dec b span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.72;
+  font-family:var(--sans);font-size:10.5px}
+.dec ul{margin:0;padding-left:15px} .dec li{margin:0 0 3px;font-size:12px;line-height:1.4}
+.aryaka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.45}
+.aryaka p{margin:0 0 6px} .aryaka p:last-child{margin:0}
+.say{background:var(--tile);color:#fff;border-radius:5px;padding:9px 11px;font-size:12.8px;
+  line-height:1.4;font-weight:500}
+.trap{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:5px;
+  padding:8px 10px;font-size:11.8px;line-height:1.4}
+.probe details{border:1px solid var(--line);border-radius:4px;padding:5px 8px;margin:0 0 4px;
+  font-size:12px;background:var(--ground)}
+.probe summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:11px;
+  font-family:var(--mono);list-style:none}
+.probe summary::-webkit-details-marker{display:none}
+.probe .q{font-weight:600;margin:0 0 4px;font-size:12.5px}
+.probe details p{margin:6px 0 0;color:var(--ink-2)}
+.src{border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.8px;
+  color:var(--ink-3)}
+.src ul{margin:4px 0 0;padding-left:15px} .src li{margin:0 0 2px}
+.src code{font-family:var(--mono);font-size:10px}
+code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1px 3px;
+  border-radius:3px}
+.tile code,.say code{background:rgba(255,255,255,.14);color:#e8ecf2;padding:0 2px}
+.bar{max-width:210mm;margin:14px auto -4px;display:flex;gap:8px;align-items:center;
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.bar a,.bar button,.bar label{font:500 11.5px/1 var(--sans);color:var(--accent);
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 9px;
+  cursor:pointer;text-decoration:none}
+.bar input{margin-right:5px;vertical-align:-1px}
+/* ── print: one card, one page, answers hidden ───────── */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  :root{--paper:#fff;--ground:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--line:#ccc}
+  /* One card must be one page. Everything below is the density step that gets it there;
+     if a card still spills, the markdown is over budget — split a subfeature. */
+  body{background:#fff;font-size:10px}
+  .bar,.noprint{display:none!important}
+  .hd h1{font-size:19px} .hd{padding-bottom:4px;margin-bottom:7px}
+  .hook{font-size:12.6px;line-height:1.28}
+  .say{font-size:10.6px;padding:7px 9px} .tile b{font-size:13px;margin-bottom:3px}
+  .tile{padding:6px 7px} .tile span,.tile i{font-size:8.8px;line-height:1.3}
+  .aryaka,.trap{font-size:9.8px;line-height:1.38;padding:7px 9px}
+  .aryaka p{margin:0 0 4px}
+  table{font-size:9.8px} td{padding:3px 5px 3px 0} th{padding:0 5px 3px 0;font-size:8.4px}
+  .dec{padding:6px 8px} .dec li{margin:0 0 2px;font-size:9.8px}
+  .flow span{padding:5px 7px 5px 12px;font-size:9.2px}
+  .probe details{padding:4px 7px;margin:0 0 3px;font-size:9.8px}
+  h2{font-size:8.4px;margin:0 0 4px}
+  section{margin:0 0 5px} .grid,.pair{gap:7px}
+  /* Provenance is required (CLAUDE.md rule 5) but it is a footnote: two columns at
+     footnote size instead of 124px of full-width citation prose. */
+  .src{font-size:7.6px;line-height:1.3;margin-top:5px;padding-top:4px}
+  .src ul{columns:2;column-gap:11px;padding-left:12px;margin-top:3px}
+  .src li{break-inside:avoid;margin:0 0 1px}
+  .src code{font-size:7.2px}
+  .probe details{padding:3px 6px;margin:0 0 2px}
+  .probe .q{font-size:9.8px;margin:0 0 3px}
+  .card{margin:0;border:0;box-shadow:none;padding:0;max-width:none}
+  /* break BEFORE each card after the first — a trailing break-after would emit a blank
+     final page, and `.card:last-child` never matches because a <script> closes the body */
+  .card+.card{break-before:page;page-break-before:always}
+  .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .probe details>*:not(summary){display:none}
+  body.answers .probe details>*{display:revert}
+  section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
+}
+/* ── index page ─────────────────────────────────────── */
+.ix{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.ix h1{font-size:27px;margin:0 0 3px;letter-spacing:-.02em}
+.ix .sub{color:var(--ink-3);margin:0 0 18px;font-size:13px}
+.ix input[type=search]{width:100%;padding:10px 12px;font:14px var(--sans);color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ix h2{font:600 10px/1 var(--mono);margin:22px 0 9px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.ic{display:block;background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:12px 13px;text-decoration:none;color:var(--ink)}
+.ic:hover{border-color:var(--accent)}
+.ic h3{margin:0 0 3px;font-size:15px;letter-spacing:-.01em}
+.ic p{margin:0 0 7px;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.ic .subs{font:10px/1.5 var(--mono);color:var(--ink-3)}
+.ic .subs a{color:var(--accent);text-decoration:none}
+</style></head><body><div class="bar noprint"><a href="index.html">← all cards</a><button id="openall">Reveal answers</button><button onclick="window.print()">Print</button><label><input type="checkbox" id="ans">print with answers</label><span>one card = one A4 page</span></div><article class="card"><div class="hd"><div><h1>Don't Step Into the Frame</h1><p class="tag">Answer the work, refuse the premise · <code>hard-conversations › dont-take-the-frame</code></p></div><div class="badges"><span class="b situational">situational</span><span class="b thin">thin confidence</span><span class="b">2026-09-10</span></div></div>
+<section><h2>Hook</h2><p class="hook">A passive-aggressive message is not information, it is a frame: you are the problem and I am suffering. Reply inside it and you have agreed to it.</p></section>
+<section class="model"><h2>The move</h2><p>Don't match the energy. Name what you noticed without accusing anyone, offer a call, and if they deny it, believe them and stop — then keep a private note, because the pattern is the evidence, not the message.</p><div class="flow"><span>Don't react</span><span>Name it plainly</span><span>Offer a call</span><span>Accept the denial</span><span>Log the pattern</span></div></section>
+<section><h2>Script</h2><table class="tbl-script"><tr><th>Instead of</th><th>Say this</th><th>Why it lands</th></tr><tr><td>"Happy to explain again, since it seems unclear 🙂"</td><td>"Your message came across a bit off — is everything okay?"</td><td>Sarcasm accepts the fight; a plain observation makes them choose.</td></tr><tr><td>A four-paragraph defence of the timeline</td><td>"Want to hop on a call for ten minutes and sort it?"</td><td>Over-explaining is the reaction they asked for, in longer form.</td></tr><tr><td>"Fine, whatever, I'll fix it."</td><td>"Okay — I'll take you at your word." (then note the date)</td><td>Ends it without conceding the premise, and starts the record.</td></tr><tr><td>Forwarding one message to your manager</td><td>"This is the second time — can we talk about how we're exchanging these?"</td><td>One message is noise; naming the count makes it a pattern.</td></tr></table></section>
+<section><h2>Rules</h2><div class="tiles"><div class='tile'><b>Never match energy</b><span>Their tone is the invitation; declining it is the whole move</span><i>Matched sarcasm makes the exchange the story, not the issue</i></div><div class='tile'><b>Notice, don't accuse</b><span>"Came across a bit off" beats "you're being passive-aggressive"</span><i>The first they can explain; the second they will argue forever</i></div><div class='tile'><b>1 denial, then log it</b><span>Take the first "everything's fine" at face value, and date it</span><i>Belief costs nothing once; a dated note costs nothing either</i></div><div class='tile'><b>2 messages are a pattern</b><span>Say the count out loud the second time it happens</span><i>One message is a mood; a count is much harder to deflect</i></div></div></section>
+<section><h2>Read the room</h2><div class="grid"><div class="dec use"><b>Use when <span>the taunt is riding on a real request</span></b><ul><li>A written message carries a taunt under a normal ask</li><li>You will keep working with this person for months</li><li>The channel is public and others are watching your reply</li></ul></div><div class="dec skip"><b>Skip when <span>this is not a tone problem</span></b><ul><li>The content is a real blocker — answer the work first</li><li>It is harassment or discrimination; that is an HR path</li><li>The pattern is already documented and escalation is due</li></ul></div></div></section>
+<section><h2>Real situation</h2><div class="aryaka"><p><strong>[Scenario]</strong> <strong>Situation</strong> — a peer team lead posts in the shared channel: "Still waiting on the config-validation gate. Some of us are trying to ship this quarter." Your gate has been blocked 5 days on their own firewall change.</p>
+<p><strong>What you said</strong> — in the channel: "The gate's blocked on the FW-2 change — I'll post status daily until it clears." Then in a DM: "Your message came across a bit off. Is everything okay? Happy to hop on a call."</p>
+<p><strong>How it landed</strong> — he said it was fine, which you took and dated. The channel saw a status, not a fight. Three weeks later the same tone arrived, you opened with "this is the second time", and he did not deny it — the channel posts stopped.</p></div></section>
+<div class="pair"><section><h2>Say this</h2><div class="say"><p>Your message came across a bit off — is everything okay? Happy to jump on a call if something isn't working on your side.</p></div></section><section><h2>Trap</h2><div class="trap"><p>Winning the reply. <strong>The tell:</strong> you drafted, deleted and redrafted it three times, and the version you sent has an emoji doing the sarcasm for you.</p></div></section></div>
+<section class="probe"><h2>Probe</h2><div class="q">A peer posts "Some of us are trying to ship this quarter" in a public channel. Write your channel reply and your DM.</div><details><summary>Show answer</summary><p>Channel — the work only: "Blocked on the FW-2 change; I'll post status daily until it clears." DM — the tone, once: "Your message came across a bit off. Is everything okay?" Two channels, two jobs; never do the second one in public.</p></details><div class="q">They deny there was any edge to the message. Write your reply.</div><details><summary>Show answer</summary><p>"Okay — I'll take you at your word." Then stop, and date a private note. Pushing past a denial hands them the reaction the message was fishing for; the note is what turns a second instance into a count.</p></details><div class="q">Why is "you're being passive-aggressive" a worse sentence than "that came across a bit off"?</div><details><summary>Show answer</summary><p>The first is a claim about their intent, which they can argue forever and which makes the argument the topic. The second is a report of your reading, which they can only accept or explain — and either answer moves you forward.</p></details></section>
+<div class="src"><strong>Sources</strong><ul><li><code>Sources/clips/clip-ritesh-giri-P0nBn_5EAhw.md</code> §1 [00:00–01:59] — Ritesh Giri, "Passive aggression is a trap disguised as a message — don't step in the frame", 2026-09-04</li><li>Confidence is <strong>thin</strong>: one clip, one voice. The clip is delivered in mixed Hindi and English, so every line here is a paraphrase of the move rather than a caption string</li><li>Real situation is constructed and labelled <strong>[Scenario]</strong>; its numbers are illustrative, not measured</li></ul></div></article>
+<script>
+(function(){
+  var cb=document.getElementById('ans');
+  if(cb)cb.addEventListener('change',function(){document.body.classList.toggle('answers',cb.checked);});
+  var all=document.getElementById('openall');
+  if(all)all.addEventListener('click',function(){
+    var d=document.querySelectorAll('details'),shut=[].some.call(d,function(x){return !x.open;});
+    [].forEach.call(d,function(x){x.open=shut;});
+    all.textContent=shut?'Collapse answers':'Reveal answers';});
+})();
+</script>
+</body></html>
