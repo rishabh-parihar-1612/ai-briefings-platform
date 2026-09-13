@@ -144,7 +144,7 @@ code{font-family:var(--mono);font-size:.92em;background:var(--ground);padding:1p
   .card+.card{break-before:page;page-break-before:always}
   .tile,.say,.flow span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .probe details>*:not(summary){display:none}
-  body.answers .probe details>*{display:revert}
+  body.answers .probe details>*{display:block}
   section,table,.tiles,.grid{break-inside:avoid;page-break-inside:avoid}
 }
 /* ── index page ─────────────────────────────────────── */
@@ -178,7 +178,10 @@ you design anything?</div><details><summary>Show answer</summary><p>Whether thos
 <script>
 (function(){
   var cb=document.getElementById('ans');
-  if(cb)cb.addEventListener('change',function(){document.body.classList.toggle('answers',cb.checked);});
+  if(cb)cb.addEventListener('change',function(){
+    document.body.classList.toggle('answers',cb.checked);
+    [].forEach.call(document.querySelectorAll('details'),function(x){x.open=cb.checked;});
+  });
   var all=document.getElementById('openall');
   if(all)all.addEventListener('click',function(){
     var d=document.querySelectorAll('details'),shut=[].some.call(d,function(x){return !x.open;});
